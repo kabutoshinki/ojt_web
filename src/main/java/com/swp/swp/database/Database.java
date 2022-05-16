@@ -10,7 +10,6 @@ package com.swp.swp.database;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.example.demo.database;
 
 
 import com.swp.swp.model.Account;
