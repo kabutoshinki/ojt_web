@@ -26,33 +26,24 @@
                                  role="alert">${mess}
                             </div> 
                         </c:if>
-                        <form action="Login" method="post">
+                        <form action="account" method="post" modelAttribute="account">
                             <!-- to error: add class "has-danger" -->
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="text" class="form-control form-control-sm"
-                                       id="exampleInputEmail1" value="${fullName}" name ="email" aria-describedby="emailHelp" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                       id="exampleInputEmail1" value="${email}" name ="email" aria-describedby="emailHelp" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
                                 <a href="#" style="float:right;font-size:12px;">Forgot password? 
                                 </a>
                                 <input type="password" class="form-control form-control-sm"
-                                    value="${email}"  id="exampleInputPassword1" name="password" required="">
+                                    value="${password}"  id="exampleInputPassword1" name="password" required="">
                             </div>
                             <div class ="role" style="display: contents; height: fit-content; width: fit-content">
 
-                                <div style="display: contents">
-                                    <input type="radio" id="admin" name="role" ${role==0?"checked":""} value="0" required="">
-                                        <label for="admin">Admin</label>
-                                    
-                                    
-                                </div>
-                                <div style="display: contents">
-                                    <input type="radio" id="customer" name="role" ${role==1?"checked":""}  value="1"  required="">
-                                        <label for="customer" >customer</label><br>
-                                </div>
+                                
                                 <div style="display: contents">
                                     <input type="checkbox" id="vehicle1" name="saveAcc" value="saveAcc">
                                     <label for="saveAcc"> Save Account</label>

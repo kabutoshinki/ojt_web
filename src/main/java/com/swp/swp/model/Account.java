@@ -55,9 +55,10 @@ public class Account {
     @Column(nullable = true, unique = false, length = 3)
     private int role;
 
-    public Account(String fullName, String email) {
+    public Account(String fullName, String email, String password) {
         this.fullName = fullName;
         this.email = email;
+        this.password = password;
     }
 
     public Account(String fullName, String email, String password, Date dateOfBirth, String phone, String street, String city, String district, String province, int status, int role) {
