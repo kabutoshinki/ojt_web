@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
-        <link rel="stylesheet" href="CSS/Login.css"  type="text/css" media="all"/>
+        <link rel="stylesheet" href="../CSS/Login.css"  type="text/css" media="all"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
     </head>
     <body>
@@ -26,7 +26,7 @@
                                  role="alert">${mess}
                             </div> 
                         </c:if>
-                        <form action="account" method="post" modelAttribute="account">
+                        <form action="../account/login" method="post" modelAttribute="account">
                             <!-- to error: add class "has-danger" -->
 
                             <div class="form-group">

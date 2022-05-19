@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class accountController {
     @Autowired
     private AccountRepositories repositories;
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
     public String getAllAccounts(ModelMap modelMap){
         System.out.println("test login page");
         modelMap.addAttribute("email", repositories.getById(1).getEmail() );
@@ -38,7 +38,7 @@ public class accountController {
         System.out.println("password: "+repositories.getById(1).getPassword());
         return "login";
     }
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(ModelMap modelMap, @ModelAttribute("account") Account account){
         
         String email = account.getEmail();
