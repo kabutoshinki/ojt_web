@@ -38,6 +38,7 @@ public class accountController {
         System.out.println("password: "+repositories.getById(1).getPassword());
         return "login";
     }
+    
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(ModelMap modelMap, @ModelAttribute("account") Account account){
         

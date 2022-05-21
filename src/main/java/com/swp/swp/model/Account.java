@@ -31,6 +31,7 @@ public class Account {
             strategy = GenerationType.AUTO,
             generator = "account_sequense"
     )
+    
     private int accountId;
     @Column(nullable = false, unique = false, length = 300)
     private String fullName;
@@ -60,7 +61,6 @@ public class Account {
         this.email = email;
         this.password = password;
     }
-
     public Account(String fullName, String email, String password, Date dateOfBirth, String phone, String street, String city, String district, String province, int status, int role) {
         this.fullName = fullName;
         this.email = email;
