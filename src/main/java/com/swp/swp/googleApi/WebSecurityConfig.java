@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -20,33 +21,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // http.authorizeRequests()
-        //     .antMatchers("/", "/login", "/oauth/**").permitAll()
+        //     .antMatchers("/","/account/loginPage", "/oauth/**").permitAll()
         //     .anyRequest().authenticated()
         //     .and()
-        //     .formLogin().permitAll()
+        //     .formLogin().loginPage("/account/loginPage").permitAll()
         //     .and()
         //     .oauth2Login()
-        //         .loginPage("/login")
-        //         .userInfoEndpoint()
-        //             .userService(oauthUserService);
+        //     .loginPage("/account/loginPage")
+        //     .userInfoEndpoint().userService(oauthUserService)
+        // ;
 
-        http.oauth2Login().loginPage("/login")
-        .userInfoEndpoint().userService(oauthUserService).and()
-        .successHandler(new AuthenticationSuccessHandler() {
-
-            @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                    Authentication authentication) throws IOException, ServletException {
-                    CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
-                    
-                    response.sendRedirect("/listCompany");
-
-                
-            }
-            
-        });
+            http.csrf().disable().httpBasic().and().authorizeRequests()
+                .antMatchers("/", "/account/loginPage", "/oauth/**","/img/**","/CSS/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/account/loginPage").permitAll()
+                .and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/").and()
+                .oauth2Login()
+                    .loginPage("/account/loginPage")
+                    .userInfoEndpoint()
+                        .userService(oauthUserService).and();
+        
+        
+        
+        
     }
-
      
     @Autowired
     private CustomOAuth2UserService oauthUserService;

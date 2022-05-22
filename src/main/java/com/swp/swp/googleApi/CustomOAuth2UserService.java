@@ -11,6 +11,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User user =  super.loadUser(userRequest);
+        CustomOAuth2User email = new CustomOAuth2User(user);
+        System.out.println("google email: " +email.getEmail());
         return new CustomOAuth2User(user);
     }
-}
+}   

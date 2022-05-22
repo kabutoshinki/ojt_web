@@ -4,12 +4,14 @@
  */
 package com.swp.swp.controller;
 
+import com.swp.swp.googleApi.CustomOAuth2User;
 import com.swp.swp.model.Account;
 import com.swp.swp.model.ResponseObject;
 import com.swp.swp.repositories.AccountRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
