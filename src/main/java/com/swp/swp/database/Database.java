@@ -36,8 +36,8 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Account accountA = new Account("test","test","test");
-                Account accountB = new Account("test1","test1@gmail.com","test1");
+                Account accountA = new Account("test","test");
+                Account accountB = new Account("test1","test1@gmail.com");
                 CompanyDetail company1 = new CompanyDetail(10,"FPT SOFTWARE",
                 "DESRIPTION", "ADRESS","IMG URL",
                 "JOB DESCRIPTION","JOB REQUIREMENTS");

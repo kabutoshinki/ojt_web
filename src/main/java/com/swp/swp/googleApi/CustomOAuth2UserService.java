@@ -13,6 +13,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2User user =  super.loadUser(userRequest);
         CustomOAuth2User email = new CustomOAuth2User(user);
         System.out.println("google email: " +email.getEmail());
+        System.out.println("user name: " + email.getName());
         return new CustomOAuth2User(user);
     }
 }   

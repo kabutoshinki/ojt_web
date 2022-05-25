@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author ADMIN
  */
 public interface AccountRepositories extends JpaRepository<Account,Integer>{
-    Account findByEmailAndPassword(String email, String password);
+    Account findByEmail(String email);
 }

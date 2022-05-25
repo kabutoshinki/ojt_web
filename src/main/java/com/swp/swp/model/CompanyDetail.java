@@ -9,13 +9,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "Company_Detail")
 public class CompanyDetail {
     @Id
     //    @GeneratedValue( strategy = GenerationType.AUTO)
         @SequenceGenerator(
                 name = "company_sequense",
-                sequenceName = "account_sequence",
+                sequenceName = "company_sequence",
                 allocationSize = 1
         )
         @GeneratedValue(

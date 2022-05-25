@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author ADMIN
  */
 @Entity
-@Table
+@Table(name = "Account")
 public class Account {
     @Id
 //    @GeneratedValue( strategy = GenerationType.AUTO)
@@ -37,61 +37,42 @@ public class Account {
     private String fullName;
     @Column(nullable = true, unique = true, length = 300)
     private String email;
-    @Column(nullable = true, unique = false, length = 300)
-    private String password;
     @Column(nullable = true, unique = false)
     private Date dateOfBirth;
     @Column(nullable = true, unique = false, length = 12)
     private String phone;
     @Column(nullable = true, unique = false, length = 300)
-    private String street;
-    @Column(nullable = true, unique = false, length = 300)
-    private String city;
-    @Column(nullable = true, unique = false, length = 300)
-    private String district;
-    @Column(nullable = true, unique = false, length = 300)
-    private String province;
+    private String address;
+    @Column(nullable = true, unique = false, length = 30)
+    private String major;
     @Column(nullable = true, unique = false, length = 3)
     private int status;
     @Column(nullable = true, unique = false, length = 3)
     private int role;
 
-    public Account(String fullName, String email, String password) {
+    public Account(String fullName, String email) {
         this.fullName = fullName;
         this.email = email;
-        this.password = password;
     }
-    public Account(String fullName, String email, String password, Date dateOfBirth, String phone, String street, String city, String district, String province, int status, int role) {
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.dateOfBirth = dateOfBirth;
-        this.phone = phone;
-        this.street = street;
-        this.city = city;
-        this.district = district;
-        this.province = province;
-        this.status = status;
-        this.role = role;
-    }
+    
 
     public Account() {
     }
 
-    public Account(int accountId, String fullName, String email, String password, Date dateOfBirth, String phone, String street, String city, String district, String province, int status, int role) {
+
+    public Account(int accountId, String fullName, String email, Date dateOfBirth, String phone, String address,
+            String major, int status, int role) {
         this.accountId = accountId;
         this.fullName = fullName;
         this.email = email;
-        this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.phone = phone;
-        this.street = street;
-        this.city = city;
-        this.district = district;
-        this.province = province;
+        this.address = address;
+        this.major = major;
         this.status = status;
         this.role = role;
     }
+
 
     public int getAccountId() {
         return accountId;
@@ -117,14 +98,6 @@ public class Account {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -141,36 +114,20 @@ public class Account {
         this.phone = phone;
     }
 
-    public String getStreet() {
-        return street;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getCity() {
-        return city;
+    public String getMajor() {
+        return major;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public int getStatus() {
@@ -191,7 +148,10 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "accountId=" + accountId + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", street=" + street + ", city=" + city + ", district=" + district + ", province=" + province + ", status=" + status + ", role=" + role + '}';
+        return "Account [accountId=" + accountId + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", email="
+                + email + ", fullName=" + fullName + ", major=" + major + ", phone=" + phone + ", role=" + role
+                + ", status=" + status + "]";
     }
+    
     
 }
