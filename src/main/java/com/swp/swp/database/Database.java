@@ -39,11 +39,9 @@ public class Database {
                 Account accountA = new Account("test","test");
                 Account accountB = new Account("test1","test1@gmail.com");
                 CompanyDetail company1 = new CompanyDetail(10,"FPT SOFTWARE",
-                "DESRIPTION", "ADRESS","IMG URL",
-                "JOB DESCRIPTION","JOB REQUIREMENTS");
+                "DESRIPTION", "ADRESS");
                 CompanyDetail company2 = new CompanyDetail(10,"FPT SOFTWARE2",
-                "DESRIPTION2", "ADRESS2","IMG URL2",
-                "JOB DESCRIPTION2","JOB REQUIREMENTS2");
+                "DESRIPTION2", "ADRESS2");
                 logger.info("insert Data: " + accountRepositories.save(accountB));
                 logger.info("insert Data: " + accountRepositories.save(accountA));
                 logger.info("insert Data: " + companyDetailRepositories.save(company1));

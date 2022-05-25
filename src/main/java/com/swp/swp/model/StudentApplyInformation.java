@@ -28,10 +28,9 @@ public class StudentApplyInformation {
     private int IdSAI;
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "account_ID", referencedColumnName = "accountId")
-  
     private Account accountId;
-    @Column(nullable = true, unique = false,length = 300)
-    private String cv;
+
+
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "comapnyID", referencedColumnName = "companyDetailId")
   
@@ -44,10 +43,9 @@ public class StudentApplyInformation {
     }
 
 
-    public StudentApplyInformation(int idSAI, Account accountId, String cv, CompanyDetail companyId, int status) {
+    public StudentApplyInformation(int idSAI, Account accountId, CompanyDetail companyId, int status) {
         IdSAI = idSAI;
         this.accountId = accountId;
-        this.cv = cv;
         this.companyId = companyId;
         this.status = status;
     }
@@ -73,14 +71,6 @@ public class StudentApplyInformation {
     }
 
 
-    public String getCv() {
-        return cv;
-    }
-
-
-    public void setCv(String cv) {
-        this.cv = cv;
-    }
 
 
     public CompanyDetail getCompanyId() {
@@ -106,7 +96,7 @@ public class StudentApplyInformation {
     @Override
     public String toString() {
         return "StudentApplyInformation [IdSAI=" + IdSAI + ", accountId=" + accountId + ", companyId=" + companyId
-                + ", cv=" + cv + ", status=" + status + "]";
+                + ", status=" + status + "]";
     }
 
     
