@@ -32,7 +32,7 @@ public class Account {
             generator = "account_sequense"
     )
     
-    private int accountId;
+    private int id;
     @Column(nullable = false, unique = false, length = 300)
     private String fullName;
     @Column(nullable = true, unique = true, length = 300)
@@ -62,7 +62,7 @@ public class Account {
 
     public Account(int accountId, String fullName, String email, Date dateOfBirth, String phone, String address,
             String major, int status, int role) {
-        this.accountId = accountId;
+        this.id = accountId;
         this.fullName = fullName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
@@ -75,11 +75,11 @@ public class Account {
 
 
     public int getAccountId() {
-        return accountId;
+        return id;
     }
 
     public void setAccountId(int accountId) {
-        this.accountId = accountId;
+        this.id = accountId;
     }
 
     public String getFullName() {
@@ -148,7 +148,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account [accountId=" + accountId + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", email="
+        return "Account [accountId=" + id + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", email="
                 + email + ", fullName=" + fullName + ", major=" + major + ", phone=" + phone + ", role=" + role
                 + ", status=" + status + "]";
     }

@@ -32,15 +32,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // ;
 
             http.csrf().disable().httpBasic().and().authorizeRequests()
-                .antMatchers("/", "/account/loginPage","/webjars/**", "/oauth/**","/img/**","/CSS/**").permitAll()
+                .antMatchers("/", "/oauth2/authorization/google","/webjars/**","/webapp/**", "/oauth/**","/img/**","/CSS/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/account/loginPage").permitAll()
+                .formLogin().loginPage("/oauth2/authorization/google").permitAll()
                 .and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/").and()
                 .oauth2Login()
-                    .loginPage("/account/loginPage")
+                    .loginPage("/oauth2/authorization/google")
                     .userInfoEndpoint()
-                        .userService(oauthUserService).and();
+                        .userService(oauthUserService);
         
         
         

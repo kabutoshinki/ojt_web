@@ -25,14 +25,14 @@ public class StudentApplyInformation {
         strategy = GenerationType.AUTO,
         generator = "student_apply_information_sequence"
     )
-    private int IdSAI;
+    private int id;
     @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "account_ID", referencedColumnName = "accountId")
+    @JoinColumn(name = "account_ID", referencedColumnName = "id")
     private Account accountId;
 
 
     @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "comapnyID", referencedColumnName = "companyDetailId")
+    @JoinColumn(name = "comapnyID", referencedColumnName = "id")
   
     private CompanyDetail companyId;
     @Column(nullable = true, unique = false,length = 3)
@@ -44,7 +44,7 @@ public class StudentApplyInformation {
 
 
     public StudentApplyInformation(int idSAI, Account accountId, CompanyDetail companyId, int status) {
-        IdSAI = idSAI;
+        id = idSAI;
         this.accountId = accountId;
         this.companyId = companyId;
         this.status = status;
@@ -52,12 +52,12 @@ public class StudentApplyInformation {
 
 
     public int getIdSAI() {
-        return IdSAI;
+        return id;
     }
 
 
     public void setIdSAI(int idSAI) {
-        IdSAI = idSAI;
+        id = idSAI;
     }
 
 
@@ -95,7 +95,7 @@ public class StudentApplyInformation {
 
     @Override
     public String toString() {
-        return "StudentApplyInformation [IdSAI=" + IdSAI + ", accountId=" + accountId + ", companyId=" + companyId
+        return "StudentApplyInformation [IdSAI=" + id + ", accountId=" + accountId + ", companyId=" + companyId
                 + ", status=" + status + "]";
     }
 

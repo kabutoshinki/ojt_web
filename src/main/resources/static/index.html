@@ -27,24 +27,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <script src="https://apis.google.com/js/platform.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-    var logout = function() {
-    $.post("/logout", function() {
-        $("#user").html('');
-        $(".unauthenticated").show();
-        $(".authenticated").hide();
-    })
-    return true;
-}
-    var login = function(){
-        $.get("/", function() {
-        $("#user1").html('');
-        $(".unauthenticated").hide()
-        $(".authenticated").show()
-        var a = document.getElementById("login").style.display
-        a = "none"
-        console.log("loggin" +a)
-    });
-    }
+        var logout = function () {
+            $.post("/logout", function () {
+                $("#user").html('');
+                $(".unauthenticated").show();
+                $(".authenticated").hide();
+            })
+            return true;
+        }
+        var login = function () {
+            $.get("/", function () {
+                $("#user1").html('');
+                $(".unauthenticated").hide()
+                $(".authenticated").show()
+                var a = document.getElementById("login").style.display
+                a = "none"
+                console.log("loggin" + a)
+            });
+        }
 
     </script>
 </head>
@@ -53,26 +53,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <div class="wrap">
         <div class="header d-flex p-3">
             <div class="d-flex flex-grow-1 p-1 info">
-                <div class="p-2">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>daihoc.hcm@fpt.edu.vn</span>
+                <div class='p-2'>
+                    <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
                 </div>
-                <div class="p-2">
+                <div class='p-2'>
                     <i class="fa-solid fa-phone"></i> <span>(028)73005588</span>
                 </div>
             </div>
-            <div class="d-flex align-items-center justify-content-around p-1" >
-                <div class="text-light" id="login" style="display:block ;">
-                    ,<span id="user1"></span>
-                    <a href="/oauth2/authorization/google" onclick="login()"><i class="fa-solid fa-user-large"></i>
-                        Login</a>
+            <div class="d-flex align-items-center justify-content-around p-1">
+                <div class="text-light">
+                    <a href="/oauth2/authorization/google"><i class="fa-solid fa-user-large"></i> Login</a>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid ">
             <div class="row">
                 <div class="col-sm-5">
-                    <img src="/img/fu.jpg" width="300" />
+                    <img src="img/fu.jpg" width="280" />
                 </div>
                 <div class="col-sm-7 menu">
                     <div class="">
@@ -87,12 +84,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="">
                         <a href=""> Company Tour </a>
                     </div>
+                    <div>
+                        <form action="" method="post">
+                            <input type="text" placeholder="Search here">
+                            <button type="submit">
+                                <i class="bi bi-search"> Search</i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
+
             </div>
         </div>
-        <hr />
+        <hr>
         <div class="container-fluid main-content">
             <div class="main-img">
+               <a href="/jobController/display">
+                <input
+                style='border-radius: 20px; background-color: orange; position: absolute; bottom: -13vh; left: 12vw; width: 18vw;'
+                class="btn btn-warning m-1 p-2 shadow text-light" type="submit" value="Đăng Ký Ngay"
+                name="btnSignUp" />
+               </a>
                 <img src="img/ojt.png" title="FU student" />
             </div>
         </div>
@@ -103,16 +115,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <div class="col-sm-3 ft-logo">
                     <img src="img/logofpt.png" width="200" />
                 </div>
-                <div class="col-3">
-                    <h2 style="font-size: larger">
-                        Lô E2a-7, Đường D1, phường Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành
-                        phố Hồ Chí Minh
+                <diV class="col-3">
+                    <h2 style="font-size: larger">Lô E2a-7, Đường D1, P. Long Thạnh Mỹ,
+                        Thành Phố Thủ Đức, Thành phố Hồ Chí Minh
                     </h2>
                     <p>
                         contact@lift.agencyr.com<br />
                         (028) 7300 5588
                     </p>
-                </div>
+                </diV>
                 <div class="col-2">
                     <ul>
                         <li>About</li>
@@ -136,8 +147,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </div>
     </footer>
-    <hr />
-    <div class="space"></div>
+    <hr>
+    <div class="space">
+
+    </div>
 </body>
 
 </html>

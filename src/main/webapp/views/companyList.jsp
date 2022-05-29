@@ -1,413 +1,192 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      $(function () {
-        $("[data-toggle=tooltip]").tooltip();
+<html>
+    <head>
+        <title>Company List</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/CSS/companyList.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/dda2b72c9e.js" crossorigin="anonymous"></script>
+    </head>
 
-        $(".grid-view").click(function () {});
-      });
-    </script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <body>
+        <div class="wrap">
+            <div class="header d-flex p-3">
+                <div class="d-flex flex-grow-1 p-1 info">
+                    <div class='p-2'>
+                        <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
+                    </div>
+                    <div class='p-2'>
+                        <i class="fa-solid fa-phone"></i> <span>(028)73005588</span> 
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-around p-1">
+                    <div class="text-light">
+                        <a href=""><i class="fa-solid fa-user-large"></i> Login</a>
+                    </div>
+                </div>
+            </div>  
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img src="/img/fu.jpg" width="280"/>
+                    </div>
+                    <div class="col-sm-7 menu">
+                        <div class="">
+                            <a href=""> Home </a>
+                        </div>
+                        <div class="">
+                            <a href=""> OJT </a>
+                        </div>
+                        <div class="">
+                            <a href=""> CNH </a>
+                        </div>
+                        <div class="">
+                            <a href=""> Company Tour </a>
+                        </div>
+                        <div>
+                            <form action="" method="post">
+                                <input type="text" placeholder="Search here">
+                                <button type="submit">
+                                    <i class="bi bi-search"> Search</i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="../CSS/companyList.css"
-      type="text/css"
-      media="all"
-    />
-    <title>Company List</title>
-  </head>
-  <body>
-    <div class="container pt-5">
-      <div class="row align-items-center justify-content-between">
-        <div class="col-lg-2 col-md-3 col-sm-4 col-7">
-          <div class="input-group input-group-sm">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">42 Items</span>
+                </div>
             </div>
-            <select name="" class="form-control form-control-sm">
-              <option value="">12</option>
-              <option value="">24</option>
-              <option value="">48</option>
-            </select>
-          </div>
+            <hr>
+            <div class="container main-content">
+                <div class="row" style="">
+                    <form action="" method="post">
+                        <input type="text" placeholder="Search here">
+                        <button type="submit">
+                            <i class="bi bi-search"> Search</i>
+                        </button>
+                    </form>
+                </div>
+                <br/>
+                <div class="row" style="justify-content: center">
+
+                    <c:forEach items="${jobList}" var= "o">
+
+                        <div class="col-sm-3 list-comp">
+                            <form style="text-align: center">
+                                <img src="/img/fpt-software.png" width="300"><br/>
+                                <hr>
+                                <p style="text-align: center"/>${o.companyDetail.companyName}<br/>
+                                <p style="text-align: center;"/>${o.slot} Job - Ho Chi Minh<br/><br/>
+                                <input type="button" value="Details" style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/>
+                            </form>
+                        </div>
+                    </c:forEach>
+
+                    <!-- <div class="col-sm-3 list-comp">
+                        <form style="text-align: center">
+                            <img src="/img/logofpt.png" width="300"><br/>
+                            <hr>
+                            <p style="text-align: center"/>LAZADA GROUP<br/>
+                            <p style="text-align: center"/>7 Jobs - Ho Chi Minh<br/><br/>
+                            <input type="button" value="Details" style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/>
+                        </form>
+                    </div>
+                    <div class="col-sm-3 list-comp">
+                        <form style="text-align: center">
+                            <img src="/img/logofpt.png" width="300"><br/>
+                            <hr>
+                            <p style="text-align: center"/>TRAVALA.COM<br/>
+                            <p style="text-align: center"/>3 Jobs - Ha Noi<br/><br/>
+                            <input type="button" value="Details" style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/>
+                        </form>
+                    </div>
+                </div>
+                <br/>
+                <div class="row" style="justify-content: center">
+                    <div class="col-sm-3 list-comp">
+                        <form style="text-align: center">
+                            <img src="img/logofpt.png" width="300"><br/>
+                            <hr>
+                            <p style="text-align: center"/>FPT SOFTWARE<br/>
+                            <p style="text-align: center"/>7 Jobs - Ho Chi Minh<br/><br/>
+                            <input type="button" value="Details" style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/>
+                        </form>
+                    </div>
+
+                    <div class="col-sm-3 list-comp">
+                        <form style="text-align: center">
+                            <img src="img/logofpt.png" width="300"><br/>
+                            <hr>
+                            <p style="text-align: center"/>PASCALIA ASIA VIETNAM<br/>
+                            <p style="text-align: center"/>1 Jobs - Ho Chi Minh<br/><br/>
+                            <input type="button" value="Details" style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/>
+                        </form>
+                    </div>
+                    <div class="col-sm-3 list-comp">
+                        <form style="text-align: center">
+                            <img src="img/logofpt.png" width="300"><br/>
+                            <hr>
+                            <p style="text-align: center"/>GOLINE CORPORATION<br/>
+                            <p style="text-align: center"/>3 Jobs - Ha Noi<br/><br/>
+                            <input type="button" value="Details" style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/>
+                        </form>
+                    </div> -->
+                </div>
+                <br/>
+                <div class="" style="text-align: center">
+                    <a href=""><i class="bi bi-arrow-down-short"></i>Xem thêm</a>
+                </div>
+
+            </div>  
         </div>
-
-        <div class="col-md-3 col-5 text-right order-md-1">
-          <a href="#" class="btn btn-primary grid-view btn-sm">
-            <i class="fa fa-th-large"></i>
-          </a>
-          <a href="#" class="btn btn-primary list-view btn-sm">
-            <i class="fa fa-bars"></i>
-          </a>
-        </div>
-
-        <div class="col-md-3 order-md-0 mt-2 mt-md-0">
-          <select class="form-control form-control-sm">
-            <option value="">Sort By</option>
-            <option value="">Popylar</option>
-            <option value="">Name</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <hr />
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-3">
-          <div class="card h-100">
-            <div class="d-flex justify-content-between position-absolute w-100">
-              <div class="label-new">
-                <span
-                  class="text-white bg-success small d-flex align-items-center px-2 py-1"
-                >
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <span class="ml-1">New</span>
-                </span>
-              </div>
-              <div class="label-sale">
-                <span
-                  class="text-white bg-primary small d-flex align-items-center px-2 py-1"
-                >
-                  <i class="fa fa-tag" aria-hidden="true"></i>
-                  <span class="ml-1">Sale</span>
-                </span>
-              </div>
+        <footer>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-3 ft-logo">
+                        <img src="/img/logofpt.png" width="200"/>
+                    </div>
+                    <diV class="col-3">
+                        <h2 style="font-size: larger">Lô E2a-7, Đường D1, P. Long Thạnh Mỹ, 
+                            Thành Phố Thủ Đức, Thành phố Hồ Chí Minh
+                        </h2>
+                        <p>
+                            contact@lift.agencyr.com<br/>
+                            (028) 7300 5588
+                        </p>
+                    </diV>
+                    <div class="col-2">
+                        <ul>
+                            <li>About</li>
+                            <li>Growers</li>
+                            <li>Merchants</li>
+                            <li>Partners</li>
+                            <li>Contact</li>
+                        </ul>
+                    </div>
+                    <div class="col-2">
+                        <ul>
+                            <li>Facebook</li>
+                            <li>Twitter</li>
+                            <li>Linkedin</li>
+                            <li>Instagram</li>
+                        </ul>
+                    </div>
+                    <div class="col-2 arrow-up">
+                        <i class="bi bi-arrow-up-circle-fill"></i>
+                    </div>
+                </div>
             </div>
-            <c:forEach items="${companyList}" var="o">
-            <a href="#">
-              <img
-                src="https://picsum.photos/700/550"
-                class="card-img-top"
-                alt="Product"
-              />
-            </a>
-            
-              <div class="card-body px-2 pb-2 pt-1">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <p class="h4 text-primary">${o.slot}</p>
-                </div>
-                <div>
-                  <a
-                    href="#"
-                    class="text-secondary lead"
-                    data-toggle="tooltip"
-                    data-placement="left"
-                    title="Compare"
-                  >
-                    <i class="fa fa-line-chart" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-              <p class="text-warning d-flex align-items-center mb-2">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </p>
-              <p class="mb-0">
-                <strong>
-                  <a href="#" class="text-secondary">${o.companyName}</a>
-                </strong>
-              </p>
-              <p class="mb-1">
-                <small>
-                  <a href="#" class="text-secondary">Brands</a>
-                </small>
-              </p>
-              <div class="d-flex mb-3 justify-content-between">
-                <div>
-                  <p class="mb-0 small"><b>UPC: </b> 2310010</p>
-                  <p class="mb-0 small"><b>PART#: </b> 2121</p>
-                  <p class="mb-0 small"><b>MPN#: </b> mpn22651</p>
-                </div>
-                <div class="text-right">
-                  <p class="mb-0 small"><b>Free Shipping</b></p>
-                  <p class="mb-0 small"><b>MSRP: </b> $119.99</p>
-                  <p class="mb-0 small"><b>REG: </b> $19.99</p>
-                  <p class="mb-0 small text-primary">
-                    <span class="font-weight-bold">Save</span> $20.00 (16%)
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div class="col px-0">
-                  <button class="btn btn-outline-primary btn-block">
-                    Add To Cart
-                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                  </button>
-                </div>
-                <div class="ml-2">
-                  <a
-                    href="#"
-                    class="btn btn-outline-success"
-                    data-toggle="tooltip"
-                    data-placement="left"
-                    title="Add to Wishlist"
-                  >
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+        </footer>
+        <hr>
+        <div class="space">
+
         </div>
-
-        <div class="col-md-4 mb-3">
-          <div class="card h-100">
-            <div
-              class="labels d-flex justify-content-between position-absolute w-100"
-            >
-              <div class="label-new"></div>
-              <div class="label-sale">
-                <span
-                  class="text-white bg-primary small d-flex align-items-center px-2 py-1"
-                >
-                  <i class="fa fa-tag" aria-hidden="true"></i>
-                  <span class="ml-1">Sale</span>
-                </span>
-              </div>
-            </div>
-            </c:forEach>
-                
-
-            <a href="#">
-              <img
-                src="https://picsum.photos/700/550"
-                class="card-img-top"
-                alt="Product"
-              />
-            </a>
-            <div class="card-body px-2 pb-2 pt-1 d-flex flex-column">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <p class="h4 text-primary">$130,00</p>
-                </div>
-                <div>
-                  <a
-                    href="#"
-                    class="text-secondary lead"
-                    data-toggle="tooltip"
-                    data-placement="left"
-                    title="Compare"
-                  >
-                    <i class="fa fa-line-chart" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-              <p class="text-warning d-flex align-items-center mb-2">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </p>
-              <p class="mb-0">
-                <strong>
-                  <a href="#" class="text-secondary">Product Title</a>
-                </strong>
-              </p>
-              <p class="mb-1">
-                <small>
-                  <a href="#" class="text-secondary">Brands</a>
-                </small>
-              </p>
-              <div class="d-flex mb-3 justify-content-between">
-                <div>
-                  <p class="mb-0 small"><b>PART#: </b> 2121</p>
-                  <p class="mb-0 small"><b>MPN#: </b> mpn22651</p>
-                </div>
-                <div class="text-right">
-                  <p class="mb-0 small"><b>MSRP: </b> $119.99</p>
-                  <p class="mb-0 small"><b>REG: </b> $19.99</p>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between mt-auto">
-                <div class="col px-0">
-                  <button class="btn btn-outline-primary btn-block">
-                    Add To Cart
-                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                  </button>
-                </div>
-                <div class="ml-2">
-                  <a
-                    href="#"
-                    class="btn btn-outline-success"
-                    data-toggle="tooltip"
-                    data-placement="left"
-                    title="Add to Wishlist"
-                  >
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-          <div class="card h-100">
-            <div
-              class="labels d-flex justify-content-between position-absolute w-100"
-            >
-              <div class="label-new">
-                <span
-                  class="text-white bg-success small d-flex align-items-center px-2 py-1"
-                >
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <span class="ml-1">New</span>
-                </span>
-              </div>
-              <div class="label-sale">
-                <span
-                  class="text-white bg-primary small d-flex align-items-center px-2 py-1"
-                >
-                  <i class="fa fa-tag" aria-hidden="true"></i>
-                  <span class="ml-1">Sale</span>
-                </span>
-              </div>
-            </div>
-            <a href="#">
-              <img
-                src="https://picsum.photos/700/550"
-                class="card-img-top"
-                alt="Product"
-              />
-            </a>
-            <div class="card-body px-2 pb-2 pt-1">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <p class="h4 text-primary">$150,20</p>
-                </div>
-                <div>
-                  <a
-                    href="#"
-                    class="text-secondary lead"
-                    data-toggle="tooltip"
-                    data-placement="left"
-                    title="Compare"
-                  >
-                    <i class="fa fa-line-chart" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-              <p class="text-warning d-flex align-items-center mb-2">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </p>
-              <p class="mb-0">
-                <strong>
-                  <a href="#" class="text-secondary">Product Title</a>
-                </strong>
-              </p>
-              <p class="mb-1">
-                <small>
-                  <a href="#" class="text-secondary">Brands</a>
-                </small>
-              </p>
-              <div class="d-flex mb-3 justify-content-between">
-                <div>
-                  <p class="mb-0 small"><b>UPC: </b> 2310010</p>
-                  <p class="mb-0 small"><b>PART#: </b> 2121</p>
-                  <p class="mb-0 small"><b>MPN#: </b> mpn22651</p>
-                </div>
-                <div class="text-right">
-                  <p class="mb-0 small"><b>Free Shipping</b></p>
-                  <p class="mb-0 small"><b>MSRP: </b> $119.99</p>
-                  <p class="mb-0 small"><b>REG: </b> $19.99</p>
-                  <p class="mb-0 small text-primary">
-                    <span class="font-weight-bold">Save</span> $20.00 (16%)
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div class="col px-0">
-                  <button class="btn btn-outline-primary btn-block">
-                    Add To Cart
-                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                  </button>
-                </div>
-                <div class="ml-2">
-                  <a
-                    href="#"
-                    class="btn btn-outline-success"
-                    data-toggle="tooltip"
-                    data-placement="left"
-                    title="Add to Wishlist"
-                  >
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <hr />
-    </div>
-
-    <div class="container pb-5">
-      <div class="row align-items-center justify-content-between">
-        <div class="col-lg-2 col-md-3 col-sm-4 col-7">
-          <div class="input-group input-group-sm">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">42 Items</span>
-            </div>
-            <select name="" class="form-control form-control-sm">
-              <option value="">12</option>
-              <option value="">24</option>
-              <option value="">48</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-5 text-right">
-          <a href="#" class="btn btn-primary grid-view btn-sm">
-            <i class="fa fa-th-large"></i>
-          </a>
-          <a href="#" class="btn btn-primary list-view btn-sm">
-            <i class="fa fa-bars"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>

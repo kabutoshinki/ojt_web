@@ -1,16 +1,19 @@
 package com.swp.swp.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Company_Detail")
-public class CompanyDetail {
+public class CompanyDetail implements Serializable{
     @Id
     //    @GeneratedValue( strategy = GenerationType.AUTO)
         @SequenceGenerator(
@@ -22,13 +25,14 @@ public class CompanyDetail {
                 strategy = GenerationType.AUTO,
                 generator = "company_sequense"
         )
-    private int companyDetailId;
+    @Column(name = "id")
+    private int id;
     @Column(nullable = true, unique = false, length = 50)
-    private String companyName;
+    private String name;
     @Column(nullable = true, unique = false, length = 300)
-    private String companyDescription;
+    private String description;
     @Column(nullable = true, unique = false, length = 200)
-    private String companyAdress;
+    private String adress;
 
     
     public CompanyDetail() {
@@ -36,57 +40,62 @@ public class CompanyDetail {
 
 
     public CompanyDetail(int companyDetailId, String companyName, String companyDescription, String companyAdress) {
-        this.companyDetailId = companyDetailId;
-        this.companyName = companyName;
-        this.companyDescription = companyDescription;
-        this.companyAdress = companyAdress;
+        this.id = companyDetailId;
+        this.name = companyName;
+        this.description = companyDescription;
+        this.adress = companyAdress;
+    }
+    public CompanyDetail( String companyName, String companyDescription, String companyAdress) {
+        this.name = companyName;
+        this.description = companyDescription;
+        this.adress = companyAdress;
     }
 
 
     public int getCompanyDetailId() {
-        return companyDetailId;
+        return id;
     }
 
 
     public void setCompanyDetailId(int companyDetailId) {
-        this.companyDetailId = companyDetailId;
+        this.id = companyDetailId;
     }
 
 
     public String getCompanyName() {
-        return companyName;
+        return name;
     }
 
 
     public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+        this.name = companyName;
     }
 
 
     public String getCompanyDescription() {
-        return companyDescription;
+        return description;
     }
 
 
     public void setCompanyDescription(String companyDescription) {
-        this.companyDescription = companyDescription;
+        this.description = companyDescription;
     }
 
 
     public String getCompanyAdress() {
-        return companyAdress;
+        return adress;
     }
 
 
     public void setCompanyAdress(String companyAdress) {
-        this.companyAdress = companyAdress;
+        this.adress = companyAdress;
     }
 
 
     @Override
     public String toString() {
-        return "CompanyDetail [companyAdress=" + companyAdress + ", companyDescription=" + companyDescription
-                + ", companyDetailId=" + companyDetailId + ", companyName=" + companyName + "]";
+        return "CompanyDetail [companyAdress=" + adress + ", companyDescription=" + description
+                + ", companyDetailId=" + id + ", companyName=" + name + "]";
     }
     
 
