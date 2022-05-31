@@ -2,14 +2,20 @@ package com.swp.swp.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Company_Detail")
@@ -29,14 +35,30 @@ public class CompanyDetail implements Serializable{
     private int id;
     @Column(nullable = true, unique = false, length = 50)
     private String name;
-    @Column(nullable = true, unique = false, length = 300)
+    @Column(nullable = true, unique = false, length = 1000)
     private String description;
-    @Column(nullable = true, unique = false, length = 200)
+    @Column(nullable = true, unique = false, length = 1000)
     private String adress;
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY,
+    cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "account_Id", referencedColumnName = "id" ,nullable = true)
+    private Account accountId;
 
     
     public CompanyDetail() {
     }
+
+
+    
+    public CompanyDetail(int id, String name, String description, String adress, Account accountId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.adress = adress;
+        this.accountId = accountId;
+    }
+
 
 
     public CompanyDetail(int companyDetailId, String companyName, String companyDescription, String companyAdress) {
@@ -91,12 +113,25 @@ public class CompanyDetail implements Serializable{
         this.adress = companyAdress;
     }
 
+    
+    public Account getAccountId() {
+        return accountId;
+    }
+
+
+    public void setAccountId(Account accountId) {
+        this.accountId = accountId;
+    }
+
 
     @Override
     public String toString() {
-        return "CompanyDetail [companyAdress=" + adress + ", companyDescription=" + description
-                + ", companyDetailId=" + id + ", companyName=" + name + "]";
+        return "CompanyDetail [accountId=" + accountId + ", adress=" + adress + ", description=" + description + ", id="
+                + id + ", name=" + name + "]";
     }
+
+
+    
     
 
   

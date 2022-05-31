@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Job")
 public class Job {
@@ -30,12 +32,13 @@ public class Job {
     private int idJob;
     @Column(nullable = true, unique = false, length = 100)
     private int slot;
-    @Column(nullable = true, unique = false, length = 300)
+    @Column(nullable = true, unique = false, length = 10000)
     private String description;
-    @Column(nullable = true, unique = false, length = 300)
+    @Column(nullable = true, unique = false, length = 1000)
     private String requirement;
     @Column(nullable = true, unique = false, length = 2)
     private int status;
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.REFRESH)
     @JoinColumn(name = "company_Id", referencedColumnName = "id" ,nullable = false)
@@ -78,6 +81,9 @@ public class Job {
 
     public void setSlot(int slot) {
         this.slot = slot;
+    }
+    public int getCompanyDetailId(){
+        return companyDetail.getCompanyDetailId();
     }
 
 

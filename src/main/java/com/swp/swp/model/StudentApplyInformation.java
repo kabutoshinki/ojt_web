@@ -26,12 +26,12 @@ public class StudentApplyInformation {
         generator = "student_apply_information_sequence"
     )
     private int id;
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(cascade = CascadeType.REFRESH, optional = false)
     @JoinColumn(name = "account_ID", referencedColumnName = "id")
     private Account accountId;
 
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(cascade = CascadeType.REFRESH, optional = false)
     @JoinColumn(name = "comapnyID", referencedColumnName = "id")
   
     private CompanyDetail companyId;

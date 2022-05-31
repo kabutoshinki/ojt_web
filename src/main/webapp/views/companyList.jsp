@@ -33,12 +33,12 @@
                     </div>
                 </div>
             </div>  
-            <div class="container-fluid ">
+            <div class="container ">
                 <div class="row">
                     <div class="col-sm-5">
                         <img src="/img/fu.jpg" width="280"/>
                     </div>
-                    <div class="col-sm-7 menu">
+                    <div class="col-sm-7 menu align-items-center">
                         <div class="">
                             <a href=""> Home </a>
                         </div>
@@ -79,12 +79,14 @@
                     <c:forEach items="${jobList}" var= "o">
 
                         <div class="col-sm-3 list-comp">
-                            <form style="text-align: center">
+                            <form style="text-align: center"  >
                                 <img src="/img/fpt-software.png" width="300"><br/>
                                 <hr>
+                                <p style="display: none ;" name="idJob" >${o.idJob}</p>
                                 <p style="text-align: center"/>${o.companyDetail.companyName}<br/>
                                 <p style="text-align: center;"/>${o.slot} Job - Ho Chi Minh<br/><br/>
-                                <input type="button" value="Details" style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/>
+                                <a href="/jobController/jobDetail/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
+                                
                             </form>
                         </div>
                     </c:forEach>

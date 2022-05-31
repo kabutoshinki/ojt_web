@@ -42,11 +42,24 @@ public class Database {
                 Account accountA = new Account("test","test");
                 Account accountB = new Account("test1","test1@gmail.com");
                 CompanyDetail company1 = new CompanyDetail("FPT SOFTWARE",
-                "DESRIPTION", "ADRESS");
+                "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
+                "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
+                "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh");
                 CompanyDetail company2 = new CompanyDetail("FPT SOFTWARE2",
-                "DESRIPTION2", "ADRESS2");
+                "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
+                "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
+                "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh");
                 Job job1 = new Job(company1);
-                Job job2 = new Job(10, "description", "requirement", 1, company2);
+                Job job2 = new Job(10, "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
+                +"Participate in building and developing system architecture\n" +
+                "Create technical documents such as: system architecture, high level design\n"+
+                "Developing new features/product improvements\n"+
+                "Research and solve difficult technical issues\n"
+                , "Strong understanding of WebRTC\n"+
+                "2 years Experienced in developing web apps with ReactJS, NodeJS\n"+
+                "Experience in building and deploying applications on the cloud (AWS)\n"+
+                "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
+                "Knowledge of infra, networking", 1, company2);
                 logger.info("insert Data: " + accountRepositories.save(accountB));
                 logger.info("insert Data: " + accountRepositories.save(accountA));
                 logger.info("insert Data: " + companyDetailRepositories.save(company1));
