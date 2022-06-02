@@ -5,13 +5,23 @@
 package com.swp.swp.model;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 /**
  *
@@ -19,6 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Account")
+
 public class Account {
     @Id
 //    @GeneratedValue( strategy = GenerationType.AUTO)
@@ -43,12 +54,17 @@ public class Account {
     private String phone;
     @Column(nullable = true, unique = false, length = 300)
     private String address;
-    @Column(nullable = true, unique = false, length = 30)
-    private String major;
     @Column(nullable = true, unique = false, length = 3)
     private int status;
     @Column(nullable = true, unique = false, length = 3)
     private int role;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.PERSIST)
+    private Set<StudentApplyJobs> jobs = new HashSet<>();
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "account_id",referencedColumnName = "id")
+    private Set<CV> cv = new HashSet<>();
+
 
     public Account(String fullName, String email) {
         this.fullName = fullName;
@@ -61,16 +77,35 @@ public class Account {
 
 
     public Account(int accountId, String fullName, String email, Date dateOfBirth, String phone, String address,
-            String major, int status, int role) {
+             int status, int role) {
         this.id = accountId;
         this.fullName = fullName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.phone = phone;
         this.address = address;
-        this.major = major;
         this.status = status;
         this.role = role;
+    }
+
+    
+    // public Set<Job> getJobs() {
+    //     return jobs;
+    // }
+
+
+    // public void setJobs(Set<Job> jobs) {
+    //     this.jobs = jobs;
+    // }
+
+
+    public Set<CV> getCv() {
+        return cv;
+    }
+
+
+    public void setCv(Set<CV> cv) {
+        this.cv = cv;
     }
 
 
@@ -122,13 +157,6 @@ public class Account {
         this.address = address;
     }
 
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
 
     public int getStatus() {
         return status;
@@ -149,7 +177,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account [accountId=" + id + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", email="
-                + email + ", fullName=" + fullName + ", major=" + major + ", phone=" + phone + ", role=" + role
+                + email + ", fullName=" + fullName  + ", phone=" + phone + ", role=" + role
                 + ", status=" + status + "]";
     }
     

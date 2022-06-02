@@ -22,5 +22,4 @@ public class companyDetailController {
         modelMap.addAttribute("companyList", list);
         return "companyList";
     }
-
 }

@@ -13,11 +13,19 @@ package com.swp.swp.database;
 
 
 import com.swp.swp.model.Account;
+import com.swp.swp.model.CV;
 import com.swp.swp.model.CompanyDetail;
 import com.swp.swp.model.Job;
+import com.swp.swp.model.Major;
+import com.swp.swp.model.Position;
+import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.repositories.AccountRepositories;
+import com.swp.swp.repositories.CVRepositories;
 import com.swp.swp.repositories.CompanyDetailRepositories;
 import com.swp.swp.repositories.JobRepositories;
+import com.swp.swp.repositories.MajorRepositories;
+import com.swp.swp.repositories.PositionRepositories;
+import com.swp.swp.repositories.StudentApplyJobsRepositories;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +42,12 @@ public class Database {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Bean
     CommandLineRunner initDatabase(AccountRepositories accountRepositories, 
-    CompanyDetailRepositories companyDetailRepositories, JobRepositories jobRepositories){
+    CompanyDetailRepositories companyDetailRepositories,
+     JobRepositories jobRepositories, 
+     CVRepositories cvRepositories,
+     MajorRepositories majorRepositories,
+     PositionRepositories positionRepositories,
+     StudentApplyJobsRepositories studentApplyJobsRepositories){
         
         return new CommandLineRunner() {
             @Override
@@ -66,6 +79,27 @@ public class Database {
                 logger.info("insert Data: " + companyDetailRepositories.save(company2));
                 logger.info("insert Data: "+ jobRepositories.save(job1));
                 logger.info("insert Data: "+ jobRepositories.save(job2));
+                // job2.getAccount().add(accountA);
+                // accountA.getJobs().add(job2);
+                CV cv = new CV("test");
+                cvRepositories.save(cv);
+                accountA.getCv().add(cv);
+                accountRepositories.save(accountA);
+                
+                StudentApplyJobs std = new StudentApplyJobs(job2, accountA, 1);
+                studentApplyJobsRepositories.save(std);
+                 Major major = new Major("SE");
+                 majorRepositories.save(major);
+                 Position position = new Position("Backend");
+                 positionRepositories.save(position);
+                 major.getPosition().add(position);
+                 majorRepositories.save(major);
+                 position.getJobs().add(job1);
+                 positionRepositories.save(position);
+               
+                
+            
+                
                 
             }
       

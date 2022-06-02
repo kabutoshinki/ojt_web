@@ -1,5 +1,8 @@
 package com.swp.swp.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,12 +11,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.sym.Name;
 
 @Entity
 @Table(name = "Job")
@@ -29,7 +36,7 @@ public class Job {
         generator = "job_sequense"
     )
     @Column(name = "idJob")
-    private int idJob;
+    public int idJob;
     @Column(nullable = true, unique = false, length = 100)
     private int slot;
     @Column(nullable = true, unique = false, length = 10000)
@@ -43,7 +50,10 @@ public class Job {
     cascade = CascadeType.REFRESH)
     @JoinColumn(name = "company_Id", referencedColumnName = "id" ,nullable = false)
     private CompanyDetail companyDetail;
-
+    
+    @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
+    private Set<StudentApplyJobs> account = new HashSet<>();
+    
     
     public Job() {
     }
@@ -72,6 +82,16 @@ public class Job {
     public void setIdJob(int idJob) {
         this.idJob = idJob;
     }
+
+    
+    // public Set<Account> getAccount() {
+    //     return account;
+    // }
+
+
+    // public void setAccount(Set<Account> account) {
+    //     this.account = account;
+    // }
 
 
     public int getSlot() {

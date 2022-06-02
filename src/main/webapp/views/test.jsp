@@ -9,8 +9,11 @@
 </head>
 <body>
     <h3>tLogin Page</h3>
-    <p>${email}</p>
-    <p>${password}</p>
+    <!-- <p>${email}</p>
+    <p>${password}</p> -->
+    <c:forEach items="${majorList}" var= "o">
+        <p>${o.major}</p>
+    </c:forEach>
 
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.swp.swp.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,12 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(name = "Company_Detail")
@@ -45,12 +50,28 @@ public class CompanyDetail implements Serializable{
     @JoinColumn(name = "account_Id", referencedColumnName = "id" ,nullable = true)
     private Account accountId;
 
-    
+
     public CompanyDetail() {
     }
 
-
     
+    
+    
+
+
+
+    public CompanyDetail(String name, String description, String adress, Account accountId) {
+        this.name = name;
+        this.description = description;
+        this.adress = adress;
+        this.accountId = accountId;
+    }
+
+
+
+
+
+
     public CompanyDetail(int id, String name, String description, String adress, Account accountId) {
         this.id = id;
         this.name = name;

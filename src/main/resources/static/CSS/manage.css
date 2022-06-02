@@ -1,0 +1,13 @@
+header{
+	height: 150px;
+}
+.title{
+	color: #E39130;
+}
+.search{
+	border-radius: 8px;
+}
+ 
+.card-title{
+	align-self: center;
+}

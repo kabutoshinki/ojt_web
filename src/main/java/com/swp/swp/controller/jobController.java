@@ -1,5 +1,6 @@
 package com.swp.swp.controller;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServlet;
@@ -30,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import antlr.collections.List;
+
 @Controller
 @RequestMapping(path = "/jobController")
 public class jobController {
@@ -46,27 +49,34 @@ public class jobController {
         modelMap.addAttribute("jobList",jobList);
         return "companyList";
     }
+    // @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
+    // public String insertPage(ModelMap modelMap){
+    //     Iterable<Major> majorList = majorReposiyories.findAll();
+    //     modelMap.addAttribute("majorList", majorList);
+    //     ArrayList<String> majorName = new ArrayList<>();
+    //     for (Major major : majorList) {
+    //         majorName.add(major.getMajor());
+    //         System.out.println("Major: " + major.getId());
+    //     }
+    //     for (String string : majorName) {
+    //         System.out.println("majorName: "+ string);
+    //     }
+    //     // modelMap.addAttribute("majorList", majorName);
+    //     return "insertJob";
+    // }
     @PostMapping(value = "/insertJob")
-    public ResponseEntity<ResponseObject> insertJob(ModelMap modelMap,
-     @ModelAttribute("job") Job job, HttpServlet httpServlet,
-    @RequestBody Job jobdemo){
+    public String insertJob(ModelMap modelMap,
+    @ModelAttribute("job") Job job, @ModelAttribute("major") int major){
         try {
             System.out.println("insert");
             CompanyDetail companyDetail = companyDetailRepositories.findById(1);
-            System.out.println("company:" +companyDetail.toString());
-            jobdemo.setCompanyDetail(companyDetail);
-            
-            return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("ok","insert job successful",repositories.save(jobdemo))
-            );
-            // modelMap.addAttribute("mess", "insert job successful");
+            System.out.println("MajorId: "+ major);
+            repositories.save(job);
+            modelMap.addAttribute("mess", "insert job successful");
+            return "companyList";
         } catch (Exception e) {
-            System.out.println("insert fail");
-            return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("Fail","insert job Fail","")
-        
-            );
-        // return "companyList";
+            
+            return "insertJob";
     }
     }
     @RequestMapping(value = "/jobDetail/{id}", method = RequestMethod.GET)
