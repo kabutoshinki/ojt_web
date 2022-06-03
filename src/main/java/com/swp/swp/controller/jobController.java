@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.swp.swp.model.CompanyDetail;
 import com.swp.swp.model.Job;
+import com.swp.swp.model.Major;
+import com.swp.swp.model.Position;
 import com.swp.swp.model.ResponseObject;
 import com.swp.swp.repositories.CompanyDetailRepositories;
 import com.swp.swp.repositories.JobRepositories;
+import com.swp.swp.repositories.MajorRepositories;
+import com.swp.swp.repositories.PositionRepositories;
 
 import org.apache.taglibs.standard.lang.jstl.test.beans.PublicInterface2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +42,8 @@ import antlr.collections.List;
 public class jobController {
     @Autowired JobRepositories repositories;
     @Autowired CompanyDetailRepositories companyDetailRepositories;
+    @Autowired MajorRepositories majorRepositories;
+    @Autowired PositionRepositories positionRepositories;
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
     public String displayJobDetail(ModelMap modelMap){
@@ -49,34 +55,27 @@ public class jobController {
         modelMap.addAttribute("jobList",jobList);
         return "companyList";
     }
-    // @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
-    // public String insertPage(ModelMap modelMap){
-    //     Iterable<Major> majorList = majorReposiyories.findAll();
-    //     modelMap.addAttribute("majorList", majorList);
-    //     ArrayList<String> majorName = new ArrayList<>();
-    //     for (Major major : majorList) {
-    //         majorName.add(major.getMajor());
-    //         System.out.println("Major: " + major.getId());
-    //     }
-    //     for (String string : majorName) {
-    //         System.out.println("majorName: "+ string);
-    //     }
-    //     // modelMap.addAttribute("majorList", majorName);
-    //     return "insertJob";
-    // }
+    @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
+    public String insertPage(ModelMap modelMap){
+        Iterable<Position> majorList = positionRepositories.findAll();
+        modelMap.addAttribute("majorList", majorList);
+        return "insertJob";
+    }
     @PostMapping(value = "/insertJob")
     public String insertJob(ModelMap modelMap,
-    @ModelAttribute("job") Job job, @ModelAttribute("major") int major){
+    @ModelAttribute("Job") Job job){
         try {
-            System.out.println("insert");
-            CompanyDetail companyDetail = companyDetailRepositories.findById(1);
-            System.out.println("MajorId: "+ major);
-            repositories.save(job);
-            modelMap.addAttribute("mess", "insert job successful");
-            return "companyList";
+            System.out.println("Job description: "+ job.getDescription());
+            System.out.println("Job requiment: "+ job.getRequirement());
+            System.out.println("Job startDate: "+ job.getStartDate());
+            System.out.println("Job endDate: "+ job.getEndDate());
+            System.out.println("Job slot: "+ job.getSlot());
+            System.out.println("Position id: " + modelMap.getAttribute("id"));
+            
+            return "redirect:/jobController/display";
         } catch (Exception e) {
             
-            return "insertJob";
+            return "redirect:/";
     }
     }
     @RequestMapping(value = "/jobDetail/{id}", method = RequestMethod.GET)

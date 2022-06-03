@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -41,6 +42,7 @@ public class CompanyDetail implements Serializable{
     @Column(nullable = true, unique = false, length = 50)
     private String name;
     @Column(nullable = true, unique = false, length = 1000)
+    @Lob
     private String description;
     @Column(nullable = true, unique = false, length = 1000)
     private String adress;

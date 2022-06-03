@@ -27,6 +27,8 @@ import com.swp.swp.repositories.MajorRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 import com.swp.swp.repositories.StudentApplyJobsRepositories;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -54,6 +56,8 @@ public class Database {
             public void run(String... args) throws Exception {
                 Account accountA = new Account("test","test");
                 Account accountB = new Account("test1","test1@gmail.com");
+                String startDate = "6/3/2022";
+                String endDate = "20/6/2022";
                 CompanyDetail company1 = new CompanyDetail("FPT SOFTWARE",
                 "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
                 "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
@@ -72,7 +76,7 @@ public class Database {
                 "2 years Experienced in developing web apps with ReactJS, NodeJS\n"+
                 "Experience in building and deploying applications on the cloud (AWS)\n"+
                 "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
-                "Knowledge of infra, networking", 1, company2);
+                "Knowledge of infra, networking", 1,startDate, endDate ,company2);
                 logger.info("insert Data: " + accountRepositories.save(accountB));
                 logger.info("insert Data: " + accountRepositories.save(accountA));
                 logger.info("insert Data: " + companyDetailRepositories.save(company1));
@@ -86,13 +90,17 @@ public class Database {
                 accountA.getCv().add(cv);
                 accountRepositories.save(accountA);
                 
-                StudentApplyJobs std = new StudentApplyJobs(job2, accountA, 1);
+                StudentApplyJobs std = new StudentApplyJobs(job2, accountA,accountB, 1, "Spring");
                 studentApplyJobsRepositories.save(std);
                  Major major = new Major("SE");
                  majorRepositories.save(major);
                  Position position = new Position("Backend");
+                 Position position2 = new Position("Frontend");
                  positionRepositories.save(position);
                  major.getPosition().add(position);
+                 majorRepositories.save(major);
+                 major.getPosition().add(position2);
+                 positionRepositories.save(position2);
                  majorRepositories.save(major);
                  position.getJobs().add(job1);
                  positionRepositories.save(position);

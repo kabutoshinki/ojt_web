@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@page contentType="text/html" pageEncoding="UTF-8" %>
+    
         <!DOCTYPE html>
         <html>
 
@@ -79,7 +80,7 @@
             </div>
 
             <!-- content -->
-            <form class="mt-5" action="/insertJob" method="post" ModelAttribute="Job">
+            <form class="mt-5" action="/jobController/insertJob" method="POST" ModelAttribute="Job">
                 <div class="container rounded mt-5 mb-5">
                     <div class="row form">
                         <div class="col-md-4 border-right">
@@ -123,13 +124,28 @@
                                     <div class="col-sm-3"></div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputMajor" class="col-sm-3 col-form-label">Major</label>
+                                    <label for="Start Date" class="col-sm-3 col-form-label">Start Date</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control text-center" aria-label="Default select example">
+                                        <input type="date" name="startDate" id="">
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="End Date" class="col-sm-3 col-form-label">End Date</label>
+                                    <div class="col-sm-6">
+                                        <input type="date" name="endDate" id="">
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputMajor" class="col-sm-3 col-form-label">Major</label>
+                                    <div class="col-sm-6" >
+                                        <select class="form-control text-center" aria-label="Default select example" >
                                         
                                             <c:forEach items="${majorList}" var= "o">
-                                                <p>${o.major}</p>
-                                                <option value="${o.id}">${o.major}</option>
+                                                <option  path="id" value="${o.id}">
+                                                    ${o.positon}
+                                                </option>
                                             </c:forEach>
                                         </select>
                                     </div>

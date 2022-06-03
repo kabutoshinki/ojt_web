@@ -1,5 +1,6 @@
 package com.swp.swp.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,12 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.sym.Name;
@@ -40,11 +43,17 @@ public class Job {
     @Column(nullable = true, unique = false, length = 100)
     private int slot;
     @Column(nullable = true, unique = false, length = 10000)
+    @Lob
     private String description;
     @Column(nullable = true, unique = false, length = 1000)
+    @Lob
     private String requirement;
     @Column(nullable = true, unique = false, length = 2)
     private int status;
+    @Column(nullable = true, unique = false)
+    private String startDate;
+    @Column(nullable = true, unique = false)
+    private String endDate;
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.REFRESH)
@@ -64,6 +73,18 @@ public class Job {
     }
 
     
+    
+    public Job(int slot, String description, String requirement, int status, String startDate, String endDate,
+            CompanyDetail companyDetail) {
+        this.slot = slot;
+        this.description = description;
+        this.requirement = requirement;
+        this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.companyDetail = companyDetail;
+    }
+
 
     public Job(int slot, String description, String requirement, int status, CompanyDetail companyDetail) {
         this.slot = slot;
@@ -97,6 +118,29 @@ public class Job {
     public int getSlot() {
         return slot;
     }
+
+
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+
 
 
     public void setSlot(int slot) {
