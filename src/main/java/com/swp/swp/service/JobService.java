@@ -16,6 +16,16 @@ public class JobService implements JobServiceInterface {
     @Autowired JobRepositories jobRepositories;
     @Autowired CompanyDetailRepositories companyDetailRepositories;
     @Autowired PositionRepositories positionRepositories;
+
+
+    public JobService(JobRepositories jobRepositories, CompanyDetailRepositories companyDetailRepositories
+    , PositionRepositories positionRepositories
+    ){
+        super();
+        this.jobRepositories =jobRepositories;
+        this.positionRepositories = positionRepositories;
+        this.companyDetailRepositories = companyDetailRepositories;
+    }
     @Override
     public Iterable<Job> getAllJobs() {
         return jobRepositories.findAll();
@@ -23,24 +33,56 @@ public class JobService implements JobServiceInterface {
     @Override
     public String[] getJobDescription(int id) {
         Job job = jobRepositories.findById(id);
-        return job.getDescription().split("\n");
+        try {
+            return job.getDescription().split("\n");
+            
+        } catch (Exception e) {
+            return null;
+        }
     }
     @Override
     public String[] getJobRequiment(int id) {
         Job job = jobRepositories.findById(id);
-        return job.getRequirement().split("\n");
+        try {
+            return job.getRequirement().split("\n");
+            
+        } catch (Exception e) {
+            return null;
+        }
     }
     @Override
     public boolean insertJob(Job job, int companyId, int positionId) {
         CompanyDetail company = companyDetailRepositories.findById(companyId);
         Position position = positionRepositories.findById(positionId);
-        position.getJobs().add(job);
         job.setCompanyDetail(company);
         try {
             jobRepositories.save(job);
+            position.getJobs().add(job);
+            positionRepositories.save(position);
             return true;
         } catch (Exception e) {
+            System.out.println(e.getStackTrace());;
             return false;
+        }
+    }
+    @Override
+    public String[] getCompanyDescription(int id) {
+        Job job = jobRepositories.findById(id);
+        CompanyDetail company = job.getCompanyDetail();
+        try {
+            return company.getCompanyDescription().split("\n");
+            
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+    @Override
+    public Job getJob(int id) {
+        try {
+            return jobRepositories.findById(id);
+        } catch (Exception e) {
+            return null;
         }
     }
     

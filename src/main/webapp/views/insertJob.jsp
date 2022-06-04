@@ -140,10 +140,9 @@
                                 <div class="form-group row">
                                     <label for="inputMajor" class="col-sm-3 col-form-label">Major</label>
                                     <div class="col-sm-6" >
-                                        <select class="form-control text-center" aria-label="Default select example" >
-                                        
-                                            <c:forEach items="${majorList}" var= "o">
-                                                <option  path="id" value="${o.id}">
+                                        <select class="form-control text-center" name ="positionId" aria-label="Default select example" >
+                                            <c:forEach items="${positionList}" var= "o">
+                                                <option value="${o.id}">
                                                     ${o.positon}
                                                 </option>
                                             </c:forEach>

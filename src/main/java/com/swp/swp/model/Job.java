@@ -62,8 +62,19 @@ public class Job {
     
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJobs> account = new HashSet<>();
+    @Transient
+    private int positionId;
     
-    
+    public int getPositionId() {
+        return positionId;
+    }
+
+
+    public void setPositionId(int positionId) {
+        this.positionId = positionId;
+    }
+
+
     public Job() {
     }
 
