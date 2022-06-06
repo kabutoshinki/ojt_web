@@ -31,6 +31,14 @@ public class JobService implements JobServiceInterface {
         return jobRepositories.findAll();
     }
     @Override
+    public Job getJob(int id) {
+        try {
+            return jobRepositories.findById(id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    @Override
     public String[] getJobDescription(int id) {
         Job job = jobRepositories.findById(id);
         try {
@@ -50,21 +58,7 @@ public class JobService implements JobServiceInterface {
             return null;
         }
     }
-    @Override
-    public boolean insertJob(Job job, int companyId, int positionId) {
-        CompanyDetail company = companyDetailRepositories.findById(companyId);
-        Position position = positionRepositories.findById(positionId);
-        job.setCompanyDetail(company);
-        try {
-            jobRepositories.save(job);
-            position.getJobs().add(job);
-            positionRepositories.save(position);
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());;
-            return false;
-        }
-    }
+    
     @Override
     public String[] getCompanyDescription(int id) {
         Job job = jobRepositories.findById(id);
@@ -78,11 +72,18 @@ public class JobService implements JobServiceInterface {
 
     }
     @Override
-    public Job getJob(int id) {
+    public boolean insertJob(Job job, int companyId, int positionId) {
+        CompanyDetail company = companyDetailRepositories.findById(companyId);
+        Position position = positionRepositories.findById(positionId);
+        job.setCompanyDetail(company);
         try {
-            return jobRepositories.findById(id);
+            jobRepositories.save(job);
+            position.getJobs().add(job);
+            positionRepositories.save(position);
+            return true;
         } catch (Exception e) {
-            return null;
+            System.out.println(e.getStackTrace());;
+            return false;
         }
     }
     

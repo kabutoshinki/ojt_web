@@ -1,5 +1,6 @@
 package com.swp.swp.googleApi;
 
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -14,6 +15,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         CustomOAuth2User email = new CustomOAuth2User(user);
         System.out.println("google email: " +email.getEmail());
         System.out.println("user name: " + email.getName());
+        
         return new CustomOAuth2User(user);
     }
 }   

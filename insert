@@ -1,0 +1,121 @@
+[33mcommit d3a1941c5175f6714b7884f210b1e5d2b2f026b1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Sat Jun 4 11:04:31 2022 +0700
+
+    add function insert job
+
+[33mcommit 9981b422ea58acbaec58d4203d1712d01b198a15[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Fri Jun 3 22:15:53 2022 +0700
+
+    add service layer of job
+
+[33mcommit 320c97d8396d48b4a4b50e7d3b54e6936cf5ae3d[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Thu Jun 2 21:52:57 2022 +0700
+
+    add table position, major, cv
+
+[33mcommit d4c9b19cf2424385fd223fc9e0643d846896d96c[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Tue May 31 21:09:23 2022 +0700
+
+    add display function job detail
+
+[33mcommit 76fb8f9f6fb2ff2c7b3d7db65b71e39b677e4f7c[m
+Merge: ec14111 8997b3c
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Sun May 29 20:17:03 2022 +0700
+
+    Merge branch 'main' of https://github.com/noname163/swp_project
+
+[33mcommit ec1411161ba63291ea0fa08ed251328c739b2b9b[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Sun May 29 20:16:24 2022 +0700
+
+    add companyList.jsp function display company list
+
+[33mcommit 8997b3c5c22cd5a451e491818f3b8831d0d6fa8c[m
+Author: Dang Huu Dat <62178681+noname163@users.noreply.github.com>
+Date:   Wed May 25 20:07:36 2022 +0700
+
+    update README.md
+
+[33mcommit a404c4e473531a2c3733026d3c10e48198bafa16[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Wed May 25 20:04:25 2022 +0700
+
+    swp_erd
+
+[33mcommit ccfb3ba6f81b78d5461b60edce741c9e4d1b4a60[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Wed May 25 19:50:19 2022 +0700
+
+    add_new_model
+
+[33mcommit 6ec5b51f6742d39cc47533c86235f369d568b766[m
+Merge: 2214440 6047ddf
+Author: noname163 <danghuudat@danghuutoans-MacBook-Pro.local>
+Date:   Wed May 25 14:28:50 2022 +0700
+
+    modifie_database
+
+[33mcommit 221444065cdd7767426080deaab6d40d05bed706[m
+Author: noname163 <danghuudat@danghuutoans-MacBook-Pro.local>
+Date:   Wed May 25 14:18:42 2022 +0700
+
+    modifie_database
+
+[33mcommit 6047ddf5f9defdd3cbe89105dc0fbe91f8747029[m
+Author: noname163 <62178681+noname163@users.noreply.github.com>
+Date:   Tue May 24 11:51:48 2022 +0700
+
+    Update README.md
+
+[33mcommit b0b7d788b4700ee6335473843be38aca7aab37c2[m
+Author: danghuudat <danghuudat@danghuutoans-MacBook-Pro.local>
+Date:   Sun May 22 21:48:31 2022 +0700
+
+    HomePage-v1
+
+[33mcommit 24838fb536b85ae54d2e3871c8cd29ae3e54ff3e[m
+Author: danghuudat <danghuudat@danghuutoans-MacBook-Pro.local>
+Date:   Sat May 21 10:03:49 2022 +0700
+
+    google-api-login
+
+[33mcommit ad35e31307ab84ee004be6bf29cba2a90a1809f4[m
+Author: danghuudat <danghuudat@danghuutoans-MacBook-Pro.local>
+Date:   Thu May 19 21:37:35 2022 +0700
+
+    company-list-v1
+
+[33mcommit e66d202b7866b4ee8abc3fbfd4ab549c1ab4ef9e[m
+Author: danghuudat <danghuudat@danghuutoans-MacBook-Pro.local>
+Date:   Wed May 18 21:33:26 2022 +0700
+
+    login-account
+
+[33mcommit 2681ce6b8cbc73967081b0cd1f6f7568fdd777e2[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Mon May 16 20:09:08 2022 +0700
+
+    add_readme_infor
+
+[33mcommit 16b2886ed5a614fe31a51328ecf29f4a2b1e9e5f[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Mon May 16 20:06:16 2022 +0700
+
+    fix_database_package
+
+[33mcommit 66f625bfd7dedf7c75da48f48e7d44b0269185e1[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Mon May 16 16:56:55 2022 +0700
+
+    Add_README.md
+
+[33mcommit 629f04d50580b65a44dd8620763429ac10a35cd6[m
+Author: noname163 <danghuudat163@gmail.com>
+Date:   Mon May 16 16:54:53 2022 +0700
+
+    Second-Login-temporary

@@ -81,7 +81,8 @@ public class jobController {
     @PostMapping(value = "/insertJob")
     public String insertJob(ModelMap modelMap,
     @ModelAttribute("Job") Job job){
-        
+            //Insert code get account id here
+            
             boolean insert =  jobService.insertJob(job, 1, job.getPositionId());
             if(insert==true)
                 return "redirect:/jobController/display";

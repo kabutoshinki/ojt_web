@@ -38,6 +38,11 @@
             <scope>runtime</scope>
         </dependency> -->
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.29</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -60,11 +65,7 @@
             <version>4.0.0-2</version>
         </dependency>        
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.29</version>
-        </dependency>
+        
         <!--google api-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -108,10 +109,10 @@
             <artifactId>spring-webmvc</artifactId>
             <version>5.3.18</version>
         </dependency>
-<!--        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>-->
+        </dependency> -->
 
 
     </dependencies>

@@ -54,7 +54,7 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Account accountA = new Account("test","test");
+                Account accountA = new Account("test","danghuudat163@gmail.com");
                 Account accountB = new Account("test1","test1@gmail.com");
                 String startDate = "6/3/2022";
                 String endDate = "20/6/2022";

@@ -32,21 +32,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // ;
 
             http.csrf().disable().httpBasic().and().authorizeRequests()
-                .antMatchers("/", "/oauth2/authorization/google","/jobController/**","/webjars/**","/webapp/**", "/oauth/**","/img/**","/CSS/**").permitAll()
+                .antMatchers("/", "/homePage","/oauth2/authorization/google","/webjars/**","/webapp/**", "/oauth/**","/img/**","/CSS/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/oauth2/authorization/google").permitAll()
-                .and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/").and()
+                .and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/homePage").and()
                 .oauth2Login()
                     .loginPage("/oauth2/authorization/google")
                     .userInfoEndpoint()
-                        .userService(oauthUserService);
-        
-        
-        
-        
+                        .userService(oauthUserService).and()
+                        .successHandler(oAuth2LoginSucessHandler);    
     }
      
     @Autowired
     private CustomOAuth2UserService oauthUserService;
+    @Autowired
+    private OAuth2LoginSucessHandler oAuth2LoginSucessHandler;
 }
