@@ -40,19 +40,19 @@ public class Job {
     )
     @Column(name = "idJob")
     public int idJob;
-    @Column(nullable = true, unique = false, length = 100)
+    @Column(unique = false, length = 100)
     private int slot;
-    @Column(nullable = true, unique = false, length = 10000)
+    @Column( unique = false, length = 10000)
     @Lob
     private String description;
-    @Column(nullable = true, unique = false, length = 1000)
+    @Column( unique = false, length = 1000)
     @Lob
     private String requirement;
-    @Column(nullable = true, unique = false, length = 2)
-    private int status;
-    @Column(nullable = true, unique = false)
+    @Column(unique = false, length = 300)
+    private String status;
+    @Column(unique = false)
     private String startDate;
-    @Column(nullable = true, unique = false)
+    @Column( unique = false)
     private String endDate;
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
@@ -62,9 +62,47 @@ public class Job {
     
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJobs> account = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "position_id")
+    private Position position;
+
     @Transient
     private int positionId;
+
     
+    public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
+            CompanyDetail companyDetail, Position position2) {
+        this.slot = slot;
+        this.description = description;
+        this.requirement = requirement;
+        this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.companyDetail = companyDetail;
+        this.position = position2;
+    }
+
+
+
+
+
+    public Position getPosition() {
+        return position;
+    }
+
+
+
+
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+
+
+
+
     public int getPositionId() {
         return positionId;
     }
@@ -85,7 +123,7 @@ public class Job {
 
     
     
-    public Job(int slot, String description, String requirement, int status, String startDate, String endDate,
+    public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
             CompanyDetail companyDetail) {
         this.slot = slot;
         this.description = description;
@@ -97,7 +135,7 @@ public class Job {
     }
 
 
-    public Job(int slot, String description, String requirement, int status, CompanyDetail companyDetail) {
+    public Job(int slot, String description, String requirement, String status, CompanyDetail companyDetail) {
         this.slot = slot;
         this.description = description;
         this.requirement = requirement;
@@ -182,12 +220,12 @@ public class Job {
     }
 
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

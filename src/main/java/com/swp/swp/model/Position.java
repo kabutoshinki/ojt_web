@@ -30,11 +30,10 @@ public class Position {
         )
         private int id;
         
-        @Column(nullable = true, unique = false, length = 300)
+        @Column( unique = false, length = 300)
         private String positon;
-        @OneToMany(cascade = CascadeType.PERSIST)
-        @JoinColumn(name = "position_id",referencedColumnName = "id")
-        private Set<Job> jobs = new HashSet<>();
+        @OneToMany(mappedBy = "position", cascade = CascadeType.REFRESH)
+        private Set<Job> job = new HashSet<>();
         
         public Position() {
         }
@@ -65,14 +64,6 @@ public class Position {
         }
 
 
-        public Set<Job> getJobs() {
-            return jobs;
-        }
-
-
-        public void setJobs(Set<Job> jobs) {
-            this.jobs = jobs;
-        }
 
         
 }

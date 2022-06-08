@@ -17,6 +17,7 @@ import com.swp.swp.model.CV;
 import com.swp.swp.model.CompanyDetail;
 import com.swp.swp.model.Job;
 import com.swp.swp.model.Major;
+import com.swp.swp.model.OjtProcess;
 import com.swp.swp.model.Position;
 import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.repositories.AccountRepositories;
@@ -24,6 +25,7 @@ import com.swp.swp.repositories.CVRepositories;
 import com.swp.swp.repositories.CompanyDetailRepositories;
 import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.MajorRepositories;
+import com.swp.swp.repositories.OjtProcessRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 import com.swp.swp.repositories.StudentApplyJobsRepositories;
 
@@ -49,7 +51,8 @@ public class Database {
      CVRepositories cvRepositories,
      MajorRepositories majorRepositories,
      PositionRepositories positionRepositories,
-     StudentApplyJobsRepositories studentApplyJobsRepositories){
+     StudentApplyJobsRepositories studentApplyJobsRepositories,
+     OjtProcessRepositories ojtProcessRepositories){
         
         return new CommandLineRunner() {
             @Override
@@ -66,7 +69,8 @@ public class Database {
                 "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
                 "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
                 "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh");
-                Job job1 = new Job(company1);
+                Position position = new Position("Backend");
+                 Position position2 = new Position("Frontend");
                 Job job2 = new Job(10, "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
                 +"Participate in building and developing system architecture\n" +
                 "Create technical documents such as: system architecture, high level design\n"+
@@ -76,33 +80,45 @@ public class Database {
                 "2 years Experienced in developing web apps with ReactJS, NodeJS\n"+
                 "Experience in building and deploying applications on the cloud (AWS)\n"+
                 "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
-                "Knowledge of infra, networking", 1,startDate, endDate ,company2);
+                "Knowledge of infra, networking", "Processing",startDate, endDate ,company2,position2);
+                Job job1 = new Job(10, "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
+                +"Participate in building and developing system architecture\n" +
+                "Create technical documents such as: system architecture, high level design\n"+
+                "Developing new features/product improvements\n"+
+                "Research and solve difficult technical issues\n"
+                , "Strong understanding of WebRTC\n"+
+                "2 years Experienced in developing web apps with ReactJS, NodeJS\n"+
+                "Experience in building and deploying applications on the cloud (AWS)\n"+
+                "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
+                "Knowledge of infra, networking", "Processing",startDate, endDate ,company2,position2);
+                OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, accountA);
                 logger.info("insert Data: " + accountRepositories.save(accountB));
                 logger.info("insert Data: " + accountRepositories.save(accountA));
                 logger.info("insert Data: " + companyDetailRepositories.save(company1));
                 logger.info("insert Data: " + companyDetailRepositories.save(company2));
+                positionRepositories.save(position2);
+                positionRepositories.save(position);
                 logger.info("insert Data: "+ jobRepositories.save(job1));
                 logger.info("insert Data: "+ jobRepositories.save(job2));
+                ojtProcessRepositories.save(ojtProcess);
                 // job2.getAccount().add(accountA);
                 // accountA.getJobs().add(job2);
-                CV cv = new CV("test");
+                CV cv = new CV("test",accountA);
                 cvRepositories.save(cv);
-                accountA.getCv().add(cv);
-                accountRepositories.save(accountA);
                 
-                StudentApplyJobs std = new StudentApplyJobs(job2, accountA,accountB, 1, "Spring");
+                
+                StudentApplyJobs std = new StudentApplyJobs(job2, accountA,accountB, "pass", "Spring");
                 studentApplyJobsRepositories.save(std);
                  Major major = new Major("SE");
                  majorRepositories.save(major);
-                 Position position = new Position("Backend");
-                 Position position2 = new Position("Frontend");
+                 
                  positionRepositories.save(position);
                  major.getPosition().add(position);
                  majorRepositories.save(major);
                  major.getPosition().add(position2);
                  positionRepositories.save(position2);
                  majorRepositories.save(major);
-                 position.getJobs().add(job1);
+                 
                  positionRepositories.save(position);
                
                 

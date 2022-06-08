@@ -34,7 +34,7 @@ public class Major {
     private String major;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "major_id",referencedColumnName = "id")
+    @JoinColumn(name = "position_id",referencedColumnName = "id")
     private Set<Position> position = new HashSet<>();
 
     

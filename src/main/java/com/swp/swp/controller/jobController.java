@@ -105,5 +105,21 @@ public class jobController {
         return "jobDetail";
     }
 
+    @RequestMapping(value = "/verifyPage", method = RequestMethod.GET)
+    public String verifyCompanyPage(ModelMap modelMap){
+        Iterable<Job> jobs =jobService.getAllJobs();
+        modelMap.addAttribute("jobList", jobs);
+        return "verifyJob";
+    }
+
+    @RequestMapping(value = "/updateStatus/{idJob}/{status}", method = RequestMethod.GET)
+    public String verifyPage(ModelMap modelMap, @PathVariable("idJob") int id, @PathVariable("status") int status){
+       if(status==1){
+           jobService.updateStatus(id, "Verify");
+       }
+       else if(status==2)
+            jobService.updateStatus(id, "Cancel");
+        return "redirect:/jobController/verifyPage";
+    }
 
 }

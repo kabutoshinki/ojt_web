@@ -38,8 +38,8 @@ public class StudentApplyJobs {
     @JoinColumn(name = "employee_id")
     private Account employeeAccount;
 
-    @Column(name = "status", unique = false, length = 3)
-    private int status;
+    @Column(name = "status", unique = false, length = 300)
+    private String status;
     @Column(name = "semester", unique = false, length = 30)
     private String semester;
 
@@ -48,7 +48,7 @@ public class StudentApplyJobs {
     }
 
     
-    public StudentApplyJobs(Job job, Account account, Account employeeAccount, int status, String semester) {
+    public StudentApplyJobs(Job job, Account account, Account employeeAccount, String status, String semester) {
         this.job = job;
         this.account = account;
         this.employeeAccount = employeeAccount;
@@ -57,14 +57,14 @@ public class StudentApplyJobs {
     }
 
 
-    public StudentApplyJobs(Job job, Account account, int status) {
+    public StudentApplyJobs(Job job, Account account, String status) {
         this.job = job;
         this.account = account;
         this.status = status;
     }
 
 
-    public StudentApplyJobs(Job job, Account account, Account employeeAccount, int status) {
+    public StudentApplyJobs(Job job, Account account, Account employeeAccount, String status) {
         this.job = job;
         this.account = account;
         this.employeeAccount = employeeAccount;
@@ -112,12 +112,12 @@ public class StudentApplyJobs {
     }
 
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

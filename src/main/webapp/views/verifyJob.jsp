@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/manage.css">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/manage.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
                     <i class="btn btn-secondary bi bi-list"></i>
                 </button>  
-                <a class="navbar-brand mr-auto" href="#"><img src="img/fu.jpg" width="300" /></a>
+                <a class="navbar-brand mr-auto" href="#"><img src="/img/fu.jpg" width="300" /></a>
                 <div class="collapse navbar-collapse" id="Navbar">
                     <ul class="navbar-nav menu mr-auto ml-auto">
                         <li class="nav-item active mr-5"><a class="nav-link" href="index.html">Home</a></li>
@@ -109,9 +109,9 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Apply Job</th>
+            <th>Company</th>
             <th>Job Description</th>
-            <th>Skill needed</th>
+            <th>Major</th>
             <th>Slot</th>
             <th>Form visit</th>
             <th>Status</th>
@@ -119,62 +119,33 @@
         </tr>
     </thead>
     <tbody> 
-        <tr>
-            <td>1</td>
-            <td>Frontend Developer</td>
-            <td>Tham gia phân tích yêu cầu và thiết kế kiến trúc phần...</td>
-            <td>React, Java web</td>
-            <td>
-               100
-            </td>
-            <td>
-                none
-            </td>
-            <td>Accepted</td>
-            <td>
-                <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Cancel</button>
-            </td>
-        </tr>
+        <c:forEach items="${jobList}" var="o">
+            <tr>
+                <td>${o.idJob}</td>
+                <td>${o.companyDetail.companyName}</td>
+                <td>${o.description}</td>
+                <td>${o.position.positon}</td>
+                <td>
+                   ${o.slot}
+                </td>
+                <td>
+                    none
+                </td>
+                <td>${o.status}</td>
+                <td>
+                    <a href="/jobController/updateStatus/${o.idJob}/1">
+                        <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
+                        </button>
+                    </a>
+                    <a href="/jobController/updateStatus/${o.idJob}/2">
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Cancel</button>
+                    </a>
+                </td>
+            </tr>
+        </c:forEach>
 
-        <tr>
-            <td>1</td>
-            <td>Frontend Developer</td>
-            <td>Tham gia phân tích yêu cầu và thiết kế kiến trúc phần...</td>
-            <td>React, Java web</td>
-            <td>
-               100
-            </td>
-            <td>
-                none
-            </td>
-            <td>Accepted</td>
-            <td>
-               <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Cancel</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>1</td>
-            <td>Frontend Developer</td>
-            <td>Tham gia phân tích yêu cầu và thiết kế kiến trúc phần...</td>
-            <td>React, Java web</td>
-            <td>
-               100
-            </td>
-            <td>
-                none
-            </td>
-            <td>Accepted</td>
-            <td>
-                <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Cancel</button>
-            </td>
-        </tr>
+        
+       
     </tbody>
 </table>
     
@@ -198,7 +169,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 ft-logo">
-                    <img src="img/logofpt.png" width="200" />
+                    <img src="/img/logofpt.png" width="200" />
                 </div>
                 <diV class="col-3">
                     <h2 style="font-size: larger">Lô E2a-7, Đường D1, phường Long Thạnh Mỹ,

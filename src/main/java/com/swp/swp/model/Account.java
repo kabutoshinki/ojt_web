@@ -54,16 +54,19 @@ public class Account {
     private String phone;
     @Column(nullable = true, unique = false, length = 300)
     private String address;
-    @Column(nullable = true, unique = false, length = 3)
-    private int status;
+    @Column(nullable = true, unique = false, length = 300)
+    private String status;
     @Column(nullable = true, unique = false, length = 3)
     private int role;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJobs> jobs = new HashSet<>();
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "account_id",referencedColumnName = "id")
+
+    @OneToMany(mappedBy = "student" ,cascade = CascadeType.PERSIST)
     private Set<CV> cv = new HashSet<>();
+
+    @OneToMany(mappedBy = "student",cascade = CascadeType.REFRESH)
+    private Set<OjtProcess> ojt = new HashSet<>();
 
 
     public Account(String fullName, String email) {
@@ -77,7 +80,7 @@ public class Account {
 
 
     public Account(int accountId, String fullName, String email, Date dateOfBirth, String phone, String address,
-             int status, int role) {
+             String status, int role) {
         this.id = accountId;
         this.fullName = fullName;
         this.email = email;
@@ -98,15 +101,7 @@ public class Account {
     //     this.jobs = jobs;
     // }
 
-
-    public Set<CV> getCv() {
-        return cv;
-    }
-
-
-    public void setCv(Set<CV> cv) {
-        this.cv = cv;
-    }
+    
 
 
     public int getAccountId() {
@@ -158,11 +153,11 @@ public class Account {
     }
 
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

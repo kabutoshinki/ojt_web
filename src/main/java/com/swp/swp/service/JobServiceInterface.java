@@ -9,4 +9,5 @@ public interface JobServiceInterface {
     String[] getCompanyDescription(int jobId);
     Job getJob(int id);
     boolean insertJob(Job job, int companyId, int positionId);
+    void updateStatus(int id, String status);
 }

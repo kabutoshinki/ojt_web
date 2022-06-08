@@ -76,9 +76,9 @@ public class JobService implements JobServiceInterface {
         CompanyDetail company = companyDetailRepositories.findById(companyId);
         Position position = positionRepositories.findById(positionId);
         job.setCompanyDetail(company);
+        job.setPosition(position);
         try {
             jobRepositories.save(job);
-            position.getJobs().add(job);
             positionRepositories.save(position);
             return true;
         } catch (Exception e) {
@@ -86,5 +86,13 @@ public class JobService implements JobServiceInterface {
             return false;
         }
     }
+    @Override
+    public void updateStatus(int id, String status) {
+        Job job = jobRepositories.findById(id);
+        job.setStatus(status);
+        jobRepositories.save(job);
+        
+    }
+    
     
 }
