@@ -44,12 +44,14 @@ public class Account {
     )
     
     private int id;
-    @Column(nullable = false, unique = false, length = 300)
+    @Column(nullable = true, unique = false, length = 300)
     private String fullName;
     @Column(nullable = true, unique = true, length = 300)
     private String email;
     @Column(nullable = true, unique = false)
     private Date dateOfBirth;
+    @Column(nullable = true, unique = false)
+    private String avatar;
     @Column(nullable = true, unique = false, length = 12)
     private String phone;
     @Column(nullable = true, unique = false, length = 300)
@@ -103,10 +105,20 @@ public class Account {
 
     
 
-
+    
     public int getAccountId() {
         return id;
     }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
 
     public void setAccountId(int accountId) {
         this.id = accountId;

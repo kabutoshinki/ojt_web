@@ -4,39 +4,77 @@
  */
 package com.swp.swp.controller;
 
-import com.swp.swp.googleApi.CustomOAuth2User;
 import com.swp.swp.model.Account;
 import com.swp.swp.model.ResponseObject;
 import com.swp.swp.repositories.AccountRepositories;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @author ADMIN
  */
 @Controller
-@RequestMapping(path = "account")
+@RequestMapping(path = "accountController")
 public class accountController {
     @Autowired
     private AccountRepositories repositories;
-    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
     public String getAllAccounts(ModelMap modelMap){
-        System.out.println("test login page");
-        modelMap.addAttribute("email", repositories.getById(1).getEmail() );
-        System.out.println("email: "+repositories.getById(1).getEmail());
-        return "login";
+        System.out.println("insert information page");
+        return "informationInsertPage";
+    }
+
+    @PostMapping(value = "/insert")
+    public String insert(@ModelAttribute("information") Account infor, RedirectAttributes ra,
+    @RequestParam("imgavatar") MultipartFile img, HttpServletRequest request) throws IOException{
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        System.out.println("insert email: "+email);
+        Account test = infor;
+        System.out.println("test: "+ test.getAddress());
+        repositories.save(infor);
+        String fileName = StringUtils.cleanPath(img.getOriginalFilename());
+        String uploadDir = "D:/swp_project/src/main/resources/static/img/"+ infor.getAccountId();
+
+        Path uploadPath = Paths.get(uploadDir);
+        if(!Files.exists(uploadPath)){
+            Files.createDirectories(uploadPath);
+        }
+        try(InputStream inputStream = img.getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println(filePath.toFile().getAbsolutePath());
+        } catch (IOException e) {
+            throw new IOException("Could not save uploaded file: " + fileName);
+        }
+        ra.addFlashAttribute("mess", "Insert completed");
+        return "test";
     }
     
     @RequestMapping(value = "login", method = RequestMethod.POST)
