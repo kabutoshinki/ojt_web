@@ -47,56 +47,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </div>
 
     </c:if>
-    <div class="wrap">
-        <div class="header d-flex p-3">
-            <div class="d-flex flex-grow-1 p-1 info">
-                <div class='p-2'>
-                    <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
-                </div>
-                <div class='p-2'>
-                    <i class="fa-solid fa-phone"></i> <span>(028)73005588</span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-around p-1">
-                <div class="text-light">
-                    <a href="/oauth2/authorization/google" ><i class="fa-solid fa-user-large"></i> Login</a>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="col-sm-5">
-                    <img src="img/fu.jpg" width="280" />
-                </div>
-                <div class="col-sm-7 menu">
-                    <div class="">
-                        <a href=""> Home </a>
-                    </div>
-                    <div class="">
-                        <a href=""> OJT </a>
-                    </div>
-                    <div class="">
-                        <a href=""> CNH </a>
-                    </div>
-                    <div class="">
-                        <a href=""> Company Tour </a>
-                    </div>
-                    <div>
-                        <form action="" method="post">
-                            <input type="text" placeholder="Search here">
-                            <button type="submit">
-                                <i class="bi bi-search"> Search</i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+    <jsp:include page="header.jsp"/>
         <hr>
         <div class="container-fluid main-content">
             <div class="main-img">
-               <a href="/jobController/display">
+               <a href="/view/display">
                 <input
                 style='border-radius: 20px; background-color: orange; position: absolute; bottom: -13vh; left: 12vw; width: 18vw;'
                 class="btn btn-warning m-1 p-2 shadow text-light" type="submit" value="Đăng Ký Ngay"

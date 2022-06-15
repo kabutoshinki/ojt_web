@@ -33,70 +33,8 @@
         <title>Job Detail</title>
     </head>
     <body>
-        <div>
-            <div style="
-                 background-color: #FC8902;
-                 display: flex;
-                 justify-content: left;
-                 align-items: center;
-                 padding: 25px 10vw;">
-                <div class="text-light px-2" style="font-size: 15px;">
-                    <span class="text-dark">
-                        <i class="far fa-envelope"></i>
-                    </span> daihoc.hcm@fpt.edu.vn
-                </div>
-                <div class="text-light px-2"  style="font-size: 15px;">
-                    <span class="text-dark">
-                        <i class="fas fa-phone"></i>
-                    </span>
-                    (028) 7300 5588
-                </div>  
-                <div style="    position: absolute;
-                     right: 1vw;">
-                    <button style="width: 10vw; border-radius: 20px !important ; padding: 10px"  class="btn btn-light shadow border fw-bold border border-dark">
-                        <img 
-                            style="    position: absolute;
-                            left: 1vw;"
-                            src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png" 
-                            width="20px" 
-                            alt="google logo png google icon logo png transparent svg vector bie supply" />
-                        <!--                    <span class="text-dark">
-                                                <i class="fab fa-google"></i>
-                                            </span>-->
-                        login</button>
-                </div>
-            </div>
-            <nav style="padding: 3vh 10vw " class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img style="height: 80px; align-items: center;" src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Dai-hoc-FPT.png"/>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon">
-                            <i class="fas fa-bars"></i>
-                        </span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                        <ul class="navbar-nav ">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark " aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" aria-current="page" href="#">OJT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" aria-current="page" href="#">CNH</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" aria-current="page" href="#">Company Tour</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
+        <jsp:include page="header.jsp"/>
+        <hr>
             </nav>  
             <div style="
                  display: flex;
@@ -168,33 +106,6 @@
                 </button>
             </div> 
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-4">
-                    <img style="height: 80px; align-items: center; padding-left:50px; padding-bottom: 10px" src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Dai-hoc-FPT.png"/>
-                </div>
-                <div class="col-5" style="position: absolute; padding-left: 300px; font-size: 20px">
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM<br>
-                    <span style="font-size: 15px">daihoc.hcm@fpt.edu.vn</br></span>
-                    <span style="font-size: 15px">(028) 7300 5588</br></span>
-
-                </div> 
-                <div class="col-8" style="position: absolute; padding-left: 900px; font-size: 15px; display: flex;">
-                    <div>
-                        About
-                        Growers
-                        Merchants
-                        Partner
-                        Contact
-                    </div>
-                    <div style="padding-left: 100px">
-                      Facebook
-                      Twitter
-                      Linkedin
-                      Instagram
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="footer.jsp"/>
     </footer>
 </html>

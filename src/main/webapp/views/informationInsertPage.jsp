@@ -24,35 +24,6 @@
     <body>
         <div class="wrap">
             <jsp:include page="header.jsp"/>
-            <div class="container-fluid" style="justify-content: flex-start">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <img src="/img/fu.jpg" width="280"/>
-                    </div>
-                    <div class="col-sm-7 menu">
-                        <div class="">
-                            <a href=""> Home </a>
-                        </div>
-                        <div class="">
-                            <a href=""> OJT </a>
-                        </div>
-                        <div class="">
-                            <a href=""> CNH </a>
-                        </div>
-                        <div class="">
-                            <a href=""> Company Tour </a>
-                        </div>
-                        <div>
-                            <form action="" method="post">
-                                <input type="text" placeholder="Search here">
-                                <button type="submit">
-                                    <i class="bi bi-search"> Search</i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <hr/>
             <br/>
             <div class="container" style="background-color: orange; border-radius: 40px; padding: 25px">

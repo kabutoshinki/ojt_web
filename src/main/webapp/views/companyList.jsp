@@ -18,52 +18,8 @@
 
     <body>
         
-        <div class="wrap">
-            <div class="header d-flex p-3">
-                <div class="d-flex flex-grow-1 p-1 info">
-                    <div class='p-2'>
-                        <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
-                    </div>
-                    <div class='p-2'>
-                        <i class="fa-solid fa-phone"></i> <span>(028)73005588</span> 
-                    </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-around p-1">
-                    <div class="text-light">
-                        <a href=""><i class="fa-solid fa-user-large"></i> Login</a>
-                    </div>
-                </div>
-            </div>  
-            <div class="container ">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <img src="/img/fu.jpg" width="280"/>
-                    </div>
-                    <div class="col-sm-7 menu align-items-center">
-                        <div class="">
-                            <a href=""> Home </a>
-                        </div>
-                        <div class="">
-                            <a href=""> OJT </a>
-                        </div>
-                        <div class="">
-                            <a href=""> CNH </a>
-                        </div>
-                        <div class="">
-                            <a href=""> Company Tour </a>
-                        </div>
-                        <div>
-                            <form action="" method="post">
-                                <input type="text" placeholder="Search here">
-                                <button type="submit">
-                                    <i class="bi bi-search"> Search</i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <jsp:include page="header.jsp"/>
+            
             <hr>
             <div class="container main-content">
                 <div class="row" style="">
@@ -86,7 +42,7 @@
                                 <p style="display: none ;" name="idJob" >${o.idJob}</p>
                                 <p style="text-align: center"/>${o.companyDetail.companyName}<br/>
                                 <p style="text-align: center;"/>${o.slot} Job - Ho Chi Minh<br/><br/>
-                                <a href="/jobController/jobDetail/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
+                                <a href="/view/jobDetail/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
                                 
                             </form>
                         </div>
@@ -150,42 +106,7 @@
             </div>  
         </div>
         <footer>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-3 ft-logo">
-                        <img src="/img/logofpt.png" width="200"/>
-                    </div>
-                    <diV class="col-3">
-                        <h2 style="font-size: larger">Lô E2a-7, Đường D1, P. Long Thạnh Mỹ, 
-                            Thành Phố Thủ Đức, Thành phố Hồ Chí Minh
-                        </h2>
-                        <p>
-                            contact@lift.agencyr.com<br/>
-                            (028) 7300 5588
-                        </p>
-                    </diV>
-                    <div class="col-2">
-                        <ul>
-                            <li>About</li>
-                            <li>Growers</li>
-                            <li>Merchants</li>
-                            <li>Partners</li>
-                            <li>Contact</li>
-                        </ul>
-                    </div>
-                    <div class="col-2">
-                        <ul>
-                            <li>Facebook</li>
-                            <li>Twitter</li>
-                            <li>Linkedin</li>
-                            <li>Instagram</li>
-                        </ul>
-                    </div>
-                    <div class="col-2 arrow-up">
-                        <i class="bi bi-arrow-up-circle-fill"></i>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="footer.jsp"/>
         </footer>
         <hr>
         <div class="space">

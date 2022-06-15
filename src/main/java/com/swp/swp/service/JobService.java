@@ -11,7 +11,7 @@ import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 
 @Service
-public class JobService implements JobServiceInterface {
+public class JobService implements JobServiceInterface, CRUDInterface<Job> {
 
     @Autowired JobRepositories jobRepositories;
     @Autowired CompanyDetailRepositories companyDetailRepositories;
@@ -25,18 +25,6 @@ public class JobService implements JobServiceInterface {
         this.jobRepositories =jobRepositories;
         this.positionRepositories = positionRepositories;
         this.companyDetailRepositories = companyDetailRepositories;
-    }
-    @Override
-    public Iterable<Job> getAllJobs() {
-        return jobRepositories.findAll();
-    }
-    @Override
-    public Job getJob(int id) {
-        try {
-            return jobRepositories.findById(id);
-        } catch (Exception e) {
-            return null;
-        }
     }
     @Override
     public String[] getJobDescription(int id) {
@@ -87,11 +75,29 @@ public class JobService implements JobServiceInterface {
         }
     }
     @Override
-    public void updateStatus(int id, String status) {
+    public boolean updateStatus(int id, String status) {
         Job job = jobRepositories.findById(id);
         job.setStatus(status);
         jobRepositories.save(job);
-        
+        return false;
+    }
+    @Override
+    public Iterable<Job> getAll() {
+        Iterable<Job> jobs= jobRepositories.findAll();
+        return jobs;
+    }
+    @Override
+    public Job getById(int id) {
+        try {
+            return jobRepositories.findById(id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    @Override
+    public boolean isExist(String value) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
     

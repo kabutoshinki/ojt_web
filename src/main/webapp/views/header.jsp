@@ -22,3 +22,33 @@
     </div>
 </div> 
 <hr/>
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm-5">
+            <img src="/img/fu.jpg" width="280" />
+        </div>
+        <div class="col-sm-7 menu">
+            <div class="">
+                <a href=""> Home </a>
+            </div>
+            <div class="">
+                <a href=""> OJT </a>
+            </div>
+            <div class="">
+                <a href=""> CNH </a>
+            </div>
+            <div class="">
+                <a href=""> Company Tour </a>
+            </div>
+            <div>
+                <form action="" method="post">
+                    <input type="text" placeholder="Search here">
+                    <button type="submit">
+                        <i class="bi bi-search"> Search</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

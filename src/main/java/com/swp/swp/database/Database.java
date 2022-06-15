@@ -90,7 +90,7 @@ public class Database {
                 "2 years Experienced in developing web apps with ReactJS, NodeJS\n"+
                 "Experience in building and deploying applications on the cloud (AWS)\n"+
                 "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
-                "Knowledge of infra, networking", "Processing",startDate, endDate ,company2,position2);
+                "Knowledge of infra, networking", "Processing",startDate, endDate ,company1,position2);
                 OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, accountA);
                 logger.info("insert Data: " + accountRepositories.save(accountB));
                 logger.info("insert Data: " + accountRepositories.save(accountA));
@@ -107,8 +107,12 @@ public class Database {
                 cvRepositories.save(cv);
                 
                 
-                StudentApplyJobs std = new StudentApplyJobs(job2, accountA,accountB, "pass", "Spring");
+                StudentApplyJobs std = new StudentApplyJobs(job2, accountA,accountB, "watting", "Spring");
+                StudentApplyJobs std1 = new StudentApplyJobs(job1, accountA,accountB, "watting", "Spring");
+                StudentApplyJobs std3 = new StudentApplyJobs(job1, accountA,accountB, "watting", "Spring");
                 studentApplyJobsRepositories.save(std);
+                studentApplyJobsRepositories.save(std1);
+                studentApplyJobsRepositories.save(std3);
                  Major major = new Major("SE");
                  majorRepositories.save(major);
                  

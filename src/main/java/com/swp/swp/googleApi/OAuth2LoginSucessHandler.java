@@ -26,7 +26,7 @@ public class OAuth2LoginSucessHandler extends SimpleUrlAuthenticationSuccessHand
             Authentication authentication) throws IOException, ServletException {
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getEmail();
-        if(accountService.isEmailExist(email)==false){
+        if(accountService.isExist(email)==false){
             System.out.println("This account not have permisstion");
             response.sendRedirect("/logout");
         }else{

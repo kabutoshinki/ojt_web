@@ -34,50 +34,7 @@
         </head>
 
         <body>
-            <div class="wrap">
-                <div class="container-fluid header d-flex p-3 align-items-center">
-                    <div class="col  d-flex flex-grow-1 p-1 info">
-                        <div class='p-2'>
-                            <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
-                        </div>
-                        <div class='p-2'>
-                            <i class="fa-solid fa-phone"></i> <span>(028)73005588</span>
-                        </div>
-                    </div>
-                    <div class="col ">
-                        <a href="manage.html" class="btn btn-light">Company</a>
-                    </div>
-                    <div class="col  d-flex align-items-center justify-content-around p-1">
-                        <div class="text-light">
-                            <a href="/oauth2/authorization/google" class="btn btn-light"><i class="bi bi-google"></i>
-                                Login</a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <nav class="navbar navbar-expand-md">
-                    <div class="container">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
-                            <i class="btn btn-secondary bi bi-list"></i>
-                        </button>
-                        <a class="navbar-brand mr-auto" href="#"><img src="/img/fu.jpg" width="300" /></a>
-                        <div class="collapse navbar-collapse" id="Navbar">
-                            <ul class="navbar-nav menu mr-auto ml-auto">
-                                <li class="nav-item active mr-5"><a class="nav-link" href="index.html">Home</a></li>
-                                <li class="nav-item mr-5"><a class="nav-link" href="#">OJT</a></li>
-                                <li class="nav-item mr-5"><a class="nav-link" href="#">CNH</a></li>
-                                <li class="nav-item mr-5"><a class="nav-link" href="#">Company Tour</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-
-
-                <hr>
-
-            </div>
+            <jsp:include page="header.jsp"/>
 
             <!-- content -->
             <form class="mt-5" action="/jobController/insertJob" method="POST" ModelAttribute="Job">
@@ -182,44 +139,7 @@
 
             <!-- footer -->
             <footer>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-3 ft-logo">
-                            <img src="/img/logofpt.png" width="200" />
-                        </div>
-                        <diV class="col-3">
-                            <h2 style="font-size: larger">Lô E2a-7, Đường D1, phường Long Thạnh Mỹ,
-                                Thành Phố Thủ Đức, Thành phố Hồ Chí Minh
-                            </h2>
-                            <p>
-                                contact@lift.agencyr.com<br />
-                                (028) 7300 5588
-                            </p>
-
-
-                        </diV>
-                        <div class="col-2">
-                            <ul>
-                                <li>About</li>
-                                <li>Growers</li>
-                                <li>Merchants</li>
-                                <li>Partners</li>
-                                <li>Contact</li>
-                            </ul>
-                        </div>
-                        <div class="col-2">
-                            <ul>
-                                <li>Facebook</li>
-                                <li>Twitter</li>
-                                <li>Linkedin</li>
-                                <li>Instagram</li>
-                            </ul>
-                        </div>
-                        <div class="col-2 arrow-up">
-                            <i class="bi bi-arrow-up-circle-fill"></i>
-                        </div>
-                    </div>
-                </div>
+                <jsp:include page="footer.jsp"/>
             </footer>
             <hr>
             <div class="space">
