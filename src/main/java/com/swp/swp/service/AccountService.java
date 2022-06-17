@@ -1,5 +1,8 @@
 package com.swp.swp.service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,16 @@ public class AccountService implements AccountServiceInterface, CRUDInterface<Ac
         this.accountRepositories = accountRepositories;
     }
 
+    public boolean checkRole( String role, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        Account account = accountRepositories.findByEmail(email);
+        
+        if(account.getRole().equals(role))
+            return true;
+        else
+            return false;
+    }
 
     @Override
     public boolean updateStatus(int id, String status) {
@@ -30,8 +43,8 @@ public class AccountService implements AccountServiceInterface, CRUDInterface<Ac
 
     @Override
     public Account getById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        Account account = accountRepositories.findById(id);
+        return account;
     }
 
     @Override
@@ -40,6 +53,13 @@ public class AccountService implements AccountServiceInterface, CRUDInterface<Ac
             return true;
         else
             return false;
+    }
+
+
+    @Override
+    public Account getByString(String value) {
+        Account account = accountRepositories.findByEmail(value);
+        return account;
     }
 
 }

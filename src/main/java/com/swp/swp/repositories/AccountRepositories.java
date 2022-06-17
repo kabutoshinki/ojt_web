@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface AccountRepositories extends JpaRepository<Account,Integer>{
     Account findByEmail(String email);
+    Account findByFullName(String fullName);
+    Account findById(int id);
 }

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>  
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -41,9 +42,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
 <body>
     <c:if test="${mess!=null}">
-        <div class="alert">
+        <div class="alert" sec:authorize="isAuthenticated()">
           <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
           <strong>Danger!</strong> ${mess}
+          <span sec:authentication="principal.authorities">Roles </span>
         </div>
 
     </c:if>
@@ -54,7 +56,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                <a href="/view/display">
                 <input
                 style='border-radius: 20px; background-color: orange; position: absolute; bottom: -13vh; left: 12vw; width: 18vw;'
-                class="btn btn-warning m-1 p-2 shadow text-light" type="submit" value="Đăng Ký Ngay"
+                class="btn btn-warning m-1 p-2 shadow text-light" type="submit" value="Đăng ký công việc"
                 name="btnSignUp" />
                </a>
                 <img src="img/ojt.png" title="FU student" />

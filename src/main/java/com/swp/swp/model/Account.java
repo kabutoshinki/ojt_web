@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.swp.swp.model;
 
 import java.sql.Date;
+import java.util.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,13 +13,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ManyToAny;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 /**
  *
@@ -30,7 +29,7 @@ import org.hibernate.annotations.ManyToAny;
 @Entity
 @Table(name = "Account")
 
-public class Account {
+public class Account implements UserDetails {
     @Id
 //    @GeneratedValue( strategy = GenerationType.AUTO)
     @SequenceGenerator(
@@ -58,8 +57,8 @@ public class Account {
     private String address;
     @Column(nullable = true, unique = false, length = 300)
     private String status;
-    @Column(nullable = true, unique = false, length = 3)
-    private int role;
+    @Column(name= "role",nullable = true, unique = false, length = 30)
+    private String role;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJobs> jobs = new HashSet<>();
@@ -79,10 +78,17 @@ public class Account {
 
     public Account() {
     }
+    
+
+    public Account(String fullName, String email, String role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+    }
 
 
     public Account(int accountId, String fullName, String email, Date dateOfBirth, String phone, String address,
-             String status, int role) {
+             String status, String role) {
         this.id = accountId;
         this.fullName = fullName;
         this.email = email;
@@ -173,11 +179,11 @@ public class Account {
         this.status = status;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -186,6 +192,54 @@ public class Account {
         return "Account [accountId=" + id + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", email="
                 + email + ", fullName=" + fullName  + ", phone=" + phone + ", role=" + role
                 + ", status=" + status + "]";
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+ 
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+ 
+ 
+        authorities.add(new SimpleGrantedAuthority(role));
+ 
+ 
+        return authorities;
+    }
+
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+
+    @Override
+    public String getUsername() {
+        return this.fullName;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
     
     

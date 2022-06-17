@@ -29,6 +29,8 @@ import com.swp.swp.repositories.OjtProcessRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 import com.swp.swp.repositories.StudentApplyJobsRepositories;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -57,8 +59,16 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Account accountA = new Account("test","danghuudat163@gmail.com");
-                Account accountB = new Account("test1","test1@gmail.com");
+                Account accountA = new Account("test","danghuudat163@gmail.com","ADMIN");
+                Account accountB = new Account("test1","datdhse150011@fpt.edu.vn","STUDENT");
+                // ArrayList tests = (ArrayList) accountA.getAuthorities();
+                // ArrayList tests1 = (ArrayList) accountB.getAuthorities();
+                // for (Object test : tests1) {
+                //     System.out.println("User Role: "+ test.toString());
+                // }
+                // for (Object test : tests) {
+                //     System.out.println( "User Role: "+ test.toString());
+                // }
                 String startDate = "6/3/2022";
                 String endDate = "20/6/2022";
                 CompanyDetail company1 = new CompanyDetail("FPT SOFTWARE",

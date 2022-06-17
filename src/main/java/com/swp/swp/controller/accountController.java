@@ -7,6 +7,7 @@ package com.swp.swp.controller;
 import com.swp.swp.model.Account;
 import com.swp.swp.model.ResponseObject;
 import com.swp.swp.repositories.AccountRepositories;
+import com.swp.swp.service.AccountService;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +20,12 @@ import java.nio.file.StandardCopyOption;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,12 +43,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author ADMIN
  */
 @Controller
-@RequestMapping(path = "accountController")
+@RequestMapping(path = "/accountController")
 public class accountController {
     @Autowired
     private AccountRepositories repositories;
+    @Autowired
+    private AccountService accountService;
+
     @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
-    public String getAllAccounts(ModelMap modelMap){
+    public String getAllAccounts(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("STUDENT", request)==false)
+            return "test";
         System.out.println("insert information page");
         return "informationInsertPage";
     }
@@ -53,6 +61,8 @@ public class accountController {
     @PostMapping(value = "/insert")
     public String insert(@ModelAttribute("information") Account infor, RedirectAttributes ra,
     @RequestParam("imgavatar") MultipartFile img, HttpServletRequest request) throws IOException{
+        if(accountService.checkRole("STUDENT", request)==false)
+            return "test";
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         System.out.println("insert email: "+email);

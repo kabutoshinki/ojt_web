@@ -45,6 +45,13 @@ public class PositionService implements PositionServiceInterface, CRUDInterface<
     }
 
 
+    @Override
+    public Position getByString(String value) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
    
     
 }

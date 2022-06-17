@@ -27,4 +27,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         
         return new CustomOAuth2User(user);
     }
+
+    
 }   

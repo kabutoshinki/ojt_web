@@ -69,5 +69,11 @@ public class StudentApplyJobsService implements CRUDInterface<StudentApplyJobs> 
         }
         return candidatesList;
     }
+
+    @Override
+    public StudentApplyJobs getByString(String value) {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

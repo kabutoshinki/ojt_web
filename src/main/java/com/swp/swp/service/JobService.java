@@ -99,6 +99,11 @@ public class JobService implements JobServiceInterface, CRUDInterface<Job> {
         // TODO Auto-generated method stub
         return false;
     }
+    @Override
+    public Job getByString(String value) {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
     
 }

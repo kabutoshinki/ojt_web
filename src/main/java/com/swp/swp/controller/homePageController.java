@@ -18,6 +18,7 @@ public class homePageController {
         String messTrue = (String)session.getAttribute("true");
         if(messTrue!=null){
             session.removeAttribute("true");
+            
             request.setAttribute("mess", "Loign Sucessfully");    
         }
         else
