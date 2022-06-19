@@ -45,4 +45,17 @@ public class viewController {
         modelMap.addAttribute("jobDetail", jobdetail);
         return "jobDetail";
     }
+
+    @RequestMapping(value = "/view1")
+    public String view1(){
+        return "studentinfo";
+    }
+    @RequestMapping(value = "/view2")
+    public String view2(){
+        return "listofstudent";
+    }
+    @RequestMapping(value = "/view3")
+    public String view3(){
+        return "applylist";
+    }
 }

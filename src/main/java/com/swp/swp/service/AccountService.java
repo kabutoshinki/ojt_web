@@ -1,5 +1,7 @@
 package com.swp.swp.service;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +29,22 @@ public class AccountService implements AccountServiceInterface, CRUDInterface<Ac
             return true;
         else
             return false;
+    }
+
+    public boolean insertInfor(String email, String fullName, String address, Date dob, String phone, String avatar){
+        try {
+            Account account = getByString(email);
+            account.setAddress(address);
+            account.setDateOfBirth(dob);
+            account.setFullName(fullName);
+            account.setPhone(phone);
+            account.setAvatar(avatar);
+            accountRepositories.save(account);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override

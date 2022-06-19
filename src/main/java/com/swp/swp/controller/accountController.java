@@ -52,36 +52,40 @@ public class accountController {
 
     @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
     public String getAllAccounts(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("STUDENT", request)==false)
-            return "test";
         System.out.println("insert information page");
-        return "informationInsertPage";
+        HttpSession session = request.getSession();
+        Account account = accountService.getByString((String) session.getAttribute("email"));
+        modelMap.addAttribute("user", account);
+        System.out.println("Account: " + account.getEmail());
+        return "studentInformation";
     }
 
     @PostMapping(value = "/insert")
     public String insert(@ModelAttribute("information") Account infor, RedirectAttributes ra,
     @RequestParam("imgavatar") MultipartFile img, HttpServletRequest request) throws IOException{
-        if(accountService.checkRole("STUDENT", request)==false)
-            return "test";
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
-        System.out.println("insert email: "+email);
-        Account test = infor;
-        System.out.println("test: "+ test.getAddress());
-        repositories.save(infor);
         String fileName = StringUtils.cleanPath(img.getOriginalFilename());
-        String uploadDir = "D:/swp_project/src/main/resources/static/img/"+ infor.getAccountId();
+        Account account = accountService.getByString(email);
+        String uploadDir = "D:/swp_project/src/main/resources/static/img/"+ account.getAccountId();
 
         Path uploadPath = Paths.get(uploadDir);
         if(!Files.exists(uploadPath)){
             Files.createDirectories(uploadPath);
         }
         try(InputStream inputStream = img.getInputStream()) {
+            System.out.println("filePath.toFile().getAbsolutePath()");
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+
             System.out.println(filePath.toFile().getAbsolutePath());
         } catch (IOException e) {
+            System.out.println("ERROS: "+e.getStackTrace());
             throw new IOException("Could not save uploaded file: " + fileName);
+        }
+        if(!accountService.insertInfor(email, infor.getFullName(), infor.getAddress(), 
+        infor.getDateOfBirth(), infor.getPhone(), fileName)){
+            System.out.println("Insert Faild");
         }
         ra.addFlashAttribute("mess", "Insert completed");
         return "test";
