@@ -10,20 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.swp.swp.model.Account;
+import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.service.AccountService;
+import com.swp.swp.service.StudentApplyJobsService;
 
 @Controller
 @RequestMapping(path = "studentController")
 public class studentController {
     @Autowired AccountService accountService;
+    @Autowired StudentApplyJobsService studentApplyJobs;
 
-    @RequestMapping(value = "insertPage", method = RequestMethod.GET)
-    public String insertPage(ModelMap modelMap, HttpServletRequest request){
+    @RequestMapping(value = "viewApply", method = RequestMethod.GET)
+    public String viewApply(ModelMap modelMap, HttpServletRequest request){
         HttpSession session = request.getSession();
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Account account = accountService.getByString((String)session.getAttribute("email"));
-        modelMap.addAttribute("account", account);
-        return "studentInformation";
+        Iterable<StudentApplyJobs> apply = studentApplyJobs.getApplyByAccount(account);
+        modelMap.addAttribute("apply", apply);
+        return "applylist";
     }
 }

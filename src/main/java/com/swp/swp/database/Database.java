@@ -59,16 +59,9 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Account accountA = new Account("test","danghuudat163@gmail.com","ADMIN");
+                Account accountA = new Account("test","danghuudat163@gmail.com","COMPANY");
                 Account accountB = new Account("test1","datdhse150011@fpt.edu.vn","STUDENT");
-                // ArrayList tests = (ArrayList) accountA.getAuthorities();
-                // ArrayList tests1 = (ArrayList) accountB.getAuthorities();
-                // for (Object test : tests1) {
-                //     System.out.println("User Role: "+ test.toString());
-                // }
-                // for (Object test : tests) {
-                //     System.out.println( "User Role: "+ test.toString());
-                // }
+                Account accountC = new Account("test2", "akai792001@gmail.com", "EMPLOYEE");
                 String startDate = "6/3/2022";
                 String endDate = "20/6/2022";
                 CompanyDetail company1 = new CompanyDetail("FPT SOFTWARE",
@@ -104,6 +97,7 @@ public class Database {
                 OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, accountA);
                 logger.info("insert Data: " + accountRepositories.save(accountB));
                 logger.info("insert Data: " + accountRepositories.save(accountA));
+                logger.info("insert Data: " + accountRepositories.save(accountC));
                 logger.info("insert Data: " + companyDetailRepositories.save(company1));
                 logger.info("insert Data: " + companyDetailRepositories.save(company2));
                 positionRepositories.save(position2);
@@ -118,8 +112,8 @@ public class Database {
                 
                 
                 StudentApplyJobs std = new StudentApplyJobs(job2, accountA,accountB, "watting", "Spring");
-                StudentApplyJobs std1 = new StudentApplyJobs(job1, accountA,accountB, "watting", "Spring");
-                StudentApplyJobs std3 = new StudentApplyJobs(job1, accountA,accountB, "watting", "Spring");
+                StudentApplyJobs std1 = new StudentApplyJobs(job1, accountB,accountA, "watting", "Spring");
+                StudentApplyJobs std3 = new StudentApplyJobs(job1, accountB,accountA, "watting", "Spring");
                 studentApplyJobsRepositories.save(std);
                 studentApplyJobsRepositories.save(std1);
                 studentApplyJobsRepositories.save(std3);

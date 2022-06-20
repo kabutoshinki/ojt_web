@@ -35,6 +35,7 @@ public class OAuth2LoginSucessHandler extends SimpleUrlAuthenticationSuccessHand
             session.setAttribute("true", "true");
             session.setAttribute("email", oAuth2User.getEmail());
             session.setAttribute("userName", oAuth2User.getName());
+            session.setAttribute("account", accountService.getByString(email));
             response.sendRedirect("/homePage");
 
         }

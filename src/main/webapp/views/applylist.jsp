@@ -12,7 +12,7 @@
         <title>Apply list</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/CSS/styles.css">
+        <link rel="stylesheet" href="/CSS/style.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -70,28 +70,28 @@
                                             <th>Student Name</th>
                                             <th>Major</th>
                                             <th>Details</th>
-                                            <th>CV</th>
+                                            <th>Verifier</th>
                                             <th>Company</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="student" items="${list}" varStatus="loop">
-                                            <tr style="text-align: center">
+                                        <c:forEach var="student" items="${apply}" varStatus="loop">
+                                        <tr style="text-align: center">
                                                 <td>${loop.count}</td>
                                                 <td>${student.id}</td>
-                                                <td>${student.name}</td>
-                                                <td>${student.major}</td>
+                                                <td>${student.account.fullName}</td>
+                                                <td>${student.job.position.positon}</td>
                                                 <td><a href="" style="font-size: 20px">Click here</a></td>
-                                                <td>${student.CV}</td>
-                                                <td>${student.company}</td>
+                                                <td>${student.employeeAccount.fullName}</td>
+                                                <td>${student.job.companyDetail.companyName}</td>
                                                 <td>${student.status}</td>
                                                 <td>
                                                     <button style="width: 30%; background-color: green;">Accept</button>
                                                     <button style="width: 30%; background-color: red;">Reject</button>
                                                 </td>
-                                            </tr
+                                            </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>

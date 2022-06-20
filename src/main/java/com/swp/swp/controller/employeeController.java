@@ -25,6 +25,13 @@ public class employeeController {
     @Autowired private StudentApplyJobsService studentApplyJobsService;
     @Autowired private AccountService accountService;
 
+
+    @RequestMapping(value = "/managePage", method = RequestMethod.GET)
+    public String managePage(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        return "employeeManage";
+    }
     @RequestMapping(value = "/verifyPage", method = RequestMethod.GET)
     public String verifyCompanyPage(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false)
@@ -32,6 +39,12 @@ public class employeeController {
         Iterable<Job> jobs =jobService.getAll();
         modelMap.addAttribute("jobList", jobs);
         return "verifyJob";
+    }
+    @RequestMapping(value = "/importAccountPage", method = RequestMethod.GET)
+    public String importPage(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        return "importAccount";
     }
 
     @RequestMapping(value = "/updateStatus/{idJob}/{status}", method = RequestMethod.GET)
@@ -44,7 +57,7 @@ public class employeeController {
        }
        else if(status==2)
             jobService.updateStatus(id, "Cancel");
-        return "redirect:/jobController/verifyPage";
+        return "redirect:/employeeController/verifyPage";
     }
     @RequestMapping(value = "/candidatesList", method = RequestMethod.GET)
     public String candidatesList(ModelMap modelMap, HttpServletRequest request){
@@ -61,11 +74,11 @@ public class employeeController {
             return "test";
         if(status==1){
             studentApplyJobsService.updateStatus(id, "waiting");
-            return "redirect:/companyManage/candidatesList";
+            return "redirect:/employeeController/candidatesList";
         }
         else{
             studentApplyJobsService.updateStatus(id, "not-accept");
-            return "redirect:/companyManage/candidatesList";
+            return "redirect:/employeeController/candidatesList";
         }
         
     }

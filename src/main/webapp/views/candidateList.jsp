@@ -16,6 +16,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/dda2b72c9e.js" crossorigin="anonymous"></script>
+
     
     </head>
     
@@ -95,13 +96,22 @@
                     <td>${o.job.companyDetail.companyName}</td>
                     <td>${o.status}</td>
                     <td>
-                        <a href="/companyController/verify/${o.id}/1">
-                            <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
-                            </button>
-                        </a>
-                        <a href="/companyController/verify/${o.id}/2">
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Denied</button>
-                        </a>
+                        <!-- <c:if test="${account.role.equals('COMPANY')=='true'}">
+                            <a href="/companyController/verify/${o.id}/1">
+                                <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
+                                </button>
+                            </a>
+                            <a href="/companyController/verify/${o.id}/2">
+                                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Denied</button>
+                            </a>
+                        </c:if> -->
+                            <a href="verify/${o.id}/1">
+                                <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
+                                </button>
+                            </a>
+                            <a href="verify/${o.id}/2">
+                                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Denied</button>
+                            </a>
                     </td>
                 </tr>
             </c:forEach>

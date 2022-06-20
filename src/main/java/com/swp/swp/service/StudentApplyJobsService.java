@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.swp.swp.model.Account;
 import com.swp.swp.model.CompanyDetail;
 import com.swp.swp.model.Job;
 import com.swp.swp.model.StudentApplyJobs;
@@ -17,6 +18,7 @@ public class StudentApplyJobsService implements CRUDInterface<StudentApplyJobs> 
     @Autowired private StudentApplyJobsRepositories studentApplyJobsRepositories;
     @Autowired private CompanyDetailRepositories companyDetailRepositories;
     @Autowired private JobRepositories jobRepositories;
+    @Autowired private AccountService accountService;
     
 
     
@@ -48,7 +50,6 @@ public class StudentApplyJobsService implements CRUDInterface<StudentApplyJobs> 
 
     @Override
     public StudentApplyJobs getById(int id) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -68,6 +69,10 @@ public class StudentApplyJobsService implements CRUDInterface<StudentApplyJobs> 
            }
         }
         return candidatesList;
+    }
+    public Iterable<StudentApplyJobs> getApplyByAccount(Account account){
+        Iterable <StudentApplyJobs> apply = studentApplyJobsRepositories.findByAccount(account);
+        return apply;
     }
 
     @Override
