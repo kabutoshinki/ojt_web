@@ -1,6 +1,5 @@
 package com.swp.swp.model;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,20 +20,19 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.sym.Name;
 
 @Entity
 @Table(name = "Job")
 public class Job {
     @Id
     @SequenceGenerator(
-        name = "job_sequense",
+        name = "job_sequence",
         sequenceName = "job_sequence",
         allocationSize = 1
     )
     @GeneratedValue(
         strategy = GenerationType.AUTO,
-        generator = "job_sequense"
+        generator = "job_sequence"
     )
     @Column(name = "idJob")
     public int idJob;
@@ -58,7 +54,7 @@ public class Job {
     @OneToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.REFRESH)
     @JoinColumn(name = "company_Id", referencedColumnName = "id" ,nullable = false)
-    private CompanyDetail companyDetail;
+    private Company company;
     
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJobs> account = new HashSet<>();
@@ -72,14 +68,14 @@ public class Job {
 
     
     public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
-            CompanyDetail companyDetail, Position position2) {
+               Company company, Position position2) {
         this.slot = slot;
         this.description = description;
         this.requirement = requirement;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.companyDetail = companyDetail;
+        this.company = company;
         this.position = position2;
     }
 
@@ -117,30 +113,30 @@ public class Job {
     }
 
 
-    public Job(CompanyDetail companyDetail) {
-        this.companyDetail = companyDetail;
+    public Job(Company company) {
+        this.company = company;
     }
 
     
     
     public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
-            CompanyDetail companyDetail) {
+            Company company) {
         this.slot = slot;
         this.description = description;
         this.requirement = requirement;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.companyDetail = companyDetail;
+        this.company = company;
     }
 
 
-    public Job(int slot, String description, String requirement, String status, CompanyDetail companyDetail) {
+    public Job(int slot, String description, String requirement, String status, Company company) {
         this.slot = slot;
         this.description = description;
         this.requirement = requirement;
         this.status = status;
-        this.companyDetail = companyDetail;
+        this.company = company;
     }
 
 
@@ -195,8 +191,8 @@ public class Job {
     public void setSlot(int slot) {
         this.slot = slot;
     }
-    public int getCompanyDetailId(){
-        return companyDetail.getCompanyDetailId();
+    public int getCompanyId(){
+        return company.getId();
     }
 
 
@@ -230,19 +226,19 @@ public class Job {
     }
 
 
-    public CompanyDetail getCompanyDetail() {
-        return companyDetail;
+    public Company getCompany() {
+        return company;
     }
 
 
-    public void setCompanyDetail(CompanyDetail companyDetail) {
-        this.companyDetail = companyDetail;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
 
     @Override
     public String toString() {
-        return "Job [companyDetail=" + companyDetail + ", description=" + description + ", idJob=" + idJob
+        return "Job [company=" + company + ", description=" + description + ", idJob=" + idJob
                 + ", requirement=" + requirement + ", slot=" + slot + ", status=" + status + "]";
     }
 

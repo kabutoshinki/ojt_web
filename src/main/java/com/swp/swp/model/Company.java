@@ -1,8 +1,6 @@
 package com.swp.swp.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,30 +10,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.hibernate.annotations.ManyToAny;
-
 @Entity
-@Table(name = "Company_Detail")
-public class CompanyDetail implements Serializable{
+@Table(name = "Company")
+public class Company implements Serializable{
     @Id
     //    @GeneratedValue( strategy = GenerationType.AUTO)
         @SequenceGenerator(
-                name = "company_sequense",
+                name = "company_sequence",
                 sequenceName = "company_sequence",
                 allocationSize = 1
         )
         @GeneratedValue(
                 strategy = GenerationType.AUTO,
-                generator = "company_sequense"
+                generator = "company_sequence"
         )
     @Column(name = "id")
     private int id;
@@ -45,7 +39,7 @@ public class CompanyDetail implements Serializable{
     @Lob
     private String description;
     @Column(nullable = true, unique = false, length = 1000)
-    private String adress;
+    private String address;
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.REFRESH)
@@ -53,7 +47,7 @@ public class CompanyDetail implements Serializable{
     private Account accountId;
 
 
-    public CompanyDetail() {
+    public Company() {
     }
 
     
@@ -62,10 +56,10 @@ public class CompanyDetail implements Serializable{
 
 
 
-    public CompanyDetail(String name, String description, String adress, Account accountId) {
+    public Company(String name, String description, String address, Account accountId) {
         this.name = name;
         this.description = description;
-        this.adress = adress;
+        this.address = address;
         this.accountId = accountId;
     }
 
@@ -74,82 +68,72 @@ public class CompanyDetail implements Serializable{
 
 
 
-    public CompanyDetail(int id, String name, String description, String adress, Account accountId) {
+    public Company(int id, String name, String description, String adress, Account accountId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.adress = adress;
+        this.address = adress;
         this.accountId = accountId;
     }
 
 
 
-    public CompanyDetail(int companyDetailId, String companyName, String companyDescription, String companyAdress) {
-        this.id = companyDetailId;
+    public Company(int companyId, String companyName, String companyDescription, String companyAdress) {
+        this.id = companyId;
         this.name = companyName;
         this.description = companyDescription;
-        this.adress = companyAdress;
+        this.address = companyAdress;
     }
-    public CompanyDetail( String companyName, String companyDescription, String companyAdress) {
+    public Company(String companyName, String companyDescription, String companyAdress) {
         this.name = companyName;
         this.description = companyDescription;
-        this.adress = companyAdress;
+        this.address = companyAdress;
     }
 
 
-    public int getCompanyDetailId() {
+    public int getId() {
         return id;
     }
 
-
-    public void setCompanyDetailId(int companyDetailId) {
-        this.id = companyDetailId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-
-    public String getCompanyName() {
+    public String getName() {
         return name;
     }
 
-
-    public void setCompanyName(String companyName) {
-        this.name = companyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-    public String getCompanyDescription() {
+    public String getDescription() {
         return description;
     }
 
-
-    public void setCompanyDescription(String companyDescription) {
-        this.description = companyDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-
-    public String getCompanyAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-
-    public void setCompanyAdress(String companyAdress) {
-        this.adress = companyAdress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    
     public Account getAccountId() {
         return accountId;
     }
-
 
     public void setAccountId(Account accountId) {
         this.accountId = accountId;
     }
 
-
     @Override
     public String toString() {
-        return "CompanyDetail [accountId=" + accountId + ", adress=" + adress + ", description=" + description + ", id="
+        return "Company [accountId=" + accountId + ", address=" + address + ", description=" + description + ", id="
                 + id + ", name=" + name + "]";
     }
 

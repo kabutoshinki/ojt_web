@@ -86,7 +86,7 @@
 
         <div class="row">
             <div class="col">
-                <a href="/companyController/candidatesList" class="text-decoration-none">
+                <a href="/company/candidatesList" class="text-decoration-none">
                     <div class="d-flex justify-content-center mb-3 product container mt-3">
                         <div class="card candidates" style="width:300px;height: 300px;">
                             <div class="card-body">
@@ -98,7 +98,7 @@
                 </a>
             </div>
             <div class="col">
-                <a class="text-decoration-none" href="/companyController/insertPage">
+                <a class="text-decoration-none" href="/company/insertPage">
                     <div class="d-flex justify-content-center mb-3 product container mt-3">
                         <div class="card company" style="width:300px;height: 300px;">
                             <div class="card-body">

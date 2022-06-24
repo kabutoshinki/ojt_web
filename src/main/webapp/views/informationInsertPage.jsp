@@ -31,7 +31,7 @@
                     <h2>Insert Information</h2>
                 </div>
                 <br/>
-                <form action="/accountController/insert" ModelAttribute="information" enctype="multipart/form-data"  method= "POST">
+                <form action="/account/insert" ModelAttribute="information" enctype="multipart/form-data"  method= "POST">
                     <div class="row">
                         <div class="col-md-4 border-right" style="border-right: 1px solid">
                             <div style="text-align: center; font-weight: 700">Avatar</div>
@@ -53,9 +53,9 @@
                                 <div>
                                     
                                     <div class="mb-3 row">
-                                        <label for="" class="col-sm-2 col-form-label">Adress</label>
+                                        <label for="" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" name="adress" id="adress"
+                                            <textarea class="form-control" name="address" id="address"
                                             rows="3"></textarea>
                                         </div>
                                     </div>

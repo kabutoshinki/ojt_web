@@ -12,7 +12,7 @@
         <title>List of student</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/CSS/style.css">
+        <link rel="stylesheet" href="/CSS/styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -54,12 +54,36 @@
                                 </div>
                             </div>
                         </div>
-                        <button style="font-size: 20px; background-color: #99ff99; border-radius: 8px; color: black; text-align: center;" type="submit" class="btn btn-link"
-                                formaction="<c:url value="/"/>"><i class="bi bi-plus-circle-fill"> Create</i></button>&nbsp;&nbsp;&nbsp;&nbsp; 
-                        <button style="font-size: 20px; background-color: #6699ff; border-radius: 8px; color: black; text-align: center;" type="submit" class="btn btn-link"
-                                formaction="<c:url value="/"/>"><i class="bi bi-box-arrow-in-down"> Import</i></button>&nbsp;&nbsp;&nbsp;&nbsp; 
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mo">
+                          Import
+                        </button>
+
+
+                        <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header" style="background: orange; text-align: center; display: unset;" >
+                                            <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
+                                        </div>
+                                        <div class="modal-body text-center" >
+                                            <div class="form-group">
+                                                <input type="file" name="file" class="form-control-file" required multiple>
+                                                <input type="text" name="role" value="STUDENT" hidden>
+                                                <input type="text" name="redirect" value="students" hidden>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-sm btn-outline-success"><i class="bi bi-check-circle"></i> Import</button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal"><i class="bi bi-x-circle"></i> Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <button style="font-size: 20px; background-color: #66ccff; border-radius: 8px; color: black; text-align: center;" type="submit" class="btn btn-link"
-                                formaction="<c:url value="/"/>"><i class="bi bi-box-arrow-in-up"></i> Export</button>
+                                formaction="<c:url value="/"/>"><i class="bi bi-box-arrow-in-down"></i> Export</button>
                         <br/>
                         <br/>
                         <table border="1" cellspacing="0" style="width: 1100px;">
@@ -68,33 +92,27 @@
                                     <th>No.</th>
                                     <th>Student ID</th>
                                     <th>Student Name</th>
-                                    <th>Major</th>
+                                    <th>Email</th>
                                     <th>Details</th>
-                                    <th>CV</th>
-                                    <th>Company</th>
                                     <th>Status</th>
-                                    <th>Checkbox</th>
-                                    <th>Custom</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="text-align: center;">
-                                    <td>1</td>
-                                    <td>SE150000</td>
-                                    <td>NGUYEN VAN A</td>
-                                    <td>KY THUAT PHAN MEM</td>
-                                    <td><a href="" style="font-size: 20px">Click here</a></td>
-                                    <td>CV.PDF</td>
-                                    <td>FPT SOFTWARE</td>
-                                    <td>NOT YET</td>
-                                    <td>
-                                        <input type="checkbox" value="" name=""/>
-                                    </td>
-                                    <td>
-                                        <a href=""><i class="bi bi-pencil-fill"></i></a>
-                                        <a href=""><i class="bi bi-trash-fill" style="color: red"></i></a>
-                                    </td>
-                                </tr
+                                <c:forEach items="${studentList}" var= "o" varStatus="loop">
+                                    <tr style="text-align: center;">
+                                        <td>${loop.count}</td>
+                                        <td>${o.studentId}</td>
+                                        <td>${o.fullName}</td>
+                                        <td>${o.email}</td>
+                                        <td><a href="" style="font-size: 20px">Click here</a></td>
+                                        <td></td>
+                                        <td>
+                                            <a href=""><i class="bi bi-trash-fill" style="color: red"></i></a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
                             </tbody>
                         </table>
                     </div>

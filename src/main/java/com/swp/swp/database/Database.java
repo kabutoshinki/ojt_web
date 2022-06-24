@@ -14,7 +14,7 @@ package com.swp.swp.database;
 
 import com.swp.swp.model.Account;
 import com.swp.swp.model.CV;
-import com.swp.swp.model.CompanyDetail;
+import com.swp.swp.model.Company;
 import com.swp.swp.model.Job;
 import com.swp.swp.model.Major;
 import com.swp.swp.model.OjtProcess;
@@ -22,16 +22,12 @@ import com.swp.swp.model.Position;
 import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.repositories.AccountRepositories;
 import com.swp.swp.repositories.CVRepositories;
-import com.swp.swp.repositories.CompanyDetailRepositories;
+import com.swp.swp.repositories.CompanyRepositories;
 import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.MajorRepositories;
 import com.swp.swp.repositories.OjtProcessRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 import com.swp.swp.repositories.StudentApplyJobsRepositories;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +44,7 @@ public class Database {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Bean
     CommandLineRunner initDatabase(AccountRepositories accountRepositories, 
-    CompanyDetailRepositories companyDetailRepositories,
+    CompanyRepositories companyRepositories,
      JobRepositories jobRepositories, 
      CVRepositories cvRepositories,
      MajorRepositories majorRepositories,
@@ -59,19 +55,23 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Account accountA = new Account("test","danghuudat163@gmail.com","COMPANY");
-                Account accountB = new Account("test1","datdhse150011@fpt.edu.vn","STUDENT");
+                Account accountA = new Account("FPT SOFTWARE","danghuudat163@gmail.com","COMPANY");
+                Account accountB = new Account("FPT SOFTWARE2","datdhse150011@fpt.edu.vn","STUDENT");
                 Account accountC = new Account("test2", "akai792001@gmail.com", "EMPLOYEE");
+                Account accountD = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
+                Account accountE = new Account("FPT","hoan123hahaha@gmail.com","COMPANY");
                 String startDate = "6/3/2022";
                 String endDate = "20/6/2022";
-                CompanyDetail company1 = new CompanyDetail("FPT SOFTWARE",
+                Company company1 = new Company("FPT SOFTWARE",
                 "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
                 "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
                 "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh");
-                CompanyDetail company2 = new CompanyDetail("FPT SOFTWARE2",
+                company1.setAccountId(accountE);
+                Company company2 = new Company("FPT SOFTWARE2",
                 "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
                 "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
                 "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh");
+                company2.setAccountId(accountB);
                 Position position = new Position("Backend");
                  Position position2 = new Position("Frontend");
                 Job job2 = new Job(10, "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
@@ -98,15 +98,15 @@ public class Database {
                 logger.info("insert Data: " + accountRepositories.save(accountB));
                 logger.info("insert Data: " + accountRepositories.save(accountA));
                 logger.info("insert Data: " + accountRepositories.save(accountC));
-                logger.info("insert Data: " + companyDetailRepositories.save(company1));
-                logger.info("insert Data: " + companyDetailRepositories.save(company2));
+                logger.info("insert Data: " + accountRepositories.save(accountD));
+                logger.info("insert Data: " + accountRepositories.save(accountE));
+                logger.info("insert Data: " + companyRepositories.save(company1));
+                logger.info("insert Data: " + companyRepositories.save(company2));
                 positionRepositories.save(position2);
                 positionRepositories.save(position);
                 logger.info("insert Data: "+ jobRepositories.save(job1));
                 logger.info("insert Data: "+ jobRepositories.save(job2));
                 ojtProcessRepositories.save(ojtProcess);
-                // job2.getAccount().add(accountA);
-                // accountA.getJobs().add(job2);
                 CV cv = new CV("test",accountA);
                 cvRepositories.save(cv);
                 

@@ -55,7 +55,8 @@
         }
 
         a:hover {
-            text-decoration: none;        }
+            text-decoration: none;
+        }
 
 
     </style>
@@ -73,11 +74,11 @@
     
     <div class="row">
         <div class="col">
-            <a href="/employeeController/importAccountPage" class="text-decoration-none">
+            <a href="/employee/students" class="text-decoration-none">
                 <div class="d-flex justify-content-center mb-3 product container mt-3">
                     <div class="card students" style="width:300px;height: 300px;">
                         <div class="card-body">
-                            <h4 class="card-title align-items-center">Import Account</h4>
+                            <h4 class="card-title align-items-center">Students</h4>
                         </div>
                     </div>
                     <br>
@@ -85,7 +86,7 @@
             </a>
         </div>
         <div class="col">
-            <a class="text-decoration-none" href="/employeeController/verifyPage">
+            <a class="text-decoration-none" href="/employee/companies">
                 <div class="d-flex justify-content-center mb-3 product container mt-3">
                     <div class="card manageCompany" style="width:300px;height: 300px;">
                         <div class="card-body">
@@ -96,8 +97,10 @@
                 </div>
             </a>
         </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <a class="text-decoration-none" href="/employeeController/candidatesList">
+            <a class="text-decoration-none" href="/employee/candidatesList">
                 <div class="d-flex justify-content-center mb-3 product container mt-3">
                     <div class="card request" style="width:300px;height: 300px;">
                         <div class="card-body">
@@ -108,22 +111,7 @@
                 </div>
             </a>
         </div>
-    </div>     
-    <div class="row">
-        <div class="col-md-4">
-            <a href="status.html">
-                <div class="d-flex justify-content-center mb-3 product container mt-3">
-                    <div class="card companyTour" style="width:300px;height: 300px;">
-                        <div class="card-body">
-                            <h4 class="card-title">Company Tour</h4>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-            </a>
-        </div>   
-         
-         <div class="col-md-4">
+         <div class="col-md-6">
             <a href="status.html">
                 <div class="d-flex justify-content-center mb-3 product container mt-3">
                     <div class="card companyRequest" style="width:300px;height: 300px;">
@@ -134,9 +122,7 @@
                     <br>
                 </div>
             </a>
-        </div>   
-        
-     
+        </div>
     </div>
 
 </div>

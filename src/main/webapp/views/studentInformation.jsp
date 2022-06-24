@@ -25,7 +25,7 @@
             <br/>
             <div class="container" style="border-radius: 40px; padding: 25px;">
                 <div class="row">
-                    <form class="row" action="/accountController/insert" ModelAttribute="information" enctype="multipart/form-data" method="POST">
+                    <form class="row" action="/account/insert" ModelAttribute="information" enctype="multipart/form-data" method="POST">
                     <div class="col-sm-5">
                             <figure class="snip1336">
                                 <figcaption>

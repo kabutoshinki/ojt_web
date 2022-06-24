@@ -83,7 +83,7 @@
         <c:forEach items="${jobList}" var="o">
             <tr>
                 <td>${o.idJob}</td>
-                <td>${o.companyDetail.companyName}</td>
+                <td>${o.company.companyName}</td>
                 <td>${o.description}</td>
                 <td>${o.position.positon}</td>
                 <td>
@@ -94,11 +94,11 @@
                 </td>
                 <td>${o.status}</td>
                 <td>
-                    <a href="/employeeController/updateStatus/${o.idJob}/1">
+                    <a href="/employee/updateStatus/${o.idJob}/1">
                         <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
                         </button>
                     </a>
-                    <a href="/employeeController/updateStatus/${o.idJob}/2">
+                    <a href="/employee/updateStatus/${o.idJob}/2">
                         <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Cancel</button>
                     </a>
                 </td>

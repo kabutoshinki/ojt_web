@@ -5,8 +5,6 @@ package com.swp.swp.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,8 +22,8 @@ import com.swp.swp.service.JobService;
 import com.swp.swp.service.StudentApplyJobsService;
 
 @Controller
-@RequestMapping(path = "/companyController")
-public class companyController {
+@RequestMapping(path = "/company")
+public class CompanyController {
     @Autowired PositionRepositories positionRepositories;
     @Autowired private JobService jobService;
     @Autowired private StudentApplyJobsService studentApplyJobsService;
@@ -43,7 +41,7 @@ public class companyController {
             return "test";
         Iterable<Position> positions = positionRepositories.findAll();
         for (Position position : positions) {
-            System.out.println("position: " + position.getPositon());
+            System.out.println("position: " + position.getPosition());
         }
         modelMap.addAttribute("positionList", positions);
         return "insertJob";
@@ -63,7 +61,7 @@ public class companyController {
                 return "redirect:/view/display";
             else{
                 modelMap.addAttribute("mess", "Insert fail");
-                return "redirect:/companyController/insertPage";
+                return "redirect:/company/insertPage";
             }
         
     }
@@ -83,12 +81,11 @@ public class companyController {
             return "test";
         if(status==1){
             studentApplyJobsService.updateStatus(id, "accepted");
-            return "redirect:/companyController/candidatesList";
         }
         else{
             studentApplyJobsService.updateStatus(id, "denied");
-            return "redirect:/companyController/candidatesList";
         }
-        
+        return "redirect:/company/candidatesList";
+
     }
 }

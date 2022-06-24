@@ -82,10 +82,10 @@
                                                 <td>${loop.count}</td>
                                                 <td>${student.id}</td>
                                                 <td>${student.account.fullName}</td>
-                                                <td>${student.job.position.positon}</td>
+                                                <td>${student.job.position.position}</td>
                                                 <td><a href="" style="font-size: 20px">Click here</a></td>
                                                 <td>${student.employeeAccount.fullName}</td>
-                                                <td>${student.job.companyDetail.companyName}</td>
+                                                <td>${student.job.company.name}</td>
                                                 <td>${student.status}</td>
                                                 <td>
                                                     <button style="width: 30%; background-color: green;">Accept</button>

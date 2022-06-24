@@ -5,59 +5,92 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="header d-flex p-3">
+<link rel="stylesheet" href="CSS/style.css">
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+</style>
+
+<div class="header d-flex p-3 container">
     <div class="d-flex flex-grow-1 p-1 info">
-        <div class='p-2'>
+        <div class='p-2 d-none d-md-block'>
             <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
         </div>
-        <div class='p-2'>
-            <i class="fa-solid fa-phone"></i> <span>(028)73005588</span> 
+        <div class='p-2 d-none d-md-block'>
+            <i class="fa-solid fa-phone"></i> <span>(028)73005588</span>
         </div>
     </div>
-        <div class="d-flex align-items-center justify-content-around p-1" >
+        <div class="d-flex align-items-center justify-content-around" >
             <div class="text-light" style="display: ${email==null?'':'none'};">
                 <a href="/oauth2/authorization/google" style="color: black"><i class="fa-solid fa-user-large"></i> Login</a>
             </div>
         </div>
-        <div class="dropdown" >
-            <button class="btn-lg btn-outline-dark" style="display: ${email!=null?'':'none'};"><i class="bi bi-person-circle"></i></i></button>
-             <div class="dropdown-content">
-                 <a href="#"><i class="bi bi-file-person"></i>Infomation</a>
-                 <a href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a>
-                 <a href="/companyController/managePage" style="display: ${account.role.equals('COMPANY')=='true'?'':'none'}"><i class="bi bi-box-arrow-left"></i> Manage Page</a>
-                 <a href="/employeeController/managePage" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}"><i class="bi bi-box-arrow-left"></i> Manage Page</a>
-                 <a href="/studentController/viewApply" style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}"><i class="bi bi-box-arrow-left"></i> View Apply</a>
-             </div>
+
+        <div class="dropdown">
+           <button class="btn-lg btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: ${email!=null?'':'none'};">
+                    <i class="bi bi-person-circle rounded-circle"></i></i>
+           </button>
+           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <a class="dropdown-item" href="#">My Profile</a>
+             <a class="dropdown-item" href="/employee" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}"> Manage Page</a>
+             <a class="dropdown-item" href="/company/managePage" style="display: ${account.role.equals('COMPANY')=='true'?'':'none'}"> Manage Page</a>
+             <a class="dropdown-item" href="/student/viewApply" style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}"><i class="bi bi-box-arrow-left"></i> View Apply</a>
+             <a  class="dropdown-item" href="/logout">Logout</a>
+           </div>
          </div>
-</div> 
+</div>
 <hr/>
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-5">
-            <img src="/img/fu.jpg" width="280" />
-        </div>
-        <div class="col-sm-7 menu">
-            <div class="">
-                <a href=""> Home </a>
-            </div>
-            <div class="">
-                <a href=""> OJT </a>
-            </div>
-            <div class="">
-                <a href=""> CNH </a>
-            </div>
-            <div class="">
-                <a href=""> Company Tour </a>
-            </div>
-            <div>
-                <form action="" method="post">
-                    <input type="text" placeholder="Search here">
-                    <button type="submit">
-                        <i class="bi bi-search"> Search</i>
-                    </button>
-                </form>
-            </div>
+
+
+<nav class="navbar navbar-expand-md align-items-center">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+            <i class="btn btn-secondary bi bi-list"></i>
+        </button>
+        <a class="navbar-brand mr-auto" href="/home"><img src="/img/fu.jpg" class="img-fluid" width="300" /></a>
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav menu mr-auto ml-auto">
+                <li class="nav-item active mr-5"><a class="nav-link" href="/home">Home</a></li>
+            </ul>
         </div>
 
     </div>
-</div>
+ </nav>
+<hr/>

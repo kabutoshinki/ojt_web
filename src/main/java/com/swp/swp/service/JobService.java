@@ -3,30 +3,30 @@ package com.swp.swp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.swp.swp.model.CompanyDetail;
+import com.swp.swp.model.Company;
 import com.swp.swp.model.Job;
 import com.swp.swp.model.Position;
-import com.swp.swp.repositories.CompanyDetailRepositories;
+import com.swp.swp.repositories.CompanyRepositories;
 import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 
 @Service
-public class JobService implements JobServiceInterface, CRUDInterface<Job> {
+public class JobService {
 
     @Autowired JobRepositories jobRepositories;
-    @Autowired CompanyDetailRepositories companyDetailRepositories;
+    @Autowired
+    CompanyRepositories companyRepositories;
     @Autowired PositionRepositories positionRepositories;
 
 
-    public JobService(JobRepositories jobRepositories, CompanyDetailRepositories companyDetailRepositories
+    public JobService(JobRepositories jobRepositories, CompanyRepositories companyRepositories
     , PositionRepositories positionRepositories
     ){
         super();
         this.jobRepositories =jobRepositories;
         this.positionRepositories = positionRepositories;
-        this.companyDetailRepositories = companyDetailRepositories;
+        this.companyRepositories = companyRepositories;
     }
-    @Override
     public String[] getJobDescription(int id) {
         Job job = jobRepositories.findById(id);
         try {
@@ -36,8 +36,7 @@ public class JobService implements JobServiceInterface, CRUDInterface<Job> {
             return null;
         }
     }
-    @Override
-    public String[] getJobRequiment(int id) {
+    public String[] getJobRequirement(int id) {
         Job job = jobRepositories.findById(id);
         try {
             return job.getRequirement().split("\n");
@@ -47,23 +46,21 @@ public class JobService implements JobServiceInterface, CRUDInterface<Job> {
         }
     }
     
-    @Override
     public String[] getCompanyDescription(int id) {
         Job job = jobRepositories.findById(id);
-        CompanyDetail company = job.getCompanyDetail();
+        Company company = job.getCompany();
         try {
-            return company.getCompanyDescription().split("\n");
+            return company.getDescription().split("\n");
             
         } catch (Exception e) {
             return null;
         }
 
     }
-    @Override
     public boolean insertJob(Job job, int companyId, int positionId) {
-        CompanyDetail company = companyDetailRepositories.findById(companyId);
+        Company company = companyRepositories.findById(companyId);
         Position position = positionRepositories.findById(positionId);
-        job.setCompanyDetail(company);
+        job.setCompany(company);
         job.setPosition(position);
         try {
             jobRepositories.save(job);
@@ -74,19 +71,16 @@ public class JobService implements JobServiceInterface, CRUDInterface<Job> {
             return false;
         }
     }
-    @Override
     public boolean updateStatus(int id, String status) {
         Job job = jobRepositories.findById(id);
         job.setStatus(status);
         jobRepositories.save(job);
         return false;
     }
-    @Override
     public Iterable<Job> getAll() {
-        Iterable<Job> jobs= jobRepositories.findAll();
+        Iterable<Job> jobs = jobRepositories.findAll();
         return jobs;
     }
-    @Override
     public Job getById(int id) {
         try {
             return jobRepositories.findById(id);
@@ -94,12 +88,10 @@ public class JobService implements JobServiceInterface, CRUDInterface<Job> {
             return null;
         }
     }
-    @Override
     public boolean isExist(String value) {
         // TODO Auto-generated method stub
         return false;
     }
-    @Override
     public Job getByString(String value) {
         // TODO Auto-generated method stub
         return null;

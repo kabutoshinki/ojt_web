@@ -17,13 +17,13 @@ import javax.persistence.Table;
 public class CV {
     @Id
     @SequenceGenerator(
-        name = "cv_sequense",
+        name = "cv_sequence",
         sequenceName = "cv_sequence",
         allocationSize = 1
     )
     @GeneratedValue(
         strategy = GenerationType.AUTO,
-        generator = "cv_sequense"
+        generator = "cv_sequence"
     )
     private int id;
     
