@@ -3,7 +3,6 @@ package com.swp.swp.googleApi;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,7 @@ import com.swp.swp.service.AccountService;
 
 
 @Component
-public class OAuth2LoginSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     @Autowired
     AccountService accountService;
@@ -27,16 +26,16 @@ public class OAuth2LoginSucessHandler extends SimpleUrlAuthenticationSuccessHand
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getEmail();
         if(accountService.isExist(email)==false){
-            System.out.println("This account not have permisstion");
+            System.out.println("This account not have permission");
             response.sendRedirect("/logout");
         }else{
-            System.out.println("loggin sucess");
+            System.out.println("login success");
             HttpSession session = request.getSession();
             session.setAttribute("true", "true");
             session.setAttribute("email", oAuth2User.getEmail());
             session.setAttribute("userName", oAuth2User.getName());
             session.setAttribute("account", accountService.getByString(email));
-            response.sendRedirect("/homePage");
+            response.sendRedirect("/home");
 
         }
     }

@@ -85,7 +85,7 @@
                                                 <td>${student.job.position.positon}</td>
                                                 <td><a href="" style="font-size: 20px">Click here</a></td>
                                                 <td>${student.employeeAccount.fullName}</td>
-                                                <td>${student.job.companyDetail.companyName}</td>
+                                                <td>${student.job.company.companyName}</td>
                                                 <td>${student.status}</td>
                                                 <td>
                                                     <button style="width: 30%; background-color: green;">Accept</button>

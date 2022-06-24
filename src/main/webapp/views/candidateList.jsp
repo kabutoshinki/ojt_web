@@ -93,7 +93,7 @@
                     <td>
                         <a href="#">CV</a>
                     </td>
-                    <td>${o.job.companyDetail.companyName}</td>
+                    <td>${o.job.company.companyName}</td>
                     <td>${o.status}</td>
                     <td>
                         <!-- <c:if test="${account.role.equals('COMPANY')=='true'}">

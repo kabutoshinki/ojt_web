@@ -39,42 +39,79 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="header d-flex p-3">
-            <div class="d-flex flex-grow-1 p-1 info">
-                <div class='p-2'>
-                    <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
-                </div>
-                <div class='p-2'>
-                    <i class="fa-solid fa-phone"></i> <span>(028)73005588</span> 
-                </div>
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+</style>
+
+    <div class="header d-flex p-3 container">
+        <div class="d-flex flex-grow-1 p-1 info">
+            <div class='p-2'>
+                <i class="fa-solid fa-envelope"></i> <span>daihoc.hcm@fpt.edu.vn</span>
             </div>
-            <div class="d-flex align-items-center justify-content-around p-1">
-                <div class="text-light">
-                    <img src="https://accounts.google.com/favicon.ico" alt="" width="24" height="24">
-                    <a href="/oauth2/authorization/google" style="color: black"><i class="fa-solid fa-user-large"></i> Login</a>
-                </div>
+            <div class='p-2'>
+                <i class="fa-solid fa-phone"></i> <span>(028)73005588</span>
             </div>
-        </div> 
-        <hr/>
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="col-sm-5">
+        </div>
+        <div class="d-flex align-items-center justify-content-around p-1" >
+            <div class="text-light" style="display: ${email==null?'':'none'};">
+                <a href="/oauth2/authorization/google" style="color: black"><i class="fa-solid fa-user-large"></i> Login</a>
+            </div>
+        </div>
+
+    </div>
+    <hr/>
+    <div class="container" style="background-color:">
+        <div class="row">
+            <div class="col-sm-5">
+                <a href="/">
                     <img src="/img/fu.jpg" width="280" />
-                </div>
-                <div class="col-sm-7 menu">
-                    <div class="">
-                        <a href=""> Home </a>
-                    </div>
-                    <div class="">
-                        <a href=""> OJT </a>
-                    </div>
-                    <div class="">
-                        <a href=""> CNH </a>
-                    </div>
-                    <div class="">
-                        <a href=""> Company Tour </a>
-                    </div>
+                </a>
+            </div>
+            <div class="col-sm-7 menu">
+                <div class="row">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/view/recruitments">OJT</a></li>
+                        <li><a href="#">Company Tour</a></li>
+                    </ul>
                     <div>
                         <form action="" method="post">
                             <input type="text" placeholder="Search here">
@@ -82,22 +119,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <i class="bi bi-search"> Search</i>
                             </button>
                         </form>
+
                     </div>
+
                 </div>
-        
             </div>
-        </div>
-        </div>
-        <hr>
-        <div class="container-fluid main-content">
-            <div class="main-img">
-               <a href="/view/display">
-                <input
-                style='border-radius: 20px; background-color: orange; position: absolute; bottom: -13vh; left: 12vw; width: 18vw;'
-                class="btn btn-warning m-1 p-2 shadow text-light" type="submit" value="Đăng ký công việc"
-                name="btnSignUp" />
-               </a>
-                <img src="img/ojt.png" title="FU student" />
+            <hr>
+            <div class="container main-content">
+                <div class="main-img">
+                   <a href="/view/recruitments">
+                    <input
+                    style='border-radius: 20px; background-color: orange; position: absolute; bottom: -13vh; left: 12vw; width: 18vw;'
+                    class="btn btn-warning m-1 p-2 shadow text-light" type="submit" value="Đăng ký OJT"
+                    name="btnSignUp" />
+                   </a>
+                    <img src="img/ojt.png" title="FU student" />
+                </div>
             </div>
         </div>
     </div>

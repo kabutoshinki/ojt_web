@@ -83,7 +83,7 @@
         <c:forEach items="${jobList}" var="o">
             <tr>
                 <td>${o.idJob}</td>
-                <td>${o.companyDetail.companyName}</td>
+                <td>${o.company.companyName}</td>
                 <td>${o.description}</td>
                 <td>${o.position.positon}</td>
                 <td>

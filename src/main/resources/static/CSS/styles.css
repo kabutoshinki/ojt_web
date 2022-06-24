@@ -1,0 +1,215 @@
+.header{
+    background-color: orange;
+}
+.text-light{
+    padding-right: 2.5em;
+    color: white;
+}
+.content{
+    float: left;
+}
+.info{
+    margin-left: 200px;
+}
+.info span{
+    color: white;
+}
+.menu{
+    display: flex;
+    padding-top: 2.5em;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+.menu a{
+    color: black;
+    font-weight: 500;
+}
+
+.main-img img{
+    width: 100%;
+    height: auto;
+}
+.space{
+    height: 100px;
+}
+input{
+    outline: none;
+    border: 1px solid burlywood;
+}
+.alert {
+    padding: 20px;
+    background-color: burlywood;
+    color: white;
+  }
+
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .closebtn:hover {
+    color: black;
+  }
+
+/* Style The Dropdown Button */
+.dropbtn {
+	background-color: #4CAF50;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+	right: 0;
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	border: 2px double #FC8902;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #FC8902}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.global-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+
+form {
+    padding-top: 10px;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.card-title {
+    font-weight: 300;
+}
+
+.btn {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.login-form {
+    width: 330px;
+    margin: 20px;
+}
+
+.sign-up {
+    text-align: center;
+    padding: 20px 0 0;
+}
+
+.alert {
+    margin-bottom: -30px;
+    font-size: 13px;
+    margin-top: 20px;
+
+}
+.role{
+    display: inline-block;
+}
+.role>div{
+    display: contents;
+}
+
+
+.header{
+  background-color: orange;
+}
+.text-light{
+  color: white;
+}
+.content{
+  float: left;
+}
+.info{
+  margin-left: 200px;
+}
+.info span{
+  color: white;
+}
+.menu{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+}
+.menu a{
+  color: black;
+  font-weight: 500;
+}
+.main-content{
+  height: 1300px;
+}
+.main-img{
+  min-height: 400px;
+}
+.main-img img{
+  width: 100%;
+  height: 600px;
+}
+.space{
+  height: 100px;
+}
+.input{
+  outline: none;
+  border: 1px solid burlywood;
+}
+
+.list-comp{
+  margin-top: 50px;
+  margin-left: 80px;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  border: 1px solid orange;
+  box-shadow: 1px 1px dark-blue;
+}
+.list-comp img{
+  width: 100%;
+}

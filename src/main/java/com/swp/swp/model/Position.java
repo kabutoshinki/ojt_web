@@ -20,18 +20,18 @@ public class Position {
     @Id
     //    @GeneratedValue( strategy = GenerationType.AUTO)
         @SequenceGenerator(
-                name = "position_sequense",
+                name = "position_sequence",
                 sequenceName = "position_sequence",
                 allocationSize = 1
         )
         @GeneratedValue(
                 strategy = GenerationType.AUTO,
-                generator = "position_sequense"
+                generator = "position_sequence"
         )
         private int id;
         
         @Column( unique = false, length = 300)
-        private String positon;
+        private String position;
         @OneToMany(mappedBy = "position", cascade = CascadeType.REFRESH)
         private Set<Job> job = new HashSet<>();
         
@@ -39,8 +39,8 @@ public class Position {
         }
 
 
-        public Position(String positon) {
-            this.positon = positon;
+        public Position(String position) {
+            this.position = position;
         }
 
 
@@ -54,13 +54,13 @@ public class Position {
         }
 
 
-        public String getPositon() {
-            return positon;
+        public String getPosition() {
+            return position;
         }
 
 
-        public void setPositon(String positon) {
-            this.positon = positon;
+        public void setPosition(String position) {
+            this.position = position;
         }
 
 

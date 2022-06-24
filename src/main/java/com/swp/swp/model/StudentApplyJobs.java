@@ -17,13 +17,13 @@ public class StudentApplyJobs {
     @Id
 //    @GeneratedValue( strategy = GenerationType.AUTO)
     @SequenceGenerator(
-            name = "saj_sequense",
+            name = "saj_sequence",
             sequenceName = "saj_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.AUTO,
-            generator = "saj_sequense"
+            generator = "saj_sequence"
     )
     private int id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

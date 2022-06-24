@@ -16,7 +16,7 @@ import com.swp.swp.service.StudentApplyJobsService;
 
 @Controller
 @RequestMapping(path = "studentController")
-public class studentController {
+public class StudentController {
     @Autowired AccountService accountService;
     @Autowired StudentApplyJobsService studentApplyJobs;
 

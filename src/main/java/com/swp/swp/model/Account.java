@@ -33,18 +33,20 @@ public class Account implements UserDetails {
     @Id
 //    @GeneratedValue( strategy = GenerationType.AUTO)
     @SequenceGenerator(
-            name = "account_sequense",
+            name = "account_sequence",
             sequenceName = "account_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.AUTO,
-            generator = "account_sequense"
+            generator = "account_sequence"
     )
     
     private int id;
     @Column(nullable = true, unique = false, length = 300)
     private String fullName;
+    @Column(nullable = true, unique = true, length = 300)
+    private String studentId;
     @Column(nullable = true, unique = true, length = 300)
     private String email;
     @Column(nullable = true, unique = false)
@@ -69,16 +71,16 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "student",cascade = CascadeType.REFRESH)
     private Set<OjtProcess> ojt = new HashSet<>();
 
-
-    public Account(String fullName, String email) {
-        this.fullName = fullName;
-        this.email = email;
-    }
-    
-
     public Account() {
     }
-    
+
+    public Account(String fullName, String email, String studentId, String role) {
+        this.fullName = fullName;
+        this.email = email;
+        this. studentId = studentId;
+        this.role = role;
+    }
+
 
     public Account(String fullName, String email, String role) {
         this.fullName = fullName;
@@ -86,21 +88,21 @@ public class Account implements UserDetails {
         this.role = role;
     }
 
-
-    public Account(int accountId, String fullName, String email, Date dateOfBirth, String phone, String address,
-             String status, String role) {
-        this.id = accountId;
+    public Account(int id, String fullName, String studentId, String email, Date dateOfBirth, String avatar, String phone, String address, String status, String role) {
+        this.id = id;
         this.fullName = fullName;
+        this.studentId = studentId;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
+        this.avatar = avatar;
         this.phone = phone;
         this.address = address;
         this.status = status;
         this.role = role;
     }
 
-    
-    // public Set<Job> getJobs() {
+
+// public Set<Job> getJobs() {
     //     return jobs;
     // }
 
@@ -109,25 +111,13 @@ public class Account implements UserDetails {
     //     this.jobs = jobs;
     // }
 
-    
 
-    
-    public int getAccountId() {
+    public int getId() {
         return id;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-
-    public void setAccountId(int accountId) {
-        this.id = accountId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFullName() {
@@ -136,6 +126,14 @@ public class Account implements UserDetails {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public String getEmail() {
@@ -154,6 +152,14 @@ public class Account implements UserDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -169,7 +175,6 @@ public class Account implements UserDetails {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
     public String getStatus() {
         return status;

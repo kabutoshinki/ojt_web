@@ -17,13 +17,13 @@ import javax.persistence.Table;
 public class OjtProcess {
     @Id
     @SequenceGenerator(
-        name = "OJT_Process_sequense",
-        sequenceName = "OJT_Process_sequense",
+        name = "OJT_Process_sequence",
+        sequenceName = "OJT_Process_sequence",
         allocationSize = 1
     )
     @GeneratedValue(
         strategy = GenerationType.AUTO,
-        generator = "OJT_Process_sequense"
+        generator = "OJT_Process_sequence"
     )
     private int id; 
     @Column(unique = false, nullable = false, length = 300)

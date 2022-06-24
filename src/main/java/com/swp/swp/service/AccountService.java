@@ -1,6 +1,8 @@
 package com.swp.swp.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +14,7 @@ import com.swp.swp.model.Account;
 import com.swp.swp.repositories.AccountRepositories;
 
 @Service
-public class AccountService implements AccountServiceInterface, CRUDInterface<Account> {
+public class AccountService {
     @Autowired
     private AccountRepositories accountRepositories;
 
@@ -47,25 +49,31 @@ public class AccountService implements AccountServiceInterface, CRUDInterface<Ac
         }
     }
 
-    @Override
+    public boolean insertAccount(Account newAccount) {
+        try {
+            accountRepositories.save(newAccount);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     public boolean updateStatus(int id, String status) {
         // TODO Auto-generated method stub
         return false;
     }
 
-    @Override
     public Iterable<Account> getAll() {
         Iterable<Account> accountList = accountRepositories.findAll();
         return accountList;
     }
 
-    @Override
     public Account getById(int id) {
         Account account = accountRepositories.findById(id);
         return account;
     }
 
-    @Override
     public boolean isExist(String value) {
         if (accountRepositories.findByEmail(value) != null)
             return true;
@@ -74,10 +82,21 @@ public class AccountService implements AccountServiceInterface, CRUDInterface<Ac
     }
 
 
-    @Override
     public Account getByString(String value) {
         Account account = accountRepositories.findByEmail(value);
         return account;
     }
 
+    public Iterable<Account> findByRole(String role) {
+        Iterable<Account> accountList = accountRepositories.findAll();
+        List<Account> a = new ArrayList<>();
+        for (Account x: accountList) {
+            if (x.getRole().equalsIgnoreCase(role)) {
+                a.add(x);
+            }
+        }
+        accountList = a;
+
+        return accountList;
+    }
 }

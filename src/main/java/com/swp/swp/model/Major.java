@@ -20,13 +20,13 @@ public class Major {
     @Id
     //    @GeneratedValue( strategy = GenerationType.AUTO)
         @SequenceGenerator(
-                name = "major_sequense",
+                name = "major_sequence",
                 sequenceName = "major_sequence",
                 allocationSize = 1
         )
         @GeneratedValue(
                 strategy = GenerationType.AUTO,
-                generator = "major_sequense"
+                generator = "major_sequence"
         )
     private int id;
 

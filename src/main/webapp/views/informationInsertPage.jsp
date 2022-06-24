@@ -53,9 +53,9 @@
                                 <div>
                                     
                                     <div class="mb-3 row">
-                                        <label for="" class="col-sm-2 col-form-label">Adress</label>
+                                        <label for="" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" name="adress" id="adress"
+                                            <textarea class="form-control" name="address" id="address"
                                             rows="3"></textarea>
                                         </div>
                                     </div>
