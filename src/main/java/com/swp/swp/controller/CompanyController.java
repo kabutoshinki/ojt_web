@@ -22,11 +22,7 @@ import com.swp.swp.service.JobService;
 import com.swp.swp.service.StudentApplyJobsService;
 
 @Controller
-<<<<<<< HEAD:src/main/java/com/swp/swp/controller/companyController.java
 @RequestMapping(path = "/company")
-=======
-@RequestMapping(path = "/companyController")
->>>>>>> 26c4eacbba2ba4706c3beb9bd9a8b4875dc2fbf2:src/main/java/com/swp/swp/controller/CompanyController.java
 public class CompanyController {
     @Autowired PositionRepositories positionRepositories;
     @Autowired private JobService jobService;
@@ -89,11 +85,7 @@ public class CompanyController {
         else{
             studentApplyJobsService.updateStatus(id, "denied");
         }
-<<<<<<< HEAD:src/main/java/com/swp/swp/controller/companyController.java
         return "redirect:/company/candidatesList";
-=======
-        return "redirect:/companyController/candidatesList";
->>>>>>> 26c4eacbba2ba4706c3beb9bd9a8b4875dc2fbf2:src/main/java/com/swp/swp/controller/CompanyController.java
 
     }
 }

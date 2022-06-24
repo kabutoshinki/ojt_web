@@ -83,9 +83,9 @@
         <c:forEach items="${jobList}" var="o">
             <tr>
                 <td>${o.idJob}</td>
-                <td>${o.company.companyName}</td>
+                <td>${o.company.name}</td>
                 <td>${o.description}</td>
-                <td>${o.position.positon}</td>
+                <td>${o.position.position}</td>
                 <td>
                    ${o.slot}
                 </td>

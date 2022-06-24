@@ -56,11 +56,7 @@ public class Database {
             @Override
             public void run(String... args) throws Exception {
                 Account accountA = new Account("FPT SOFTWARE","danghuudat163@gmail.com","COMPANY");
-<<<<<<< HEAD
                 Account accountB = new Account("FPT SOFTWARE2","datdhse150011@fpt.edu.vn","STUDENT");
-=======
-                Account accountB = new Account("FPT SOFTWARE2","datdhse@fpt.edu.vn","COMPANY");
->>>>>>> 26c4eacbba2ba4706c3beb9bd9a8b4875dc2fbf2
                 Account accountC = new Account("test2", "akai792001@gmail.com", "EMPLOYEE");
                 Account accountD = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                 Account accountE = new Account("FPT","hoan123hahaha@gmail.com","COMPANY");
