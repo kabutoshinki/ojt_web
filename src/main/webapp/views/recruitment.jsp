@@ -43,7 +43,11 @@
              align-items: center;
              padding: 25px 1vw;">
             <span style="font-size: 30px; font-weight:bold;">
+<<<<<<< HEAD
                 ${jobDetail.company.name}
+=======
+                ${jobDetail.company.companyName}
+>>>>>>> 26c4eacbba2ba4706c3beb9bd9a8b4875dc2fbf2
             </span>
         </div>
         <hr style="height: 2px; color: black;"/>
@@ -57,7 +61,11 @@
                         <c:forEach items="${companyDes}" var="o">
                             ${o}<br>
                         </c:forEach>
+<<<<<<< HEAD
                         ${jobDetail.company.address}<br>
+=======
+                        ${jobDetail.company.companyAddress}<br>
+>>>>>>> 26c4eacbba2ba4706c3beb9bd9a8b4875dc2fbf2
                     </p>
                 </div>
             </div>

@@ -15,7 +15,11 @@ import com.swp.swp.service.AccountService;
 import com.swp.swp.service.StudentApplyJobsService;
 
 @Controller
+<<<<<<< HEAD:src/main/java/com/swp/swp/controller/studentController.java
 @RequestMapping(path = "student")
+=======
+@RequestMapping(path = "studentController")
+>>>>>>> 26c4eacbba2ba4706c3beb9bd9a8b4875dc2fbf2:src/main/java/com/swp/swp/controller/StudentController.java
 public class StudentController {
     @Autowired AccountService accountService;
     @Autowired StudentApplyJobsService studentApplyJobs;

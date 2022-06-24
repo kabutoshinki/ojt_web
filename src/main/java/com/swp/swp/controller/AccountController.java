@@ -38,7 +38,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author ADMIN
  */
 @Controller
+<<<<<<< HEAD:src/main/java/com/swp/swp/controller/accountController.java
 @RequestMapping(path = "/account")
+=======
+@RequestMapping(path = "/accountController")
+>>>>>>> 26c4eacbba2ba4706c3beb9bd9a8b4875dc2fbf2:src/main/java/com/swp/swp/controller/AccountController.java
 public class AccountController {
     @Autowired
     private AccountRepositories repositories;
