@@ -46,16 +46,10 @@ public class Account implements UserDetails {
 
     @Column(nullable = true, unique = false, length = 300)
     private String status;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "role_id")
-    private Role role;
 
-    //@OneToOne(mappedBy = "account")
-    //private Student student;
+    @Column(nullable = true, unique = false, length = 300)
+    private String role;
 
-    /*@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
-    private Student student;*/
     @OneToOne(mappedBy = "account")
     private Company company;
 
@@ -64,7 +58,7 @@ public class Account implements UserDetails {
     public Account() {
     }
 
-    public Account(int id, String fullName, String email, String phone, String address, String status, Role role) {
+    public Account(int id, String fullName, String email, String phone, String address, String status, String role) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -74,7 +68,7 @@ public class Account implements UserDetails {
         this.role = role;
     }
 
-    public Account(String fullName, String email, Role role) {
+    public Account(String fullName, String email, String role) {
         this.fullName = fullName;
         this.email = email;
         this.role = role;
@@ -129,11 +123,11 @@ public class Account implements UserDetails {
         this.status = status;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -159,7 +153,7 @@ public class Account implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
  
  
-        //authorities.add(new SimpleGrantedAuthority(Role.getRoleName()));
+        authorities.add(new SimpleGrantedAuthority(role));
  
  
         return authorities;

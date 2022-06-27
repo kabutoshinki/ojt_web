@@ -33,7 +33,6 @@ public class Database {
     CompanyRepositories companyRepositories,
      StudentRepositories studentRepositories,
      EmployeeRepositories employeeRepositories,
-     RoleRepositories roleRepositories,
      JobRepositories jobRepositories,
      CVRepositories cvRepositories,
      MajorRepositories majorRepositories,
@@ -44,15 +43,10 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Role role1 = new Role("ADMIN");
-                Role role2 = new Role("EMPLOYEE");
-                Role role3 = new Role("COMPANY");
-                Role role4 = new Role("STUDENT");
-
-                Account accountA = new Account("test3", "hoanmalai2001@gmail.com", role2);
-                Account accountB = new Account("FPT SOFTWARE","danghuudat112363@gmail.com",role3);
-                Account accountC = new Account("FPT SOFTWARE2","datdhse132150011@fpt.edu.vn",role3);
-                Account accountD = new Account("FPT","hoan123hahaha@gmail.com",role4);
+                Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
+                Account accountB = new Account("FPT SOFTWARE","danghuudat112363@gmail.com", "COMPANY");
+                Account accountC = new Account("FPT SOFTWARE2","datdhse132150011@fpt.edu.vn","COMPANY");
+                Account accountD = new Account("FPT","hoan123hahaha@gmail.com","STUDENT");
                 Employee employeeA = new Employee();
                 Student studentD = new Student();
                 studentD.setStudentId("SE1500000");
@@ -91,10 +85,6 @@ public class Database {
                 "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
                 "Knowledge of infra, networking", "Processing",startDate, endDate ,company1,position2, employeeA);
                 OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, studentD);
-               logger.info("insert Data: " + roleRepositories.save(role1));
-                logger.info("insert Data: " + roleRepositories.save(role2));
-                logger.info("insert Data: " + roleRepositories.save(role3));
-                logger.info("insert Data: " + roleRepositories.save(role4));
                 logger.info("insert Data: " + companyRepositories.save(company1));
                 logger.info("insert Data: " + companyRepositories.save(company2));
                 logger.info("insert Data: " + employeeRepositories.save(employeeA));

@@ -27,7 +27,7 @@ public class AccountService {
         String email = (String) session.getAttribute("email");
         Account account = accountRepositories.findByEmail(email);
         
-        if(account.getRole().getRoleName().equals(role))
+        if(account.getRole().equals(role))
             return true;
         else
             return false;

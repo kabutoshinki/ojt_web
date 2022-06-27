@@ -24,33 +24,32 @@
     <body>
         <%@include file="header.jsp"%>
         <hr>
-        <hr>
-        <div class="container main-content">
-            <div class="row" style="">
-                <form action="" method="post">
-                    <input type="text" placeholder="Search here">
-                    <button type="submit">
-                        <i class="bi bi-search"> Search</i>
-                    </button>
-                </form>
+        <div class="container">
+            <div>
+                <div style="margin-bottom:20px; padding:10px; background-color:#336699; color:white;">
+                    <p>Type some text to search the List:</p>
+                    <input class="form-control" id="myInput" type="text" placeholder="Search.." />
+
+                </div>
+
             </div>
-            <br/>
+        </div>
+        <div class="container main-content">
             <div class="row" style="justify-content: center">
+                <c:forEach items="${jobList}" var="o">
+                        <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3"
+                            style="border-radius: 5px;border: 1px solid orange; width: 200px;height: 400px;">
+                            <form style="text-align: center">
+                                <img src="/img/fpt-software.png" class="img-fluid mt-3" width="200"><br />
+                                <hr>
+                                <p style="display: none ;" name="idJob">${o.idJob}</p>
+                                <p style="text-align: center" />${o.company.account.fullName}<br />
+                                <p style="text-align: center;" />${o.slot} Job - Ho Chi Minh<br /><br />
+                                <a href="/view/recruitment/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
+                            </form>
+                        </div>
+                    </c:forEach>
 
-                <c:forEach items="${jobList}" var= "o">
-
-                    <div class="col-sm-3 list-comp">
-                        <form style="text-align: center"  >
-                            <img src="/img/fpt-software.png" width="300"><br/>
-                            <hr>
-                            <p style="display: none ;" name="idJob" >${o.idJob}</p>
-                            <p style="text-align: center"/>${o.company.account.fullName}<br/>
-                            <p style="text-align: center;"/>${o.slot} Slots<br/><br/>
-                            <a href="/view/recruitment/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
-
-                        </form>
-                    </div>
-                </c:forEach>
             </div>
             <br/>
             <div class="" style="text-align: center">
@@ -58,5 +57,15 @@
             </div>
         </div>
         <%@include file="footer.jsp" %>
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $(".list-comp").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

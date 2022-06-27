@@ -25,8 +25,6 @@ public class EmployeeController {
     @Autowired private StudentApplyJobsService studentApplyJobsService;
     @Autowired private AccountService accountService;
     @Autowired private CompanyService companyService;
-    @Autowired private RoleService roleService;
-
     @Autowired private StudentService studentService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -96,7 +94,7 @@ public class EmployeeController {
         String body = "Welcome to OJT website. Please use this email to login to the website";
         String subject = "Account for ojt";
         for (Account account: accountList) {
-            account.setRole(roleService.getRole(role));
+            account.setRole(role);
             if (role.equalsIgnoreCase("COMPANY")) {
                 Company newCompany = new Company();
                 newCompany.setAccount(account);
