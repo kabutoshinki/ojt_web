@@ -28,6 +28,9 @@ public class Student {
     @Column(nullable = true, unique = false)
     private Date dateOfBirth;
 
+    @Column(nullable = true, unique = false)
+    private String gender;
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJob> jobs = new HashSet<>();
 
@@ -117,5 +120,13 @@ public class Student {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

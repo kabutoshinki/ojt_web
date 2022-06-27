@@ -45,7 +45,7 @@ public class Database {
             public void run(String... args) throws Exception {
                 Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                 Account accountB = new Account("FPT SOFTWARE","danghuudat112363@gmail.com", "COMPANY");
-                Account accountC = new Account("FPT SOFTWARE2","datdhse132150011@fpt.edu.vn","COMPANY");
+                Account accountC = new Account("FPT SOFTWARE2","hoannsse150010@fpt.edu.vn","COMPANY");
                 Account accountD = new Account("FPT","hoan123hahaha@gmail.com","STUDENT");
                 Employee employeeA = new Employee();
                 Student studentD = new Student();

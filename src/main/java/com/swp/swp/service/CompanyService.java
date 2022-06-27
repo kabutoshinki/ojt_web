@@ -2,6 +2,7 @@ package com.swp.swp.service;
 
 import com.swp.swp.model.Account;
 import com.swp.swp.model.Company;
+import com.swp.swp.model.Student;
 import com.swp.swp.repositories.AccountRepositories;
 import com.swp.swp.repositories.CompanyRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,9 @@ public class CompanyService {
     public Company getById(int id) {
         Company company = companyRepositories.findById(id);
         return company;
+    }
+
+    public Company findByAccount(Account account) {
+        return companyRepositories.findByAccount(account);
     }
 }

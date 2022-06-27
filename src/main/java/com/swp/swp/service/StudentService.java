@@ -1,5 +1,6 @@
 package com.swp.swp.service;
 
+import com.swp.swp.model.Account;
 import com.swp.swp.model.Company;
 import com.swp.swp.model.Student;
 import com.swp.swp.repositories.CompanyRepositories;
@@ -27,8 +28,12 @@ public class StudentService {
         return studentList;
     }
 
-    public Student getById(int id) {
+    public Student findById(int id) {
         Student student = studentRepositories.findById(id);
         return student;
+    }
+
+    public Student findByAccount(Account account) {
+        return studentRepositories.findByAccount(account);
     }
 }
