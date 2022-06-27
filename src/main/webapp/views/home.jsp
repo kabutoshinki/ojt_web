@@ -44,7 +44,7 @@
                             <img src="/img/fpt-software.png" width="300"><br/>
                             <hr>
                             <p style="display: none ;" name="idJob" >${o.idJob}</p>
-                            <p style="text-align: center"/>${o.company.name}<br/>
+                            <p style="text-align: center"/>${o.company.account.fullName}<br/>
                             <p style="text-align: center;"/>${o.slot} Slots<br/><br/>
                             <a href="/view/recruitment/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
 

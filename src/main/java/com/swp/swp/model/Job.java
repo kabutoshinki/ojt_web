@@ -48,7 +48,7 @@ public class Job {
     private String status;
     @Column(unique = false)
     private String startDate;
-    @Column( unique = false)
+    @Column(unique = false)
     private String endDate;
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
@@ -57,18 +57,21 @@ public class Job {
     private Company company;
     
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
-    private Set<StudentApplyJobs> account = new HashSet<>();
+    private Set<StudentApplyJob> account = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "position_id")
     private Position position;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
     @Transient
     private int positionId;
 
     
     public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
-               Company company, Position position2) {
+               Company company, Position position2, Employee employee) {
         this.slot = slot;
         this.description = description;
         this.requirement = requirement;
@@ -77,6 +80,7 @@ public class Job {
         this.endDate = endDate;
         this.company = company;
         this.position = position2;
+        this.employee = employee;
     }
 
 

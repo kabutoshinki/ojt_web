@@ -4,6 +4,7 @@ package com.swp.swp.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.swp.swp.model.StudentApplyJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.swp.swp.model.Job;
 import com.swp.swp.model.Position;
-import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.repositories.PositionRepositories;
 import com.swp.swp.service.AccountService;
 import com.swp.swp.service.JobService;
@@ -69,7 +69,7 @@ public class CompanyController {
     public String candidatesList(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
-        Iterable<StudentApplyJobs> candidates = studentApplyJobsService.getApplyByCompanyId(1);
+        Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
         modelMap.addAttribute("candidates", candidates);
         return "candidateList";
     }

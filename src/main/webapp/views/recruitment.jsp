@@ -43,7 +43,7 @@
              align-items: center;
              padding: 25px 1vw;">
             <span style="font-size: 30px; font-weight:bold;">
-                ${jobDetail.company.name}
+                ${jobDetail.company.accountId.fullName}
             </span>
         </div>
         <hr style="height: 2px; color: black;"/>
@@ -57,7 +57,7 @@
                         <c:forEach items="${companyDes}" var="o">
                             ${o}<br>
                         </c:forEach>
-                        ${jobDetail.company.address}<br>
+                        ${jobDetail.company.accountId.address}<br>
                     </p>
                 </div>
             </div>

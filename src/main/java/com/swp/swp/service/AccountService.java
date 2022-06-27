@@ -27,7 +27,7 @@ public class AccountService {
         String email = (String) session.getAttribute("email");
         Account account = accountRepositories.findByEmail(email);
         
-        if(account.getRole().equals(role))
+        if(account.getRole().getRoleName().equals(role))
             return true;
         else
             return false;
@@ -37,10 +37,10 @@ public class AccountService {
         try {
             Account account = getByString(email);
             account.setAddress(address);
-            account.setDateOfBirth(dob);
+            /*account.setDateOfBirth(dob);*/
             account.setFullName(fullName);
             account.setPhone(phone);
-            account.setAvatar(avatar);
+            /*account.setAvatar(avatar);*/
             accountRepositories.save(account);
             return true;
         } catch (Exception e) {
@@ -83,6 +83,7 @@ public class AccountService {
 
 
     public Account getByString(String value) {
+        //System.out.println(value);
         Account account = accountRepositories.findByEmail(value);
         return account;
     }
@@ -91,9 +92,9 @@ public class AccountService {
         Iterable<Account> accountList = accountRepositories.findAll();
         List<Account> a = new ArrayList<>();
         for (Account x: accountList) {
-            if (x.getRole().equalsIgnoreCase(role)) {
+            /*if (x.getRole().equalsIgnoreCase(role)) {
                 a.add(x);
-            }
+            }*/
         }
         accountList = a;
 

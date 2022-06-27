@@ -42,10 +42,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/oauth2/authorization/google")
                     .userInfoEndpoint()
                         .userService(oauthUserService).and()
-                        .successHandler(oAuth2LoginSucessHandler);   
+                        .successHandler(oAuth2LoginSuccessHandler);
     }
     @Autowired
     private CustomOAuth2UserService oauthUserService;
     @Autowired
-    private OAuth2LoginSuccessHandler oAuth2LoginSucessHandler;
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 }

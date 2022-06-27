@@ -6,17 +6,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,70 +38,47 @@ public class Account implements UserDetails {
     @Column(nullable = true, unique = false, length = 300)
     private String fullName;
     @Column(nullable = true, unique = true, length = 300)
-    private String studentId;
-    @Column(nullable = true, unique = true, length = 300)
     private String email;
-    @Column(nullable = true, unique = false)
-    private Date dateOfBirth;
-    @Column(nullable = true, unique = false)
-    private String avatar;
     @Column(nullable = true, unique = false, length = 12)
     private String phone;
     @Column(nullable = true, unique = false, length = 300)
     private String address;
+
     @Column(nullable = true, unique = false, length = 300)
     private String status;
-    @Column(name= "role",nullable = true, unique = false, length = 30)
-    private String role;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.PERSIST)
-    private Set<StudentApplyJobs> jobs = new HashSet<>();
+    //@OneToOne(mappedBy = "account")
+    //private Student student;
 
-    @OneToMany(mappedBy = "student" ,cascade = CascadeType.PERSIST)
-    private Set<CV> cv = new HashSet<>();
+    /*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id")
+    private Student student;*/
+    @OneToOne(mappedBy = "account")
+    private Company company;
 
-    @OneToMany(mappedBy = "student",cascade = CascadeType.REFRESH)
-    private Set<OjtProcess> ojt = new HashSet<>();
-
+    @OneToOne(mappedBy = "account")
+    private Employee employee;
     public Account() {
     }
 
-    public Account(String fullName, String email, String studentId, String role) {
-        this.fullName = fullName;
-        this.email = email;
-        this. studentId = studentId;
-        this.role = role;
-    }
-
-
-    public Account(String fullName, String email, String role) {
-        this.fullName = fullName;
-        this.email = email;
-        this.role = role;
-    }
-
-    public Account(int id, String fullName, String studentId, String email, Date dateOfBirth, String avatar, String phone, String address, String status, String role) {
+    public Account(int id, String fullName, String email, String phone, String address, String status, Role role) {
         this.id = id;
         this.fullName = fullName;
-        this.studentId = studentId;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
-        this.avatar = avatar;
         this.phone = phone;
         this.address = address;
         this.status = status;
         this.role = role;
     }
 
-
-// public Set<Job> getJobs() {
-    //     return jobs;
-    // }
-
-
-    // public void setJobs(Set<Job> jobs) {
-    //     this.jobs = jobs;
-    // }
+    public Account(String fullName, String email, Role role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+    }
 
 
     public int getId() {
@@ -128,36 +97,12 @@ public class Account implements UserDetails {
         this.fullName = fullName;
     }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getPhone() {
@@ -184,19 +129,28 @@ public class Account implements UserDetails {
         this.status = status;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "Account [accountId=" + id + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", email="
-                + email + ", fullName=" + fullName  + ", phone=" + phone + ", role=" + role
-                + ", status=" + status + "]";
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -205,7 +159,7 @@ public class Account implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
  
  
-        authorities.add(new SimpleGrantedAuthority(role));
+        //authorities.add(new SimpleGrantedAuthority(Role.getRoleName()));
  
  
         return authorities;

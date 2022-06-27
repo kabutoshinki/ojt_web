@@ -2,13 +2,12 @@ package com.swp.swp.service;
 
 import java.util.ArrayList;
 
+import com.swp.swp.model.StudentApplyJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.swp.swp.model.Account;
 import com.swp.swp.model.Company;
 import com.swp.swp.model.Job;
-import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.repositories.CompanyRepositories;
 import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.StudentApplyJobsRepositories;
@@ -31,9 +30,9 @@ public class StudentApplyJobsService {
     }
 
     public boolean updateStatus(int id, String status) {
-        StudentApplyJobs candidate = studentApplyJobsRepositories.findById(id);
+        StudentApplyJob candidate = studentApplyJobsRepositories.findById(id);
         try {
-            candidate.setStatus(status);
+            /*candidate.setStatus(status);*/
             studentApplyJobsRepositories.save(candidate);
             return true;
         } catch (Exception e) {
@@ -41,12 +40,12 @@ public class StudentApplyJobsService {
         }
     }
 
-    public Iterable<StudentApplyJobs> getAll() {
-        Iterable<StudentApplyJobs> candidates = studentApplyJobsRepositories.findAll();
+    public Iterable<StudentApplyJob> getAll() {
+        Iterable<StudentApplyJob> candidates = studentApplyJobsRepositories.findAll();
         return candidates;
     }
 
-    public StudentApplyJobs getById(int id) {
+    public StudentApplyJob getById(int id) {
         return null;
     }
 
@@ -54,24 +53,24 @@ public class StudentApplyJobsService {
         // TODO Auto-generated method stub
         return false;
     }
-    public Iterable<StudentApplyJobs> getApplyByCompanyId(int id){
+    public Iterable<StudentApplyJob> getApplyByCompanyId(int id){
         Company company = companyRepositories.findById(id);
-        ArrayList<StudentApplyJobs> candidatesList = new ArrayList<>();
+        ArrayList<StudentApplyJob> candidatesList = new ArrayList<>();
         Iterable<Job> jobs = jobRepositories.findByCompany(company);
         for (Job job : jobs) {
-           Iterable<StudentApplyJobs> candidates= studentApplyJobsRepositories.findByJob(job);
-           for (StudentApplyJobs candidate : candidates) {
+           Iterable<StudentApplyJob> candidates= studentApplyJobsRepositories.findByJob(job);
+           for (StudentApplyJob candidate : candidates) {
                 candidatesList.add(candidate);
            }
         }
         return candidatesList;
     }
-    public Iterable<StudentApplyJobs> getApplyByAccount(Account account){
-        Iterable <StudentApplyJobs> apply = studentApplyJobsRepositories.findByAccount(account);
+    /*public Iterable<StudentApplyJob> getApplyByAccount(Account account){
+        Iterable <StudentApplyJob> apply = studentApplyJobsRepositories.findByAccount(account);
         return apply;
-    }
+    }*/
 
-    public StudentApplyJobs getByString(String value) {
+    public StudentApplyJob getByString(String value) {
         // TODO Auto-generated method stub
         return null;
     }

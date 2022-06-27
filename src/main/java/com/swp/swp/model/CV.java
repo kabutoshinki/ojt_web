@@ -32,11 +32,12 @@ public class CV {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
-    private Account student;
+    private Student student;
     
     
     public CV() {
     }
+
 
 
     public CV(String name) {
@@ -44,7 +45,7 @@ public class CV {
     }
     
 
-    public CV(String name, Account student) {
+    public CV(String name, Student student) {
         this.name = name;
         this.student = student;
     }
@@ -54,30 +55,23 @@ public class CV {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
 
-
-    public Account getStudent() {
+    public Student getStudent() {
         return student;
     }
 
-
-    public void setStudent(Account student) {
+    public void setStudent(Student student) {
         this.student = student;
     }
-    
-    
 }

@@ -51,7 +51,7 @@ public class AccountController {
         HttpSession session = request.getSession();
         Account account = accountService.getByString((String) session.getAttribute("email"));
         modelMap.addAttribute("user", account);
-        System.out.println("Account: " + account.getEmail());
+        //System.out.println("Account: " + account.getEmail());
         return "studentInformation";
     }
 
@@ -75,13 +75,13 @@ public class AccountController {
 
             System.out.println(filePath.toFile().getAbsolutePath());
         } catch (IOException e) {
-            System.out.println("ERROS: "+e.getStackTrace());
+            System.out.println("ERROR: "+e.getStackTrace());
             throw new IOException("Could not save uploaded file: " + fileName);
         }
-        if(!accountService.insertInfor(email, infor.getFullName(), infor.getAddress(), 
+        /*if(!accountService.insertInfor(email, infor.getFullName(), infor.getAddress(),
         infor.getDateOfBirth(), infor.getPhone(), fileName)){
-            System.out.println("Insert Faild");
-        }
+            System.out.println("Insert Failed");
+        }*/
         ra.addFlashAttribute("mess", "Insert completed");
         return "test";
     }

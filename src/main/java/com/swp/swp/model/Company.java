@@ -33,63 +33,21 @@ public class Company implements Serializable{
         )
     @Column(name = "id")
     private int id;
-    @Column(nullable = true, unique = false, length = 50)
-    private String name;
     @Column(nullable = true, unique = false, length = 1000)
     @Lob
     private String description;
-    @Column(nullable = true, unique = false, length = 1000)
-    private String address;
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "account_Id", referencedColumnName = "id" ,nullable = true)
-    private Account accountId;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public Company() {
     }
 
-    
-    
-    
-
-
-
-    public Company(String name, String description, String address, Account accountId) {
-        this.name = name;
+    public Company(String description, Account account) {
         this.description = description;
-        this.address = address;
-        this.accountId = accountId;
+        this.account = account;
     }
-
-
-
-
-
-
-    public Company(int id, String name, String description, String adress, Account accountId) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.address = adress;
-        this.accountId = accountId;
-    }
-
-
-
-    public Company(int companyId, String companyName, String companyDescription, String companyAdress) {
-        this.id = companyId;
-        this.name = companyName;
-        this.description = companyDescription;
-        this.address = companyAdress;
-    }
-    public Company(String companyName, String companyDescription, String companyAdress) {
-        this.name = companyName;
-        this.description = companyDescription;
-        this.address = companyAdress;
-    }
-
 
     public int getId() {
         return id;
@@ -97,14 +55,6 @@ public class Company implements Serializable{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
@@ -115,34 +65,11 @@ public class Company implements Serializable{
         this.description = description;
     }
 
-    public String getAddress() {
-        return address;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAccount(Account account) {
+        this.account = account;
     }
-
-    public Account getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Account accountId) {
-        this.accountId = accountId;
-    }
-
-    @Override
-    public String toString() {
-        return "Company [accountId=" + accountId + ", address=" + address + ", description=" + description + ", id="
-                + id + ", name=" + name + "]";
-    }
-
-
-    
-    
-
-  
-
-    
-
 }

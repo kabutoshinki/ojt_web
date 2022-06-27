@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.swp.swp.model.Account;
-import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.service.AccountService;
 import com.swp.swp.service.StudentApplyJobsService;
 
@@ -26,8 +25,8 @@ public class StudentController {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Account account = accountService.getByString((String)session.getAttribute("email"));
-        Iterable<StudentApplyJobs> apply = studentApplyJobs.getApplyByAccount(account);
-        modelMap.addAttribute("apply", apply);
+        /*Iterable<StudentApplyJob> apply = studentApplyJobs.getApplyByAccount(account);
+        modelMap.addAttribute("apply", apply);*/
         return "applylist";
     }
 }
