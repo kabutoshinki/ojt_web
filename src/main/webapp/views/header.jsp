@@ -71,7 +71,8 @@ li a {
              <a class="dropdown-item" href="/view/user">My Profile</a>
              <a class="dropdown-item" href="/employee" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}"> Manage Page</a>
                <a class="dropdown-item" href="/company/managePage" style="display: ${account.role.equals('COMPANY')=='true'?'':'none'}"> Manage Page</a>
-              <a class="dropdown-item" href="/student/viewApply" style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}"><i class="bi bi-box-arrow-left"></i> View Apply</a>
+              <a class="dropdown-item" href="/student/applications" style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View Apply</a>
+              <a class="dropdown-item" href="/student/CVs" style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV</a>
              <a  class="dropdown-item" href="/logout">Logout</a>
            </div>
          </div>

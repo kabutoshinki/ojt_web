@@ -3,6 +3,7 @@ package com.swp.swp.service;
 import java.util.ArrayList;
 
 import com.swp.swp.database.Database;
+import com.swp.swp.model.Student;
 import com.swp.swp.model.StudentApplyJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,10 +70,10 @@ public class StudentApplyJobsService {
         }
         return candidatesList;
     }
-    /*public Iterable<StudentApplyJob> getApplyByAccount(Account account){
-        Iterable <StudentApplyJob> apply = studentApplyJobsRepositories.findByAccount(account);
+    public Iterable<StudentApplyJob> getApplyByStudent(Student student){
+        Iterable <StudentApplyJob> apply = studentApplyJobsRepositories.findByStudent(student);
         return apply;
-    }*/
+    }
 
     public StudentApplyJob getByString(String value) {
         // TODO Auto-generated method stub

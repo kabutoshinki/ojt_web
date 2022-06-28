@@ -3,6 +3,9 @@ package com.swp.swp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.swp.swp.model.Student;
+import com.swp.swp.model.StudentApplyJob;
+import com.swp.swp.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,16 +20,19 @@ import com.swp.swp.service.StudentApplyJobsService;
 @RequestMapping(path = "student")
 public class StudentController {
     @Autowired AccountService accountService;
-    @Autowired StudentApplyJobsService studentApplyJobs;
+    @Autowired
+    StudentService studentService;
+    @Autowired StudentApplyJobsService studentApplyJobsService;
 
-    @RequestMapping(value = "viewApply", method = RequestMethod.GET)
+    @RequestMapping(value = "applications", method = RequestMethod.GET)
     public String viewApply(ModelMap modelMap, HttpServletRequest request){
         HttpSession session = request.getSession();
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Account account = accountService.getByString((String)session.getAttribute("email"));
-        /*Iterable<StudentApplyJob> apply = studentApplyJobs.getApplyByAccount(account);
-        modelMap.addAttribute("apply", apply);*/
-        return "applylist";
+        Student student = studentService.findByAccount(account);
+        Iterable<StudentApplyJob> apply = studentApplyJobsService.getApplyByStudent(student);
+        modelMap.addAttribute("applyList", apply);
+        return "studentApplications";
     }
 }
