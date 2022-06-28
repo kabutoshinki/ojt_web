@@ -2,7 +2,10 @@ package com.swp.swp.service;
 
 import java.util.ArrayList;
 
+import com.swp.swp.database.Database;
 import com.swp.swp.model.StudentApplyJob;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,7 @@ import com.swp.swp.repositories.StudentApplyJobsRepositories;
 
 @Service
 public class StudentApplyJobsService {
+    private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Autowired private StudentApplyJobsRepositories studentApplyJobsRepositories;
     @Autowired private CompanyRepositories companyRepositories;
     @Autowired private JobRepositories jobRepositories;

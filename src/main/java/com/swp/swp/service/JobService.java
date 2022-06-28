@@ -1,5 +1,8 @@
 package com.swp.swp.service;
 
+import com.swp.swp.database.Database;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,7 @@ import com.swp.swp.repositories.PositionRepositories;
 
 @Service
 public class JobService {
+    private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
     @Autowired JobRepositories jobRepositories;
     @Autowired

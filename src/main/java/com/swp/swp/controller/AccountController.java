@@ -5,7 +5,9 @@
 package com.swp.swp.controller;
 
 import com.swp.swp.model.Account;
+import com.swp.swp.model.Company;
 import com.swp.swp.model.ResponseObject;
+import com.swp.swp.model.Student;
 import com.swp.swp.repositories.AccountRepositories;
 import com.swp.swp.service.AccountService;
 
@@ -15,10 +17,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.swp.swp.service.CompanyService;
+import com.swp.swp.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +50,10 @@ public class AccountController {
     private AccountRepositories repositories;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private CompanyService companyService;
 
     @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
     public String getAllAccounts(ModelMap modelMap, HttpServletRequest request){
@@ -53,6 +63,44 @@ public class AccountController {
         modelMap.addAttribute("user", account);
         //System.out.println("Account: " + account.getEmail());
         return "studentInformation";
+    }
+
+    @PostMapping(value = "/update")
+    public String viewUserInformation(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("user");
+        if (request.getParameter("address") != null) {
+            account.setAddress(request.getParameter("address"));
+        }
+        if (request.getParameter("phone") != null) {
+            account.setPhone(request.getParameter("phone"));
+        }
+        if (account.getRole().equals("STUDENT")) {
+            Student student = (Student) session.getAttribute("student");
+            if (request.getParameter("studentId") != null) {
+                student.setStudentId(request.getParameter("studentId"));
+            }
+            if (request.getParameter("dateOfBirth") != null) {
+                student.setDateOfBirth(Date.valueOf(request.getParameter("dateOfBirth")));
+            }
+            if (request.getParameter("gender") != null) {
+                student.setGender(request.getParameter("gender"));
+            }
+            student.setAccount(account);
+            studentService.save(student);
+            session.setAttribute("student", student);
+        }
+        if (account.getRole().equals("COMPANY")) {
+            Company company = (Company) session.getAttribute("company");
+            if (request.getParameter("description") != null) {
+                company.setDescription(request.getParameter("description"));
+            }
+            company.setAccount(account);
+            companyService.save(company);
+            session.setAttribute("company", company);
+        }
+        accountService.save(account);
+        return "redirect:/view/user";
     }
 
     @PostMapping(value = "/insert")

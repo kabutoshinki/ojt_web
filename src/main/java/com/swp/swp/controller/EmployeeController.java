@@ -98,13 +98,13 @@ public class EmployeeController {
             if (role.equalsIgnoreCase("COMPANY")) {
                 Company newCompany = new Company();
                 newCompany.setAccount(account);
-                accountService.insertAccount(account);
-                companyService.insertCompany(newCompany);
+                accountService.save(account);
+                companyService.save(newCompany);
             } else if (role.equalsIgnoreCase("STUDENT")) {
                 Student newStudent = new Student();
                 newStudent.setAccount(account);
-                accountService.insertAccount(account);
-                studentService.insertStudent(newStudent);
+                accountService.save(account);
+                studentService.save(newStudent);
             }
             //emailService.sendEmail(account.getEmail(), body, subject);
             System.out.println(account);

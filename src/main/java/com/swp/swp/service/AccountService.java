@@ -7,6 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.swp.swp.database.Database;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,7 @@ import com.swp.swp.repositories.AccountRepositories;
 
 @Service
 public class AccountService {
+    private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Autowired
     private AccountRepositories accountRepositories;
 
@@ -49,9 +53,9 @@ public class AccountService {
         }
     }
 
-    public boolean insertAccount(Account newAccount) {
+    public boolean save(Account newAccount) {
         try {
-            accountRepositories.save(newAccount);
+            logger.info("insert Data: " + accountRepositories.save(newAccount));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
