@@ -59,7 +59,7 @@
     </div>
     <hr>
     <div class="container">
-        <a href="" style="text-decoration: none;" class="btn btn-warning btn-lg btn-block">APPLY</a>
+        <a href="/student/applyForm/${jobDetail.id}" style="text-decoration: none;" class="btn btn-warning btn-lg btn-block">APPLY</a>
         <div class="row">
             <div class="col-12 mt-5 mr-2">
                 <h3>Job description:</h3>

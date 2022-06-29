@@ -108,7 +108,7 @@
                                         <td>${o.account.email}</td>
                                         <td><a href="" style="font-size: 20px">Click here</a></td>
                                         <td>
-                                            <a href=""><i class="bi bi-trash-fill"
+                                            <a href="/account/delete/${o.account.id}"><i class="bi bi-trash-fill"
                                                     style="color: red"></i></a>
                                         </td>
                                     </tr </c:forEach>

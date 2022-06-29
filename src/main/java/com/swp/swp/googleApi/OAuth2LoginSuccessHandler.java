@@ -30,8 +30,6 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             response.sendRedirect("/logout");
         }else{
             System.out.println("login success");
-            System.out.println("login success");
-            System.out.println("login success");
 
             System.out.println(accountService.getByString(email).getRole());
             HttpSession session = request.getSession();

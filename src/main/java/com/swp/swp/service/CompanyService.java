@@ -38,7 +38,7 @@ public class CompanyService {
         return companyList;
     }
 
-    public Company getById(int id) {
+    public Company findById(int id) {
         Company company = companyRepositories.findById(id);
         return company;
     }

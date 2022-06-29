@@ -32,7 +32,7 @@ public class EmployeeService {
         return employeeList;
     }
 
-    public Employee getById(int id) {
+    public Employee findById(int id) {
         Employee employee = employeeRepositories.findById(id);
         return employee;
     }

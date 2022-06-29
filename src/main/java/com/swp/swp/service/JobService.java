@@ -92,6 +92,10 @@ public class JobService {
             return null;
         }
     }
+
+    public Job findById(int id) {
+        return jobRepositories.findById(id);
+    }
     public boolean isExist(String value) {
         // TODO Auto-generated method stub
         return false;

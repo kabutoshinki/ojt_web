@@ -42,10 +42,10 @@
                             <form style="text-align: center">
                                 <img src="/img/fpt-software.png" class="img-fluid mt-3" width="200"><br />
                                 <hr>
-                                <p style="display: none ;" name="idJob">${o.idJob}</p>
+                                <p style="display: none ;" name="id">${o.id}</p>
                                 <p style="text-align: center" />${o.company.account.fullName}<br />
-                                <p style="text-align: center;" />${o.slot} Job - Ho Chi Minh<br /><br />
-                                <a href="/view/recruitment/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
+                                <p style="text-align: center;" />${o.slot} Slots - Ho Chi Minh<br /><br />
+                                <a href="/view/recruitment/${o.id}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
                             </form>
                         </div>
                     </c:forEach>

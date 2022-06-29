@@ -73,9 +73,13 @@ public class AccountService {
         return accountList;
     }
 
-    public Account getById(int id) {
+    public Account findById(int id) {
         Account account = accountRepositories.findById(id);
         return account;
+    }
+
+    public Account findByEmail(String email) {
+        return accountRepositories.findByEmail(email);
     }
 
     public boolean isExist(String value) {
