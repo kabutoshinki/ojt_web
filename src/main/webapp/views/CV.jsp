@@ -48,12 +48,12 @@
                 <div>
                     <div class="row">
                         <div class="col">
-                            <h1 style="color: orange">List of Students</h1>
+                            <h1 style="color: orange">List of CV</h1>
                         </div>
                     </div>
                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                         data-target="#mo">
-                        <i class="bi bi-box-arrow-in-down"> Import</i>
+                        <i class="bi bi-upload"> Upload CV</i>
                     </button>
 
                     <!-- Notification-->
@@ -105,8 +105,7 @@
                             </form>
                         </div>
                     </div>
-                    <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                        class="bi bi-box-arrow-in-down"></i> Export</button>
+
                     <br />
                     <br />
                     <div class="container">
@@ -118,26 +117,34 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Student ID</th>
-                                    <th>Student Name</th>
-                                    <th>Email</th>
-                                    <th>Details</th>
-                                    <th>Status</th>
+                                    <th>CV </th>
+                                    <th>View CV</th>
+                                    <th>Operation</th>
                                 </tr>
                             </thead>
                             <tbody id="myTable">
                                 <c:forEach items="${studentList}" var="o" varStatus="loop">
                                     <tr style="text-align: center;">
                                         <td>${loop.count}</td>
-                                        <td>${o.studentId}</td>
                                         <td>${o.account.fullName}</td>
-                                        <td>${o.account.email}</td>
                                         <td><a href="" style="font-size: 20px">Click here</a></td>
                                         <td>
+                                            <input type="radio" class="btn btn-success">
+                                                      <i class="bi bi-trash-fill" style="color: red"></i> Choose CV</input>
                                             <a href=""><i class="bi bi-trash-fill"
                                                     style="color: red"></i></a>
                                         </td>
-                                    </tr </c:forEach>
+                                    </tr
+                                    
+                                    </c:forEach>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>
+                                           <button class="btn btn-outline-danger m-0"><i class="bi bi-trash-fill" style="color: red"></i> Delete</button>
+                                        </td>
+                                    </tr>
                             </tbody>
                         </table>
                         </div>

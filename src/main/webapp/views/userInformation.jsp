@@ -39,6 +39,14 @@
 <body>
     <%@include file="header.jsp" %>
         <br />
+        <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb align-items-center">
+            <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+          </ol>
+        </nav>
+        </div>
         <form action="/account/update" ModelAttribute="information" enctype="multipart/form-data" method="POST">
             <div class="container rounded bg-white mt-5 mb-5">
                 <div class="row form">

@@ -1,8 +1,16 @@
 package com.swp.swp.model;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "CV")
@@ -22,15 +30,10 @@ public class CV {
     @Column(nullable = true, unique = false, length = 300)
     private String name;
 
-    @Column(nullable = true, unique = false, length = 300)
-    private String desciption;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
     private Student student;
-
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.PERSIST)
-    private Set<StudentApplyJob> jobs = new HashSet<>();
+    
     
     public CV() {
     }

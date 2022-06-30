@@ -1,3 +1,4 @@
+<%-- Document : index Created on : May 30, 2022, 12:29:03 PM Author : SE150437 Vo Pham Quoc Thang --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -68,7 +69,6 @@
         <div class="modal fade" id="CV" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-               <form action="/student/applyForm/${jobDetail.id}">
               <div class="modal-header">
                 <h5 class="modal-title text-center" id="exampleModalLabel">Choose CV</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -78,31 +78,27 @@
               <div class="modal-body">
 
                 <div class="dropdown text-center btn-lg btn-block">
-                  <select name="cvId" class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3" id="selection" aria-label=".form-select-lg example">
-                      <option name="CvId" value="" class="text-center" selected>Select CV</option>
-                      <c:forEach var="o" items="${cvList}">
-                        <option value="${o.id}">"${o.name}"</option>
-                      </c:forEach>
-                      <option value="/home">Other</option>
-                  </select>
+                  <select class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3" id="selection" aria-label=".form-select-lg example">
+                  <option value="" class="text-center" selected>Select CV</option>
+                  <option value="FPT">FPT</option>
+                  <option value="Tiki">Tiki</option>
+                  <option value="Lazada">Lazada</option>
+                   <option value="/home">Other</option>
+                </select>
                 </div>
 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Apply</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
               </div>
-              </form>
             </div>
           </div>
         </div>
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <div class="container">
-        <a href="" style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}"
-            class="btn btn-warning btn-lg btn-block"
-            data-toggle="modal"
-            data-target="#CV" >APPLY</a>
+        <a href="" style="text-decoration: none;" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>
         <div class="row">
             <div class="col-12 mt-5 mr-2">
                 <h3>Job description:</h3>
