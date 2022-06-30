@@ -31,7 +31,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -129,24 +133,7 @@ public class AccountController {
         ra.addFlashAttribute("mess", "Insert completed");
         return "test";
     }
-
-
-    @RequestMapping(value = "/delete/{id}&{redirect}", method = RequestMethod.GET)
-//    @DeleteMapping(value = "/delete/{id}")
-    public String deleteAccount(@PathVariable int id, @PathVariable String redirect) {
-        System.out.println(id);
-        Account account = accountService.findById(id);
-        account.setStatus("Disable");
-        /*if (redirect.equals("students")) {
-            Student student = studentService.findByAccount(account);
-            System.out.println(student);
-            student.setAccount(account);
-            studentService.save(student);
-        }*/
-        accountService.save(account);
-        return "redirect:/employee/" + redirect;
-    }
-
+    
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(ModelMap modelMap, @ModelAttribute("account") Account account){
         

@@ -79,7 +79,7 @@ public class FileService {
     public void saveFile(MultipartFile file, String path) {
         if(file.isEmpty())
         {
-            throw  new RuntimeException("please provide a valid file");
+            throw  new RuntimeException("please provide a valide file");
         }
 
         InputStream in = null;

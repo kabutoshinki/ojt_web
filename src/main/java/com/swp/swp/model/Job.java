@@ -34,8 +34,8 @@ public class Job {
         strategy = GenerationType.AUTO,
         generator = "job_sequence"
     )
-    //@Column(name = "id")
-    public int id;
+    @Column(name = "idJob")
+    public int idJob;
     @Column(unique = false, length = 100)
     private int slot;
     @Column( unique = false, length = 10000)
@@ -84,21 +84,8 @@ public class Job {
     }
 
 
-    public Set<StudentApplyJob> getAccount() {
-        return account;
-    }
 
-    public void setAccount(Set<StudentApplyJob> account) {
-        this.account = account;
-    }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 
     public Position getPosition() {
         return position;
@@ -157,13 +144,13 @@ public class Job {
     }
 
 
-    public int getId() {
-        return id;
+    public int getIdJob() {
+        return idJob;
     }
 
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdJob(int idJob) {
+        this.idJob = idJob;
     }
 
     
@@ -255,7 +242,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job [company=" + company + ", description=" + description + ", idJob=" + id
+        return "Job [company=" + company + ", description=" + description + ", idJob=" + idJob
                 + ", requirement=" + requirement + ", slot=" + slot + ", status=" + status + "]";
     }
 

@@ -50,8 +50,8 @@ public class StudentApplyJobsService {
         return candidates;
     }
 
-    public StudentApplyJob findById(int id) {
-        return studentApplyJobsRepositories.findById(id);
+    public StudentApplyJob getById(int id) {
+        return null;
     }
 
     public boolean isExist(String value) {
@@ -78,16 +78,6 @@ public class StudentApplyJobsService {
     public StudentApplyJob getByString(String value) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    public boolean save(StudentApplyJob newApplication) {
-        try {
-            logger.info("insert Data: " +  studentApplyJobsRepositories.save(newApplication));
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
     }
     
 }

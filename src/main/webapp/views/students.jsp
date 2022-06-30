@@ -25,18 +25,24 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/dda2b72c9e.js" crossorigin="anonymous"></script>
+    <style>
+
+    </style>
 </head>
 
 <body>
     <%@include file="header.jsp" %>
-        <hr />
         <br />
-        <div class="container" style="border-radius: 40px; padding: 25px;">
-            <div style="background-color: #cccccc;">
-                <a href="" style="font-size: 15px">Home</a> |
-                <a href="" style="font-size: 15px">Employee</a> |
-                <a href="" style="font-size: 15px">Student-manage</a>
-            </div>
+        <div class="container">
+
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb align-items-center">
+                        <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/employee" style="padding:0;display: inline;">Employee</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Student_Manage</li>
+                      </ol>
+                    </nav>
+
             <br />
             <div class="container" style="justify-content: center;">
                 <div>
@@ -50,7 +56,26 @@
                         <i class="bi bi-box-arrow-in-down"> Import</i>
                     </button>
 
+                    <!-- Notification-->
+                    <c:if test="${not empty file}">
+                        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header bg-success">
+                                                        <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel"><i  class="bi bi-check-circle"  style="font-size:100px"></i></h5>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        Success Import
+                                                      </div>
+                                                    <div class="modal-footer mr-auto ml-auto">
+                                                        <button type="button" class="btn btn-danger" id="close" data-dismiss="modal" >Close</button>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                </div>
+                    </c:if>
 
+                    <!-- +++++++++++++++++++++++++++++++++ -->
                     <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
@@ -70,7 +95,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-sm btn-outline-success"><i
+                                        <button type="submit" class="btn btn-sm btn-outline-success" id="import"><i
                                                 class="bi bi-check-circle"></i> Import</button>
                                         <button type="button" class="btn btn-sm btn-outline-danger"
                                             data-dismiss="modal"><i class="bi bi-x-circle"></i>
@@ -88,6 +113,7 @@
                         <p>Type something in the input field to search the table</p>
                         <input class="form-control" id="myInput" type="text" placeholder="Search..">
                         <br>
+                        <div class="table-responsive">
                         <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
@@ -96,7 +122,7 @@
                                     <th>Student Name</th>
                                     <th>Email</th>
                                     <th>Details</th>
-                                    <th>Operation</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody id="myTable">
@@ -108,12 +134,13 @@
                                         <td>${o.account.email}</td>
                                         <td><a href="" style="font-size: 20px">Click here</a></td>
                                         <td>
-                                            <a href="/account/delete/${o.account.id}&students"><i class="bi bi-trash-fill"
+                                            <a href=""><i class="bi bi-trash-fill"
                                                     style="color: red"></i></a>
                                         </td>
                                     </tr </c:forEach>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,6 +171,12 @@
                     });
                 });
             });
+
+            $(document).ready(function () {
+                  $("#import").click(function () {
+                    $("#success").modal();
+                  });
+                });
         </script>
 </body>
 

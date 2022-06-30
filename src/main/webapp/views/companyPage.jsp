@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/CSS/manage.css">
-    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -110,33 +110,17 @@
                 </a>
             </div>
             <div class="col">
-                <a class="text-decoration-none" href="tour.html">
-                    <div class="d-flex justify-content-center mb-3 product container mt-3">
-                        <div class="card tour" style="width:300px;height: 300px;">
-                            <div class="card-body">
-                                <h4 class="card-title">Manage Business Tour</h4>
-                            </div>
+                            <a href="status.html">
+                                <div class="d-flex justify-content-center mb-3 product container mt-3">
+                                    <div class="card status" style="width:300px;height: 300px;">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Status</h4>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </a>
                         </div>
-                        <br>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <a href="status.html">
-                    <div class="d-flex justify-content-center mb-3 product container mt-3">
-                        <div class="card status" style="width:300px;height: 300px;">
-                            <div class="card-body">
-                                <h4 class="card-title">Status</h4>
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                </a>
-            </div>
-
-
         </div>
 
     </div>
