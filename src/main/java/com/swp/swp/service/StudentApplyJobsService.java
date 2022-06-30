@@ -23,12 +23,6 @@ public class StudentApplyJobsService {
 
     
 
-    public StudentApplyJobsService(StudentApplyJobsRepositories studentApplyJobsRepositories,
-                                   CompanyRepositories companyRepositories, JobRepositories jobRepositories) {
-        this.studentApplyJobsRepositories = studentApplyJobsRepositories;
-        this.companyRepositories = companyRepositories;
-        this.jobRepositories = jobRepositories;
-    }
 
     public boolean updateStatus(int id, String status) {
         StudentApplyJobs candidate = studentApplyJobsRepositories.findById(id);
@@ -67,6 +61,11 @@ public class StudentApplyJobsService {
         return candidatesList;
     }
     public Iterable<StudentApplyJobs> getApplyByAccount(Account account){
+        if(studentApplyJobsRepositories.findByAccount(account).iterator().next().getJob()==null){
+            System.out.println("NULLLLLLLL");
+            return null;
+        }
+            
         Iterable <StudentApplyJobs> apply = studentApplyJobsRepositories.findByAccount(account);
         return apply;
     }

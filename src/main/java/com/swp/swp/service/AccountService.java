@@ -22,7 +22,7 @@ public class AccountService {
         this.accountRepositories = accountRepositories;
     }
 
-    public boolean checkRole( String role, HttpServletRequest request){
+    public boolean checkRole(String role, HttpServletRequest request){
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         Account account = accountRepositories.findByEmail(email);

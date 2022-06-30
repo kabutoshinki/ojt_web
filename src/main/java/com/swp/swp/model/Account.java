@@ -21,12 +21,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Builder;
+
 
 /**
  *
  * @author ADMIN
  */
 @Entity
+@Builder
 @Table(name = "Account")
 
 public class Account implements UserDetails {

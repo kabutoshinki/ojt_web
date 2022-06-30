@@ -67,6 +67,18 @@ public class Job {
     private int positionId;
 
     
+
+    public Job(int slot, String description, String requirement, String status) {
+        this.slot = slot;
+        this.description = description;
+        this.requirement = requirement;
+        this.status = status;
+    }
+
+
+
+
+
     public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
                Company company, Position position2) {
         this.slot = slot;
