@@ -25,7 +25,7 @@ public class OjtProcess {
         strategy = GenerationType.AUTO,
         generator = "OJT_Process_sequence"
     )
-    private int id; 
+    private int id;
     @Column(unique = false, nullable = false, length = 300)
     private int week;
     @Lob
@@ -33,10 +33,9 @@ public class OjtProcess {
     private String detail;
     @Column(unique = false, nullable = false, length = 300)
     private int grade;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
-    private Account student;
+    private Student student;
 
     public OjtProcess() {
     }
@@ -47,7 +46,7 @@ public class OjtProcess {
         this.grade = grade;
     }
 
-    public OjtProcess(int week, String detail, int grade, Account student) {
+    public OjtProcess(int week, String detail, int grade, Student student) {
         this.week = week;
         this.detail = detail;
         this.grade = grade;
@@ -86,14 +85,11 @@ public class OjtProcess {
         this.grade = grade;
     }
 
-    public Account getStudent() {
+    public Student getStudent() {
         return student;
     }
 
-    public void setStudent(Account student) {
+    public void setStudent(Student student) {
         this.student = student;
     }
-    
-    
-
 }

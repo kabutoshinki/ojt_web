@@ -34,8 +34,8 @@ public class Job {
         strategy = GenerationType.AUTO,
         generator = "job_sequence"
     )
-    @Column(name = "idJob")
-    public int idJob;
+    //@Column(name = "id")
+    public int id;
     @Column(unique = false, length = 100)
     private int slot;
     @Column( unique = false, length = 10000)
@@ -48,7 +48,7 @@ public class Job {
     private String status;
     @Column(unique = false)
     private String startDate;
-    @Column( unique = false)
+    @Column(unique = false)
     private String endDate;
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
@@ -57,12 +57,15 @@ public class Job {
     private Company company;
     
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
-    private Set<StudentApplyJobs> account = new HashSet<>();
+    private Set<StudentApplyJob> account = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "position_id")
     private Position position;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
     @Transient
     private int positionId;
 
@@ -80,7 +83,7 @@ public class Job {
 
 
     public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
-               Company company, Position position2) {
+               Company company, Position position2, Employee employee) {
         this.slot = slot;
         this.description = description;
         this.requirement = requirement;
@@ -89,11 +92,25 @@ public class Job {
         this.endDate = endDate;
         this.company = company;
         this.position = position2;
+        this.employee = employee;
     }
 
 
+    public Set<StudentApplyJob> getAccount() {
+        return account;
+    }
 
+    public void setAccount(Set<StudentApplyJob> account) {
+        this.account = account;
+    }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     public Position getPosition() {
         return position;
@@ -152,13 +169,13 @@ public class Job {
     }
 
 
-    public int getIdJob() {
-        return idJob;
+    public int getId() {
+        return id;
     }
 
 
-    public void setIdJob(int idJob) {
-        this.idJob = idJob;
+    public void setId(int id) {
+        this.id = id;
     }
 
     
@@ -250,7 +267,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job [company=" + company + ", description=" + description + ", idJob=" + idJob
+        return "Job [company=" + company + ", description=" + description + ", idJob=" + id
                 + ", requirement=" + requirement + ", slot=" + slot + ", status=" + status + "]";
     }
 

@@ -2,19 +2,23 @@ package com.swp.swp.service;
 
 import java.util.ArrayList;
 
+import com.swp.swp.database.Database;
+import com.swp.swp.model.Student;
+import com.swp.swp.model.StudentApplyJob;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.swp.swp.model.Account;
 import com.swp.swp.model.Company;
 import com.swp.swp.model.Job;
-import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.repositories.CompanyRepositories;
 import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.StudentApplyJobsRepositories;
 
 @Service
 public class StudentApplyJobsService {
+    private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Autowired private StudentApplyJobsRepositories studentApplyJobsRepositories;
     @Autowired private CompanyRepositories companyRepositories;
     @Autowired private JobRepositories jobRepositories;
@@ -25,9 +29,9 @@ public class StudentApplyJobsService {
 
 
     public boolean updateStatus(int id, String status) {
-        StudentApplyJobs candidate = studentApplyJobsRepositories.findById(id);
+        StudentApplyJob candidate = studentApplyJobsRepositories.findById(id);
         try {
-            candidate.setStatus(status);
+            /*candidate.setStatus(status);*/
             studentApplyJobsRepositories.save(candidate);
             return true;
         } catch (Exception e) {
@@ -35,44 +39,49 @@ public class StudentApplyJobsService {
         }
     }
 
-    public Iterable<StudentApplyJobs> getAll() {
-        Iterable<StudentApplyJobs> candidates = studentApplyJobsRepositories.findAll();
+    public Iterable<StudentApplyJob> getAll() {
+        Iterable<StudentApplyJob> candidates = studentApplyJobsRepositories.findAll();
         return candidates;
     }
 
-    public StudentApplyJobs getById(int id) {
-        return null;
+    public StudentApplyJob findById(int id) {
+        return studentApplyJobsRepositories.findById(id);
     }
 
     public boolean isExist(String value) {
         // TODO Auto-generated method stub
         return false;
     }
-    public Iterable<StudentApplyJobs> getApplyByCompanyId(int id){
+    public Iterable<StudentApplyJob> getApplyByCompanyId(int id){
         Company company = companyRepositories.findById(id);
-        ArrayList<StudentApplyJobs> candidatesList = new ArrayList<>();
+        ArrayList<StudentApplyJob> candidatesList = new ArrayList<>();
         Iterable<Job> jobs = jobRepositories.findByCompany(company);
         for (Job job : jobs) {
-           Iterable<StudentApplyJobs> candidates= studentApplyJobsRepositories.findByJob(job);
-           for (StudentApplyJobs candidate : candidates) {
+           Iterable<StudentApplyJob> candidates= studentApplyJobsRepositories.findByJob(job);
+           for (StudentApplyJob candidate : candidates) {
                 candidatesList.add(candidate);
            }
         }
         return candidatesList;
     }
-    public Iterable<StudentApplyJobs> getApplyByAccount(Account account){
-        if(studentApplyJobsRepositories.findByAccount(account).iterator().next().getJob()==null){
-            System.out.println("NULLLLLLLL");
-            return null;
-        }
-            
-        Iterable <StudentApplyJobs> apply = studentApplyJobsRepositories.findByAccount(account);
+    public Iterable<StudentApplyJob> getApplyByStudent(Student student){
+        Iterable <StudentApplyJob> apply = studentApplyJobsRepositories.findByStudent(student);
         return apply;
     }
 
-    public StudentApplyJobs getByString(String value) {
+    public StudentApplyJob getByString(String value) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public boolean save(StudentApplyJob newApplication) {
+        try {
+            logger.info("insert Data: " +  studentApplyJobsRepositories.save(newApplication));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
     
 }

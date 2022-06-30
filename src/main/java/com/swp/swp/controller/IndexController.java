@@ -1,6 +1,8 @@
 package com.swp.swp.controller;
 
+import com.swp.swp.model.Account;
 import com.swp.swp.model.Job;
+import com.swp.swp.service.AccountService;
 import com.swp.swp.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,8 @@ import javax.servlet.http.HttpSession;
 class IndexController {
     @Autowired
     private JobService jobService;
+    @Autowired
+    private AccountService accountService;
 
     @RequestMapping("/")
     public String index() {
@@ -27,6 +31,10 @@ class IndexController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(ModelMap modelMap, HttpServletRequest request){
+        /*Account ac = accountService.getByString("hoanmalai2001@gmail.com");
+
+        System.out.println(ac.getFullName());
+        System.out.println(ac.getRole().getRoleName());*/
         HttpSession session = request.getSession();
         Iterable<Job> jobList = jobService.getAll();
         modelMap.addAttribute("jobList",jobList);

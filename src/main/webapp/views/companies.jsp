@@ -93,17 +93,20 @@
                                     <th>Company Name</th>
                                     <th>Email</th>
                                     <th>Details</th>
-                                    <th></th>
+                                    <th>Operation</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach items="${companyList}" var= "o" varStatus="loop">
                                     <tr style="text-align: center;">
                                         <td>${loop.count}</td>
-                                        <td>${o.accountId.fullName}</td>
-                                        <td>${o.accountId.email}</td>
+                                        <td>${o.account.fullName}</td>
+                                        <td>${o.account.email}</td>
                                         <td><a href="" style="font-size: 20px">Click here</a></td>
-                                        <td></td>
+                                        <td>
+                                            <a href="/account/delete/${o.account.id}&companies"><i class="bi bi-trash-fill"
+                                                    style="color: red"></i></a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

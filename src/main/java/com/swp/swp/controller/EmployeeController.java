@@ -3,15 +3,13 @@ package com.swp.swp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.swp.swp.model.Account;
-import com.swp.swp.model.Company;
+import com.swp.swp.model.*;
 import com.swp.swp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import com.swp.swp.model.StudentApplyJobs;
 import com.swp.swp.repositories.PositionRepositories;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +25,7 @@ public class EmployeeController {
     @Autowired private StudentApplyJobsService studentApplyJobsService;
     @Autowired private AccountService accountService;
     @Autowired private CompanyService companyService;
-
+    @Autowired private StudentService studentService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String managePage(ModelMap modelMap, HttpServletRequest request){
@@ -40,7 +38,7 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        Iterable<Company> companyList = companyService.getAll();
+        Iterable<Company> companyList = companyService.getAvailable();
         modelMap.addAttribute("companyList",companyList);
         return "companies";
     }
@@ -49,7 +47,7 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        Iterable<Account> studentList = accountService.findByRole("STUDENT");
+        Iterable<Student> studentList = studentService.getAvailable();
         modelMap.addAttribute("studentList",studentList);
         return "students";
     }
@@ -70,7 +68,7 @@ public class EmployeeController {
     public String candidatesList(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
-        Iterable<StudentApplyJobs> candidates = studentApplyJobsService.getApplyByCompanyId(1);
+        Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
         modelMap.addAttribute("candidates", candidates);
         return "candidateList";
     }
@@ -97,14 +95,18 @@ public class EmployeeController {
         String subject = "Account for ojt";
         for (Account account: accountList) {
             account.setRole(role);
-            accountService.insertAccount(account);
             if (role.equalsIgnoreCase("COMPANY")) {
                 Company newCompany = new Company();
-                newCompany.setName(account.getFullName());
-                newCompany.setAccountId(account);
-                companyService.insertCompany(newCompany);
+                newCompany.setAccount(account);
+                accountService.save(account);
+                companyService.save(newCompany);
+            } else if (role.equalsIgnoreCase("STUDENT")) {
+                Student newStudent = new Student();
+                newStudent.setAccount(account);
+                accountService.save(account);
+                studentService.save(newStudent);
             }
-            emailService.sendEmail(account.getEmail(), body, subject);
+            //emailService.sendEmail(account.getEmail(), body, subject);
             System.out.println(account);
         }
 

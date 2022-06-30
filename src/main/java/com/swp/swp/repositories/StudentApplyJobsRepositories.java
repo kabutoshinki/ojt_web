@@ -1,13 +1,13 @@
 package com.swp.swp.repositories;
 
-import com.swp.swp.model.Account;
 import com.swp.swp.model.Job;
-import com.swp.swp.model.StudentApplyJobs;
+import com.swp.swp.model.Student;
+import com.swp.swp.model.StudentApplyJob;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StudentApplyJobsRepositories extends JpaRepository<StudentApplyJobs,Integer> {
-    StudentApplyJobs findById(int id);
-    Iterable<StudentApplyJobs> findByJob(Job job);
-    Iterable <StudentApplyJobs> findByAccount(Account account);
+public interface StudentApplyJobsRepositories extends JpaRepository<StudentApplyJob,Integer> {
+    StudentApplyJob findById(int id);
+    Iterable<StudentApplyJob> findByJob(Job job);
+    Iterable <StudentApplyJob> findByStudent(Student student);
 }

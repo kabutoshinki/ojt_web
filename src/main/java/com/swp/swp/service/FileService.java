@@ -1,10 +1,13 @@
 package com.swp.swp.service;
 
+import com.swp.swp.database.Database;
 import com.swp.swp.model.Account;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +20,7 @@ import java.util.List;
 
 @Service
 public class FileService {
+    private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
     static public List<Account> upload(MultipartFile file) throws Exception {
         List <Account> accountList = new ArrayList<>();
@@ -56,8 +60,8 @@ public class FileService {
                 //System.out.println(params);
                 Account newAccount = new Account();
                 newAccount.setFullName((String) params.get(1));
-                if (params.size() > 3)
-                    newAccount.setStudentId((String) params.get(3));
+                /*if (params.size() > 3)
+                    newAccount.setStudentId((String) params.get(3));*/
                 newAccount.setEmail((String) params.get(2));
                 accountList.add(newAccount);
                 /*accountList.add(new Account((int)Math.round((Double)params.get(0)), (String) params.get(1), (String) params.get(2),
@@ -75,7 +79,7 @@ public class FileService {
     public void saveFile(MultipartFile file, String path) {
         if(file.isEmpty())
         {
-            throw  new RuntimeException("please provide a valide file");
+            throw  new RuntimeException("please provide a valid file");
         }
 
         InputStream in = null;

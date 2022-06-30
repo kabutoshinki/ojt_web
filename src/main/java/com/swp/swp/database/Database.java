@@ -12,28 +12,18 @@ package com.swp.swp.database;
  */
 
 
-import com.swp.swp.model.Account;
-import com.swp.swp.model.CV;
-import com.swp.swp.model.Company;
-import com.swp.swp.model.Job;
-import com.swp.swp.model.Major;
-import com.swp.swp.model.OjtProcess;
-import com.swp.swp.model.Position;
-import com.swp.swp.model.StudentApplyJobs;
-import com.swp.swp.repositories.AccountRepositories;
-import com.swp.swp.repositories.CVRepositories;
-import com.swp.swp.repositories.CompanyRepositories;
-import com.swp.swp.repositories.JobRepositories;
-import com.swp.swp.repositories.MajorRepositories;
-import com.swp.swp.repositories.OjtProcessRepositories;
-import com.swp.swp.repositories.PositionRepositories;
-import com.swp.swp.repositories.StudentApplyJobsRepositories;
+import com.swp.swp.model.*;
+import com.swp.swp.repositories.*;
+import com.swp.swp.service.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
@@ -43,37 +33,43 @@ import org.springframework.context.annotation.Configuration;
 public class Database {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Bean
-    CommandLineRunner initDatabase(AccountRepositories accountRepositories, 
-    CompanyRepositories companyRepositories,
-     JobRepositories jobRepositories, 
-     CVRepositories cvRepositories,
-     MajorRepositories majorRepositories,
-     PositionRepositories positionRepositories,
-     StudentApplyJobsRepositories studentApplyJobsRepositories,
-     OjtProcessRepositories ojtProcessRepositories){
+    CommandLineRunner initDatabase(AccountService accountService,
+    CompanyService companyService,
+     StudentService studentService,
+     EmployeeService employeeService,
+     JobService jobService,
+     CVService cvService,
+     MajorService majorService,
+     StudentApplyJobsService studentApplyJobsService,
+     OjtProcessService ojtProcessService,
+     PositionRepositories positionService
+                                   ){
         
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Account accountA = new Account("FPT SOFTWARE","danghuudat163@gmail.com","COMPANY");
-                Account accountB = new Account("FPT SOFTWARE2","datdhse150011@fpt.edu.vn","STUDENT");
-                Account accountC = new Account("test2", "akai792001@gmail.com", "EMPLOYEE");
-                Account accountD = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
-                Account accountE = new Account("FPT","hoan123hahaha@gmail.com","COMPANY");
+
+                Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
+                Account accountB = new Account("FPT SOFTWARE","danghuudat112363@gmail.com", "COMPANY");
+                Account accountC = new Account("FPT SOFTWARE2","hoannsse150010@fpt.edu.vn","COMPANY");
+                Account accountD = new Account("FPT","hoan123hahaha@gmail.com","STUDENT");
+                Employee employeeA = new Employee();
+                Student studentD = new Student();
+                studentD.setStudentId("SE1500000");
+
+                studentD.setAccount(accountD);
                 String startDate = "6/3/2022";
                 String endDate = "20/6/2022";
-                Company company1 = new Company("FPT SOFTWARE",
+                Company company1 = new Company(
                 "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
                 "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
-                "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh");
-                company1.setAccountId(accountE);
-                Company company2 = new Company("FPT SOFTWARE2",
-                "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
-                "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.", 
-                "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh");
-                company2.setAccountId(accountB);
+                accountB);
+                Company company2 = new Company(
+                        "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"+
+                        "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.",
+                accountC);
                 Position position = new Position("Backend");
-                 Position position2 = new Position("Frontend");
+                Position position2 = new Position("Frontend");
                 Job job2 = new Job(10, "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
                 +"Participate in building and developing system architecture\n" +
                 "Create technical documents such as: system architecture, high level design\n"+
@@ -83,7 +79,7 @@ public class Database {
                 "2 years Experienced in developing web apps with ReactJS, NodeJS\n"+
                 "Experience in building and deploying applications on the cloud (AWS)\n"+
                 "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
-                "Knowledge of infra, networking", "Processing",startDate, endDate ,company2,position2);
+                "Knowledge of infra, networking", "Processing",startDate, endDate ,company2,position2, employeeA);
                 Job job1 = new Job(10, "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
                 +"Participate in building and developing system architecture\n" +
                 "Create technical documents such as: system architecture, high level design\n"+
@@ -93,41 +89,45 @@ public class Database {
                 "2 years Experienced in developing web apps with ReactJS, NodeJS\n"+
                 "Experience in building and deploying applications on the cloud (AWS)\n"+
                 "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
-                "Knowledge of infra, networking", "Processing",startDate, endDate ,company1,position2);
-                OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, accountA);
-                logger.info("insert Data: " + accountRepositories.save(accountB));
-                logger.info("insert Data: " + accountRepositories.save(accountA));
-                logger.info("insert Data: " + accountRepositories.save(accountC));
-                logger.info("insert Data: " + accountRepositories.save(accountD));
-                logger.info("insert Data: " + accountRepositories.save(accountE));
-                logger.info("insert Data: " + companyRepositories.save(company1));
-                logger.info("insert Data: " + companyRepositories.save(company2));
-                positionRepositories.save(position2);
-                positionRepositories.save(position);
-                logger.info("insert Data: "+ jobRepositories.save(job1));
-                logger.info("insert Data: "+ jobRepositories.save(job2));
-                ojtProcessRepositories.save(ojtProcess);
-                CV cv = new CV("test",accountA);
-                cvRepositories.save(cv);
+                "Knowledge of infra, networking", "Processing",startDate, endDate ,company1,position2, employeeA);
+                OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, studentD);
+                logger.info("insert Data: " + companyService.save(company1));
+                logger.info("insert Data: " + companyService.save(company2));
+                logger.info("insert Data: " + employeeService.save(employeeA));
+                logger.info("insert Data: " + studentService.save(studentD));
+                logger.info("insert Data: " + accountService.save(accountA));
+                logger.info("insert Data: " + accountService.save(accountB));
+                logger.info("insert Data: " + accountService.save(accountC));
+                logger.info("insert Data: " + accountService.save(accountD));
+
+
+
+                positionService.save(position2);
+                positionService.save(position);
+                logger.info("insert Data: "+ jobService.save(job1));
+                logger.info("insert Data: "+ jobService.save(job2));
+                ojtProcessService.save(ojtProcess);
+                CV cv = new CV("test", studentD);
+                cvService.save(cv);
                 
                 
-                StudentApplyJobs std = new StudentApplyJobs(job2, accountA,accountB, "watting", "Spring");
-                StudentApplyJobs std1 = new StudentApplyJobs(job1, accountB,accountA, "watting", "Spring");
-                StudentApplyJobs std3 = new StudentApplyJobs(job1, accountB,accountA, "watting", "Spring");
-                studentApplyJobsRepositories.save(std);
-                studentApplyJobsRepositories.save(std1);
-                studentApplyJobsRepositories.save(std3);
+                StudentApplyJob std = new StudentApplyJob(job2, studentD, employeeA, "watting", "Spring");
+                StudentApplyJob std1 = new StudentApplyJob(job1, studentD, employeeA, "watting", "Spring");
+                StudentApplyJob std3 = new StudentApplyJob(job1, studentD, employeeA, "watting", "Spring");
+                studentApplyJobsService.save(std);
+                studentApplyJobsService.save(std1);
+                studentApplyJobsService.save(std3);
                  Major major = new Major("SE");
-                 majorRepositories.save(major);
-                 
-                 positionRepositories.save(position);
+                 majorService.save(major);
+
+                 positionService.save(position);
                  major.getPosition().add(position);
-                 majorRepositories.save(major);
+                 majorService.save(major);
                  major.getPosition().add(position2);
-                 positionRepositories.save(position2);
-                 majorRepositories.save(major);
+                 positionService.save(position2);
+                 majorService.save(major);
                  
-                 positionRepositories.save(position);
+                 positionService.save(position);
                
                 
             

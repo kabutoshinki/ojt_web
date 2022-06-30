@@ -12,7 +12,7 @@
         <title>Apply list</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/CSS/style.css">
+        <link rel="stylesheet" href="/CSS/styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -38,31 +38,19 @@
                             <div class="col-sm-5">
                                 <h1 style="color: orange">Apply list</h1>
                             </div>
-                            <div class="">
-                                <div>
-                                    <select>
-                                        <option>Find all</option>
-                                        <option>Find by name</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <form action="" method="post">
-                                        <input type="text" placeholder="Search here"/>
-                                        <button type="submit" style="width: 100px">
-                                            <i class="bi bi-search"> Search</i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
+
                         <button style="font-size: 20px; background-color: #99ff99; border-radius: 8px; color: black; text-align: center;" type="submit" class="btn btn-link"
                                 formaction="<c:url value="/"/>"><i class="bi bi-plus-circle-fill"> Create</i></button>&nbsp;&nbsp;&nbsp;&nbsp;
                         <button style="font-size: 20px; background-color: #6699ff; border-radius: 8px; color: black; text-align: center;" type="submit" class="btn btn-link"
                                 formaction="<c:url value="/"/>"><i class="bi bi-arrow-clockwise"></i> Reload</button>&nbsp;&nbsp;
                             <br/>
+                            <p>Type something in the input field to search the table</p>
+                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                            <br>
                             <br/>
                             <div>
-                                <table border="1" cellspacing="0" style="width: 1100px;">
+                                <table class="table" style="border:1px">
                                     <thead>
                                         <tr style="text-align: center">
                                             <th>No.</th>
@@ -76,20 +64,20 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <c:forEach var="student" items="${apply}" varStatus="loop">
+                                    <tbody id="myTable">
+                                        <c:forEach var="application" items="${applyList}" varStatus="loop">
                                         <tr style="text-align: center">
                                                 <td>${loop.count}</td>
-                                                <td>${student.id}</td>
-                                                <td>${student.account.fullName}</td>
-                                                <td>${student.job.position.position}</td>
+                                                <td>${application.student.studentId}</td>
+                                                <td>${application.student.account.fullName}</td>
+                                                <td>${application.job.position.position}</td>
                                                 <td><a href="" style="font-size: 20px">Click here</a></td>
-                                                <td>${student.employeeAccount.fullName}</td>
-                                                <td>${student.job.company.name}</td>
-                                                <td>${student.status}</td>
+                                                <td>${application.employee.account.fullName}</td>
+                                                <td>${application.job.company.account.fullName}</td>
+                                                <td>${application.status}</td>
                                                 <td>
-                                                    <button style="width: 30%; background-color: green;">Accept</button>
-                                                    <button style="width: 30%; background-color: red;">Reject</button>
+                                                    <button class="btn btn-primary">Accept</button>
+                                                    <button class="btn btn-danger">Reject</button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -106,5 +94,15 @@
                 </div>
             </div>
             <jsp:include page="footer.jsp"/>
+            <script>
+                $(document).ready(function () {
+                    $("#myInput").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("#myTable tr").filter(function () {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                    });
+                });
+            </script>
     </body>
 </html>

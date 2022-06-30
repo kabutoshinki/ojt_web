@@ -1,16 +1,8 @@
 package com.swp.swp.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CV")
@@ -30,13 +22,19 @@ public class CV {
     @Column(nullable = true, unique = false, length = 300)
     private String name;
 
+    @Column(nullable = true, unique = false, length = 300)
+    private String desciption;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
-    private Account student;
-    
+    private Student student;
+
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.PERSIST)
+    private Set<StudentApplyJob> jobs = new HashSet<>();
     
     public CV() {
     }
+
 
 
     public CV(String name) {
@@ -44,7 +42,7 @@ public class CV {
     }
     
 
-    public CV(String name, Account student) {
+    public CV(String name, Student student) {
         this.name = name;
         this.student = student;
     }
@@ -54,30 +52,23 @@ public class CV {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
 
-
-    public Account getStudent() {
+    public Student getStudent() {
         return student;
     }
 
-
-    public void setStudent(Account student) {
+    public void setStudent(Student student) {
         this.student = student;
     }
-    
-    
 }

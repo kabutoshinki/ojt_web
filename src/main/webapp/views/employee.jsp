@@ -71,7 +71,7 @@
     <!-- Content -->
 
     <div class="container mt-3">
-    
+
     <div class="row">
         <div class="col">
             <a href="/employee/students" class="text-decoration-none">

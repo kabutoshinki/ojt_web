@@ -1,5 +1,7 @@
 package com.swp.swp.service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.swp.swp.database.Database;
+import com.swp.swp.model.Student;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +21,7 @@ import com.swp.swp.repositories.AccountRepositories;
 
 @Service
 public class AccountService {
+    private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Autowired
     private AccountRepositories accountRepositories;
 
@@ -26,7 +33,7 @@ public class AccountService {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         Account account = accountRepositories.findByEmail(email);
-        
+        if (account == null) return false;
         if(account.getRole().equals(role))
             return true;
         else
@@ -37,10 +44,10 @@ public class AccountService {
         try {
             Account account = getByString(email);
             account.setAddress(address);
-            account.setDateOfBirth(dob);
+            /*account.setDateOfBirth(dob);*/
             account.setFullName(fullName);
             account.setPhone(phone);
-            account.setAvatar(avatar);
+            /*account.setAvatar(avatar);*/
             accountRepositories.save(account);
             return true;
         } catch (Exception e) {
@@ -49,9 +56,10 @@ public class AccountService {
         }
     }
 
-    public boolean insertAccount(Account newAccount) {
+    public boolean save(Account newAccount) {
         try {
-            accountRepositories.save(newAccount);
+            newAccount.setStatus("Enable");
+            logger.info("insert Data: " + accountRepositories.save(newAccount));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -69,9 +77,13 @@ public class AccountService {
         return accountList;
     }
 
-    public Account getById(int id) {
+    public Account findById(int id) {
         Account account = accountRepositories.findById(id);
         return account;
+    }
+
+    public Account findByEmail(String email) {
+        return accountRepositories.findByEmail(email);
     }
 
     public boolean isExist(String value) {
@@ -83,6 +95,7 @@ public class AccountService {
 
 
     public Account getByString(String value) {
+        //System.out.println(value);
         Account account = accountRepositories.findByEmail(value);
         return account;
     }
@@ -91,9 +104,9 @@ public class AccountService {
         Iterable<Account> accountList = accountRepositories.findAll();
         List<Account> a = new ArrayList<>();
         for (Account x: accountList) {
-            if (x.getRole().equalsIgnoreCase(role)) {
+            /*if (x.getRole().equalsIgnoreCase(role)) {
                 a.add(x);
-            }
+            }*/
         }
         accountList = a;
 
