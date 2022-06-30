@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Service
 public class EmployeeService {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
@@ -18,6 +21,7 @@ public class EmployeeService {
     private EmployeeRepositories employeeRepositories;
 
     public boolean save(Employee newEmployee) {
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static");
         try {
             logger.info("insert Data: " + employeeRepositories.save(newEmployee));
             return true;

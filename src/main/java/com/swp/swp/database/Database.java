@@ -14,12 +14,16 @@ package com.swp.swp.database;
 
 import com.swp.swp.model.*;
 import com.swp.swp.repositories.*;
+import com.swp.swp.service.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
@@ -29,20 +33,22 @@ import org.springframework.context.annotation.Configuration;
 public class Database {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
     @Bean
-    CommandLineRunner initDatabase(AccountRepositories accountRepositories, 
-    CompanyRepositories companyRepositories,
-     StudentRepositories studentRepositories,
-     EmployeeRepositories employeeRepositories,
-     JobRepositories jobRepositories,
-     CVRepositories cvRepositories,
-     MajorRepositories majorRepositories,
-     PositionRepositories positionRepositories,
-     StudentApplyJobsRepositories studentApplyJobsRepositories,
-     OjtProcessRepositories ojtProcessRepositories){
+    CommandLineRunner initDatabase(AccountService accountService,
+    CompanyService companyService,
+     StudentService studentService,
+     EmployeeService employeeService,
+     JobService jobService,
+     CVService cvService,
+     MajorService majorService,
+     StudentApplyJobsService studentApplyJobsService,
+     OjtProcessService ojtProcessService,
+     PositionRepositories positionService
+                                   ){
         
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
+
                 Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                 Account accountB = new Account("FPT SOFTWARE","danghuudat112363@gmail.com", "COMPANY");
                 Account accountC = new Account("FPT SOFTWARE2","hoannsse150010@fpt.edu.vn","COMPANY");
@@ -85,43 +91,43 @@ public class Database {
                 "Have in-depth knowledge of Object Oriented Design and Data Structures\n"+
                 "Knowledge of infra, networking", "Processing",startDate, endDate ,company1,position2, employeeA);
                 OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, studentD);
-                logger.info("insert Data: " + companyRepositories.save(company1));
-                logger.info("insert Data: " + companyRepositories.save(company2));
-                logger.info("insert Data: " + employeeRepositories.save(employeeA));
-                logger.info("insert Data: " + studentRepositories.save(studentD));
-                logger.info("insert Data: " + accountRepositories.save(accountA));
-                logger.info("insert Data: " + accountRepositories.save(accountB));
-                logger.info("insert Data: " + accountRepositories.save(accountC));
-                logger.info("insert Data: " + accountRepositories.save(accountD));
+                logger.info("insert Data: " + companyService.save(company1));
+                logger.info("insert Data: " + companyService.save(company2));
+                logger.info("insert Data: " + employeeService.save(employeeA));
+                logger.info("insert Data: " + studentService.save(studentD));
+                logger.info("insert Data: " + accountService.save(accountA));
+                logger.info("insert Data: " + accountService.save(accountB));
+                logger.info("insert Data: " + accountService.save(accountC));
+                logger.info("insert Data: " + accountService.save(accountD));
 
 
 
-                positionRepositories.save(position2);
-                positionRepositories.save(position);
-                logger.info("insert Data: "+ jobRepositories.save(job1));
-                logger.info("insert Data: "+ jobRepositories.save(job2));
-                ojtProcessRepositories.save(ojtProcess);
+                positionService.save(position2);
+                positionService.save(position);
+                logger.info("insert Data: "+ jobService.save(job1));
+                logger.info("insert Data: "+ jobService.save(job2));
+                ojtProcessService.save(ojtProcess);
                 CV cv = new CV("test", studentD);
-                cvRepositories.save(cv);
+                cvService.save(cv);
                 
                 
                 StudentApplyJob std = new StudentApplyJob(job2, studentD, employeeA, "watting", "Spring");
                 StudentApplyJob std1 = new StudentApplyJob(job1, studentD, employeeA, "watting", "Spring");
                 StudentApplyJob std3 = new StudentApplyJob(job1, studentD, employeeA, "watting", "Spring");
-                studentApplyJobsRepositories.save(std);
-                studentApplyJobsRepositories.save(std1);
-                studentApplyJobsRepositories.save(std3);
+                studentApplyJobsService.save(std);
+                studentApplyJobsService.save(std1);
+                studentApplyJobsService.save(std3);
                  Major major = new Major("SE");
-                 majorRepositories.save(major);
-                 
-                 positionRepositories.save(position);
+                 majorService.save(major);
+
+                 positionService.save(position);
                  major.getPosition().add(position);
-                 majorRepositories.save(major);
+                 majorService.save(major);
                  major.getPosition().add(position2);
-                 positionRepositories.save(position2);
-                 majorRepositories.save(major);
+                 positionService.save(position2);
+                 majorService.save(major);
                  
-                 positionRepositories.save(position);
+                 positionService.save(position);
                
                 
             

@@ -13,6 +13,9 @@ import com.swp.swp.repositories.CompanyRepositories;
 import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Service
 public class JobService {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
@@ -85,11 +88,15 @@ public class JobService {
         Iterable<Job> jobs = jobRepositories.findAll();
         return jobs;
     }
-    public Job getById(int id) {
+
+    public boolean save(Job newJob) {
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\companies");
         try {
-            return jobRepositories.findById(id);
+            logger.info("insert Data: " +  jobRepositories.save(newJob));
+            return true;
         } catch (Exception e) {
-            return null;
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 

@@ -38,7 +38,7 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        Iterable<Company> companyList = companyService.getAll();
+        Iterable<Company> companyList = companyService.getAvailable();
         modelMap.addAttribute("companyList",companyList);
         return "companies";
     }
@@ -47,7 +47,7 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        Iterable<Student> studentList = studentService.getAll();
+        Iterable<Student> studentList = studentService.getAvailable();
         modelMap.addAttribute("studentList",studentList);
         return "students";
     }

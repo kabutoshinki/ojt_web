@@ -36,7 +36,7 @@ public class ViewController {
 
     @RequestMapping(value = "/recruitment/{id}", method = RequestMethod.GET)
     public String jobDetail(ModelMap modelMap, @PathVariable("id") int id ){
-        Job jobDetail = jobService.getById(id);
+        Job jobDetail = jobService.findById(id);
         String[] jobDes = jobService.getJobDescription(id);
         String[] companyDes = jobService.getCompanyDescription(id);
         String[] jobRe = jobService.getJobRequirement(id);

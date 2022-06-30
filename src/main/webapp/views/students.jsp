@@ -96,7 +96,7 @@
                                     <th>Student Name</th>
                                     <th>Email</th>
                                     <th>Details</th>
-                                    <th>Status</th>
+                                    <th>Operation</th>
                                 </tr>
                             </thead>
                             <tbody id="myTable">
@@ -108,7 +108,7 @@
                                         <td>${o.account.email}</td>
                                         <td><a href="" style="font-size: 20px">Click here</a></td>
                                         <td>
-                                            <a href="/account/delete/${o.account.id}"><i class="bi bi-trash-fill"
+                                            <a href="/account/delete/${o.account.id}&students"><i class="bi bi-trash-fill"
                                                     style="color: red"></i></a>
                                         </td>
                                     </tr </c:forEach>

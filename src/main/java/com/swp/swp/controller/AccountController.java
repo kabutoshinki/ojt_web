@@ -131,15 +131,20 @@ public class AccountController {
     }
 
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}&{redirect}", method = RequestMethod.GET)
 //    @DeleteMapping(value = "/delete/{id}")
-    public String deleteAccount(@PathVariable int id) {
+    public String deleteAccount(@PathVariable int id, @PathVariable String redirect) {
         System.out.println(id);
         Account account = accountService.findById(id);
-        account.setStatus("Denied");
+        account.setStatus("Disable");
+        /*if (redirect.equals("students")) {
+            Student student = studentService.findByAccount(account);
+            System.out.println(student);
+            student.setAccount(account);
+            studentService.save(student);
+        }*/
         accountService.save(account);
-        System.out.println("fuck");
-        return "redirect:/employee/students";
+        return "redirect:/employee/" + redirect;
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)

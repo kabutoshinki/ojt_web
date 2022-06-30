@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.swp.swp.model.Position;
 import com.swp.swp.repositories.PositionRepositories;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class PositionService {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
@@ -20,6 +23,16 @@ public class PositionService {
     }
 
 
+    public boolean save(Position newPosition) {
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\companies");
+        try {
+            logger.info("insert Data: " +  positionRepositories.save(newPosition));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
     public boolean updateStatus(int id, String status) {
         // TODO Auto-generated method stub
         return false;

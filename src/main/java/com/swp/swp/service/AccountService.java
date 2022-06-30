@@ -1,5 +1,7 @@
 package com.swp.swp.service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.swp.swp.database.Database;
+import com.swp.swp.model.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +58,7 @@ public class AccountService {
 
     public boolean save(Account newAccount) {
         try {
+            newAccount.setStatus("Enable");
             logger.info("insert Data: " + accountRepositories.save(newAccount));
             return true;
         } catch (Exception e) {
