@@ -25,7 +25,7 @@ public class OjtProcess {
         strategy = GenerationType.AUTO,
         generator = "OJT_Process_sequence"
     )
-    private int id; 
+    private int id;
     @Column(unique = false, nullable = false, length = 300)
     private int week;
     @Lob
@@ -33,7 +33,6 @@ public class OjtProcess {
     private String detail;
     @Column(unique = false, nullable = false, length = 300)
     private int grade;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
     private Student student;

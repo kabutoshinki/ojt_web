@@ -40,7 +40,7 @@ public class AccountService {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         Account account = accountRepositories.findByEmail(email);
-        
+        if (account == null) return false;
         if(account.getRole().equals(role))
             return true;
         else
