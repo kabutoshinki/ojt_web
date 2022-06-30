@@ -35,8 +35,8 @@ public class CVService {
         return CVList;
     }
 
-    /*public CV findById(int id) {
-        CV CV = CVRepositories.findById(id);
-        return CV;
-    }*/
+    public CV findById(int id) {
+        CV cv = cvRepositories.findById(id);
+        return cv;
+    }
 }

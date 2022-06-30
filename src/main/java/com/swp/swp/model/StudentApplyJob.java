@@ -35,6 +35,9 @@ public class StudentApplyJob {
     private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "cv_id")
+    private CV cv;
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
@@ -59,6 +62,14 @@ public class StudentApplyJob {
         this.employee = employee;
         this.status = status;
         this.semester = semester;
+    }
+
+    public StudentApplyJob(Job job, Student student, String status, String semester, CV cv) {
+        this.job = job;
+        this.student = student;
+        this.status = status;
+        this.semester = semester;
+        this.cv = cv;
     }
 
 

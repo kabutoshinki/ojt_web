@@ -8,12 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>tLogin Page</h3>
-    <!-- <p>${email}</p>
-    <p>${password}</p> -->
-    <c:forEach items="${majorList}" var= "o">
-        <p>${o.major}</p>
-    </c:forEach>
-
+    <h1>You are not allow here</h1>
+    <a href="/home">Go back</a>
 </body>
 </html>

@@ -1,4 +1,3 @@
-<%-- Document : index Created on : May 30, 2022, 12:29:03 PM Author : SE150437 Vo Pham Quoc Thang --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -8,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/styles.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -29,8 +28,14 @@
 
 <body>
     <jsp:include page="header.jsp" />
-    <hr>
-
+     <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb align-items-center">
+                <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">${jobDetail.company.account.fullName}</li>
+              </ol>
+            </nav>
+            </div>
     <div style="
  display: flex;
  justify-content: space-around;
@@ -42,12 +47,12 @@
     </div>
     <hr style="height: 2px; color: black;" />
     <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-4 mb-2">
-                <img style="width:400px" class="img-fluid" alt="Responsive image"
-                    src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.6435-9/96390018_2696615493801270_8485826556134948864_n.png?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=jfQvr3P7PPkAX8zMuYJ&_nc_ht=scontent.fsgn5-5.fna&oh=00_AT_BIEXxQrEsLNBnweMlukjHUyjIegSZHwc1B3Mg0JGSwQ&oe=62BB7CE0" />
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-4 mb-2">
+                <img style="width:300px" class="img-fluid" alt="Responsive image"
+                    src="https://www.fpt-software.com/wp-content/uploads/sites/2/2017/06/logofsoft.png" />
             </div>
-            <div class="col-12 col-md-8 mb-2">
+            <div class="col-12 col-lg-8 mt-5 mb-2">
                 <p style="font-size: 30px; font-weight:bold;">
                     <c:forEach items="${companyDes}" var="o">
                         ${o}<br>
@@ -58,8 +63,46 @@
         </div>
     </div>
     <hr>
+
+    <!-- Modal CV -->
+        <div class="modal fade" id="CV" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <form action="/student/applyForm/${jobDetail.id}">
+              <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Choose CV</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="dropdown text-center btn-lg btn-block">
+                  <select name="cvId" class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3" id="selection" aria-label=".form-select-lg example">
+                      <option name="CvId" value="" class="text-center" selected>Select CV</option>
+                      <c:forEach var="o" items="${cvList}">
+                        <option value="${o.id}">"${o.name}"</option>
+                      </c:forEach>
+                      <option value="/home">Other</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Apply</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
     <div class="container">
-        <a href="/student/applyForm/${jobDetail.id}" style="text-decoration: none;" class="btn btn-warning btn-lg btn-block">APPLY</a>
+        <a href="" style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}"
+            class="btn btn-warning btn-lg btn-block"
+            data-toggle="modal"
+            data-target="#CV" >APPLY</a>
         <div class="row">
             <div class="col-12 mt-5 mr-2">
                 <h3>Job description:</h3>
@@ -80,6 +123,20 @@
         </div>
     </div>
     <jsp:include page="footer.jsp" />
+
+
+    <script>
+
+        $(document).ready(function() {
+            $("#selection").change(function() {
+                var curVal = $("#selection option:selected").val();
+                if (curVal.indexOf('/home') === 0) {
+                    location = $("#selection option:selected").val();
+                }
+            });
+        });
+
+    </script>
 </body>
 
 

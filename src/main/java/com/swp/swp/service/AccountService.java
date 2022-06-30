@@ -29,6 +29,13 @@ public class AccountService {
         this.accountRepositories = accountRepositories;
     }
 
+    public Account currentAccount(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        Account account = accountRepositories.findByEmail(email);
+        return account;
+    }
+
     public boolean checkRole( String role, HttpServletRequest request){
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");

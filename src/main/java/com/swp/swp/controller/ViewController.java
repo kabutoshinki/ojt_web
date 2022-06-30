@@ -1,9 +1,7 @@
 package com.swp.swp.controller;
 
 import com.swp.swp.model.*;
-import com.swp.swp.service.CompanyService;
-import com.swp.swp.service.EmployeeService;
-import com.swp.swp.service.StudentService;
+import com.swp.swp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,8 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.swp.swp.service.JobService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +22,9 @@ public class ViewController {
     private JobService jobService;
 
     @Autowired
+    private AccountService accountService;
+
+    @Autowired
     private StudentService studentService;
 
     @Autowired
@@ -35,7 +34,7 @@ public class ViewController {
     private CompanyService companyService;
 
     @RequestMapping(value = "/recruitment/{id}", method = RequestMethod.GET)
-    public String jobDetail(ModelMap modelMap, @PathVariable("id") int id ){
+    public String jobDetail(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id ){
         Job jobDetail = jobService.findById(id);
         String[] jobDes = jobService.getJobDescription(id);
         String[] companyDes = jobService.getCompanyDescription(id);
@@ -44,6 +43,10 @@ public class ViewController {
         modelMap.addAttribute("companyDes", companyDes);
         modelMap.addAttribute("jobRe", jobRe);
         modelMap.addAttribute("jobDetail", jobDetail);
+        if(accountService.checkRole("STUDENT", request)==true) {
+            Iterable<CV> cvList = studentService.findByAccount(accountService.currentAccount(request)).getCv();
+            modelMap.addAttribute("cvList", cvList);
+        }
         return "recruitment";
     }
 
