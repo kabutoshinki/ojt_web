@@ -68,7 +68,7 @@ public class EmployeeController {
     public String candidatesList(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
-        Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
+         Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
         modelMap.addAttribute("candidates", candidates);
         return "candidateList";
     }

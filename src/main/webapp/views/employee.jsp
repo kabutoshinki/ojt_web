@@ -58,6 +58,10 @@
             text-decoration: none;
         }
 
+        .card-title{
+              font-weight: bold;
+              color: orange;
+        }
 
     </style>
 </head>

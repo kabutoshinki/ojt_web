@@ -46,15 +46,6 @@
                                 </div>
                             </div>
 
-                            <button
-                                style="font-size: 20px; background-color: #99ff99; border-radius: 8px; color: black; text-align: center;"
-                                type="submit" class="btn btn-link" formaction="<c:url value=" /" />"><i
-                                class="bi bi-plus-circle-fill"> Create</i></button>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button
-                                style="font-size: 20px; background-color: #6699ff; border-radius: 8px; color: black; text-align: center;"
-                                type="submit" class="btn btn-link" formaction="<c:url value=" /" />"><i
-                                class="bi bi-arrow-clockwise"></i> Reload</button>&nbsp;&nbsp;
-                            <br />
                             <p class="mt-3">Type something in the input field to search the table</p>
                             <input class="form-control" id="myInput" type="text" placeholder="Search..">
                             <br>

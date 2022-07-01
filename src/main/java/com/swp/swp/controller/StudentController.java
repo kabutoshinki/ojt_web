@@ -43,4 +43,6 @@ public class StudentController {
         modelMap.addAttribute("cvList", cvList);
         return "CV";
     }
+
+
 }

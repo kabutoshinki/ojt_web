@@ -50,8 +50,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-lg-4 mb-2">
-                <img style="width:300px" class="img-fluid" alt="Responsive image"
+                <img style="width:300px" class="img-fluid mb-3" alt="Responsive image"
                     src="https://www.fpt-software.com/wp-content/uploads/sites/2/2017/06/logofsoft.png" />
+                <a href="" style="text-decoration: none;" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>
             </div>
             <div class="col-12 col-lg-8 mt-5 mb-2">
                 <p style="font-size: 30px; font-weight:bold;">
@@ -98,7 +99,6 @@
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <div class="container">
-        <a href="" style="text-decoration: none;" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>
         <div class="row">
             <div class="col-12 mt-5 mr-2">
                 <h3>Job description:</h3>

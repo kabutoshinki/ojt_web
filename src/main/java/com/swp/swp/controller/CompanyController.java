@@ -69,9 +69,9 @@ public class CompanyController {
     public String candidatesList(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
-        Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
-        modelMap.addAttribute("candidates", candidates);
-        return "candidateList";
+        //Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
+       // modelMap.addAttribute("candidates", candidates);
+        return "candidateListForCompany";
     }
     
     @RequestMapping(value = "/verify/{id}/{status}", method = RequestMethod.GET)
@@ -87,5 +87,23 @@ public class CompanyController {
         }
         return "redirect:/company/candidatesList";
 
+    }
+
+    @RequestMapping(value = "/internsList", method = RequestMethod.GET)
+    public String internsList(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("COMPANY", request)==false)
+            return "test";
+        //Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
+        // modelMap.addAttribute("candidates", candidates);
+        return "list_Inters";
+    }
+
+    @RequestMapping(value = "/internshipRequirement", method = RequestMethod.GET)
+    public String internshipRequirement(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("COMPANY", request)==false)
+            return "test";
+        //Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
+        // modelMap.addAttribute("candidates", candidates);
+        return "internship_Requirement";
     }
 }

@@ -110,9 +110,9 @@
                     <br />
                     <br />
                     <div class="container">
-                        <p>Type something in the input field to search the table</p>
-                        <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                        <br>
+                            <p>Type something in the input field to search the table</p>
+                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                            <br>
                         <div class="table-responsive">
                         <table class="table table-bordered text-center">
                             <thead>
