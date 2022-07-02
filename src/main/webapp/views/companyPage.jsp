@@ -25,37 +25,6 @@
             <script src="https://kit.fontawesome.com/dda2b72c9e.js" crossorigin="anonymous"></script>
 
             <style>
-                .candidates {
-                    background-image: url('/img/candidates.jpg');
-                    background-size: cover;
-                }
-
-                .candidates:hover {
-                    background-image: url('/img/candidates.gif');
-                    background-size: cover;
-                }
-
-                .company {
-                    background-image: url('/img/company.png');
-                    background-size: cover;
-                }
-
-                .company:hover {
-                    background-image: url('/img/company.gif');
-                    background-size: cover;
-                }
-
-
-                .status {
-                    background-image: url('/img/status.jpg');
-                    background-size: cover;
-                }
-
-                .status:hover {
-                    background-image: url('/img/status.gif');
-                    background-size: cover;
-                }
-
                 a {
                     text-align: center;
                     text-decoration: none;
@@ -64,15 +33,6 @@
 
                 a:hover {
                     text-decoration: none;
-                }
-
-                .card-body {
-                    padding: 7rem 1rem;
-
-                }
-                .card-title{
-                    font-weight: bold;
-
                 }
             </style>
         </head>
@@ -86,76 +46,67 @@
                 <div class="container mt-3">
 
                     <div class="row">
-                        <div class="col">
-                            <a href="/company/candidatesList" class="text-decoration-none">
-                                <div class="d-flex justify-content-center mb-3 product container mt-3">
-                                    <div class="card candidates" style="width:300px;height: 300px;">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Candidates Management</h4>
-                                        </div>
+                        <div class="col-12 col-lg-4">
+                            <a href="/company/candidatesList">
+                                <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="/img/listCandidate.jpg"
+                                        style="  height: 150px;" alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text"><strong>Candidates Management</strong></p>
                                     </div>
-                                    <br>
                                 </div>
                             </a>
                         </div>
-                        <div class="col">
-                            <a class="text-decoration-none" href="/company/insertPage">
-                                <div class="d-flex justify-content-center mb-3 product container mt-3">
-                                    <div class="card company" style="width:300px;height: 300px;">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Post Intership Requirement</h4>
-                                        </div>
+                        <div class="col-12 col-lg-4">
+                            <a href="/company/insertPage">
+                                <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="/img/company.png" style="  height: 150px;"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text"><strong>Post Internship Requirement</strong></p>
                                     </div>
-                                    <br>
                                 </div>
                             </a>
                         </div>
-                        <div class="col">
+                        <div class="col-12 col-lg-4">
                             <a href="/company/internshipRequirement">
-                                <div class="d-flex justify-content-center mb-3 product container mt-3">
-                                    <div class="card status" style="width:300px;height: 300px;">
-                                        <div class="card-body">
-                                            <h4 class="card-title">View Internship Requirement</h4>
-                                        </div>
+                                <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="/img/requirement.jpg"
+                                        style="  height: 150px;" alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text"><strong>View Internship Requirement</strong></p>
                                     </div>
-                                    <br>
                                 </div>
                             </a>
                         </div>
-                        <div class="col">
-                            <a href="status.html">
-                                <div class="d-flex justify-content-center mb-3 product container mt-3">
-                                    <div class="card status" style="width:300px;height: 300px;">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Evaluation Intern</h4>
-                                        </div>
+                        <div class="col-12 col-lg-4">
+                            <a href="#">
+                                <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="/img/evaluation.jpg"
+                                        style="  height: 150px;" alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text"><strong>Evaluation Intern</strong></p>
                                     </div>
-                                    <br>
                                 </div>
                             </a>
                         </div>
-                        <div class="col">
+                        <div class="col-12 col-lg-4">
                             <a href="/company/internsList">
-                                <div class="d-flex justify-content-center mb-3 product container mt-3">
-                                    <div class="card status" style="width:300px;height: 300px;">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Intern Management</h4>
-                                        </div>
+                                <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="/img/intern.jpg" style="  height: 150px;"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text"><strong>Intern Management</strong></p>
                                     </div>
-                                    <br>
                                 </div>
                             </a>
                         </div>
                     </div>
 
                 </div>
-                <footer>
+            
                     <%@include file="footer.jsp" %>
-                </footer>
-
-
-
-
+              
         </body>
 
         </html>

@@ -76,10 +76,10 @@
 
             <ul class="navbar-nav menu mr-auto ml-auto p-0 align-items-center">
               <li class="nav-item active mr-3"><a class="nav-link" href="/home">Home</a></li>
+              <li class="nav-item active mr-3"><a href="/student/CVs"
+                  style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV List</a></li>
               <li class="nav-item active mr-3"><a href="/student/applications"
-                  style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View Apply</a></li>
-              <li class="nav-item active mr-3"><a href="/student/applications"
-                  style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View Apply</a></li>
+                  style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View Apply Status</a></li>
             </ul>
             <div class="d-flex align-items-center justify-content-around">
               <div class="text-light" style="display: ${email==null?'':'none'};">
@@ -109,4 +109,3 @@
 
         </div>
       </nav>
-      <hr />
