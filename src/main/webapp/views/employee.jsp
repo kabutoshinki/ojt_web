@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <a href="#">
+                        <a href="/employee/verifyApplication">
                             <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                 <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
                                     style="  height: 150px;" alt="Card image cap">
@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <a href="#">
+                        <a href="/employee/studentResult">
                             <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                 <img class="card-img-top img-fluid" src="/img/result.png" style="  height: 150px;"
                                     alt="Card image cap">

@@ -25,6 +25,8 @@
                     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                     crossorigin="anonymous"></script>
                 <script src="https://kit.fontawesome.com/dda2b72c9e.js" crossorigin="anonymous"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+                <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
             </head>
 
             <body>
@@ -87,26 +89,24 @@
                         <br />
                         <br />
                         <div class="container">
-                            <p>Type something in the input field to search the table</p>
-                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                            <br>
-                            <div class="table-responsive">
-                                <table class="table table-bordered text-center">
+                             
+                            <div class="table-responsive-lg">
+                                <table id="myTable" class="table table-bordered text-center">
                                     <thead>
                                         <tr style="text-align: center;">
-                                            <th>No.</th>
-                                            <th>Company Name</th>
-                                            <th>Email</th>
-                                            <th>Details</th>
+                                            <th class="text-center">No.</th>
+                                            <th class="text-center">Company Name</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Details</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="myTable">
+                                    <tbody>
                                         <c:forEach items="${companyList}" var="o" varStatus="loop">
                                             <tr style="text-align: center;">
                                                 <td>${loop.count}</td>
                                                 <td>${o.account.fullName}</td>
                                                 <td>${o.account.email}</td>
-                                                <td><a href="" style="font-size: 20px">Click here</a></td>
+                                                <td><a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a></td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -115,30 +115,16 @@
                         </div>
 
                         <br />
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                         
                     </div>
                     <jsp:include page="footer.jsp" />
 
+                    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+                    <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                    <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
                     <script>
                         $(document).ready(function () {
-                            $("#myInput").on("keyup", function () {
-                                var value = $(this).val().toLowerCase();
-                                $("#myTable tr").filter(function () {
-                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                });
-                            });
+                            $('#myTable').DataTable();
                         });
                     </script>
             </body>

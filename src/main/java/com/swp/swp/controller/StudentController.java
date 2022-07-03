@@ -43,6 +43,16 @@ public class StudentController {
         modelMap.addAttribute("cvList", cvList);
         return "CV";
     }
+    @GetMapping(value = "report")
+    public String studentReport(ModelMap modelMap, HttpServletRequest request) {
 
+        return "internship_Report";
+    }
+
+    @GetMapping(value = "evaluate")
+    public String evaluate(ModelMap modelMap, HttpServletRequest request) {
+
+        return "evaluate";
+    }
 
 }

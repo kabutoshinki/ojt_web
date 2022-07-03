@@ -6,7 +6,7 @@
             <html>
 
             <head>
-                <title>List of student</title>
+                <title>Verify student application</title>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="/CSS/styles.css">
@@ -25,8 +25,10 @@
                     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                     crossorigin="anonymous"></script>
                 <script src="https://kit.fontawesome.com/dda2b72c9e.js" crossorigin="anonymous"></script>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+                <link rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
                 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
             </head>
 
             <body>
@@ -37,7 +39,9 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb align-items-center">
                                 <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">CV List</li>
+                                <li class="breadcrumb-item"><a href="/employee"
+                                        style="padding:0;display: inline;">Employee</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Student_Internship_Result</li>
                             </ol>
                         </nav>
 
@@ -46,12 +50,12 @@
                             <div>
                                 <div class="row">
                                     <div class="col">
-                                        <h1 style="color: orange">List of CV</h1>
+                                        <h1 style="color: orange">List Of Student Internship Result</h1>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                                     data-target="#mo">
-                                    <i class="bi bi-upload"> Upload CV</i>
+                                    <i class="bi bi-box-arrow-in-down"> Import</i>
                                 </button>
 
                                 <!-- Notification-->
@@ -106,65 +110,73 @@
                                         </form>
                                     </div>
                                 </div>
-
+                                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                                    class="bi bi-box-arrow-in-down"></i> Export</button>
                                 <br />
                                 <br />
                                 <div class="container">
-
-                                    <div class="table-responsive">
-                                        <table id="myTable" class="table table-bordered text-center">
+                                    <div class="table-responsive-lg">
+                                        <table id="myTable" class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">No.</th>
-                                                    <th class="text-center">CV </th>
-                                                    <th class="text-center">Description</th>
-                                                    <th class="text-center">View CV</th>
-                                                    <th class="text-center">Operation</th>
+                                                    <th>No.</th>
+                                                    <th>Student ID</th>
+                                                    <th>Student Name</th>
+                                                    <th>Major</th>
+                                                    <th>Detail Evaluate</th>
+                                                    <th>Company</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${studentList}" var="o" varStatus="loop">
-                                                    <tr style="text-align: center;">
+                                                    <tr>
                                                         <td>${loop.count}</td>
+                                                        <td>${o.studentId}</td>
                                                         <td>${o.account.fullName}</td>
+                                                        <td>${o.account.email}</td>
                                                         <td><a href="" class="btn btn-outline-info"><i
                                                                     class="bi bi-eye"></i> View Detail</a></td>
                                                         <td>
-                                                            <a  class="btn btn-outline-success"><i class="bi bi-check-circle"></i> Choose CV</a>
-                                                            <a href="" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i> Remove</a>
+                                                            <a href="" class="btn btn-outline-danger"><i
+                                                                    class="bi bi-trash-fill" style="color: red"></i>
+                                                                Remove</a>
                                                         </td>
                                                     </tr </c:forEach>
+
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>2</td>
-                                                        <td>2</td>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>1</td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
+                                                            <a href="/employee/evaluate" class="btn btn-outline-info btn-sm"><i
+                                                                class="bi bi-eye"></i> Evaluate</a>
                                                         </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-danger m-0"><i
-                                                                    class="bi bi-trash-fill"></i>
-                                                                Delete</button>
-                                                        </td>
+                                                        <td>1</td>
+                                                        <td>1</td>
                                                     </tr>
+                                                    
                                             </tbody>
                                         </table>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br />
-                         
                     </div>
                     </div>
                     <jsp:include page="footer.jsp" />
+                    <!-- ++++++++++++++++ -->
                     <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
                     <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
                     <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
                     <script>
+
                         $(document).ready(function () {
                             $('#myTable').DataTable();
-                        }); 
+                        });
 
                         $(document).ready(function () {
                             $("#import").click(function () {

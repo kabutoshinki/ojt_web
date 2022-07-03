@@ -98,6 +98,15 @@ public class CompanyController {
         return "list_Inters";
     }
 
+    @RequestMapping(value = "/evaluate", method = RequestMethod.GET)
+    public String internEvaluate(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("COMPANY", request)==false)
+            return "test";
+        //Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
+        // modelMap.addAttribute("candidates", candidates);
+        return "evaluate_By_Company";
+    }
+
     @RequestMapping(value = "/internshipRequirement", method = RequestMethod.GET)
     public String internshipRequirement(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)

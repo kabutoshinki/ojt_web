@@ -52,6 +52,27 @@ public class EmployeeController {
         return "students";
     }
 
+    @RequestMapping(value = "/verifyApplication", method = RequestMethod.GET)
+    public String verifyApplication(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        return "verify_Student_Application";
+    }
+
+    @RequestMapping(value = "/studentResult", method = RequestMethod.GET)
+    public String studentInternshipResult(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        return "student_Internship_Result";
+    }
+
+    @RequestMapping(value = "/evaluate", method = RequestMethod.GET)
+    public String evaluate(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        return "evaluate";
+    }
+
     @RequestMapping(value = "/updateStatus/{idJob}/{status}", method = RequestMethod.GET)
     public String verifyPage(ModelMap modelMap, @PathVariable("idJob") int id,
      @PathVariable("status") int status, HttpServletRequest request){

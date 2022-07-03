@@ -61,25 +61,32 @@
       </div>
       <hr /> -->
 
+      <div class="container">
+        <nav class="navbar navbar-expand-md align-items-center" style="background: orange">
 
-      <nav class="navbar navbar-expand-md align-items-center" style="background: orange">
-        <div class="container">
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+          <button class="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#Navbar">
             <i class="btn btn-secondary bi bi-list"></i>
           </button>
+
+
           <div class="collapse navbar-collapse" id="Navbar">
 
-          <div class="d-flex align-items-center justify-content-around">
-          <a class="navbar-brand mr-auto ml-auto mr-5" href="/home"><img src="/img/fu.jpg" class="img-fluid" width="300" /></a>
-          </div>
+            <div class="d-flex align-items-center justify-content-around">
+              <a class="navbar-brand mr-auto ml-auto mr-5" href="/home"><img src="/img/fu.jpg" class="img-fluid"
+                  width="300" /></a>
+            </div>
 
             <ul class="navbar-nav menu mr-auto ml-auto p-0 align-items-center">
               <li class="nav-item active mr-3"><a class="nav-link" href="/home">Home</a></li>
               <li class="nav-item active mr-3"><a href="/student/CVs"
-                  style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV List</a></li>
+                  style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV
+                  List</a></li>
               <li class="nav-item active mr-3"><a href="/student/applications"
-                  style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View Apply Status</a></li>
+                  style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View Apply
+                  Status</a></li>
+              <li class="nav-item active mr-3"><a href="/student/report"
+                  style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">Intership Report</a></li>
             </ul>
             <div class="d-flex align-items-center justify-content-around">
               <div class="text-light" style="display: ${email==null?'':'none'};">
@@ -107,5 +114,6 @@
 
           </div>
 
-        </div>
-      </nav>
+
+        </nav>
+      </div>

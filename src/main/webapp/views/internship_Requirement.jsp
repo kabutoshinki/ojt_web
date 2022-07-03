@@ -23,13 +23,14 @@
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                 crossorigin="anonymous"></script>
             <script src="https://kit.fontawesome.com/dda2b72c9e.js" crossorigin="anonymous"></script>
-
-
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
         </head>
 
         <body>
             <jsp:include page="header.jsp" />
-
+            <br />
             <!-- content -->
             <header class="container">
 
@@ -48,25 +49,22 @@
             </header>
             <hr>
             <div class="container">
-                <p>Type something in the input field to search the table</p>
-                <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                <br>
-                <div class="table-responsive">
+                <div class="table-responsive-lg">
 
-                    <table class="table table-striped text-center">
-                        <thead class="text-center">
+                    <table id="myTable" class="table table-striped">
+                        <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Apply Position</th>
-                                <th>Internship Description</th>
-                                <th>Requirement</th>
-                                <th>Slot</th>
-                                <th>Status</th>
-                                <th>Reason</th>
-                                <th>Operations</th>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Apply Position</th>
+                                <th class="text-center">Internship Description</th>
+                                <th class="text-center">Requirement</th>
+                                <th class="text-center">Slot</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Reason</th>
+                                <th class="text-center">Operations</th>
                             </tr>
                         </thead>
-                        <tbody id="myTable">
+                        <tbody>
                             <c:forEach items="${candidates}" var="o">
                                 <tr>
                                     <td>${o.id}</td>
@@ -74,10 +72,10 @@
                                     <td>${o.account.fullName}</td>
                                     <td>Kỹ thuật phần mềm</td>
                                     <td>
-                                        <a href="#">click here</a>
+                                        <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
                                     </td>
                                     <td>
-                                        <a href="#">CV</a>
+                                        <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View CV</a>
                                     </td>
                                     <td>${o.job.company.name}</td>
                                     <td>${o.status}</td>
@@ -110,8 +108,12 @@
                                 <td>1</td>
                                 <td>1</td>
                                 <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
+                                <td>
+                                    <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View CV</a>
+                                </td>
                                 <td>1</td>
                                 <td>
                                     <a href="verify/${o.id}/1" class="btn btn-sm btn-outline-success mt-auto mb-auto"
@@ -130,35 +132,31 @@
                 </div>
             </div>
 
-
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-
             <hr>
             <!-- footer -->
             <footer>
                 <jsp:include page="footer.jsp" />
             </footer>
 
+            <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+            <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
             <script>
+                // $(document).ready(function () {
+                //     $("#myInput").on("keyup", function () {
+                //         var value = $(this).val().toLowerCase();
+                //         $("#myTable tr").filter(function () {
+                //             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                //         });
+                //     });
+                // });
                 $(document).ready(function () {
-                    $("#myInput").on("keyup", function () {
-                        var value = $(this).val().toLowerCase();
-                        $("#myTable tr").filter(function () {
-                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                        });
+                    $('#myTable').DataTable();
+                });
+
+                $(document).ready(function () {
+                    $("#import").click(function () {
+                        $("#success").modal();
                     });
                 });
             </script>
