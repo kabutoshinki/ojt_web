@@ -86,7 +86,7 @@
                   style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View Apply
                   Status</a></li>
               <li class="nav-item active mr-3"><a href="/student/report"
-                  style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">Intership Report</a></li>
+                  style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">Internship Report</a></li>
             </ul>
             <div class="d-flex align-items-center justify-content-around">
               <div class="text-light" style="display: ${email==null?'':'none'};">
@@ -105,7 +105,7 @@
                   <a class="dropdown-item" href="/view/user">My Profile</a>
                   <a class="dropdown-item" href="/employee"
                     style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}"> Manage Page</a>
-                  <a class="dropdown-item" href="/company/managePage"
+                  <a class="dropdown-item" href="/company"
                     style="display: ${account.role.equals('COMPANY')=='true'?'':'none'}"> Manage Page</a>
                   <a class="dropdown-item" href="/logout">Logout</a>
                 </div>

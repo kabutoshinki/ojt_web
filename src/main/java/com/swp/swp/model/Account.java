@@ -54,6 +54,9 @@ public class Account implements UserDetails {
     private Company company;
 
     @OneToOne(mappedBy = "account")
+    private Student student;
+
+    @OneToOne(mappedBy = "account")
     private Employee employee;
     public Account() {
     }

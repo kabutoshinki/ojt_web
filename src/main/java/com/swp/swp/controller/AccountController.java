@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.swp.swp.service.CompanyService;
+import com.swp.swp.service.FileService;
 import com.swp.swp.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,8 @@ public class AccountController {
     private StudentService studentService;
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private FileService fileService;
 
     @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
     public String getAllAccounts(ModelMap modelMap, HttpServletRequest request){
@@ -66,14 +69,19 @@ public class AccountController {
     }
 
     @PostMapping(value = "/update")
-    public String viewUserInformation(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
+    public String viewUserInformation(ModelMap modelMap, @RequestParam("avatar") MultipartFile file, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("user");
+        Account account = accountService.currentAccount(request);
         if (request.getParameter("address") != null) {
             account.setAddress(request.getParameter("address"));
         }
         if (request.getParameter("phone") != null) {
             account.setPhone(request.getParameter("phone"));
+        }
+        if (file != null) {
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\avatar\\");
+            String path = currentWorkingDir.normalize().toString();
+            fileService.saveFile(file, account.getId() + "", path);
         }
         if (account.getRole().equals("STUDENT")) {
             Student student = (Student) session.getAttribute("student");
@@ -88,7 +96,7 @@ public class AccountController {
             }
             student.setAccount(account);
             studentService.save(student);
-            session.setAttribute("student", student);
+            modelMap.addAttribute("student", student);
         }
         if (account.getRole().equals("COMPANY")) {
             Company company = (Company) session.getAttribute("company");
@@ -97,7 +105,7 @@ public class AccountController {
             }
             company.setAccount(account);
             companyService.save(company);
-            session.setAttribute("company", company);
+            modelMap.addAttribute("company", company);
         }
         accountService.save(account);
         return "redirect:/view/user";

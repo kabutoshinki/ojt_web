@@ -1,5 +1,6 @@
 package com.swp.swp.model;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,8 +35,8 @@ public class Job {
         strategy = GenerationType.AUTO,
         generator = "job_sequence"
     )
-    @Column(name = "idJob")
-    public int idJob;
+    @Column(name = "id")
+    public int id;
     @Column(unique = false, length = 100)
     private int slot;
     @Column( unique = false, length = 10000)
@@ -47,30 +48,29 @@ public class Job {
     @Column(unique = false, length = 300)
     private String status;
     @Column(unique = false)
-    private String startDate;
+    private Date startDate;
     @Column(unique = false)
-    private String endDate;
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "company_Id", referencedColumnName = "id" ,nullable = false)
+    private Date endDate;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "company_Id")
     private Company company;
-    
+
+
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
-    private Set<StudentApplyJob> account = new HashSet<>();
+    private Set<StudentApplyJob> applyList = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "employee_id")
     private Employee employee;
     @Transient
     private int positionId;
 
-    
-    public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
+    public Job(int slot, String description, String requirement, String status, Date startDate, Date endDate,
                Company company, Position position2, Employee employee) {
         this.slot = slot;
         this.description = description;
@@ -82,10 +82,6 @@ public class Job {
         this.position = position2;
         this.employee = employee;
     }
-
-
-
-
 
     public Position getPosition() {
         return position;
@@ -123,7 +119,7 @@ public class Job {
 
     
     
-    public Job(int slot, String description, String requirement, String status, String startDate, String endDate,
+    public Job(int slot, String description, String requirement, String status, Date startDate, Date endDate,
             Company company) {
         this.slot = slot;
         this.description = description;
@@ -144,25 +140,30 @@ public class Job {
     }
 
 
-    public int getIdJob() {
-        return idJob;
+    public int getId() {
+        return id;
     }
 
 
-    public void setIdJob(int idJob) {
-        this.idJob = idJob;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    
-    // public Set<Account> getAccount() {
-    //     return account;
-    // }
+    public Set<StudentApplyJob> getApplyList() {
+        return applyList;
+    }
 
+    public void setApplyList(Set<StudentApplyJob> applyList) {
+        this.applyList = applyList;
+    }
 
-    // public void setAccount(Set<Account> account) {
-    //     this.account = account;
-    // }
+    public Employee getEmployee() {
+        return employee;
+    }
 
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     public int getSlot() {
         return slot;
@@ -170,22 +171,22 @@ public class Job {
 
 
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -242,7 +243,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job [company=" + company + ", description=" + description + ", idJob=" + idJob
+        return "Job [company=" + company + ", description=" + description + ", idJob=" + id
                 + ", requirement=" + requirement + ", slot=" + slot + ", status=" + status + "]";
     }
 

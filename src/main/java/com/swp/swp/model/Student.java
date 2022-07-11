@@ -1,5 +1,7 @@
 package com.swp.swp.model;
 
+import com.swp.swp.service.StudentService;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
@@ -32,17 +34,20 @@ public class Student {
     private String gender;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST)
-    private Set<StudentApplyJob> jobs = new HashSet<>();
+    private Set<StudentApplyJob> applyList = new HashSet<>();
 
     @OneToMany(mappedBy = "student" ,cascade = CascadeType.PERSIST)
-    private Set<CV> cv = new HashSet<>();
+    private Set<CV> cvList = new HashSet<>();
 
     @OneToMany(mappedBy = "student",cascade = CascadeType.REFRESH)
-    private Set<OjtProcess> ojt = new HashSet<>();
+    private Set<OjtProcess> processList = new HashSet<>();
 
     @OneToMany(mappedBy = "student",cascade = CascadeType.REFRESH)
-    private Set<ExternalRequest> request = new HashSet<>();
+    private Set<ExternalRequest> requestList = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "semester_id")
+    private Semester semester;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;
@@ -56,6 +61,14 @@ public class Student {
         this.studentId = studentId;
         this.dateOfBirth = dateOfBirth;
         this.account = account;
+    }
+
+    public boolean getApplicationStatus() {
+        for (StudentApplyJob x: this.getApplyList()) {
+            if (x.getStatus().equalsIgnoreCase("Interning"))
+                return true;
+        }
+        return false;
     }
 
     public int getId() {
@@ -82,36 +95,36 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Set<StudentApplyJob> getJobs() {
-        return jobs;
+    public Set<StudentApplyJob> getApplyList() {
+        return applyList;
     }
 
-    public void setJobs(Set<StudentApplyJob> jobs) {
-        this.jobs = jobs;
+    public void setApplyList(Set<StudentApplyJob> applyList) {
+        this.applyList = applyList;
     }
 
-    public Set<CV> getCv() {
-        return cv;
+    public Set<CV> getCvList() {
+        return cvList;
     }
 
-    public void setCv(Set<CV> cv) {
-        this.cv = cv;
+    public void setCvList(Set<CV> cvList) {
+        this.cvList = cvList;
     }
 
-    public Set<OjtProcess> getOjt() {
-        return ojt;
+    public Set<OjtProcess> getProcessList() {
+        return processList;
     }
 
-    public void setOjt(Set<OjtProcess> ojt) {
-        this.ojt = ojt;
+    public void setProcessList(Set<OjtProcess> processList) {
+        this.processList = processList;
     }
 
-    public Set<ExternalRequest> getRequest() {
-        return request;
+    public Set<ExternalRequest> getRequestList() {
+        return requestList;
     }
 
-    public void setRequest(Set<ExternalRequest> request) {
-        this.request = request;
+    public void setRequestList(Set<ExternalRequest> requestList) {
+        this.requestList = requestList;
     }
 
     public Account getAccount() {
@@ -128,5 +141,13 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
     }
 }

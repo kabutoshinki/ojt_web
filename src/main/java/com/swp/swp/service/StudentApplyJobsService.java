@@ -23,9 +23,9 @@ public class StudentApplyJobsService {
     @Autowired private CompanyRepositories companyRepositories;
     @Autowired private JobRepositories jobRepositories;
     @Autowired private AccountService accountService;
-    
 
-    
+
+
 
     public StudentApplyJobsService(StudentApplyJobsRepositories studentApplyJobsRepositories,
                                    CompanyRepositories companyRepositories, JobRepositories jobRepositories) {
@@ -45,28 +45,29 @@ public class StudentApplyJobsService {
         }
     }
 
-    public Iterable<StudentApplyJob> getAll() {
+    public Iterable<StudentApplyJob> findAll() {
         Iterable<StudentApplyJob> candidates = studentApplyJobsRepositories.findAll();
         return candidates;
     }
 
-    public StudentApplyJob getById(int id) {
-        return null;
+    public StudentApplyJob findById(int id) {
+        return studentApplyJobsRepositories.findById(id);
     }
 
     public boolean isExist(String value) {
         // TODO Auto-generated method stub
         return false;
     }
-    public Iterable<StudentApplyJob> getApplyByCompanyId(int id){
-        Company company = companyRepositories.findById(id);
+    public Iterable<StudentApplyJob> findApplyByCompany(Company company){
         ArrayList<StudentApplyJob> candidatesList = new ArrayList<>();
         Iterable<Job> jobs = jobRepositories.findByCompany(company);
         for (Job job : jobs) {
-           Iterable<StudentApplyJob> candidates= studentApplyJobsRepositories.findByJob(job);
-           for (StudentApplyJob candidate : candidates) {
-                candidatesList.add(candidate);
-           }
+            Iterable<StudentApplyJob> candidates= studentApplyJobsRepositories.findByJob(job);
+            for (StudentApplyJob candidate : candidates) {
+                if (candidate.getStatus().equalsIgnoreCase("waiting") == false &&
+                    candidate.getStatus().equalsIgnoreCase("Denied") == false)
+                        candidatesList.add(candidate);
+            }
         }
         return candidatesList;
     }
@@ -79,5 +80,15 @@ public class StudentApplyJobsService {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
+    public boolean save(StudentApplyJob newApplication) {
+        try {
+            logger.info("insert Data: " +  studentApplyJobsRepositories.save(newApplication));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
 }

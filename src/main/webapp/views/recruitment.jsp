@@ -53,7 +53,7 @@
             <div class="col-12 col-lg-4 mb-2">
                 <img style="width:300px" class="img-fluid mb-3" alt="Responsive image"
                     src="https://www.fpt-software.com/wp-content/uploads/sites/2/2017/06/logofsoft.png" />
-                <a href="" style="text-decoration: none;" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>
+                <a href="" style="text-decoration: none;display: ${account.role.equals('STUDENT')=='true'?'':'none'}" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>
             </div>
             <div class="col-12 col-lg-8 mt-5 mb-2">
                 <p style="font-size: 30px; font-weight:bold;">
@@ -77,23 +77,24 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <form action="/student/applyForm/${jobDetail.id}">
+                  <div class="modal-body">
+                    <div class="dropdown text-center btn-lg btn-block">
+                        <select name="cvId" class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3" id="selection" aria-label=".form-select-lg example">
+                            <option name="CvId" value="" class="text-center" selected>Select CV</option>
+                            <c:forEach var="o" items="${cvList}">
+                                <option value="${o.id}">${o.name}</option>
+                            </c:forEach>
+                            <option value="/student/CVs">Other</option>
+                        </select>
+                    </div>
 
-                <div class="dropdown text-center btn-lg btn-block">
-                  <select class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3" id="selection" aria-label=".form-select-lg example">
-                  <option value="" class="text-center" selected>Select CV</option>
-                  <option value="FPT">FPT</option>
-                  <option value="Tiki">Tiki</option>
-                  <option value="Lazada">Lazada</option>
-                   <option value="/home">Other</option>
-                </select>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input value="Save changes" type="submit" class="btn btn-primary">
+                  </div>
+              </form>
             </div>
           </div>
         </div>

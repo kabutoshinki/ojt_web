@@ -122,41 +122,52 @@
                                                     <th>No.</th>
                                                     <th>Student ID</th>
                                                     <th>Student Name</th>
-                                                    <th>Major</th>
-                                                    <th>Detail Evaluate</th>
+                                                    <th>Semester</th>
                                                     <th>Company</th>
+                                                    <th>Application Detail</th>
+                                                    <th>Start time</th>
+                                                    <th>End time</th>
+                                                    <th>Evaluation Detail</th>
+                                                    <th>Grade</th>
                                                     <th>Status</th>
+                                                    <%--<th>Verifier</th>--%>
+                                                    <%--<th>Action</th>--%>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${studentList}" var="o" varStatus="loop">
+                                                <c:forEach items="${processList}" var="o" varStatus="loop">
                                                     <tr>
                                                         <td>${loop.count}</td>
-                                                        <td>${o.studentId}</td>
-                                                        <td>${o.account.fullName}</td>
-                                                        <td>${o.account.email}</td>
-                                                        <td><a href="" class="btn btn-outline-info"><i
-                                                                    class="bi bi-eye"></i> View Detail</a></td>
+                                                        <td>${o.student.studentId}</td>
+                                                        <td>${o.student.account.fullName}</td>
+                                                        <td>${o.application.semester.semester}</td>
+                                                        <td>${o.application.job.company.account.fullName}</td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-danger"><i
-                                                                    class="bi bi-trash-fill" style="color: red"></i>
-                                                                Remove</a>
+                                                            <a href="" class="btn btn-outline-info"><i
+                                                                    class="bi bi-eye"></i> View Detail</a>
                                                         </td>
-                                                    </tr </c:forEach>
-
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
+                                                        <td>${o.startTime}</td>
+                                                        <td>${o.endTime}</td>
                                                         <td>
-                                                            <a href="/employee/evaluate" class="btn btn-outline-info btn-sm"><i
-                                                                class="bi bi-eye"></i> Evaluate</a>
+                                                            <a href="" class="btn btn-outline-info"><i
+                                                                    class="bi bi-eye"></i> View Detail</a>
                                                         </td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                    </tr>
-                                                    
+                                                        <td>${o.grade}</td>
+                                                        <td>${o.status}</td>
+                                                        <%--<td>${o.employee.account.fullName}</td>--%>
+                                                        <%--<td>
+                                                            <a style="${o.status!='Processing'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Processing"
+                                                               class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                                               value="accept">
+                                                                <i class="bi bi-check-circle"></i> Accept
+                                                            </a>
+                                                            <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                                               name="op" value="remove">
+                                                                <i class="bi bi-x-circle"></i> Deny
+                                                            </a>
+                                                        </td>--%>
+                                                    </tr
+                                                </c:forEach>
                                             </tbody>
                                         </table>
 

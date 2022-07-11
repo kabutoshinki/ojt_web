@@ -4,42 +4,40 @@ package com.swp.swp.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.swp.swp.model.StudentApplyJob;
+import com.swp.swp.model.*;
+import com.swp.swp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import com.swp.swp.model.Job;
-import com.swp.swp.model.Position;
 import com.swp.swp.repositories.PositionRepositories;
-import com.swp.swp.service.AccountService;
-import com.swp.swp.service.JobService;
-import com.swp.swp.service.StudentApplyJobsService;
+
+import java.sql.Date;
 
 @Controller
 @RequestMapping(path = "/company")
 public class CompanyController {
-    @Autowired PositionRepositories positionRepositories;
+    @Autowired
+    private PositionService positionService;
+    @Autowired
+    private CompanyService companyService;
     @Autowired private JobService jobService;
     @Autowired private StudentApplyJobsService studentApplyJobsService;
     @Autowired AccountService accountService;
-    
-    @RequestMapping(value = "/managePage", method = RequestMethod.GET)
+
+    @Autowired private OjtProcessService ojtProcessService;
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String managePage(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
-        return "companyPage";
+        return "company";
     }
     @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
     public String insertPage(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
-        Iterable<Position> positions = positionRepositories.findAll();
+        Iterable<Position> positions = positionService.findAll();
         for (Position position : positions) {
             System.out.println("position: " + position.getPosition());
         }
@@ -65,13 +63,33 @@ public class CompanyController {
             }
         
     }
-    @RequestMapping(value = "/candidatesList", method = RequestMethod.GET)
-    public String candidatesList(ModelMap modelMap, HttpServletRequest request){
+    @RequestMapping(value = "/candidates", method = RequestMethod.GET)
+    public String candidates(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
-        //Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
-       // modelMap.addAttribute("candidates", candidates);
-        return "candidateListForCompany";
+        Company company = companyService.findByAccount(accountService.currentAccount(request));
+        Iterable<StudentApplyJob> candidateList = studentApplyJobsService.findApplyByCompany(company);
+        modelMap.addAttribute("candidateList", candidateList);
+        return "candidates";
+    }
+
+    @RequestMapping(value = "/verifyApplication/{id}/{status}", method = RequestMethod.GET)
+    public String verifyApplication(@PathVariable("id") int id, @PathVariable("status") String status,
+                                    HttpServletRequest request){
+        if(accountService.checkRole("COMPANY", request)==false)
+            return "test";
+        StudentApplyJob x = studentApplyJobsService.findById(id);
+        if (status.equalsIgnoreCase("nextStep")) {
+            if (x.getStatus().equalsIgnoreCase("Processing")) {
+                x.setStatus("Interviewing");
+            } else if (x.getStatus().equalsIgnoreCase("Interviewing")) {
+                x.setStatus("Passed");
+            }
+        } else {
+            x.setStatus(status);
+        }
+        studentApplyJobsService.save(x);
+        return "redirect:/company/candidates";
     }
     
     @RequestMapping(value = "/verify/{id}/{status}", method = RequestMethod.GET)
@@ -89,13 +107,13 @@ public class CompanyController {
 
     }
 
-    @RequestMapping(value = "/internsList", method = RequestMethod.GET)
+    @RequestMapping(value = "/internships", method = RequestMethod.GET)
     public String internsList(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
-        //Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
-        // modelMap.addAttribute("candidates", candidates);
-        return "list_Inters";
+        Iterable <OjtProcess> processList = ojtProcessService.findByCompany(companyService.findByAccount(accountService.currentAccount(request)));
+        modelMap.addAttribute("processList", processList);
+        return "companyInternships";
     }
 
     @RequestMapping(value = "/evaluate", method = RequestMethod.GET)
@@ -107,12 +125,35 @@ public class CompanyController {
         return "evaluate_By_Company";
     }
 
-    @RequestMapping(value = "/internshipRequirement", method = RequestMethod.GET)
+    @RequestMapping(value = "/requirements", method = RequestMethod.GET)
     public String internshipRequirement(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
-        //Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
-        // modelMap.addAttribute("candidates", candidates);
-        return "internship_Requirement";
+        Iterable<Job> jobList = jobService.findByCompany(companyService.findByAccount(accountService.currentAccount(request)));
+        modelMap.addAttribute("jobList", jobList);
+        Iterable<Position> positionList = positionService.findAll();
+        modelMap.addAttribute("positionList", positionList);
+        return "companyRequirements";
+    }
+
+    @RequestMapping(value = "/uploadRequirement", method = RequestMethod.POST)
+    public String uploadRequirement(ModelMap modelMap, HttpServletRequest request, @RequestParam("position") int positionId,
+                                    @RequestParam("description") String description, @RequestParam("requirement") String requirement,
+                                    @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate,
+                                    @RequestParam("slot") int slot){
+        if(accountService.checkRole("COMPANY", request)==false)
+            return "test";
+        Position position = positionService.findById(positionId);
+        Job newJob = new Job();
+        newJob.setPosition(position);
+        newJob.setCompany(companyService.findByAccount(accountService.currentAccount(request)));
+        newJob.setStatus("Waiting");
+        newJob.setRequirement(requirement);
+        newJob.setDescription(description);
+        newJob.setStartDate(startDate);
+        newJob.setEndDate(endDate);
+        newJob.setSlot(slot);
+        jobService.save(newJob);
+        return "redirect:/company/requirements";
     }
 }

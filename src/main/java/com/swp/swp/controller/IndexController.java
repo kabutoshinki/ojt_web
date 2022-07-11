@@ -1,9 +1,11 @@
 package com.swp.swp.controller;
 
 import com.swp.swp.model.Account;
+import com.swp.swp.model.CV;
 import com.swp.swp.model.Job;
 import com.swp.swp.service.AccountService;
 import com.swp.swp.service.JobService;
+import com.swp.swp.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -24,6 +26,9 @@ class IndexController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private StudentService studentService;
+
     @RequestMapping("/")
     public String index() {
         return "forward:/home";
@@ -31,17 +36,12 @@ class IndexController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(ModelMap modelMap, HttpServletRequest request){
-        /*Account ac = accountService.getByString("hoanmalai2001@gmail.com");
-
-        System.out.println(ac.getFullName());
-        System.out.println(ac.getRole().getRoleName());*/
         HttpSession session = request.getSession();
-        Iterable<Job> jobList = jobService.getAll();
+        Iterable<Job> jobList = jobService.findAllAvailable();
         modelMap.addAttribute("jobList",jobList);
         String messTrue = (String)session.getAttribute("true");
         if(messTrue!=null){
             session.removeAttribute("true");
-
             request.setAttribute("mess", "Login Successfully");
         }
         else

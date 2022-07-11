@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <a href="/employee/candidatesList">
+                        <a href="/employee/requirements">
                             <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                 <img class="card-img-top img-fluid" src="/img/verify.jpg" style="  height: 150px;"
                                     alt="Card image cap">
@@ -90,10 +90,10 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <a href="/employee/verifyApplication">
+                        <a href="/employee/applications">
                             <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                 <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
-                                    style="  height: 150px;" alt="Card image cap">
+                                     style="  height: 150px;" alt="Card image cap">
                                 <div class="card-body">
                                     <p class="card-text"><strong>Verify Student Application</strong></p>
                                 </div>
@@ -102,7 +102,19 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <a href="/employee/studentResult">
+                        <a href="/employee/verifyApplication">
+                            <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
+                                    style="  height: 150px;" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Verify Student External Application</strong></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <a href="/employee/internships">
                             <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                 <img class="card-img-top img-fluid" src="/img/result.png" style="  height: 150px;"
                                     alt="Card image cap">

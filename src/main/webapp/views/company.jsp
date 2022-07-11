@@ -47,7 +47,7 @@
 
                     <div class="row">
                         <div class="col-12 col-lg-4">
-                            <a href="/company/candidatesList">
+                            <a href="/company/candidates">
                                 <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                     <img class="card-img-top img-fluid" src="/img/listCandidate.jpg"
                                         style="  height: 150px;" alt="Card image cap">
@@ -57,41 +57,21 @@
                                 </div>
                             </a>
                         </div>
+
                         <div class="col-12 col-lg-4">
-                            <a href="/company/insertPage">
+                            <a href="/company/requirements">
                                 <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                     <img class="card-img-top img-fluid" src="/img/company.png" style="  height: 150px;"
-                                        alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text"><strong>Post Internship Requirement</strong></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <a href="/company/internshipRequirement">
-                                <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
-                                    <img class="card-img-top img-fluid" src="/img/requirement.jpg"
                                         style="  height: 150px;" alt="Card image cap">
                                     <div class="card-body">
-                                        <p class="card-text"><strong>View Internship Requirement</strong></p>
+                                        <p class="card-text"><strong>Internship Requirements</strong></p>
                                     </div>
                                 </div>
                             </a>
                         </div>
+
                         <div class="col-12 col-lg-4">
-                            <a href="#">
-                                <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
-                                    <img class="card-img-top img-fluid" src="/img/evaluation.jpg"
-                                        style="  height: 150px;" alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text"><strong>Evaluation Intern</strong></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <a href="/company/internsList">
+                            <a href="/company/internships">
                                 <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                     <img class="card-img-top img-fluid" src="/img/intern.jpg" style="  height: 150px;"
                                         alt="Card image cap">

@@ -3,19 +3,10 @@ package com.swp.swp.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="position_table")
+@Table(name="Position")
 public class Position {
     @Id
     //    @GeneratedValue( strategy = GenerationType.AUTO)
@@ -33,7 +24,11 @@ public class Position {
     @Column( unique = false, length = 300)
     private String position;
     @OneToMany(mappedBy = "position", cascade = CascadeType.REFRESH)
-    private Set<Job> jobs = new HashSet<>();
+    private Set<Job> jobList = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "major_id")
+    private Major major;
 
     public Position() {
     }
@@ -59,11 +54,19 @@ public class Position {
         this.position = position;
     }
 
-    public Set<Job> getJobs() {
-        return jobs;
+    public Set<Job> getJobList() {
+        return jobList;
     }
 
-    public void setJobs(Set<Job> jobs) {
-        this.jobs = jobs;
+    public void setJobList(Set<Job> jobList) {
+        this.jobList = jobList;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
     }
 }

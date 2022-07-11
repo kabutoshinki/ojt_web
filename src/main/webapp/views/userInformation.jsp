@@ -59,7 +59,7 @@
                                                 id="thumbnail" /><br />
 
                                             <div class="custom-file mt-3">
-                                                <input type="file" class="custom-file-input" id="fileImage">
+                                                <input name="avatar" type="file" class="custom-file-input" id="fileImage">
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                         </figcaption>

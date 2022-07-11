@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Major_Table")
+@Table(name = "Major")
 public class Major {
     @Id
     //    @GeneratedValue( strategy = GenerationType.AUTO)
@@ -34,8 +34,7 @@ public class Major {
     private String major;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "position_id",referencedColumnName = "id")
-    private Set<Position> position = new HashSet<>();
+    private Set<Position> positionList = new HashSet<>();
 
     
     public Major() {
@@ -57,15 +56,15 @@ public class Major {
     }
 
 
-    public Set<Position> getPosition() {
-        return position;
+    public Set<Position> getPositionList() {
+        return positionList;
     }
 
 
-    public void setPosition(Set<Position> position) {
-        this.position = position;
+    public void setPositionList(Set<Position> positionList) {
+        this.positionList = positionList;
     }
-    
+
 
     
 }

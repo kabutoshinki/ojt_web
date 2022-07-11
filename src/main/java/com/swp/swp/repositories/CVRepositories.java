@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.swp.swp.model.CV;
 
 public interface CVRepositories extends JpaRepository<CV, Integer> {
-    
+    CV findById(int id);
 }

@@ -53,10 +53,9 @@
                                     <thead>
                                         <tr style="text-align: center">
                                             <th class="text-center">No.</th>
-                                            <th class="text-center">Student ID</th>
-                                            <th class="text-center">Student Name</th>
-                                            <th class="text-center">Major</th>
+                                            <th class="text-center">Position</th>
                                             <th class="text-center">Details</th>
+                                            <th class="text-center">CV</th>
                                             <th class="text-center">Verifier</th>
                                             <th class="text-center">Company</th>
                                             <th class="text-center">Status</th>
@@ -64,19 +63,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="application" items="${applyList}" varStatus="loop">
+                                        <c:forEach var="o" items="${applyList}" varStatus="loop">
                                             <tr style="text-align: center">
                                                 <td>${loop.count}</td>
-                                                <td>${application.student.studentId}</td>
-                                                <td>${application.student.account.fullName}</td>
-                                                <td>${application.job.position.position}</td>
-                                                <td><a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a></td>
-                                                <td>${application.employee.account.fullName}</td>
-                                                <td>${application.job.company.account.fullName}</td>
-                                                <td>${application.status}</td>
-                                                <td>
+                                                <td>${o.job.position.position}</td>
+                                                <td><a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a></td>
+                                                <td>${o.cv.name}</td>
+                                                <td>${o.employee.account.fullName}</td>
+                                                <td>${o.job.company.account.fullName}</td>
+                                                <td>${o.status}</td>
+                                                <%--<td>
                                                     <button class="btn btn-outline-primary"><i class="bi bi-check-circle"></i> Accept</button>
                                                     <button class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Reject</button>
+                                                </td>--%>
+                                                <td>
+                                                    <a style="${o.status=='Passed' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}" href="verifyIntern/${o.id}/Interning"
+                                                       class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                                       value="accept">
+                                                        <i class="bi bi-check-circle"></i> Intern
+                                                    </a>
+
+                                                    <a style="${o.status=='Passed' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}" href="verifyIntern/${o.id}/Refused" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                                       name="op" value="remove">
+                                                        <i class="bi bi-x-circle"></i> Reject
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </c:forEach>

@@ -36,8 +36,8 @@
 
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb align-items-center">
-                        <li class="breadcrumb-item"><a href="/company/managePage" style="padding:0">Company</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Internship_Requirement</li>
+                        <li class="breadcrumb-item"><a href="/employee" style="padding:0">Employee</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Requirements</li>
                     </ol>
                 </nav>
 
@@ -55,77 +55,38 @@
                         <thead>
                             <tr>
                                 <th class="text-center">No</th>
-                                <th class="text-center">Apply Position</th>
-                                <th class="text-center">Internship Description</th>
-                                <th class="text-center">Requirement</th>
-                                <th class="text-center">Slot</th>
+                                <th class="text-center">Company</th>
+                                <th class="text-center">Position</th>
+                                <th class="text-center">Detail</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center">Reason</th>
+                                <th class="text-center">Verifier</th>
                                 <th class="text-center">Operations</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${candidates}" var="o">
+                            <c:forEach items="${jobList}" var="o" varStatus="loop">
                                 <tr>
-                                    <td>${o.id}</td>
-                                    <td>SE150011</td>
-                                    <td>${o.account.fullName}</td>
-                                    <td>Kỹ thuật phần mềm</td>
+                                    <td>${loop.count}</td>
+                                    <td>${o.company.account.fullName}</td>
+                                    <td>${o.position.position}</td>
                                     <td>
-                                        <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
+                                        <a href="/view/recruitment/${o.id}" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
                                     </td>
-                                    <td>
-                                        <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View CV</a>
-                                    </td>
-                                    <td>${o.job.company.name}</td>
                                     <td>${o.status}</td>
+                                    <td>${o.employee.account.fullName}</td>
                                     <td>
-
-                                        <!-- <c:if test="${account.role.equals('COMPANY')=='true'}">
-                                    <a href="/companyController/verify/${o.id}/1">
-                                        <button type="submit" class="btn btn-sm btn-outline-success"  name="op" value="update"><i class="bi bi-check-circle"></i> Accepted
-                                        </button>
-                                    </a>
-                                    <a href="/companyController/verify/${o.id}/2">
-                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal" name="op" value="cancel"><i class="bi bi-x-circle"></i> Denied</button>
-                                    </a>
-                                </c:if> -->
-                                        <a href="verify/${o.id}/1"
+                                        <a style="${o.status!='Accepted'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyRequirement/${o.id}/Accepted"
                                             class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                                             value="accept">
-                                            <i class="bi bi-check-circle"></i> Accepted
+                                            <i class="bi bi-check-circle"></i> Accept
                                         </a>
-                                        <a href="verify/${o.id}/2" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                        <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyRequirement/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
                                             name="op" value="remove">
-                                            <i class="bi bi-x-circle"></i> Denied
+                                            <i class="bi bi-x-circle"></i> Deny
                                         </a>
                                     </td>
                                 </tr>
                             </c:forEach>
-                            <!-- Example -->
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>
-                                    <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View CV</a>
-                                </td>
-                                <td>1</td>
-                                <td>
-                                    <a href="verify/${o.id}/1" class="btn btn-sm btn-outline-success mt-auto mb-auto"
-                                        name="op" value="accept">
-                                        <i class="bi bi-check-circle"></i> Accept
-                                    </a>
-                                    <a href="verify/${o.id}/2" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                        name="op" value="remove">
-                                        <i class="bi bi-x-circle"></i> Deny
-                                    </a>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
 
