@@ -40,26 +40,46 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        Iterable<Company> companyList = companyService.getAll();
+        Iterable<Company> companyList = companyService.findAllActive();
         modelMap.addAttribute("companyList",companyList);
         return "companies";
     }
+    @PostMapping(value = "removeCompany/{id}")
+    public String removeCompany(HttpServletRequest request, @PathVariable("id") int id) {
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        Company company = companyService.findById(id);
+        company.getAccount().setStatus("Inactive");
+        companyService.save(company);
+        return "redirect:/employee/companies";
+    }
+
     @RequestMapping(value = "/students", method = RequestMethod.GET)
     public String importPage(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
-        Iterable<Student> studentList = studentService.findAll();
+        Iterable<Student> studentList = studentService.findAllActive();
         modelMap.addAttribute("studentList",studentList);
         return "students";
     }
 
-    @RequestMapping(value = "/applications", method = RequestMethod.GET)
-    public String verifyApplication(ModelMap modelMap, HttpServletRequest request){
+    @PostMapping(value = "removeStudent/{id}")
+    public String removeStudent(HttpServletRequest request, @PathVariable("id") int id) {
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
-        Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAll();
-        modelMap.addAttribute("applyList", applyList);
-        return "applications";
+        Student student = studentService.findById(id);
+        student.getAccount().setStatus("Inactive");
+        studentService.save(student);
+        return "redirect:/employee/students";
+    }
+
+    @RequestMapping(value = "/applications", method = RequestMethod.GET)
+        public String verifyApplication(ModelMap modelMap, HttpServletRequest request){
+            if(accountService.checkRole("EMPLOYEE", request)==false)
+                return "test";
+            Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAll();
+            modelMap.addAttribute("applyList", applyList);
+            return "applications";
     }
 
     @RequestMapping(value = "/verifyApplication/{id}/{status}", method = RequestMethod.GET)
@@ -69,9 +89,13 @@ public class EmployeeController {
             return "test";
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         StudentApplyJob x = studentApplyJobsService.findById(id);
-        x.setStatus(status);
-        x.setEmployee(employee);
-        studentApplyJobsService.save(x);
+        if (x.getStatus().equalsIgnoreCase("Waiting") ||
+                x.getStatus().equalsIgnoreCase("Processing") ||
+                x.getStatus().equalsIgnoreCase("Denied")) {
+            x.setStatus(status);
+            x.setEmployee(employee);
+            studentApplyJobsService.save(x);
+        }
         return "redirect:/employee/applications";
     }
 

@@ -49,15 +49,12 @@ public class StudentService {
         return studentList;
     }
 
-    public Iterable<Student> getAvailable() {
+    public Iterable<Student> findAllActive() {
         Iterable<Student> studentList = studentRepositories.findAll();
         ArrayList <Student> temp = new ArrayList<>();
         for (Student x: studentList) {
-            if (x.getAccount().getStatus() == null || x.getAccount().getStatus().equalsIgnoreCase("Disable") == false)
+            if (x.getAccount().getStatus() == null || x.getAccount().getStatus().equalsIgnoreCase("Inactive") == false)
                 temp.add(x);
-            /*System.out.println(x.getAccount().getFullName());
-            System.out.println(x.getAccount().getRole());
-            System.out.println();*/
         }
         return temp;
     }
@@ -71,12 +68,4 @@ public class StudentService {
         return studentRepositories.findByAccount(account);
     }
 
-    public boolean isAccepted(int id) {
-        Student student = studentRepositories.findById(id);
-        for (StudentApplyJob x: student.getApplyList()) {
-            if (x.getStatus().equalsIgnoreCase("Interning"))
-                return true;
-        }
-        return false;
-    }
 }

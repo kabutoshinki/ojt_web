@@ -86,7 +86,7 @@
 
                                                     <a style="${o.status=='Passed' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}" href="verifyIntern/${o.id}/Refused" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
                                                        name="op" value="remove">
-                                                        <i class="bi bi-x-circle"></i> Reject
+                                                        <i class="bi bi-x-circle"></i> Refuse
                                                     </a>
                                                 </td>
                                             </tr>

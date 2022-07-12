@@ -127,6 +127,7 @@
                                                     <th class="text-center">Email</th>
                                                     <th class="text-center">Details</th>
                                                     <th class="text-center">Status</th>
+                                                    <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -137,12 +138,42 @@
                                                         <td>${o.account.fullName}</td>
                                                         <td>${o.account.email}</td>
                                                         <td><a href="" class="btn btn-outline-info btn-sm"><i
-                                                                    class="bi bi-eye"></i> View Detail</a></td>
-                                                        <td>
-                                                            <a href="" class="btn btn-outline-danger btn-sm"><i
-                                                                    class="bi bi-trash-fill" style="color: red"></i>
-                                                                Remove</a>
+                                                                    class="bi bi-eye"></i> View Detail</a>
                                                         </td>
+                                                        <td>${o.account.status}</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-outline-danger btn-sm" style="color: red"
+                                                                    data-toggle="modal" data-target="#modelRemove_${o.id}">
+                                                                <i class="bi bi-trash-fill"></i> Remove
+                                                            </button>
+                                                        </td>
+                                                        <!-- ++++++++++++++++ Remove Student +++++++++++++++++ -->
+                                                        <div class="modal fade" id="modelRemove_${o.id}" tabindex="-1"
+                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <form action="/employee/removeStudent/${o.id}" method="post">
+                                                                    <div class="modal-content text-center">
+                                                                        <div class="modal-header"
+                                                                             style="background: orange; text-align: center; display: unset;">
+                                                                            <h5 class="modal-title" id="exampleModalLabel4">
+                                                                                Remove Form</h5>
+                                                                        </div>
+                                                                        <h1>Are you sure you want to remove ${o.account.fullName}? This action cannot be undone.</h1>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-outline-danger btn-sm" style="color: red">
+                                                                                <i class="bi bi-trash-fill"></i>
+                                                                                Remove
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">
+                                                                                <i class="bi bi-x-circle"></i>
+                                                                                Cancel
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                                                     </tr>
                                                  </c:forEach>
                                             </tbody>

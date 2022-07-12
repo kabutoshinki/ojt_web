@@ -70,20 +70,25 @@ public class StudentController {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Iterable <StudentApplyJob> applyList = studentService.findByAccount(accountService.currentAccount(request)).getApplyList();
-        for (StudentApplyJob x: applyList) {
-            if (x.getId() == id) {
-                x.setStatus(status);
-            } else if (status.equalsIgnoreCase("Interning")) {
-                x.setStatus("Refused");
-            }
-            studentApplyJobsService.save(x);
-            if (x.getStatus().equalsIgnoreCase("Interning")) {
-                OjtProcess newProcess = new OjtProcess();
-                newProcess.setApplication(x);
-                newProcess.setStatus("Interning");
-                newProcess.setStudent(x.getStudent());
-                newProcess.setCompany(x.getJob().getCompany());
-                ojtProcessService.save(newProcess);
+        StudentApplyJob application = studentApplyJobsService.findById(id);
+        if (application.getJob().getSlot() > 0) {
+            application.getJob().setSlot(application.getJob().getSlot() - 1);
+            jobService.save(application.getJob());
+            for (StudentApplyJob x : applyList) {
+                if (x.getId() == id) {
+                    x.setStatus(status);
+                } else if (status.equalsIgnoreCase("Interning")) {
+                    x.setStatus("Refused");
+                }
+                studentApplyJobsService.save(x);
+                if (x.getStatus().equalsIgnoreCase("Interning")) {
+                    OjtProcess newProcess = new OjtProcess();
+                    newProcess.setApplication(x);
+                    newProcess.setStatus("Interning");
+                    newProcess.setStudent(x.getStudent());
+                    newProcess.setCompany(x.getJob().getCompany());
+                    ojtProcessService.save(newProcess);
+                }
             }
         }
         return "redirect:/student/applications";

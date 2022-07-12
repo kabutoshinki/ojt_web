@@ -79,32 +79,19 @@ public class CompanyController {
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         StudentApplyJob x = studentApplyJobsService.findById(id);
-        if (status.equalsIgnoreCase("nextStep")) {
-            if (x.getStatus().equalsIgnoreCase("Processing")) {
-                x.setStatus("Interviewing");
-            } else if (x.getStatus().equalsIgnoreCase("Interviewing")) {
-                x.setStatus("Passed");
+        if (x.getStatus().equalsIgnoreCase("Processing") || x.getStatus().equalsIgnoreCase("Interviewing")) {
+            if (status.equalsIgnoreCase("nextStep")) {
+                if (x.getStatus().equalsIgnoreCase("Processing")) {
+                    x.setStatus("Interviewing");
+                } else if (x.getStatus().equalsIgnoreCase("Interviewing")) {
+                    x.setStatus("Passed");
+                }
+            } else {
+                x.setStatus(status);
             }
-        } else {
-            x.setStatus(status);
+            studentApplyJobsService.save(x);
         }
-        studentApplyJobsService.save(x);
         return "redirect:/company/candidates";
-    }
-    
-    @RequestMapping(value = "/verify/{id}/{status}", method = RequestMethod.GET)
-    public String verify(@PathVariable("id") int id, @PathVariable("status") int status,
-        HttpServletRequest request){
-        if(accountService.checkRole("COMPANY", request)==false)
-            return "test";
-        if(status==1){
-            studentApplyJobsService.updateStatus(id, "accepted");
-        }
-        else{
-            studentApplyJobsService.updateStatus(id, "denied");
-        }
-        return "redirect:/company/candidatesList";
-
     }
 
     @RequestMapping(value = "/internships", method = RequestMethod.GET)

@@ -150,12 +150,12 @@
                                                         <td>${o.status}</td>
                                                         <td>${o.employee.account.fullName}</td>
                                                         <td>
-                                                            <a style="${o.status!='Processing'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Processing"
+                                                            <a style="${o.status=='Waiting' || o.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Processing"
                                                                class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                                                                value="accept">
                                                                 <i class="bi bi-check-circle"></i> Accept
                                                             </a>
-                                                            <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                                            <a style="${o.status=='Processing' || o.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
                                                                name="op" value="remove">
                                                                 <i class="bi bi-x-circle"></i> Deny
                                                             </a>

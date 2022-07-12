@@ -229,11 +229,11 @@
                                             </div>
                                             <h1>Are you sure you want to remove ${o.name}? This action cannot be undone.</h1>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-sm btn-outline-success">
-                                                    <i class="bi bi-check-circle"></i>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm" style="color: red">
+                                                    <i class="bi bi-trash-fill"></i>
                                                     Remove
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">
                                                     <i class="bi bi-x-circle"></i>
                                                     Cancel
                                                 </button>

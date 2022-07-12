@@ -46,7 +46,7 @@
                             <div>
                                 <div class="row">
                                     <div class="col">
-                                        <h1 style="color: orange">Internship Report for ...</h1>
+                                        <h1 style="color: orange">Internship Report for ${account.fullName}</h1>
                                     </div>
                                 </div>
                                 <br />
@@ -59,7 +59,7 @@
                                                 <th>No.</th>
                                                 <th>Semester</th>
                                                 <th>Company</th>
-                                                <th>Application Detail</th>
+                                                <th>Position</th>
                                                 <th>Start time</th>
                                                 <th>End time</th>
                                                 <th>Evaluation Detail</th>
@@ -75,10 +75,7 @@
                                                     <td>${loop.count}</td>
                                                     <td>${o.application.semester.semester}</td>
                                                     <td>${o.application.job.company.account.fullName}</td>
-                                                    <td>
-                                                        <a href="" class="btn btn-outline-info btn-sm"><i
-                                                                class="bi bi-eye"></i> View Detail</a>
-                                                    </td>
+                                                    <td>${o.application.job.position.position}</td>
                                                     <td>${o.startTime}</td>
                                                     <td>${o.endTime}</td>
                                                     <td>

@@ -35,10 +35,10 @@
             </div>
         </div>
         <div class="container main-content">
-            <div class="row" style="justify-content: center">
+            <div class="row" style="justify-content: center;">
                 <c:forEach items="${jobList}" var="o">
                     <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3"
-                        style="border-radius: 5px;border: 1px solid orange; width: 200px;height: 400px;">
+                        style="border-radius: 5px;border: 1px solid orange; width: 200px;">
                         <form style="text-align: center">
                             <img src="/img/fpt-software.png" class="img-fluid mt-3" width="200"><br />
                             <hr>
