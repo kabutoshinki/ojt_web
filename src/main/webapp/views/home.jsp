@@ -31,11 +31,14 @@
                     <input class="form-control" id="myInput" type="text" placeholder="Search.." />
 
                 </div>
-
+            </div>
+            <div>
+                <h1 style="text-align: center; color: orange">Looking for an internship chance?</h1>
+                <button style="background-color: #00ff00; width: 150px; border-radius: 22px; border: none; float: right ; font-size: 14px;"><span style="font-weight: 700; color: white;">Already Intern</span><br/><span style="font-weight: 600; color: red;">Click here</span></button>
             </div>
         </div>
         <div class="container main-content">
-            <div class="row" style="justify-content: center">
+            <!-- <div class="row" style="justify-content: center">
                 <c:forEach items="${jobList}" var="o">
                         <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3"
                             style="border-radius: 5px;border: 1px solid orange; width: 200px;height: 400px;">
@@ -50,10 +53,28 @@
                         </div>
                     </c:forEach>
 
+            </div> -->
+            <div class="row" style="justify-content: center; padding-top: 3em;">
+                <c:forEach items="${jobList}" var="o">
+                    <div class="col-sm-3 list-comp" style="height: 20em;">
+                        <form style="text-align: center; display: block; padding-top: 0em; margin-top: 0px;">
+                            <img src="img/fpt-software.png" width="300" height="150px">
+                            <hr id="hr"/>
+                            <strong>Position: </strong>${o.position.position}<br/>
+                            <strong>End date: </strong>${o.endDate}<br/>
+                            <strong>Available slot: </strong>${o.slot}<br/>
+                            <div style="box-shadow: #000000;">
+                                <a href="/view/recruitment/${o.idJob}" style="display: block; margin-top: 1em">
+                                    <input class="btn" type="button" value="Details" style="background-color: #00ff66; border-radius: 10px; padding: 4px 25px; width: 150px"></input>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </c:forEach>
             </div>
             <br/>
             <div class="" style="text-align: center">
-                <a href=""><i class="bi bi-arrow-down-short"></i>Xem thêm</a>
+                <a href="" style="font-size: 18px"><i class="bi bi-arrow-down-short"></i>Xem thêm</a>
             </div>
         </div>
         <%@include file="footer.jsp" %>

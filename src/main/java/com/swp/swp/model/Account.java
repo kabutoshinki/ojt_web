@@ -21,7 +21,6 @@ import lombok.Builder;
  * @author ADMIN
  */
 @Entity
-@Builder
 @Table(name = "Account")
 
 public class Account implements UserDetails {

@@ -159,3 +159,30 @@ form {
 .a{
     text-decoration: none;
 }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.list-comp{
+    /* margin-top: 50px; */
+    margin-left: 80px;
+    border-radius: 8px;
+    padding-bottom: 2em;
+    padding-top: 0px;
+    cursor: pointer;
+    border: 2px solid orange;
+    /* box-shadow: 1px 1px darkblue; */
+}
+.list-comp img{
+    width: 100%;
+}
+
+#hr{
+    background-color: black;
+    border: 1px solid black;
+}
+.strong{
+    margin-top: 1em;
+}

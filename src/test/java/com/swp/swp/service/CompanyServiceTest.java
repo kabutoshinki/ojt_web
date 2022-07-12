@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.swp.swp.model.Account;
 import com.swp.swp.model.Company;
 import com.swp.swp.repositories.CompanyRepositories;
 
@@ -21,7 +22,7 @@ public class CompanyServiceTest {
     void testGetAll() {
         Iterable<Company> expected = companyRepositories.findAll();
         Iterable<Company> actual = companyService.getAll();
-        assertEquals(expected.iterator().next().getName(), actual.iterator().next().getName());
+        assertEquals(expected.iterator().next().getAccount().getFullName(), actual.iterator().next().getAccount().getFullName());
     }
 
     @Test
@@ -30,13 +31,14 @@ public class CompanyServiceTest {
         for (Company company : compayList) {
             Company expected = companyRepositories.findById(company.getId());
             Company actual = companyService.getById(company.getId());
-            assertEquals(expected.getName(), actual.getName());
+            assertEquals(expected.getAccount().getFullName(), actual.getAccount().getFullName());
         }
     }
 
     @Test
     void testInsertCompany() {
-        Company company = new Company("companyName", "companyDescription", "companyAdress");
-        assertTrue(companyService.insertCompany(company));
+        Account account = new Account("fullName", "email", "role");
+        Company company = new Company("companyName", account);
+        assertTrue(companyService.save(company));
     }
 }

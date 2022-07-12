@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.swp.swp.model.Account;
-import com.swp.swp.model.StudentApplyJobs;
+import com.swp.swp.model.StudentApplyJob;
 import com.swp.swp.repositories.AccountRepositories;
 import com.swp.swp.repositories.StudentApplyJobsRepositories;
 
@@ -25,8 +25,8 @@ public class StudentApplyJobsServiceTest {
     @Autowired private AccountRepositories account;
     @Test
     void testGetAll() {
-        ArrayList<StudentApplyJobs> expected = (ArrayList<StudentApplyJobs>) repositories.findAll();
-        ArrayList<StudentApplyJobs> actual = (ArrayList<StudentApplyJobs>) service.getAll();
+        ArrayList<StudentApplyJob> expected = (ArrayList<StudentApplyJob>) repositories.findAll();
+        ArrayList<StudentApplyJob> actual = (ArrayList<StudentApplyJob>) service.getAll();
         for (int i = 0; i < actual.size(); i++) {
            assertEquals(expected.get(i).getId(), actual.get(i).getId());
         }
@@ -34,18 +34,18 @@ public class StudentApplyJobsServiceTest {
 
     @Test
     void testGetApplyByAccount() {
-        Iterable<StudentApplyJobs> accountList = repositories.findAll();
+        Iterable<StudentApplyJob> accountList = repositories.findAll();
         Account account1 = new Account("fullName", "email", "role");
         account.save(account1);
-        for (StudentApplyJobs account : accountList) {
-            assertNotNull(service.getApplyByAccount(account.getAccount()));
+        for (StudentApplyJob account : accountList) {
+            assertNotNull(service.getApplyByStudent(account.getStudent()));
         }
       
     }
 
     @Test
     void testGetApplyByCompanyId() {
-        Iterable<StudentApplyJobs> companyList = repositories.findAll();
+        Iterable<StudentApplyJob> companyList = repositories.findAll();
             assertNotNull(service.getApplyByCompanyId(1));
         
     }
@@ -67,7 +67,7 @@ public class StudentApplyJobsServiceTest {
 
     @Test
     void testUpdateStatus() {
-        Iterable<StudentApplyJobs> applyList = repositories.findAll();
+        Iterable<StudentApplyJob> applyList = repositories.findAll();
 
     }
 }

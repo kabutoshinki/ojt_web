@@ -46,7 +46,7 @@ public class AccountServiceTest {
         Iterable<Account> list = accountRepositories.findAll();
         for (Account account : list) {
             Account expected = accountRepositories.findById(account.getId());
-            Account actual = accountService.findById(account.getId());
+            Account actual = accountService.getById(account.getId());
             assertEquals(expected.getFullName(), actual.getFullName());
         }
         

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.swp.swp.model.StudentApplyJobs;
+import com.swp.swp.model.StudentApplyJob;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -16,24 +16,24 @@ public class StudentApplyJobsRepositoriesTest {
     @Autowired private StudentApplyJobsRepositories stdR;
     @Test
     void testFindByAccount() {
-        Iterable<StudentApplyJobs> list = stdR.findAll();
-        for (StudentApplyJobs studentApplyJobs : list) {
-            assertNotNull(stdR.findByAccount(studentApplyJobs.getAccount()));
+        Iterable<StudentApplyJob> list = stdR.findAll();
+        for (StudentApplyJob studentApplyJobs : list) {
+            assertNotNull(stdR.findByStudent(studentApplyJobs.getStudent()));
         }
     }
 
     @Test
     void testFindById() {
-        Iterable<StudentApplyJobs> list = stdR.findAll();
-        for (StudentApplyJobs studentApplyJobs : list) {
+        Iterable<StudentApplyJob> list = stdR.findAll();
+        for (StudentApplyJob studentApplyJobs : list) {
             assertNotNull(stdR.findById(studentApplyJobs.getId()));
         }
     }
 
     @Test
     void testFindByJob() {
-        Iterable<StudentApplyJobs> list = stdR.findAll();
-        for (StudentApplyJobs studentApplyJobs : list) {
+        Iterable<StudentApplyJob> list = stdR.findAll();
+        for (StudentApplyJob studentApplyJobs : list) {
             assertNotNull(stdR.findByJob(studentApplyJobs.getJob()));
         }
     }

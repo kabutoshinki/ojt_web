@@ -53,6 +53,12 @@ public class AccountService {
         }
     }
 
+    public Account currentAccount(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        Account account = accountRepositories.findByEmail(email);
+        return account;
+    }
     public boolean save(Account newAccount) {
         try {
             logger.info("insert Data: " + accountRepositories.save(newAccount));
