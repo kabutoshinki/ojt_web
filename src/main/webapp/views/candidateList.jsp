@@ -31,7 +31,7 @@
 
         <body>
             <jsp:include page="header.jsp" />
-
+            <%@include file="sliderbar.jsp" %>
             <br />
             <div class="container">
 
@@ -89,10 +89,10 @@
                                 <td>${o.account.fullName}</td>
                                 <td>Kỹ thuật phần mềm</td>
                                 <td>
-                                    <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
+                                    <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View CV</a>
+                                    <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View CV</a>
                                 </td>
                                 <td>${o.job.company.name}</td>
                                 <td>${o.status}</td>

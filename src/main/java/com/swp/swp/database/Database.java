@@ -106,6 +106,7 @@ public class Database {
 
 
                 CV cv = new CV("test", studentD);
+                cv.setStatus("Active");
 
                 Semester semester = new Semester("Spring", 2022);
                 studentD.setSemester(semester);

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping(path = "student")
@@ -99,8 +100,35 @@ public class StudentController {
         newCV.setName(name);
         newCV.setStudent(student);
         newCV.setDescription(description);
+        newCV.setStatus("Active");
         cvService.save(newCV);
+        name = newCV.getId() + name;
         fileService.saveFile(file, name, path);
+        return "redirect:/student/CVs";
+    }
+
+    @PostMapping(value = "updateCV/{cvId}")
+    public String updateCV(HttpServletRequest request, @RequestParam("file") MultipartFile file, @RequestParam("description") String description, @PathVariable("cvId") int cvId) {
+        if(accountService.checkRole("STUDENT", request)==false)
+            return "test";
+        Student student = studentService.findByAccount(accountService.currentAccount(request));
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
+        CV cv = cvService.findById(cvId);
+        cv.setDescription(description);
+        cvService.save(cv);
+        fileService.saveFile(file, cv.getId() + cv.getName(), path);
+        return "redirect:/student/CVs";
+    }
+
+    @PostMapping(value = "removeCV/{cvId}")
+    public String removeCV(HttpServletRequest request, @PathVariable("cvId") int cvId) {
+        if(accountService.checkRole("STUDENT", request)==false)
+            return "test";
+        Student student = studentService.findByAccount(accountService.currentAccount(request));
+        CV cv = cvService.findById(cvId);
+        cv.setStatus("Inactive");
+        cvService.save(cv);
         return "redirect:/student/CVs";
     }
 
@@ -108,7 +136,12 @@ public class StudentController {
     public String viewCV(ModelMap modelMap, HttpServletRequest request) {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
-        Iterable<CV> cvList = studentService.findByAccount(accountService.currentAccount(request)).getCvList();
+        Iterable<CV> lst = studentService.findByAccount(accountService.currentAccount(request)).getCvList();
+        ArrayList<CV> cvList = new ArrayList<>();
+        for (CV cv: lst) {
+            if (cv.getStatus().equalsIgnoreCase("Inactive") == false)
+                cvList.add(cv);
+        }
         modelMap.addAttribute("cvList", cvList);
         return "CV";
     }

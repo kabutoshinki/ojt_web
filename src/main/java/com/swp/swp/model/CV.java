@@ -25,6 +25,9 @@ public class CV {
     @Column(nullable = true, unique = false, length = 300)
     private String description;
 
+    @Column(nullable = true, unique = false, length = 300)
+    private String status;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
@@ -86,5 +89,13 @@ public class CV {
 
     public void setApplyList(Set<StudentApplyJob> applyList) {
         this.applyList = applyList;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

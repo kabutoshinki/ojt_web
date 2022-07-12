@@ -30,9 +30,10 @@
 
         <body>
             <jsp:include page="header.jsp" />
+            <jsp:include page="sliderbar.jsp" />
             <br />
             <!-- content -->
-            <header class="container">
+            <div class="container">
 
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb align-items-center">
@@ -46,7 +47,7 @@
                         <h1 style="color: orange;">Internship Requirement</h1>
                     </label>
                 </div>
-            </header>
+            
             <hr>
             <div class="container">
                 <div class="table-responsive-lg">
@@ -89,15 +90,15 @@
                             </c:forEach>
                         </tbody>
                     </table>
-
+                    </div>
                 </div>
             </div>
-
+            </div>
             <hr>
             <!-- footer -->
-            <footer>
+
                 <jsp:include page="footer.jsp" />
-            </footer>
+
 
             <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

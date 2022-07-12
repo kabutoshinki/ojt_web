@@ -33,6 +33,7 @@
 
             <body>
                 <%@include file="header.jsp" %>
+                <%@include file="sliderbar.jsp" %>
                     <br />
                     <div class="container">
 
@@ -46,14 +47,14 @@
                         </nav>
 
                         <br />
-                        <div class="container" style="justify-content: center;">
+                        <div class="container-fluid" style="justify-content: center;">
                             <div>
                                 <div class="row">
                                     <div class="col">
                                         <h1 style="color: orange">List Of Student Internship Result</h1>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                <button type="button" class="btn btn-outline-primary mb-3" data-toggle="modal"
                                     data-target="#mo">
                                     <i class="bi bi-box-arrow-in-down"> Import</i>
                                 </button>
@@ -110,12 +111,12 @@
                                         </form>
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                                <button class="btn btn-outline-info mb-3" formaction="<c:url value=" /" />"><i
                                     class="bi bi-box-arrow-in-down"></i> Export</button>
                                 <br />
-                                <br />
+
                                 <div class="container">
-                                    <div class="table-responsive-lg">
+                                    <div class="table-responsive-xl">
                                         <table id="myTable" class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -143,13 +144,13 @@
                                                         <td>${o.application.semester.semester}</td>
                                                         <td>${o.application.job.company.account.fullName}</td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-info"><i
+                                                            <a href="" class="btn btn-outline-info btn-sm"><i
                                                                     class="bi bi-eye"></i> View Detail</a>
                                                         </td>
                                                         <td>${o.startTime}</td>
                                                         <td>${o.endTime}</td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-info"><i
+                                                            <a href="" class="btn btn-outline-info btn-sm"><i
                                                                     class="bi bi-eye"></i> View Detail</a>
                                                         </td>
                                                         <td>${o.grade}</td>
@@ -166,7 +167,7 @@
                                                                 <i class="bi bi-x-circle"></i> Deny
                                                             </a>
                                                         </td>--%>
-                                                    </tr
+                                                    </tr>
                                                 </c:forEach>
                                             </tbody>
                                         </table>

@@ -31,6 +31,7 @@
 
             <body>
                 <%@include file="header.jsp" %>
+                <%@include file="sliderbar.jsp" %>
                     <br />
                     <div class="container" style="border-radius: 40px; padding: 25px;">
                         <nav aria-label="breadcrumb">
@@ -106,7 +107,7 @@
                                                 <td>${loop.count}</td>
                                                 <td>${o.account.fullName}</td>
                                                 <td>${o.account.email}</td>
-                                                <td><a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a></td>
+                                                <td><a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a></td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -116,6 +117,7 @@
 
                         <br />
                          
+                    </div>
                     </div>
                     <jsp:include page="footer.jsp" />
 

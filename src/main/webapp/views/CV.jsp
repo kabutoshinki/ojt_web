@@ -50,7 +50,7 @@
                     <h1 style="color: orange">List of CV</h1>
                 </div>
             </div>
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
                     data-target="#mo">
                 <i class="bi bi-upload"> Upload CV</i>
             </button>
@@ -152,16 +152,16 @@
                                 <td>${loop.count}</td>
                                 <td>${o.name}</td>
                                 <td>${o.description}</td>
-                                <td><a href="" class="btn btn-outline-info"><i
+                                <td><a href="/students/${o.student.id}/CV/${o.id}${o.name}.pdf" class="btn btn-outline-info btn-sm"><i
                                         class="bi bi-eye"></i> View Detail</a></td>
                                 <td>
-                                    <a class="btn btn-outline-success"><i
-                                            class="bi bi-check-circle"></i> Choose CV</a>
-                                        <%--<a href="" class="btn btn-outline-danger"><i
-                                                class="fa fa-refresh"></i> Update</a>--%>
-                                    <button type="button" class="btn btn-outline-primary"
+                                    <button type="button" class="btn btn-outline-primary btn-sm"
                                             data-toggle="modal" data-target="#modelUpdate_${o.id}">
                                         <i class="fa fa-refresh"></i> Update
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm"
+                                            data-toggle="modal" data-target="#modelRemove_${o.id}">
+                                        <i class="fa fa-trash"></i> Remove
                                     </button>
                                 </td>
                             </tr>
@@ -185,6 +185,18 @@
                                                 </div>
 
                                             </div>
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" >Name CV</span>
+                                                <input type="text" class="form-control" value="${o.name}" disabled
+                                                       placeholder="Enter name" name="name" required>
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                 <span class="input-group-text">Description</span>
+                                                 <input type="text" class="form-control" value="${o.description}"
+                                                       placeholder="Enter Description" name="description" required>
+                                            </div>
                                             <div class="modal-footer">
                                                 <button type="submit"
                                                         class="btn btn-sm btn-outline-success"
@@ -196,6 +208,35 @@
                                                         data-dismiss="modal"><i
                                                         class="bi bi-x-circle"></i>
                                                     Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                            <!-- ++++++++++++++++ Remove CV +++++++++++++++++ -->
+                            <div class="modal fade" id="modelRemove_${o.id}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="/student/removeCV/${o.id}" method="post"
+                                          enctype="multipart/form-data">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header"
+                                                 style="background: orange; text-align: center; display: unset;">
+                                                <h5 class="modal-title" id="exampleModalLabel4">
+                                                    Remove Form</h5>
+                                            </div>
+                                            <h1>Are you sure you want to remove ${o.name}? This action cannot be undone.</h1>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-sm btn-outline-success">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    Remove
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
+                                                    <i class="bi bi-x-circle"></i>
+                                                    Cancel
+                                                </button>
                                             </div>
                                         </div>
                                     </form>

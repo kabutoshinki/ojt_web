@@ -102,11 +102,17 @@
 
     <div class="container">
         <div class="row">
+            <h3>Slot: ${jobDetail.slot}</h3>
+        </div>
+        <div class="row">
+            <h3>End date: ${jobDetail.endDate}</h3>
+        </div>
+        <div class="row">
             <div class="col-12 mt-5 mr-2">
                 <h3>Job description:</h3>
                 <ul style="font-size: 25px">
                     <c:forEach items="${jobDes}" var="o">
-                        <li><i class="bi bi-dot"></i> ${o}</li>
+                        <li>${o}</li>
                     </c:forEach>
                 </ul>
             </div>
@@ -114,7 +120,7 @@
                 <h3>Qualification:</h3>
                 <ul style="font-size: 25px">
                     <c:forEach items="${jobRe}" var="o">
-                        <li><i class="bi bi-dot"></i> ${o}</li>
+                        <li>${o}</li>
                     </c:forEach>
                 </ul>
             </div>

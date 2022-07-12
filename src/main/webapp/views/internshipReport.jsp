@@ -30,6 +30,7 @@
 
             <body>
                 <%@include file="header.jsp" %>
+
                     <br />
                     <div class="container">
 
@@ -75,13 +76,13 @@
                                                     <td>${o.application.semester.semester}</td>
                                                     <td>${o.application.job.company.account.fullName}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-outline-info"><i
+                                                        <a href="" class="btn btn-outline-info btn-sm"><i
                                                                 class="bi bi-eye"></i> View Detail</a>
                                                     </td>
                                                     <td>${o.startTime}</td>
                                                     <td>${o.endTime}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-outline-info"><i
+                                                        <a href="" class="btn btn-outline-info btn-sm"><i
                                                                 class="bi bi-eye"></i> View Detail</a>
                                                     </td>
                                                     <td>${o.grade}</td>
@@ -98,7 +99,7 @@
                                                                 <i class="bi bi-x-circle"></i> Deny
                                                             </a>
                                                         </td>--%>
-                                                </tr
+                                                    </tr>
                                             </c:forEach>
                                             </tbody>
                                         </table>

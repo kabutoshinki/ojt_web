@@ -33,6 +33,7 @@
 
             <body>
                 <%@include file="header.jsp" %>
+                <%@include file="sliderbar.jsp" %>
                     <br />
                     <div class="container">
 

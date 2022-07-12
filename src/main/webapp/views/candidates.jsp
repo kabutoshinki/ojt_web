@@ -30,100 +30,109 @@
 
         <body>
             <jsp:include page="header.jsp" />
-            <br/>
-            <!-- content -->
-            <header class="container">
+            <%@include file="sliderbar.jsp" %>
+                <br />
+                <!-- content -->
+                <div class="container">
 
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb align-items-center">
-                        <li class="breadcrumb-item"><a href="/company/managePage" style="padding:0">Company</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">List_Of_Candidates</li>
-                    </ol>
-                </nav>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb align-items-center">
+                            <li class="breadcrumb-item"><a href="/company" style="padding:0">Company</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">List_Of_Candidates</li>
+                        </ol>
+                    </nav>
 
-                <div class="form-group row align-items-center">
-                    <label for="inputDateVisit" class="col-md-4 col-form-label title">
-                        <h1 style="color: orange;">List Of Candidates</h1>
-                    </label>
+                    <div class="form-group row align-items-center">
+                        <label for="inputDateVisit" class="col-md-4 col-form-label title">
+                            <h1 style="color: orange;">List Of Candidates</h1>
+                        </label>
 
+                    </div>
+
+                    <button class="btn btn-outline-info" formaction="<c:url value=" /" />">
+                    <i class="bi bi-box-arrow-in-down"></i> Export
+                    </button>
+
+
+
+
+                    <hr>
+                    <div class="container">
+                        <div class="table-responsive-lg">
+
+                            <table id="myTable" class="table table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Student Name</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">Phone</th>
+                                        <th class="text-center">Position</th>
+                                        <th class="text-center">Detail Information</th>
+                                        <th class="text-center">CV</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${candidateList}" var="o" varStatus="loop">
+                                        <tr>
+                                            <td>${loop.count}</td>
+                                            <td>${o.student.account.fullName}</td>
+                                            <td><a
+                                                    href="mailto: ${o.student.account.email}">${o.student.account.email}</a>
+                                            </td>
+                                            <td>${o.student.account.phone}</td>
+                                            <td>${o.job.position.position}</td>
+                                            <td>
+                                                <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i
+                                                        class="bi bi-eye"></i> View Detail</a>
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i>
+                                                    ${o.cv.name}</a>
+                                            </td>
+                                            <td>${o.status}</td>
+                                            <td>
+                                                <a style="${o.status!='Passed' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                    href="verifyApplication/${o.id}/nextStep"
+                                                    class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                                    value="accept">
+                                                    <i class="bi bi-check-circle"></i> Next Step
+                                                </a>
+                                                <a style="${o.status!='Rejected' && o.status!='Passed'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                    href="verifyApplication/${o.id}/Rejected"
+                                                    class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
+                                                    value="remove">
+                                                    <i class="bi bi-x-circle"></i> Reject
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
                 </div>
-
-                <button class="btn btn-outline-info" formaction="<c:url value=" /" />">
-                <i class="bi bi-box-arrow-in-down"></i> Export
-                </button>
-
-            </header>
-
-
-            <hr>
-            <div class="container">
-                <div class="table-responsive-lg">
-
-                    <table id="myTable" class="table table-striped text-center">
-                        <thead>
-                            <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Student Name</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Phone</th>
-                                <th class="text-center">Position</th>
-                                <th class="text-center">Detail Information</th>
-                                <th class="text-center">CV</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Operations</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${candidateList}" var="o" varStatus="loop">
-                                <tr>
-                                    <td>${loop.count}</td>
-                                    <td>${o.student.account.fullName}</td>
-                                    <td><a href="mailto: ${o.student.account.email}">${o.student.account.email}</a></td>
-                                    <td>${o.student.account.phone}</td>
-                                    <td>${o.job.position.position}</td>
-                                    <td>
-                                        <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> ${o.cv.name}</a>
-                                    </td>
-                                    <td>${o.status}</td>
-                                    <td>
-                                        <a style="${o.status!='Passed' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/nextStep"
-                                           class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
-                                           value="accept">
-                                            <i class="bi bi-check-circle"></i> Next Step
-                                        </a>
-                                        <a style="${o.status!='Rejected' && o.status!='Passed'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Rejected" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                           name="op" value="remove">
-                                            <i class="bi bi-x-circle"></i> Reject
-                                        </a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-
                 </div>
-            </div>
+                <hr>
+                <!-- footer -->
+                <footer>
+                    <jsp:include page="footer.jsp" />
+                </footer>
 
-            <hr>
-            <!-- footer -->
-            <footer>
-                <jsp:include page="footer.jsp" />
-            </footer>
+                <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+                <script>
 
-            <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
-            <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-            <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-            <script>
-                
 
-                $(document).ready(function () {
-                    $('#myTable').DataTable();
-                });
+                    $(document).ready(function () {
+                        $('#myTable').DataTable();
+                    });
 
-            </script>
+                </script>
         </body>
 
         </html>

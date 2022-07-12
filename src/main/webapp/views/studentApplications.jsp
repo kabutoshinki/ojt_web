@@ -31,6 +31,7 @@
 
             <body>
                 <%@include file="header.jsp" %>
+
                     <br />
                     <div class="container">
                         <nav aria-label="breadcrumb">
@@ -67,14 +68,14 @@
                                             <tr style="text-align: center">
                                                 <td>${loop.count}</td>
                                                 <td>${o.job.position.position}</td>
-                                                <td><a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a></td>
+                                                <td><a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a></td>
                                                 <td>${o.cv.name}</td>
                                                 <td>${o.employee.account.fullName}</td>
                                                 <td>${o.job.company.account.fullName}</td>
                                                 <td>${o.status}</td>
                                                 <%--<td>
-                                                    <button class="btn btn-outline-primary"><i class="bi bi-check-circle"></i> Accept</button>
-                                                    <button class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Reject</button>
+                                                    <button class="btn btn-outline-primary btn-sm"><i class="bi bi-check-circle"></i> Accept</button>
+                                                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-x-circle"></i> Reject</button>
                                                 </td>--%>
                                                 <td>
                                                     <a style="${o.status=='Passed' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}" href="verifyIntern/${o.id}/Interning"

@@ -33,7 +33,9 @@
 
             <body>
                 <%@include file="header.jsp" %>
+                    <%@include file="sliderbar.jsp" %>
                     <br />
+
                     <div class="container">
 
                         <nav aria-label="breadcrumb">
@@ -139,10 +141,10 @@
                                                         <td>${o.student.account.fullName}</td>
                                                         <td>${o.job.company.account.fullName}</td>
                                                         <td>
-                                                            <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
+                                                            <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
                                                         </td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
+                                                            <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
                                                         </td>
                                                         <td>${o.semester.semester} - ${o.semester.year}</td>
                                                         <td>${o.status}</td>
@@ -158,7 +160,7 @@
                                                                 <i class="bi bi-x-circle"></i> Deny
                                                             </a>
                                                         </td>
-                                                    </tr
+                                                    </tr>
                                                 </c:forEach>
 
                                             </tbody>

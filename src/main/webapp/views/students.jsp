@@ -33,7 +33,9 @@
 
             <body>
                 <%@include file="header.jsp" %>
-                    <br />
+                <%@include file="sliderbar.jsp" %>  
+                <br />
+                  
                     <div class="container">
 
                         <nav aria-label="breadcrumb">
@@ -134,14 +136,15 @@
                                                         <td>${o.studentId}</td>
                                                         <td>${o.account.fullName}</td>
                                                         <td>${o.account.email}</td>
-                                                        <td><a href="" class="btn btn-outline-info"><i
+                                                        <td><a href="" class="btn btn-outline-info btn-sm"><i
                                                                     class="bi bi-eye"></i> View Detail</a></td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-danger"><i
+                                                            <a href="" class="btn btn-outline-danger btn-sm"><i
                                                                     class="bi bi-trash-fill" style="color: red"></i>
                                                                 Remove</a>
                                                         </td>
-                                                    </tr </c:forEach>
+                                                    </tr>
+                                                 </c:forEach>
                                             </tbody>
                                         </table>
 
