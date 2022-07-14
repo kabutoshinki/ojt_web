@@ -33,119 +33,128 @@
 
             <body>
                 <%@include file="header.jsp" %>
-                <%@include file="sliderbar.jsp" %>
-                    <br />
-                    <div class="container">
-
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb align-items-center">
-                                <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-                                <li class="breadcrumb-item"><a href="/employee"
-                                        style="padding:0;display: inline;">Employee</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Verify_Student_Application</li>
-                            </ol>
-                        </nav>
-
+                    <%@include file="sliderbar.jsp" %>
                         <br />
-                        <div class="container" style="justify-content: center;">
-                            <div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h1 style="color: orange">List of Students Application</h1>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                    data-target="#mo">
-                                    <i class="bi bi-box-arrow-in-down"> Import</i>
-                                </button>
+                        <div class="container">
 
-                                <!-- Notification-->
-                                <c:if test="${not empty file}">
-                                    <div class="modal fade" id="success" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-success">
-                                                    <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel"><i
-                                                            class="bi bi-check-circle" style="font-size:100px"></i></h5>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    Success Import
-                                                </div>
-                                                <div class="modal-footer mr-auto ml-auto">
-                                                    <button type="button" class="btn btn-danger" id="close"
-                                                        data-dismiss="modal">Close</button>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb align-items-center">
+                                    <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/employee"
+                                            style="padding:0;display: inline;">Employee</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Verify_Student_Application
+                                    </li>
+                                </ol>
+                            </nav>
+
+                            <br />
+                            <div class="container" style="justify-content: center;">
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h1 style="color: orange">List of Students Application</h1>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                        data-target="#mo">
+                                        <i class="bi bi-box-arrow-in-down"> Import</i>
+                                    </button>
+
+                                    <!-- Notification-->
+                                    <c:if test="${not empty file}">
+                                        <div class="modal fade" id="success" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-success">
+                                                        <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel">
+                                                            <i class="bi bi-check-circle" style="font-size:100px"></i>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        Success Import
+                                                    </div>
+                                                    <div class="modal-footer mr-auto ml-auto">
+                                                        <button type="button" class="btn btn-danger" id="close"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </c:if>
+                                    </c:if>
 
-                                <!-- +++++++++++++++++++++++++++++++++ -->
-                                <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <form action="/employee/upload" method="post" enctype="multipart/form-data">
-                                            <div class="modal-content text-center">
-                                                <div class="modal-header"
-                                                    style="background: orange; text-align: center; display: unset;">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    <div class="form-group">
-                                                        <input type="file" name="file" class="form-control-file"
-                                                            required multiple>
-                                                        <input type="text" name="role" value="STUDENT" hidden>
-                                                        <input type="text" name="redirect" value="students" hidden>
+                                    <!-- +++++++++++++++++++++++++++++++++ -->
+                                    <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                                                <div class="modal-content text-center">
+                                                    <div class="modal-header"
+                                                        style="background: orange; text-align: center; display: unset;">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
                                                     </div>
+                                                    <div class="modal-body text-center">
+                                                        <div class="form-group">
+                                                            <div class="custom-file mt-3">
+                                                                <label class="custom-file-label" for="customFile">Choose
+                                                                    file</label>
+                                                                <input type="file" class="custom-file-input" name="file"
+                                                                    id="fileImage">
+                                                                <input type="text" name="role" value="STUDENT" hidden>
+                                                                <input type="text" name="redirect" value="students"
+                                                                    hidden>
+                                                            </div>
+                                                        </div>
 
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-sm btn-outline-success"
+                                                            id="import"><i class="bi bi-check-circle"></i>
+                                                            Import</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            data-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                                            Cancel</button>
+                                                    </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-sm btn-outline-success"
-                                                        id="import"><i class="bi bi-check-circle"></i> Import</button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                                        data-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                                        Cancel</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                                    class="bi bi-box-arrow-in-down"></i> Export</button>
-                                <br />
-                                <br />
-                                <div class="container">
-                                    <div class="table-responsive-lg">
-                                        <table id="myTable" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Student ID</th>
-                                                    <th>Student Name</th>
-                                                    <th>Major</th>
-                                                    <th>External Company</th>
-                                                    <th>CV</th>
-                                                    <th>Company</th>
-                                                    <th>Status</th>
-                                                    <th>Operation</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${studentList}" var="o" varStatus="loop">
+                                    <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                                        class="bi bi-box-arrow-in-down"></i> Export</button>
+                                    <br />
+                                    <br />
+                                    <div class="container">
+                                        <div class="table-responsive-lg">
+                                            <table id="myTable" class="table table-bordered">
+                                                <thead>
                                                     <tr>
-                                                        <td>${loop.count}</td>
-                                                        <td>${o.studentId}</td>
-                                                        <td>${o.account.fullName}</td>
-                                                        <td>${o.account.email}</td>
-                                                        <td><a href="" class="btn btn-outline-info"><i
-                                                                    class="bi bi-eye"></i> View Detail</a></td>
-                                                        <td>
-                                                            <a href="" class="btn btn-outline-danger"><i
-                                                                    class="bi bi-trash-fill" style="color: red"></i>
-                                                                Remove</a>
-                                                        </td>
-                                                    </tr </c:forEach>
+                                                        <th>No.</th>
+                                                        <th>Student ID</th>
+                                                        <th>Student Name</th>
+                                                        <th>Major</th>
+                                                        <th>External Company</th>
+                                                        <th>CV</th>
+                                                        <th>Company</th>
+                                                        <th>Status</th>
+                                                        <th>Operation</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${studentList}" var="o" varStatus="loop">
+                                                        <tr>
+                                                            <td>${loop.count}</td>
+                                                            <td>${o.studentId}</td>
+                                                            <td>${o.account.fullName}</td>
+                                                            <td>${o.account.email}</td>
+                                                            <td><a href="" class="btn btn-outline-info"><i
+                                                                        class="bi bi-eye"></i> View Detail</a></td>
+                                                            <td>
+                                                                <a href="" class="btn btn-outline-danger"><i
+                                                                        class="bi bi-trash-fill" style="color: red"></i>
+                                                                    Remove</a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
 
                                                     <tr>
                                                         <td>1</td>
@@ -154,47 +163,53 @@
                                                         <td>1</td>
                                                         <td>
                                                             <a href="" class="btn btn-outline-info btn-sm"><i
-                                                                class="bi bi-eye"></i> Contract</a>
+                                                                    class="bi bi-eye"></i> Contract</a>
                                                         </td>
                                                         <td>
                                                             <a href="" class="btn btn-outline-info btn-sm"><i
-                                                                class="bi bi-eye"></i> CV</a>
+                                                                    class="bi bi-eye"></i> CV</a>
                                                         </td>
                                                         <td>1</td>
                                                         <td>1</td>
                                                         <td>
-                                                            <a  class="btn btn-outline-success btn-sm"><i class="bi bi-check-circle"></i> Verify</a>
-                                                            <a href="" class="btn btn-outline-danger btn-sm"><i class="bi bi-x-circle"></i> Deny</a>
+                                                            <a class="btn btn-outline-success btn-sm"><i
+                                                                    class="bi bi-check-circle"></i> Verify</a>
+                                                            <a href="" class="btn btn-outline-danger btn-sm"><i
+                                                                    class="bi bi-x-circle"></i> Deny</a>
                                                         </td>
                                                     </tr>
-                                                    
-                                            </tbody>
-                                        </table>
 
+                                                </tbody>
+                                            </table>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <br />
                         </div>
-                        <br />
-                    </div>
-                    </div>
-                    <jsp:include page="footer.jsp" />
-                    <!-- ++++++++++++++++ -->
-                    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
-                    <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-                    <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-                    <script>
+                        </div>
+                        <jsp:include page="footer.jsp" />
+                        <!-- ++++++++++++++++ -->
+                        <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+                        <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                        <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+                        <script>
 
-                        $(document).ready(function () {
-                            $('#myTable').DataTable();
-                        });
-
-                        $(document).ready(function () {
-                            $("#import").click(function () {
-                                $("#success").modal();
+                            $(document).ready(function () {
+                                $('#myTable').DataTable();
                             });
-                        });
-                    </script>
+
+                            $(document).ready(function () {
+                                $("#import").click(function () {
+                                    $("#success").modal();
+                                });
+                            });
+                            $(".custom-file-input").on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                            });
+                        </script>
             </body>
 
             </html>

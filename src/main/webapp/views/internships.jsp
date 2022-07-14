@@ -33,166 +33,179 @@
 
             <body>
                 <%@include file="header.jsp" %>
-                <%@include file="sliderbar.jsp" %>
-                    <br />
-                    <div class="container">
-
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb align-items-center">
-                                <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-                                <li class="breadcrumb-item"><a href="/employee"
-                                        style="padding:0;display: inline;">Employee</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Student_Internship_Result</li>
-                            </ol>
-                        </nav>
-
+                    <%@include file="sliderbar.jsp" %>
                         <br />
-                        <div class="container-fluid" style="justify-content: center;">
-                            <div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h1 style="color: orange">List Of Student Internship Result</h1>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-outline-primary mb-3" data-toggle="modal"
-                                    data-target="#mo">
-                                    <i class="bi bi-box-arrow-in-down"> Import</i>
-                                </button>
+                        <div class="container">
 
-                                <!-- Notification-->
-                                <c:if test="${not empty file}">
-                                    <div class="modal fade" id="success" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-success">
-                                                    <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel"><i
-                                                            class="bi bi-check-circle" style="font-size:100px"></i></h5>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    Success Import
-                                                </div>
-                                                <div class="modal-footer mr-auto ml-auto">
-                                                    <button type="button" class="btn btn-danger" id="close"
-                                                        data-dismiss="modal">Close</button>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb align-items-center">
+                                    <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/employee"
+                                            style="padding:0;display: inline;">Employee</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Student_Internship_Result
+                                    </li>
+                                </ol>
+                            </nav>
+
+                            <br />
+                            <div class="container-fluid" style="justify-content: center;">
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h1 style="color: orange">List Of Student Internship Result</h1>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary mb-3" data-toggle="modal"
+                                        data-target="#mo">
+                                        <i class="bi bi-box-arrow-in-down"> Import</i>
+                                    </button>
+
+                                    <!-- Notification-->
+                                    <c:if test="${not empty file}">
+                                        <div class="modal fade" id="success" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-success">
+                                                        <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel">
+                                                            <i class="bi bi-check-circle" style="font-size:100px"></i>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        Success Import
+                                                    </div>
+                                                    <div class="modal-footer mr-auto ml-auto">
+                                                        <button type="button" class="btn btn-danger" id="close"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </c:if>
+                                    </c:if>
 
-                                <!-- +++++++++++++++++++++++++++++++++ -->
-                                <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <form action="/employee/upload" method="post" enctype="multipart/form-data">
-                                            <div class="modal-content text-center">
-                                                <div class="modal-header"
-                                                    style="background: orange; text-align: center; display: unset;">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    <div class="form-group">
-                                                        <input type="file" name="file" class="form-control-file"
-                                                            required multiple>
-                                                        <input type="text" name="role" value="STUDENT" hidden>
-                                                        <input type="text" name="redirect" value="students" hidden>
+                                    <!-- +++++++++++++++++++++++++++++++++ -->
+                                    <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                                                <div class="modal-content text-center">
+                                                    <div class="modal-header"
+                                                        style="background: orange; text-align: center; display: unset;">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
                                                     </div>
-
+                                                    <div class="modal-body text-center">
+                                                        <div class="custom-file mt-3">
+                                                            <label class="custom-file-label" for="customFile">Choose
+                                                                file</label>
+                                                            <input type="file" class="custom-file-input" name="file"
+                                                                id="fileImage">
+                                                            <input type="text" name="role" value="STUDENT" hidden>
+                                                            <input type="text" name="redirect" value="students" hidden>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-sm btn-outline-success"
+                                                            id="import"><i class="bi bi-check-circle"></i>
+                                                            Import</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            data-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                                            Cancel</button>
+                                                    </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-sm btn-outline-success"
-                                                        id="import"><i class="bi bi-check-circle"></i> Import</button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                                        data-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                                        Cancel</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <button class="btn btn-outline-info mb-3" formaction="<c:url value=" /" />"><i
-                                    class="bi bi-box-arrow-in-down"></i> Export</button>
-                                <br />
+                                    <button class="btn btn-outline-info mb-3" formaction="<c:url value=" /" />"><i
+                                        class="bi bi-box-arrow-in-down"></i> Export</button>
+                                    <br />
 
-                                <div class="container">
-                                    <div class="table-responsive-xl">
-                                        <table id="myTable" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Student ID</th>
-                                                    <th>Student Name</th>
-                                                    <th>Semester</th>
-                                                    <th>Company</th>
-                                                    <th>Position</th>
-                                                    <th>Start date</th>
-                                                    <th>End date</th>
-                                                    <th>Evaluation Detail</th>
-                                                    <th>Grade</th>
-                                                    <th>Status</th>
-                                                    <%--<th>Verifier</th>--%>
-                                                    <%--<th>Action</th>--%>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${processList}" var="o" varStatus="loop">
+                                    <div class="container">
+                                        <div class="table-responsive-xl">
+                                            <table id="myTable" class="table table-bordered">
+                                                <thead>
                                                     <tr>
-                                                        <td>${loop.count}</td>
-                                                        <td>${o.student.studentId}</td>
-                                                        <td>${o.student.account.fullName}</td>
-                                                        <td>${o.application.semester.semester}</td>
-                                                        <td>${o.application.job.company.account.fullName}</td>
-                                                        <td>${o.application.job.position.position}</td>
-                                                        <td>${o.startDate}</td>
-                                                        <td>${o.endDate}</td>
-                                                        <td>
-                                                            <a href="/view/evaluate/${o.id}" class="btn btn-outline-info btn-sm"><i
-                                                                    class="bi bi-eye"></i> View Detail</a>
-                                                        </td>
-                                                        <td>${o.grade}</td>
-                                                        <td>${o.status}</td>
-                                                        <%--<td>${o.employee.account.fullName}</td>--%>
-                                                        <%--<td>
-                                                            <a style="${o.status!='Processing'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Processing"
-                                                               class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
-                                                               value="accept">
-                                                                <i class="bi bi-check-circle"></i> Accept
-                                                            </a>
-                                                            <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                                               name="op" value="remove">
-                                                                <i class="bi bi-x-circle"></i> Deny
-                                                            </a>
-                                                        </td>--%>
+                                                        <th>No.</th>
+                                                        <th>Student ID</th>
+                                                        <th>Student Name</th>
+                                                        <th>Semester</th>
+                                                        <th>Company</th>
+                                                        <th>Position</th>
+                                                        <th>Start date</th>
+                                                        <th>End date</th>
+                                                        <th>Evaluation Detail</th>
+                                                        <th>Grade</th>
+                                                        <th>Status</th>
+                                                        <%--<th>Verifier</th>--%>
+                                                            <%--<th>Action</th>--%>
                                                     </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${processList}" var="o" varStatus="loop">
+                                                        <tr>
+                                                            <td>${loop.count}</td>
+                                                            <td>${o.student.studentId}</td>
+                                                            <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
+                                                            <td class="text-truncate" style="max-width: 150px;" title="${o.application.semester.semester}">${o.application.semester.semester}</td>
+                                                            <td class="text-truncate" style="max-width: 150px;" title="${o.application.job.company.account.fullName}">${o.application.job.company.account.fullName}</td>
+                                                            <td class="text-truncate" style="max-width: 150px;" title="${o.application.job.position.position}">${o.application.job.position.position}</td>
+                                                            <td>${o.startDate}</td>
+                                                            <td>${o.endDate}</td>
+                                                            <td>
+                                                                <a href="/view/evaluate/${o.id}"
+                                                                    class="btn btn-outline-info btn-sm"><i
+                                                                        class="bi bi-eye"></i> View Detail</a>
+                                                            </td>
+                                                            <td>${o.grade}</td>
+                                                            <td>${o.status}</td>
+                                                            <%--<td>${o.employee.account.fullName}</td>--%>
+                                                                <%--<td>
+                                                                    <a style="${o.status!='Processing'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                                        href="verifyApplication/${o.id}/Processing"
+                                                                        class="btn btn-sm btn-outline-success mt-auto mb-auto"
+                                                                        name="op" value="accept">
+                                                                        <i class="bi bi-check-circle"></i> Accept
+                                                                    </a>
+                                                                    <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                                        href="verifyApplication/${o.id}/Denied"
+                                                                        class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                                                        name="op" value="remove">
+                                                                        <i class="bi bi-x-circle"></i> Deny
+                                                                    </a>
+                                                                    </td>--%>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <br />
                         </div>
-                        <br />
-                    </div>
-                    </div>
-                    <jsp:include page="footer.jsp" />
-                    <!-- ++++++++++++++++ -->
-                    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
-                    <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-                    <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-                    <script>
+                        </div>
+                        <jsp:include page="footer.jsp" />
+                        <!-- ++++++++++++++++ -->
+                        <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+                        <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                        <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+                        <script>
 
-                        $(document).ready(function () {
-                            $('#myTable').DataTable();
-                        });
-
-                        $(document).ready(function () {
-                            $("#import").click(function () {
-                                $("#success").modal();
+                            $(document).ready(function () {
+                                $('#myTable').DataTable();
                             });
-                        });
-                    </script>
+
+                            $(document).ready(function () {
+                                $("#import").click(function () {
+                                    $("#success").modal();
+                                });
+                            });
+
+                            $(".custom-file-input").on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                            });
+                        </script>
             </body>
 
             </html>

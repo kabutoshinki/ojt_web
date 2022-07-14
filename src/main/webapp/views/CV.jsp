@@ -150,8 +150,8 @@
                         <c:forEach items="${cvList}" var="o" varStatus="loop">
                             <tr style="text-align: center;">
                                 <td>${loop.count}</td>
-                                <td>${o.name}</td>
-                                <td>${o.description}</td>
+                                <td class="text-truncate" style="max-width: 150px;" title="${o.name}">${o.name}</td>
+                                <td class="text-truncate" style="max-width: 150px;" title="${o.description}">${o.description}</td>
                                 <%--<td>${currentPath}${o.path}</td>--%>
 
                                 <td><a href="${o.path}" class="btn btn-outline-info btn-sm"><i
@@ -165,7 +165,7 @@
                                             data-toggle="modal" data-target="#modelUpdate_${o.id}">
                                         <i class="fa fa-refresh"></i> Update
                                     </button>
-                                    <button type="button" class="btn btn-outline-primary btn-sm"
+                                    <button type="button" class="btn btn-outline-danger btn-sm"
                                             data-toggle="modal" data-target="#modelRemove_${o.id}">
                                         <i class="fa fa-trash"></i> Remove
                                     </button>
@@ -184,12 +184,13 @@
                                                 <h5 class="modal-title" id="exampleModalLabel3">
                                                     Update Form</h5>
                                             </div>
-                                            <div class="modal-body text-center">
-                                                <div class="form-group">
-                                                    <input type="file" name="file"
-                                                           class="form-control-file" required>
-                                                </div>
 
+                                            <div class="form-group">
+                                                <div class="custom-file mt-3">
+                                                    <label class="custom-file-label" for="customFile">Choose
+                                                        file</label>
+                                                    <input type="file" class="custom-file-input" name="file" id="fileImage">
+                                                </div>
                                             </div>
 
                                             <div class="input-group mb-3">
@@ -233,7 +234,9 @@
                                                 <h5 class="modal-title" id="exampleModalLabel4">
                                                     Remove Form</h5>
                                             </div>
-                                            <h1>Are you sure you want to remove ${o.name}? This action cannot be undone.</h1>
+                                            <h4>Are you sure you want to remove CV</h4> 
+                                            <h1 class="text-truncate text-center" title="${o.name}">${o.name} </h1>
+                                            <h4>This action cannot be undone.</h4>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-outline-danger btn-sm" style="color: red">
                                                     <i class="bi bi-trash-fill"></i>

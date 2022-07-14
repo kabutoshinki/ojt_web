@@ -69,14 +69,35 @@
                                                     <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
                                                 </div>
                                                 <div class="modal-body text-center">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <input type="text" name="current" class="form-control-file" value="${currentSemester.semester}" readonly>
                                                         <input type="text" name="current" class="form-control-file" value="${currentSemester.nextSemester.semester}" readonly>
                                                         <input type="date" name="startDate" required>
                                                         <input type="date" name="endDate" required>
 
+                                                    </div> -->
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                          <div class="input-group-text">Semester</div>
+                                                        </div>
+                                                        <input type="text" name="current" class="form-control" value="${currentSemester.semester}" readonly>
                                                     </div>
-
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                          <div class="input-group-text">Next Semester</div>
+                                                        </div>
+                                                        <input type="text" name="current" class="form-control" value="${currentSemester.nextSemester.semester}" readonly>
+                                                    </div>  
+                                                    <div class="form-row">
+                                                        <div class="col-6 input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Start Date</i></span>
+                                                            <input type="date" class="form-control" name="startDate" required>
+                                                        </div>
+                                                        <div class="col-6 input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">End Date</span>
+                                                            <input type="date" class="form-control" name="endDate" required>
+                                                        </div>
+                                                    </div>    
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-sm btn-outline-success"

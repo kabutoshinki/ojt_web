@@ -138,8 +138,8 @@
                                                     <tr>
                                                         <td>${loop.count}</td>
                                                         <td>${o.student.studentId}</td>
-                                                        <td>${o.student.account.fullName}</td>
-                                                        <td>${o.job.company.account.fullName}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.job.company.account.fullName}">${o.job.company.account.fullName}</td>
                                                         <td>
                                                             <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
                                                         </td>
@@ -148,7 +148,7 @@
                                                         </td>
                                                         <td>${o.semester.semester}</td>
                                                         <td>${o.status}</td>
-                                                        <td>${o.employee.account.fullName}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
                                                         <td>
                                                             <a style="${o.status=='Waiting' || o.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Processing"
                                                                class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"

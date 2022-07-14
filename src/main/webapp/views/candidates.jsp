@@ -78,12 +78,12 @@
                                     <c:forEach items="${candidateList}" var="o" varStatus="loop">
                                         <tr>
                                             <td>${loop.count}</td>
-                                            <td>${o.student.account.fullName}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
                                             <td><a
-                                                    href="mailto: ${o.student.account.email}">${o.student.account.email}</a>
+                                                    href="mailto: ${o.student.account.email}" class="text-truncate" style="max-width: 150px;" title="${o.student.account.email}">${o.student.account.email}</a>
                                             </td>
                                             <td>${o.student.account.phone}</td>
-                                            <td>${o.job.position.position}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.job.position.position}">${o.job.position.position}</td>
                                             <td>
                                                 <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i
                                                         class="bi bi-eye"></i> View Detail</a>

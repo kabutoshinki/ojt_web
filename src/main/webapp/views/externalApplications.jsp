@@ -75,11 +75,11 @@
                                                 <c:forEach items="${applyList}" var="o" varStatus="loop">
                                                     <tr>
                                                         <td>${loop.count}</td>
-                                                        <td>${o.student.studentId}</td>
-                                                        <td>${o.student.account.fullName}</td>
-                                                        <td>${o.application.semester.semester}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.student.studentId}">${o.student.studentId}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
+                                                        <td class="text-truncate" style="max-width: 50px;" title="${o.application.semester.semester}">${o.application.semester.semester}</td>
                                                         <td>${o.application.status}</td>
-                                                        <td>${o.employee.account.fullName}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
                                                         <td>
                                                             <a style="${o.application.status=='Waiting' || o.application.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyExternalApplication/${o.id}/Passed"
                                                                class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"

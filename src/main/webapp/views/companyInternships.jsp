@@ -86,9 +86,9 @@
                                         <tr>
                                             <td>${loop.count}</td>
                                             <td>${o.student.studentId}</td>
-                                            <td>${o.student.account.fullName}</td>
-                                            <td>${o.application.semester.semester}</td>
-                                            <td>${o.application.job.position.position}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.application.semester.semester}">${o.application.semester.semester}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.application.job.position.position}">${o.application.job.position.position}</td>
                                             <td>${o.startDate}</td>
                                             <td>${o.startDate}</td>
                                             <td>

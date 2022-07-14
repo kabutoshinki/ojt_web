@@ -33,179 +33,204 @@
 
             <body>
                 <%@include file="header.jsp" %>
-                <%@include file="sliderbar.jsp" %>  
-                <br />
-                  
-                    <div class="container">
-
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb align-items-center">
-                                <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-                                <li class="breadcrumb-item"><a href="/employee"
-                                        style="padding:0;display: inline;">Employee</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Student_Manage</li>
-                            </ol>
-                        </nav>
-
+                    <%@include file="sliderbar.jsp" %>
                         <br />
-                        <div class="container" style="justify-content: center;">
-                            <div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h1 style="color: orange">List of Students</h1>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                    data-target="#mo">
-                                    <i class="bi bi-box-arrow-in-down"> Import</i>
-                                </button>
 
-                                <!-- Notification-->
-                                <c:if test="${not empty file}">
-                                    <div class="modal fade" id="success" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-success">
-                                                    <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel"><i
-                                                            class="bi bi-check-circle" style="font-size:100px"></i></h5>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    Success Import
-                                                </div>
-                                                <div class="modal-footer mr-auto ml-auto">
-                                                    <button type="button" class="btn btn-danger" id="close"
-                                                        data-dismiss="modal">Close</button>
+                        <div class="container">
+
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb align-items-center">
+                                    <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/employee"
+                                            style="padding:0;display: inline;">Employee</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Student_Manage</li>
+                                </ol>
+                            </nav>
+
+                            <br />
+                            <div class="container" style="justify-content: center;">
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h1 style="color: orange">List of Students</h1>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                        data-target="#mo">
+                                        <i class="bi bi-box-arrow-in-down"> Import</i>
+                                    </button>
+
+                                    <!-- Notification-->
+                                    <c:if test="${not empty file}">
+                                        <div class="modal fade" id="success" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-success">
+                                                        <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel">
+                                                            <i class="bi bi-check-circle" style="font-size:100px"></i>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        Success Import
+                                                    </div>
+                                                    <div class="modal-footer mr-auto ml-auto">
+                                                        <button type="button" class="btn btn-danger" id="close"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </c:if>
+                                    </c:if>
 
-                                <!-- +++++++++++++++++++++++++++++++++ -->
-                                <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <form action="/employee/upload" method="post" enctype="multipart/form-data">
-                                            <div class="modal-content text-center">
-                                                <div class="modal-header"
-                                                    style="background: orange; text-align: center; display: unset;">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    <div class="form-group">
-                                                        <input type="file" name="file" class="form-control-file"
-                                                            required multiple>
-                                                        <input type="text" name="role" value="STUDENT" hidden>
-                                                        <input type="text" name="redirect" value="students" hidden>
+                                    <!-- +++++++++++++++++++++++++++++++++ -->
+                                    <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                                                <div class="modal-content text-center">
+                                                    <div class="modal-header"
+                                                        style="background: orange; text-align: center; display: unset;">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
                                                     </div>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-sm btn-outline-success"
-                                                        id="import"><i class="bi bi-check-circle"></i> Import</button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                                        data-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                                        Cancel</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                                    class="bi bi-box-arrow-in-down"></i> Export</button>
-                                <br />
-                                <br />
-                                <div class="container">
-                                    <div class="table-responsive-lg">
-                                        <table id="myTable" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">No.</th>
-                                                    <th class="text-center">Student ID</th>
-                                                    <th class="text-center">Student Name</th>
-                                                    <th class="text-center">Email</th>
-                                                    <th class="text-center">Details</th>
-                                                    <th class="text-center">Semester</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${studentList}" var="o" varStatus="loop">
-                                                    <tr>
-                                                        <td>${loop.count}</td>
-                                                        <td>${o.studentId}</td>
-                                                        <td>${o.account.fullName}</td>
-                                                        <td>${o.account.email}</td>
-                                                        <td><a href="" class="btn btn-outline-info btn-sm"><i
-                                                                    class="bi bi-eye"></i> View Detail</a>
-                                                        </td>
-                                                        <td>${o.semester.semester}</td>
-                                                        <td>${o.account.status}</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-outline-danger btn-sm" style="color: red"
-                                                                    data-toggle="modal" data-target="#modelRemove_${o.id}">
-                                                                <i class="bi bi-trash-fill"></i> Remove
-                                                            </button>
-                                                        </td>
-                                                        <!-- ++++++++++++++++ Remove Student +++++++++++++++++ -->
-                                                        <div class="modal fade" id="modelRemove_${o.id}" tabindex="-1"
-                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <form action="/employee/removeStudent/${o.id}" method="post">
-                                                                    <div class="modal-content text-center">
-                                                                        <div class="modal-header"
-                                                                             style="background: orange; text-align: center; display: unset;">
-                                                                            <h5 class="modal-title" id="exampleModalLabel4">
-                                                                                Remove Form</h5>
-                                                                        </div>
-                                                                        <h1>Are you sure you want to remove ${o.account.fullName}? This action cannot be undone.</h1>
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit" class="btn btn-outline-danger btn-sm" style="color: red">
-                                                                                <i class="bi bi-trash-fill"></i>
-                                                                                Remove
-                                                                            </button>
-                                                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">
-                                                                                <i class="bi bi-x-circle"></i>
-                                                                                Cancel
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
+                                                    <div class="modal-body text-center">
+                                                        <div class="form-group">
+                                                            <div class="custom-file mt-3">
+                                                                <label class="custom-file-label" for="customFile">Choose
+                                                                    file</label>
+                                                                <input type="file" class="custom-file-input" name="file"
+                                                                    id="fileImage">
+                                                                <input type="text" name="role" value="STUDENT" hidden>
+                                                                <input type="text" name="redirect" value="students"
+                                                                    hidden>
                                                             </div>
                                                         </div>
-                                                        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-sm btn-outline-success"
+                                                            id="import"><i class="bi bi-check-circle"></i>
+                                                            Import</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            data-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                                            Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                                        class="bi bi-box-arrow-in-down"></i> Export</button>
+                                    <br />
+                                    <br />
+                                    <div class="container">
+                                        <div class="table-responsive-lg">
+                                            <table id="myTable" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">No.</th>
+                                                        <th class="text-center">Student ID</th>
+                                                        <th class="text-center">Student Name</th>
+                                                        <th class="text-center">Email</th>
+                                                        <th class="text-center">Details</th>
+                                                        <th class="text-center">Semester</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center">Action</th>
                                                     </tr>
-                                                 </c:forEach>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${studentList}" var="o" varStatus="loop">
+                                                        <tr>
+                                                            <td>${loop.count}</td>
+                                                            <td>${o.studentId}</td>
+                                                            <td class="text-truncate" style="max-width: 150px;"
+                                                                title="${o.account.fullName}">${o.account.fullName}</td>
+                                                            <td class="text-truncate" style="max-width: 150px;"
+                                                                title="${o.account.email}">${o.account.email}</td>
+                                                            <td><a href="" class="btn btn-outline-info btn-sm"><i
+                                                                        class="bi bi-eye"></i> View Detail</a>
+                                                            </td>
+                                                            <td class="text-truncate" style="max-width: 150px;"
+                                                                title="${o.semester.semester}">${o.semester.semester}
+                                                            </td>
+                                                            <td>${o.account.status}</td>
+                                                            <td>
+                                                                <button type="button"
+                                                                    class="btn btn-outline-danger btn-sm"
+                                                                    style="color: red" data-toggle="modal"
+                                                                    data-target="#modelRemove_${o.id}">
+                                                                    <i class="bi bi-trash-fill"></i> Remove
+                                                                </button>
+                                                            </td>
+                                                            <!-- ++++++++++++++++ Remove Student +++++++++++++++++ -->
+                                                            <div class="modal fade" id="modelRemove_${o.id}"
+                                                                tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <form action="/employee/removeStudent/${o.id}"
+                                                                        method="post">
+                                                                        <div class="modal-content text-center">
+                                                                            <div class="modal-header"
+                                                                                style="background: orange; text-align: center; display: unset;">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel4">
+                                                                                    Remove Form</h5>
+                                                                            </div>
+                                                                            <h1>Are you sure you want to remove
+                                                                                ${o.account.fullName}? This action
+                                                                                cannot be undone.</h1>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-outline-danger btn-sm"
+                                                                                    style="color: red">
+                                                                                    <i class="bi bi-trash-fill"></i>
+                                                                                    Remove
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-sm btn-outline-secondary"
+                                                                                    data-dismiss="modal">
+                                                                                    <i class="bi bi-x-circle"></i>
+                                                                                    Cancel
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <br />
                         </div>
-                        <br />
-                    </div>
-                    </div>
-                    <jsp:include page="footer.jsp" />
-                    <!-- ++++++++++++++++ -->
-                    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
-                    <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-                    <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-                    <script>
-                        
+                        </div>
+                        <jsp:include page="footer.jsp" />
+                        <!-- ++++++++++++++++ -->
+                        <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+                        <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                        <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+                        <script>
 
-                        $(document).ready(function () {
-                            $('#myTable').DataTable();
-                        });
 
-                        $(document).ready(function () {
-                            $("#import").click(function () {
-                                $("#success").modal();
+                            $(document).ready(function () {
+                                $('#myTable').DataTable();
                             });
-                        });
-                    </script>
+
+                            $(document).ready(function () {
+                                $("#import").click(function () {
+                                    $("#success").modal();
+                                });
+                            });
+                            $(".custom-file-input").on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                            });
+                        </script>
             </body>
 
             </html>

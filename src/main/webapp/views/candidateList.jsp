@@ -86,7 +86,7 @@
                             <tr>
                                 <td>${o.id}</td>
                                 <td>SE150011</td>
-                                <td>${o.account.fullName}</td>
+                                <td class="text-truncate" style="max-width: 150px;" title="${o.account.fullName}">${o.account.fullName}</td>
                                 <td>Kỹ thuật phần mềm</td>
                                 <td>
                                     <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
@@ -94,7 +94,7 @@
                                 <td>
                                     <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View CV</a>
                                 </td>
-                                <td>${o.job.company.name}</td>
+                                <td class="text-truncate" style="max-width: 150px;" title="${o.job.company.name}">${o.job.company.name}</td>
                                 <td>${o.status}</td>
                                 <td>
                                     <!-- <c:if test="${account.role.equals('COMPANY')=='true'}">

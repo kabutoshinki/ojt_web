@@ -51,14 +51,14 @@ public class Database {
             @Override
             public void run(String... args) throws Exception {
 
-                Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
+                Account accountA = new Account("test3", "huynhse151464@fpt.edu.vn", "EMPLOYEE");
                 Account accountB = new Account("FPT SOFTWARE","hoannsse150010@fpt.edu.vn", "COMPANY");
-                Account accountC = new Account("FPT SOFTWARE2","danghuudat112363@gmail.com","COMPANY");
+                Account accountC = new Account("FPT SOFTWARE2","hoanghuy1vip@gmail.com","COMPANY");
                 Account accountExternal = new Account("External","","COMPANY");
                 Company companyExternal = new Company();
                 companyExternal.setAccount(accountExternal);
-                Account accountD = new Account("FPT","hoan123hahaha@gmail.com","STUDENT");
-                Account accountAdmin = new Account("FPT","ojt.sender@gmail.com","ADMIN");
+                Account accountD = new Account("FPT","kabutoshinki@gmail.com","STUDENT");
+                Account accountAdmin = new Account("FPT","goldscorpio1311@gmail.com","ADMIN");
                 Employee employeeAdmin = new Employee();
                 employeeAdmin.setAccount(accountAdmin);
                 Employee employeeA = new Employee();

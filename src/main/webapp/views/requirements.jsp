@@ -47,49 +47,56 @@
                         <h1 style="color: orange;">Internship Requirement</h1>
                     </label>
                 </div>
-            
-            <hr>
-            <div class="container">
-                <div class="table-responsive-lg">
 
-                    <table id="myTable" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Company</th>
-                                <th class="text-center">Position</th>
-                                <th class="text-center">Detail</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Verifier</th>
-                                <th class="text-center">Operations</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${jobList}" var="o" varStatus="loop">
+                <hr>
+                <div class="container">
+                    <div class="table-responsive-lg">
+
+                        <table id="myTable" class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>${loop.count}</td>
-                                    <td>${o.company.account.fullName}</td>
-                                    <td>${o.position.position}</td>
-                                    <td>
-                                        <a href="/view/recruitment/${o.id}" class="btn btn-outline-info"><i class="bi bi-eye"></i> View Detail</a>
-                                    </td>
-                                    <td>${o.status}</td>
-                                    <td>${o.employee.account.fullName}</td>
-                                    <td>
-                                        <a style="${o.status!='Accepted'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyRequirement/${o.id}/Accepted"
-                                            class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
-                                            value="accept">
-                                            <i class="bi bi-check-circle"></i> Accept
-                                        </a>
-                                        <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyRequirement/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                            name="op" value="remove">
-                                            <i class="bi bi-x-circle"></i> Deny
-                                        </a>
-                                    </td>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Company</th>
+                                    <th class="text-center">Position</th>
+                                    <th class="text-center">Detail</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Verifier</th>
+                                    <th class="text-center">Operations</th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${jobList}" var="o" varStatus="loop">
+                                    <tr>
+                                        <td>${loop.count}</td>
+                                        <td class="text-truncate" style="max-width: 150px;"
+                                            title="${o.company.account.fullName}">${o.company.account.fullName}</td>
+                                        <td class="text-truncate" style="max-width: 150px;"
+                                            title="${o.position.position}">${o.position.position}</td>
+                                        <td>
+                                            <a href="/view/recruitment/${o.id}" class="btn btn-outline-info"><i
+                                                    class="bi bi-eye"></i> View Detail</a>
+                                        </td>
+                                        <td>${o.status}</td>
+                                        <td class="text-truncate" style="max-width: 150px;"
+                                            title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
+                                        <td>
+                                            <a style="${o.status!='Accepted'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                href="verifyRequirement/${o.id}/Accepted"
+                                                class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                                value="accept">
+                                                <i class="bi bi-check-circle"></i> Accept
+                                            </a>
+                                            <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                href="verifyRequirement/${o.id}/Denied"
+                                                class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
+                                                value="remove">
+                                                <i class="bi bi-x-circle"></i> Deny
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -97,7 +104,7 @@
             <hr>
             <!-- footer -->
 
-                <jsp:include page="footer.jsp" />
+            <jsp:include page="footer.jsp" />
 
 
             <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
