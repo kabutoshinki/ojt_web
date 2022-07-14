@@ -11,6 +11,7 @@ import com.swp.swp.model.Student;
 import com.swp.swp.repositories.AccountRepositories;
 import com.swp.swp.service.AccountService;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -68,8 +69,9 @@ public class AccountController {
         return "studentInformation";
     }
 
-    @PostMapping(value = "/update")
-    public String viewUserInformation(ModelMap modelMap, HttpServletRequest request) {
+    @PostMapping(value = "/updateInformation")
+    public String updateInformation(ModelMap modelMap, HttpServletRequest request,
+                                    @RequestParam("avatar") MultipartFile file) {
         HttpSession session = request.getSession();
         Account account = accountService.currentAccount(request);
         if (request.getParameter("address") != null) {
@@ -89,7 +91,10 @@ public class AccountController {
             if (request.getParameter("studentId") != null) {
                 student.setStudentId(request.getParameter("studentId"));
             }
-            if (request.getParameter("dateOfBirth") != null) {
+            /*System.out.println("kadjnwdjkhadkwa" + request.getParameter("dateOfBirth"));
+            System.out.println("ccccccccc" + request.getParameter("dateOfBirth").toString());*/
+
+            if (request.getParameter("dateOfBirth") != null && request.getParameter("dateOfBirth").isEmpty() == false) {
                 student.setDateOfBirth(Date.valueOf(request.getParameter("dateOfBirth")));
             }
             if (request.getParameter("gender") != null) {
@@ -100,7 +105,7 @@ public class AccountController {
             modelMap.addAttribute("student", student);
         }
         if (account.getRole().equals("COMPANY")) {
-            Company company = (Company) session.getAttribute("company");
+            Company company = companyService.findByAccount(accountService.currentAccount(request));
             if (request.getParameter("description") != null) {
                 company.setDescription(request.getParameter("description"));
             }
@@ -109,6 +114,17 @@ public class AccountController {
             modelMap.addAttribute("company", company);
         }
         accountService.save(account);
+        if (file.isEmpty() == false) {
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
+            String path = currentWorkingDir.normalize().toString();
+            String filename = file.getOriginalFilename();
+            int index = filename.indexOf('.');
+            String extension = filename.substring(index+1, filename.length()).toUpperCase();
+            path += File.separator + String.valueOf(account.getId()) + "." + extension;
+            account.setAvatar("\\avatar\\" + String.valueOf(account.getId()) + "." + extension);
+            fileService.saveFile(file, path);
+            accountService.save(account);
+        }
         return "redirect:/view/user";
     }
 

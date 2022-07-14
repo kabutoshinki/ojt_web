@@ -45,6 +45,9 @@ public class Account implements UserDetails {
     private String address;
 
     @Column(nullable = true, unique = false, length = 300)
+    private String avatar;
+
+    @Column(nullable = true, unique = false, length = 300)
     private String status;
 
     @Column(nullable = true, unique = false, length = 300)
@@ -148,6 +151,22 @@ public class Account implements UserDetails {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override

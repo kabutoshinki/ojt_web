@@ -43,7 +43,7 @@
                 <c:forEach items="${jobList}" var="o">
                     <div class="col-sm-3 list-comp" style="height: 20em;">
                         <form style="text-align: center; display: block; padding-top: 0em; margin-top: 0px;">
-                            <img src="img/fpt-software.png" width="300" height="150px">
+                            <img src="${o.company.account.avatar==null?'':o.company.account.avatar}" width="300" height="150px">
                             <hr id="hr"/>
                             <strong>Position: </strong>${o.position.position}<br/>
                             <strong>End date: </strong>${o.endDate}<br/>

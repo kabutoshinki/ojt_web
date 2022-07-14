@@ -47,14 +47,14 @@
                         </ol>
                     </nav>
                 </div>
-                <form action="/account/update" ModelAttribute="information" enctype="multipart/form-data" method="POST">
+                <form action="/account/updateInformation" ModelAttribute="information" enctype="multipart/form-data" method="POST">
                     <div class="container rounded bg-white mt-5 mb-5">
                         <div class="row form">
                             <div class="col-12 col-lg-4 border-right">
                                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                                     <figure class="snip1336">
                                         <figcaption>
-                                            <img src="/img/avatar.png" alt="profile-sample4"
+                                            <img src="${user.avatar==null?'/avatar/avatar.png':user.avatar}" alt="profile-sample4"
                                                 style="width: 300px;height: 300px;" class="profile img-fluid mt-5 pt-5"
                                                 id="thumbnail" /><br />
 

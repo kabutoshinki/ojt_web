@@ -48,7 +48,7 @@
                             <div class="mt-5 mb-5 d-none d-lg-block" style="height: 30px;"></div>
                             <div class="d-flex flex-column text-center p-3 py-5">
                                 <img class="rounded-circle mx-auto d-block img-fluid mt-5 mb-3" style="height:300px"
-                                    src="/img/avatar.jpg">
+                                     src="${process.student.account.avatar==null?'/avatar/avatar.png':process.student.account.avatar}">
                                 <span>Name: ${process.student.account.fullName}</span>
                                 <span>Student ID: ${process.student.studentId}</span>
                                 <span>Phone: ${process.student.account.phone}</span>

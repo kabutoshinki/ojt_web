@@ -38,7 +38,7 @@ class IndexController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(ModelMap modelMap, HttpServletRequest request){
-        String currentWorkingDir = Paths.get("").toAbsolutePath().normalize().toString();
+        String currentWorkingDir = Paths.get("").toAbsolutePath().normalize().toString() + "\\target\\classes\\static\\";
         System.out.println(currentWorkingDir);
         HttpSession session = request.getSession();
         session.setAttribute("currentPath", currentWorkingDir);

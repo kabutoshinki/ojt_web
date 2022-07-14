@@ -152,7 +152,7 @@
                                 <td>${loop.count}</td>
                                 <td>${o.name}</td>
                                 <td>${o.description}</td>
-                                <td>${currentPath}${o.path}</td>
+                                <%--<td>${currentPath}${o.path}</td>--%>
 
                                 <td><a href="${o.path}" class="btn btn-outline-info btn-sm"><i
                                         class="bi bi-eye"></i> View Detail</a></td>

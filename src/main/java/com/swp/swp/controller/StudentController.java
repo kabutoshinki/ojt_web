@@ -105,21 +105,28 @@ public class StudentController {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
         String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
         CV newCV = new CV();
-        newCV.setName(name);
+
 
         newCV.setStudent(student);
         newCV.setDescription(description);
         newCV.setStatus("Active");
         cvService.save(newCV);
-        name = newCV.getId() + name;
 
+        String filename = file.getOriginalFilename();
+        int index = filename.indexOf('.');
+        String extension = filename.substring(index+1, filename.length()).toUpperCase();
+        newCV.setName(name + "." + extension);
+        name = newCV.getId()  + " - " + name + "." + extension;
         /*newCV.setPath("\\src\\main\\resources\\static\\students\\" + String.valueOf(student.getId()) + "\\CV\\" + name + ".pdf");*/
-        newCV.setPath("\\students\\" + String.valueOf(student.getId()) + "\\CV\\" + name + ".pdf");
+        newCV.setPath("\\students\\" + String.valueOf(student.getId()) + "\\CV\\" + name);
+        path += name;
+
         cvService.save(newCV);
-        fileService.saveFile(file, name, path);
+        fileService.saveFile(file, path);
         return "redirect:/student/CVs";
     }
 
@@ -128,12 +135,14 @@ public class StudentController {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
         String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
         CV cv = cvService.findById(cvId);
         cv.setDescription(description);
+        path += cv.getId() + " - " + cv.getName();
         cvService.save(cv);
-        fileService.saveFile(file, cv.getId() + cv.getName(), path);
+        fileService.saveFile(file, path);
         return "redirect:/student/CVs";
     }
 
@@ -194,12 +203,18 @@ public class StudentController {
         apply.setStudent(student);
         apply.setSemester(student.getSemester());
         apply.setJob(jobService.firstOfCompany(companyService.findByAccount(accountService.findByEmail(""))));
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
         String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
         File requestFolder = new File(currentWorkingDir + "\\" + student.getId() + "\\Request\\" + newRequest.getId());
         requestFolder.mkdirs();
-        fileService.saveFile(contract, "contract", path);
-        fileService.saveFile(letter, "letter", path);
+        String filename = contract.getOriginalFilename();
+        int index = filename.indexOf('.');
+        String extension = filename.substring(index+1, filename.length()).toUpperCase();
+        fileService.saveFile(contract, path + "contract" + "." + extension);
+        filename = letter.getOriginalFilename();
+        index = filename.indexOf('.');
+        extension = filename.substring(index+1, filename.length()).toUpperCase();
+        fileService.saveFile(letter, path + "letter" + "." + extension);
         newRequest.setApplication(apply);
         studentApplyJobsService.save(apply);
         externalRequestService.save(newRequest);
