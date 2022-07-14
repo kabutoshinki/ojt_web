@@ -17,11 +17,11 @@ public class StudentApplyJob {
             generator = "saj_sequence"
     )
     private int id;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "Job_id")
     private Job job;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "student_id")
     private Student student;
 
@@ -32,16 +32,19 @@ public class StudentApplyJob {
     @Column(name = "status", unique = false, length = 300)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "cv_id")
     private CV cv;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "semester_id")
     private Semester semester;
 
     @OneToOne(mappedBy = "application")
     private OjtProcess process;
+
+    @OneToOne(mappedBy = "application")
+    private ExternalRequest request;
     public StudentApplyJob() {
     }
 

@@ -41,7 +41,7 @@
                 </nav>
             </div>
             <!-- content -->
-            <form class="mt-5" action="form.html">
+            <form class="mt-5" action="/company/updateEvaluate/${process.id}">
                 <div class="container rounded mt-5 mb-5">
                     <div class="row form">
                         <div class="col-lg-4 border-right">
@@ -49,16 +49,22 @@
                             <div class="d-flex flex-column text-center p-3 py-5">
                                 <img class="rounded-circle mx-auto d-block img-fluid mt-5 mb-3" style="height:300px"
                                     src="/img/avatar.jpg">
-                                <span>Name: Nguyễn Hoàng Huy</span>
-                                <span>MSSV: SE151464</span>
-                                <span>Phone: 02873005588</span>
-                                <span>Email: huynhse151464@fpt.edu.vn</span>
+                                <span>Name: ${process.student.account.fullName}</span>
+                                <span>Student ID: ${process.student.studentId}</span>
+                                <span>Phone: ${process.student.account.phone}</span>
+                                <span>Email: ${process.student.account.email}</span>
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <div class="p-3 py-5">
 
                                 <h1 class="text-center">Evaluation Form</h1>
+                                Job description
+                                <div class="input-group">
+                                    <textarea class="form-control" rows="4" name="jobDescription"
+                                              aria-label="With textarea" value="${process.description}" required>${process.description}</textarea>
+                                </div>
+
 
 
                                 <div class="form-group row">
@@ -74,70 +80,32 @@
                                                 <tr>
                                                     <th>
                                                         <p>
-                                                            Job description
-                                                        </p>
-                                                    </th>
-                                                    <td>
-                                                        <div class="input-group">
-
-                                                            <textarea class="form-control" rows="4" name="description_1"
-                                                                aria-label="With textarea" required></textarea>
-                                                        </div>
-
-                                                    </td>
-                                                    <td>
-                                                        <div class="dropdown text-center btn-lg btn-block">
-                                                            <select
-                                                                class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3"
-                                                                id="grade1" aria-label=".form-select-lg example"
-                                                                required>
-                                                                <option value="" class="text-center" selected>Grade
-                                                                </option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <th>
-                                                        <p>
                                                             Knowledge
                                                         </p>
                                                     </th>
                                                     <td>
                                                         <div class="input-group">
 
-                                                            <textarea class="form-control" rows="4" name="description_2"
-                                                                aria-label="With textarea" required></textarea>
+                                                            <textarea class="form-control" rows="4" name="knowledge"
+                                                                aria-label="With textarea" value="${process.knowledge}" required>${process.knowledge}</textarea>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="dropdown text-center btn-lg btn-block">
-                                                            <select
+                                                            <select name="point1"
                                                                 class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3"
                                                                 id="grade2" aria-label=".form-select-lg example">
-                                                                <option value="" class="text-center" selected>Grade
-                                                                </option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
+
+                                                                <option value="1" ${process.knowledgePoint==1?"selected":""}>1</option>
+                                                                <option value="2" ${process.knowledgePoint==2?"selected":""}>2</option>
+                                                                <option value="3" ${process.knowledgePoint==3?"selected":""}>3</option>
+                                                                <option value="4" ${process.knowledgePoint==4?"selected":""}>4</option>
+                                                                <option value="5" ${process.knowledgePoint==5?"selected":""}>5</option>
+                                                                <option value="6" ${process.knowledgePoint==6?"selected":""}>6</option>
+                                                                <option value="7" ${process.knowledgePoint==7?"selected":""}>7</option>
+                                                                <option value="8" ${process.knowledgePoint==8?"selected":""}>8</option>
+                                                                <option value="9" ${process.knowledgePoint==9?"selected":""}>9</option>
+                                                                <option value="10" ${process.knowledgePoint==10?"selected":""}>10</option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -152,28 +120,26 @@
                                                     <td>
                                                         <div class="input-group">
 
-                                                            <textarea class="form-control" rows="4" name="description_3"
-                                                                aria-label="With textarea" required></textarea>
+                                                            <textarea class="form-control" rows="4" name="softSkill"
+                                                                aria-label="With textarea" value="${process.softSkill}" required>${process.softSkill}</textarea>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="dropdown text-center btn-lg btn-block">
-                                                            <select
+                                                            <select name="point2"
                                                                 class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3"
                                                                 id="grade3" aria-label=".form-select-lg example"
                                                                 required>
-                                                                <option value="" class="text-center" selected>Grade
-                                                                </option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
+                                                                <option value="1" ${process.softSkillPoint==1?"selected":""}>1</option>
+                                                                <option value="2" ${process.softSkillPoint==2?"selected":""}>2</option>
+                                                                <option value="3" ${process.softSkillPoint==3?"selected":""}>3</option>
+                                                                <option value="4" ${process.softSkillPoint==4?"selected":""}>4</option>
+                                                                <option value="5" ${process.softSkillPoint==5?"selected":""}>5</option>
+                                                                <option value="6" ${process.softSkillPoint==6?"selected":""}>6</option>
+                                                                <option value="7" ${process.softSkillPoint==7?"selected":""}>7</option>
+                                                                <option value="8" ${process.softSkillPoint==8?"selected":""}>8</option>
+                                                                <option value="9" ${process.softSkillPoint==9?"selected":""}>9</option>
+                                                                <option value="10" ${process.softSkillPoint==10?"selected":""}>10</option>
                                                             </select>
                                                         </div>
 
@@ -189,37 +155,35 @@
                                                     <td>
                                                         <div class="input-group">
 
-                                                            <textarea class="form-control" rows="4" name="description_4"
-                                                                aria-label="With textarea" required></textarea>
+                                                            <textarea class="form-control" rows="4" name="attitude"
+                                                                aria-label="With textarea" value="${process.attitude}" required>${process.attitude}</textarea>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="dropdown text-center btn-lg btn-block">
-                                                            <select
+                                                            <select name="point3"
                                                                 class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3"
                                                                 id="grade4" aria-label=".form-select-lg example"
                                                                 required>
-                                                                <option value="" class="text-center" selected>Grade
-                                                                </option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
+                                                                <option value="1" ${process.attitudePoint==1?"selected":""}>1</option>
+                                                                <option value="2" ${process.attitudePoint==2?"selected":""}>2</option>
+                                                                <option value="3" ${process.attitudePoint==3?"selected":""}>3</option>
+                                                                <option value="4" ${process.attitudePoint==4?"selected":""}>4</option>
+                                                                <option value="5" ${process.attitudePoint==5?"selected":""}>5</option>
+                                                                <option value="6" ${process.attitudePoint==6?"selected":""}>6</option>
+                                                                <option value="7" ${process.attitudePoint==7?"selected":""}>7</option>
+                                                                <option value="8" ${process.attitudePoint==8?"selected":""}>8</option>
+                                                                <option value="9" ${process.attitudePoint==9?"selected":""}>9</option>
+                                                                <option value="10" ${process.attitudePoint==10?"selected":""}>10</option>
                                                             </select>
                                                         </div>
                                                     </td>
 
                                                 </tr>
                                                 <tr>
-                                                    <th colspan="1">Total: </th>
-                                                    <td colspan="2" class="text-center"> <input type="number"
-                                                            class="mr-auto ml-auto" id="total" disabled> </td>
+                                                    <th colspan="1">Average: </th>
+                                                    <td colspan="2" class="text-center"> <input type="number" value="${process.grade}"
+                                                            class="mr-auto ml-auto" id="total" name="total" disabled> </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -248,12 +212,11 @@
 
             <script>
                 $(function () {
-                    $('#grade1, #grade2, #grade3, #grade4').change(function () {
-                        var grade1 = parseInt($('#grade1').val(), 10) || 0;
+                    $('#grade2, #grade3, #grade4').change(function () {
                         var grade2 = parseInt($('#grade2').val(), 10) || 0;
                         var grade3 = parseInt($('#grade3').val(), 10) || 0;
                         var grade4 = parseInt($('#grade4').val(), 10) || 0;
-                        $('#total').val(grade1 + grade2 + grade3 + grade4);
+                        $('#total').val((grade2 + grade3 + grade4) / 3.0);
                     });
                 });
             </script>

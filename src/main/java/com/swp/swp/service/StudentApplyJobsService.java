@@ -71,9 +71,9 @@ public class StudentApplyJobsService {
         }
         return candidatesList;
     }
-    public Iterable<StudentApplyJob> getApplyByStudent(Student student){
-        Iterable <StudentApplyJob> apply = studentApplyJobsRepositories.findByStudent(student);
-        return apply;
+    public Iterable<StudentApplyJob> findApplyByStudent(Student student){
+        Iterable <StudentApplyJob> applyList = studentApplyJobsRepositories.findByStudent(student);
+        return applyList;
     }
 
     public StudentApplyJob getByString(String value) {

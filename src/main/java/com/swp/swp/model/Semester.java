@@ -1,6 +1,7 @@
 package com.swp.swp.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +26,13 @@ public class Semester {
 
     @Column( unique = false)
     private int year;
+
+    @Column(unique = false, nullable = true)
+    private Date startDate;
+
+    @Column(unique = false, nullable = true)
+    private Date endDate;
+
     @OneToMany(mappedBy = "semester", cascade = CascadeType.REFRESH)
     private Set<Student> studentList = new HashSet<>();
     @OneToMany(mappedBy = "semester", cascade = CascadeType.REFRESH)
@@ -77,5 +85,37 @@ public class Semester {
 
     public void setApplyList(Set<StudentApplyJob> applyList) {
         this.applyList = applyList;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Semester getNextSemester() {
+        Semester nextSemester = new Semester();
+        nextSemester.setYear(this.year);
+        if (this.semester.equals("Spring")) {
+            nextSemester.setSemester("Summer");
+        }
+        if (this.semester.equals("Summer")) {
+            nextSemester.setSemester("Fall");
+        }
+        if (this.semester.equals("Fall")) {
+            nextSemester.setSemester("Spring");
+            nextSemester.setYear(this.year + 1);
+        }
+        return nextSemester;
     }
 }

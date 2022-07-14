@@ -33,6 +33,8 @@ public class ViewController {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired private OjtProcessService ojtProcessService;
+
     @RequestMapping(value = "/recruitment/{id}", method = RequestMethod.GET)
     public String jobDetail(ModelMap modelMap, @PathVariable("id") int id, HttpServletRequest request){
         Job jobDetail = jobService.findById(id);
@@ -75,12 +77,13 @@ public class ViewController {
 
         return "userInformation";
     }
-    @RequestMapping(value = "/view2")
-    public String view2(){
-        return "listofstudent";
-    }
-    @RequestMapping(value = "/view3")
-    public String view3(){
-        return "applylist";
+
+    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
+    public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
+        /*if(accountService.checkRole("COMPANY", request)==false)
+            return "test";*/
+        OjtProcess process = ojtProcessService.findById(id);
+        modelMap.addAttribute("process", process);
+        return "viewEvaluate";
     }
 }

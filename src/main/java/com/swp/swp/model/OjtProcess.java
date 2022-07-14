@@ -18,19 +18,36 @@ public class OjtProcess {
     )
     private int id; 
     @Column(unique = false, nullable = true)
-    private Date startTime;
+    private Date startDate;
 
     @Column(unique = false, nullable = true)
-    private Date endTime;
+    private Date endDate;
     @Lob
     @Column(unique = false, nullable = true, length = 300)
     private String detail;
     @Column(unique = false, nullable = true)
-    private int grade;
+    private Double grade;
     @Column(unique = false, nullable = true)
     private String status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(unique = false, nullable = true)
+    private String description;
+
+    @Column(unique = false, nullable = true)
+    private String knowledge;
+
+    @Column(unique = false, nullable = true)
+    private int knowledgePoint;
+    @Column(unique = false, nullable = true)
+    private String softSkill;
+    @Column(unique = false, nullable = true)
+    private int softSkillPoint;
+    @Column(unique = false, nullable = true)
+    private String attitude;
+    @Column(unique = false, nullable = true)
+    private int attitudePoint;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "application_id")
     private StudentApplyJob application;
 
@@ -55,20 +72,20 @@ public class OjtProcess {
         this.id = id;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public String getDetail() {
@@ -79,11 +96,11 @@ public class OjtProcess {
         this.detail = detail;
     }
 
-    public int getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(Double grade) {
         this.grade = grade;
     }
 
@@ -125,5 +142,61 @@ public class OjtProcess {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(String knowledge) {
+        this.knowledge = knowledge;
+    }
+
+    public String getSoftSkill() {
+        return softSkill;
+    }
+
+    public void setSoftSkill(String softSkill) {
+        this.softSkill = softSkill;
+    }
+
+    public String getAttitude() {
+        return attitude;
+    }
+
+    public void setAttitude(String attitude) {
+        this.attitude = attitude;
+    }
+
+    public int getKnowledgePoint() {
+        return knowledgePoint;
+    }
+
+    public void setKnowledgePoint(int knowledgePoint) {
+        this.knowledgePoint = knowledgePoint;
+    }
+
+    public int getSoftSkillPoint() {
+        return softSkillPoint;
+    }
+
+    public void setSoftSkillPoint(int softSkillPoint) {
+        this.softSkillPoint = softSkillPoint;
+    }
+
+    public int getAttitudePoint() {
+        return attitudePoint;
+    }
+
+    public void setAttitudePoint(int attitudePoint) {
+        this.attitudePoint = attitudePoint;
     }
 }

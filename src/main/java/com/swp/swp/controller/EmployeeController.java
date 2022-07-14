@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.swp.swp.model.*;
+import com.swp.swp.repositories.SemesterRepositories;
 import com.swp.swp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +14,16 @@ import org.springframework.web.bind.annotation.*;
 import com.swp.swp.repositories.PositionRepositories;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping(path = "/employee")
 public class EmployeeController {
 
-    @Autowired PositionRepositories positionRepositories;
+    @Autowired PositionService positionService;
+    @Autowired
+    SemesterService semesterService;
     @Autowired private JobService jobService;
     @Autowired private OjtProcessService ojtProcessService;
     @Autowired private EmployeeService employeeService;
@@ -28,16 +32,17 @@ public class EmployeeController {
     @Autowired private AccountService accountService;
     @Autowired private CompanyService companyService;
     @Autowired private StudentService studentService;
+    @Autowired private ExternalRequestService externalRequestService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String managePage(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         return "employee";
     }
     @RequestMapping(value = "/companies", method = RequestMethod.GET)
     public String verifyCompanyPage(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
         Iterable<Company> companyList = companyService.findAllActive();
@@ -46,7 +51,7 @@ public class EmployeeController {
     }
     @PostMapping(value = "removeCompany/{id}")
     public String removeCompany(HttpServletRequest request, @PathVariable("id") int id) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Company company = companyService.findById(id);
         company.getAccount().setStatus("Inactive");
@@ -56,16 +61,16 @@ public class EmployeeController {
 
     @RequestMapping(value = "/students", method = RequestMethod.GET)
     public String importPage(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable<Student> studentList = studentService.findAllActive();
-        modelMap.addAttribute("studentList",studentList);
+        modelMap.addAttribute("studentList", studentList);
         return "students";
     }
 
     @PostMapping(value = "removeStudent/{id}")
     public String removeStudent(HttpServletRequest request, @PathVariable("id") int id) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Student student = studentService.findById(id);
         student.getAccount().setStatus("Inactive");
@@ -74,18 +79,28 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/applications", method = RequestMethod.GET)
-        public String verifyApplication(ModelMap modelMap, HttpServletRequest request){
-            if(accountService.checkRole("EMPLOYEE", request)==false)
-                return "test";
-            Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAll();
-            modelMap.addAttribute("applyList", applyList);
-            return "applications";
+    public String verifyApplication(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAll();
+        modelMap.addAttribute("applyList", applyList);
+        return "applications";
     }
+
+    @RequestMapping(value = "/externalApplications", method = RequestMethod.GET)
+    public String externalApplications(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Iterable<ExternalRequest> applyList = externalRequestService.findAll();
+        modelMap.addAttribute("applyList", applyList);
+        return "externalApplications";
+    }
+
 
     @RequestMapping(value = "/verifyApplication/{id}/{status}", method = RequestMethod.GET)
     public String verifyApplication(@PathVariable("id") int id, @PathVariable("status") String status,
                          HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         StudentApplyJob x = studentApplyJobsService.findById(id);
@@ -99,9 +114,28 @@ public class EmployeeController {
         return "redirect:/employee/applications";
     }
 
+    @RequestMapping(value = "/verifyExternalApplication/{id}/{status}", method = RequestMethod.GET)
+    public String verifyExternalApplication(@PathVariable("id") int id, @PathVariable("status") String status,
+                                    HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
+        ExternalRequest x = externalRequestService.findById(id);
+        StudentApplyJob application = x.getApplication();
+        if (application.getStatus().equalsIgnoreCase("Waiting") ||
+                application.getStatus().equalsIgnoreCase("Processing") ||
+                application.getStatus().equalsIgnoreCase("Denied")) {
+            application.setStatus(status);
+            application.setEmployee(employee);
+            studentApplyJobsService.save(application);
+            externalRequestService.save(x);
+        }
+        return "redirect:/employee/externalApplications";
+    }
+
     @RequestMapping(value = "/internships", method = RequestMethod.GET)
     public String studentInternshipResult(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable <OjtProcess> processList = ojtProcessService.findAll();
         modelMap.addAttribute("processList", processList);
@@ -110,7 +144,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/evaluate", method = RequestMethod.GET)
     public String evaluate(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         return "evaluate";
     }
@@ -138,7 +172,7 @@ public class EmployeeController {
     @RequestMapping(value = "/verifyRequirement/{id}/{status}", method = RequestMethod.GET)
     public String verify(@PathVariable("id") int id, @PathVariable("status") String status,
     HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         jobService.updateStatus(id, status);
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
@@ -151,7 +185,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(@RequestParam("file") MultipartFile file, @RequestParam("role") String role, @RequestParam("redirect") String redirect, HttpServletRequest request) throws Exception{
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         List<Account> accountList = FileService.upload(file);
         String body = "Welcome to OJT website. Please use this email to login to the website";
@@ -168,11 +202,11 @@ public class EmployeeController {
                 Student newStudent = new Student();
                 newStudent.setAccount(account);
                 newStudent.setStudentId(account.getEmail().substring(account.getEmail().lastIndexOf("se"), account.getEmail().indexOf("@fpt")).toUpperCase());
-                Semester semester = new Semester();
-                semester.setSemester("Fall");
-                semester.setYear(2022);
-                semester.setId(1);
-                newStudent.setSemester(semester);
+                if (accountService.isExist(account.getEmail())) {
+                    account = accountService.findByEmail(account.getEmail());
+                    newStudent = studentService.findByAccount(account);
+                }
+                newStudent.setSemester(semesterService.currentSemester());
                 accountService.save(account);
                 studentService.save(newStudent);
             }
@@ -184,16 +218,33 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/requirements")
-    public String requirementList(ModelMap modelMap, HttpServletRequest request) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+    public String requirements(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable<Job> jobList = jobService.findAll();
-        /*for (Job x: jobList) {
-            System.out.print(x.getCompany().getAccount().getFullName() + "      ");
-            System.out.println(x.getEmployee().getAccount().getFullName());
-        }*/
         modelMap.addAttribute("jobList",jobList);
         return "requirements";
+    }
+
+    @RequestMapping(value = "/semester")
+    public String semester(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Iterable<Semester> semesterList = semesterService.findAll();
+        modelMap.addAttribute("semesterList", semesterList);
+        modelMap.addAttribute("currentSemester", semesterService.currentSemester());
+        return "semester";
+    }
+
+    @RequestMapping(value = "/newSemester")
+    public String newSemester(ModelMap modelMap, HttpServletRequest request, @RequestParam("startDate")Date startDate, @RequestParam("endDate")Date endDate) {
+        if(accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Semester newSemester = semesterService.currentSemester().getNextSemester();
+        newSemester.setStartDate(startDate);
+        newSemester.setEndDate(endDate);
+        semesterService.save(newSemester);
+        return "redirect:/employee/semester";
     }
 
 }

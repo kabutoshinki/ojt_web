@@ -126,6 +126,7 @@
                                                     <th class="text-center">Student Name</th>
                                                     <th class="text-center">Email</th>
                                                     <th class="text-center">Details</th>
+                                                    <th class="text-center">Semester</th>
                                                     <th class="text-center">Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -140,6 +141,7 @@
                                                         <td><a href="" class="btn btn-outline-info btn-sm"><i
                                                                     class="bi bi-eye"></i> View Detail</a>
                                                         </td>
+                                                        <td>${o.semester.semester}</td>
                                                         <td>${o.account.status}</td>
                                                         <td>
                                                             <button type="button" class="btn btn-outline-danger btn-sm" style="color: red"

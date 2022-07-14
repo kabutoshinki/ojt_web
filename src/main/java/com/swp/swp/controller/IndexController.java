@@ -18,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 class IndexController {
@@ -36,7 +38,10 @@ class IndexController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(ModelMap modelMap, HttpServletRequest request){
+        String currentWorkingDir = Paths.get("").toAbsolutePath().normalize().toString();
+        System.out.println(currentWorkingDir);
         HttpSession session = request.getSession();
+        session.setAttribute("currentPath", currentWorkingDir);
         Iterable<Job> jobList = jobService.findAllAvailable();
         modelMap.addAttribute("jobList",jobList);
         String messTrue = (String)session.getAttribute("true");

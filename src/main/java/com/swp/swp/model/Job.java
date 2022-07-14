@@ -52,7 +52,7 @@ public class Job {
     @Column(unique = false)
     private Date endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "company_Id")
     private Company company;
 
@@ -60,7 +60,7 @@ public class Job {
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJob> applyList = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "position_id")
     private Position position;
 
@@ -246,10 +246,4 @@ public class Job {
         return "Job [company=" + company + ", description=" + description + ", idJob=" + id
                 + ", requirement=" + requirement + ", slot=" + slot + ", status=" + status + "]";
     }
-
-    
-
-    
-
-    
 }

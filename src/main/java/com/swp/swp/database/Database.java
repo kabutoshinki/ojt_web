@@ -54,7 +54,13 @@ public class Database {
                 Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                 Account accountB = new Account("FPT SOFTWARE","hoannsse150010@fpt.edu.vn", "COMPANY");
                 Account accountC = new Account("FPT SOFTWARE2","danghuudat112363@gmail.com","COMPANY");
+                Account accountExternal = new Account("External","","COMPANY");
+                Company companyExternal = new Company();
+                companyExternal.setAccount(accountExternal);
                 Account accountD = new Account("FPT","hoan123hahaha@gmail.com","STUDENT");
+                Account accountAdmin = new Account("FPT","ojt.sender@gmail.com","ADMIN");
+                Employee employeeAdmin = new Employee();
+                employeeAdmin.setAccount(accountAdmin);
                 Employee employeeA = new Employee();
                 employeeA.setAccount(accountA);
                 Student studentD = new Student();
@@ -103,12 +109,17 @@ public class Database {
                         "Knowledge of infra, networking", "Accepted",startDate, endDate ,company1,position2, employeeA);
                 //OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, studentD);
 
-
+                Job jobExternal = new Job();
+                jobExternal.setCompany(companyExternal);
+                jobExternal.setStatus("Inactive");
+                jobExternal.setSlot(1000000000);
 
                 CV cv = new CV("test", studentD);
                 cv.setStatus("Active");
 
                 Semester semester = new Semester("Spring", 2022);
+                semester.setStartDate(startDate);
+                semester.setEndDate(endDate);
                 studentD.setSemester(semester);
 
                 StudentApplyJob std = new StudentApplyJob(job2, studentD, "Waiting", semester, cv);
@@ -118,21 +129,32 @@ public class Database {
                 std1.setEmployee(employeeA);
                 std3.setEmployee(employeeA);
 
+                OjtProcess process = new OjtProcess();
+                process.setStudent(studentD);
+                process.setCompany(company1);
+                process.setApplication(std1);
+                process.setStatus("Interning");
+
+
                 semesterService.save(semester);
 
                 majorService.save(major);
 
                 logger.info("insert Data: " + companyService.save(company1));
                 logger.info("insert Data: " + companyService.save(company2));
+                logger.info("insert Data: " + companyService.save(companyExternal));
 
                 logger.info("insert Data: " + employeeService.save(employeeA));
+                logger.info("insert Data: " + employeeService.save(employeeAdmin));
 
                 logger.info("insert Data: " + studentService.save(studentD));
 
+                logger.info("insert Data: " + accountService.save(accountAdmin));
                 logger.info("insert Data: " + accountService.save(accountA));
                 logger.info("insert Data: " + accountService.save(accountB));
                 logger.info("insert Data: " + accountService.save(accountC));
                 logger.info("insert Data: " + accountService.save(accountD));
+                logger.info("insert Data: " + accountService.save(accountExternal));
 
 
                 logger.info("insert Data: " + positionService.save(position));
@@ -140,15 +162,18 @@ public class Database {
 
                 logger.info("insert Data: "+ jobService.save(job1));
                 logger.info("insert Data: "+ jobService.save(job2));
+                logger.info("insert Data: "+ jobService.save(jobExternal));
 
 
                 logger.info("insert Data: " + cvService.save(cv));
 
                 //logger.info("insert Data: " + ojtProcessService.save(ojtProcess));
-
+                ojtProcessService.save(process);
                 logger.info("insert Data: " + studentApplyJobsService.save(std));
                 logger.info("insert Data: " + studentApplyJobsService.save(std1));
                 logger.info("insert Data: " + studentApplyJobsService.save(std3));
+
+
 
 /*
  */

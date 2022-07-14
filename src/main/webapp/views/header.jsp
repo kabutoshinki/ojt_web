@@ -57,7 +57,7 @@
       </div>
       <hr /> -->
 
-
+      ${currentPath}
       <nav class="navbar navbar-expand-md align-items-center" style="background: orange">
 
 

@@ -22,13 +22,17 @@ public class ExternalRequest {
 
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "application_id")
+    private StudentApplyJob application;
 
     public int getId() {
         return id;
@@ -52,5 +56,13 @@ public class ExternalRequest {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public StudentApplyJob getApplication() {
+        return application;
+    }
+
+    public void setApplication(StudentApplyJob application) {
+        this.application = application;
     }
 }

@@ -69,7 +69,7 @@ public class AccountController {
     }
 
     @PostMapping(value = "/update")
-    public String viewUserInformation(ModelMap modelMap, @RequestParam("avatar") MultipartFile file, HttpServletRequest request) {
+    public String viewUserInformation(ModelMap modelMap, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Account account = accountService.currentAccount(request);
         if (request.getParameter("address") != null) {
@@ -78,13 +78,14 @@ public class AccountController {
         if (request.getParameter("phone") != null) {
             account.setPhone(request.getParameter("phone"));
         }
-        if (file != null) {
+        /*if (request.getParameter("file") != null) {
+            Part file = request.getPart("avatar");
             Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\avatar\\");
             String path = currentWorkingDir.normalize().toString();
             fileService.saveFile(file, account.getId() + "", path);
-        }
+        }*/
         if (account.getRole().equals("STUDENT")) {
-            Student student = (Student) session.getAttribute("student");
+            Student student = studentService.findByAccount(accountService.currentAccount(request));
             if (request.getParameter("studentId") != null) {
                 student.setStudentId(request.getParameter("studentId"));
             }

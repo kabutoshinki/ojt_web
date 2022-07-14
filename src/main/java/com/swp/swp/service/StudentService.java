@@ -32,9 +32,11 @@ public class StudentService {
             //if (!file.exists()){
             File cvFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\CV");
             File imgFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\image");
+            File requestFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\Request");
             file.mkdirs();
             cvFolder.mkdirs();
             imgFolder.mkdirs();
+            requestFolder.mkdirs();
             //}
             System.out.println(file.exists());
             return true;

@@ -30,8 +30,6 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             response.sendRedirect("/logout");
         }else{
             System.out.println("login success");
-            System.out.println("login success");
-            System.out.println("login success");
 
             System.out.println(accountService.getByString(email).getRole());
             HttpSession session = request.getSession();
@@ -43,7 +41,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                 response.sendRedirect("/home");
             else if (accountService.checkRole("COMPANY", request))
                 response.sendRedirect("/company");
-            else if (accountService.checkRole("EMPLOYEE", request))
+            else if (accountService.checkRole("EMPLOYEE", request) || accountService.checkRole("ADMIN", request))
                 response.sendRedirect("/employee");
         }
     }

@@ -152,8 +152,14 @@
                                 <td>${loop.count}</td>
                                 <td>${o.name}</td>
                                 <td>${o.description}</td>
-                                <td><a href="/students/${o.student.id}/CV/${o.id}${o.name}.pdf" class="btn btn-outline-info btn-sm"><i
+                                <td>${currentPath}${o.path}</td>
+
+                                <td><a href="${o.path}" class="btn btn-outline-info btn-sm"><i
                                         class="bi bi-eye"></i> View Detail</a></td>
+                                    <%--<td><a href="file:///${currentPath}${o.path}" class="btn btn-outline-info btn-sm"><i
+                                        class="bi bi-eye"></i> View Detail</a></td>--%>
+                                <%--<td><a href="file://D:\Java\swp_project\src\main\resources\static\students\1\CV\2x.pdf" class="btn btn-outline-info btn-sm"><i
+                                    class="bi bi-eye"></i> View Detail</a></td>--%>
                                 <td>
                                     <button type="button" class="btn btn-outline-primary btn-sm"
                                             data-toggle="modal" data-target="#modelUpdate_${o.id}">

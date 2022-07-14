@@ -86,6 +86,25 @@ public class JobService {
         return jobList;
     }
 
+    public Job firstOfCompany(Company company) {
+        Iterable<Job> jobList = jobRepositories.findByCompany(company);
+        for (Job job: jobList) {
+            return job;
+        }
+        return null;
+    }
+
+    public Iterable<Job> findAllActiveByCompany(Company company) {
+        Iterable<Job> lst = jobRepositories.findByCompany(company);
+        ArrayList<Job> jobList = new ArrayList<>();
+        for (Job job: lst) {
+            if (job.getStatus().equalsIgnoreCase("Inactive") == false) {
+                jobList.add(job);
+            }
+        }
+        return jobList;
+    }
+
     public Iterable <Job> findAllAvailable() {
         Iterable<Job> temp = jobRepositories.findAll();
         ArrayList<Job> jobs = new ArrayList<>();
