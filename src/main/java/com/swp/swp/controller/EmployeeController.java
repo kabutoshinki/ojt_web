@@ -48,7 +48,7 @@ public class EmployeeController {
         HttpSession session = request.getSession();
         Iterable<Company> companyList = companyService.findAllActive();
         modelMap.addAttribute("companyList",companyList);
-        return "companies";
+        return "employeeCompanies";
     }
     @PostMapping(value = "removeCompany/{id}")
     public String removeCompany(HttpServletRequest request, @PathVariable("id") int id) {
@@ -66,7 +66,7 @@ public class EmployeeController {
             return "test";
         Iterable<Student> studentList = studentService.findAllActive();
         modelMap.addAttribute("studentList", studentList);
-        return "students";
+        return "employeeStudents";
     }
 
     @PostMapping(value = "removeStudent/{id}")
@@ -85,7 +85,7 @@ public class EmployeeController {
             return "test";
         Iterable<Employee> employeeList = employeeService.findAllActive();
         modelMap.addAttribute("employeeList", employeeList);
-        return "employees";
+        return "adminEmployees";
     }
 
     @PostMapping(value = "removeEmployee/{id}")
@@ -105,7 +105,7 @@ public class EmployeeController {
             return "test";
         Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAllApplications();
         modelMap.addAttribute("applyList", applyList);
-        return "applications";
+        return "employeeApplications";
     }
 
     @RequestMapping(value = "/externalApplications", method = RequestMethod.GET)
@@ -114,7 +114,7 @@ public class EmployeeController {
             return "test";
         Iterable<ExternalRequest> applyList = externalRequestService.findAll();
         modelMap.addAttribute("applyList", applyList);
-        return "externalApplications";
+        return "employeeExternalApplications";
     }
 
 
@@ -186,15 +186,9 @@ public class EmployeeController {
             return "test";
         Iterable <OjtProcess> processList = ojtProcessService.findAll();
         modelMap.addAttribute("processList", processList);
-        return "internships";
+        return "employeeInternships";
     }
 
-    @RequestMapping(value = "/evaluate", method = RequestMethod.GET)
-    public String evaluate(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
-            return "test";
-        return "evaluate";
-    }
 
     @RequestMapping(value = "/verifyRequirement/{id}/{status}", method = RequestMethod.GET)
     public String verify(@PathVariable("id") int id, @PathVariable("status") String status,
@@ -316,7 +310,7 @@ public class EmployeeController {
             return "test";
         Iterable<Job> jobList = jobService.findAll();
         modelMap.addAttribute("jobList",jobList);
-        return "requirements";
+        return "employeeRequirements";
     }
 
     @RequestMapping(value = "/semester")
@@ -326,7 +320,7 @@ public class EmployeeController {
         Iterable<Semester> semesterList = semesterService.findAll();
         modelMap.addAttribute("semesterList", semesterList);
         modelMap.addAttribute("currentSemester", semesterService.currentSemester());
-        return "semester";
+        return "adminSemester";
     }
 
     @RequestMapping(value = "/newSemester")

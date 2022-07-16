@@ -183,7 +183,7 @@ public class StudentController {
                 cvList.add(cv);
         }
         modelMap.addAttribute("cvList", cvList);
-        return "CV";
+        return "studentCV";
     }
     @GetMapping(value = "report")
     public String studentReport(ModelMap modelMap, HttpServletRequest request) {
@@ -191,7 +191,7 @@ public class StudentController {
             return "test";
         Iterable <OjtProcess> processList = ojtProcessService.findByStudent(studentService.findByAccount(accountService.currentAccount(request)));
         modelMap.addAttribute("processList", processList);
-        return "internshipReport";
+        return "studentInternshipReport";
     }
 
     @GetMapping(value = "externalApply")
@@ -200,7 +200,7 @@ public class StudentController {
             return "test";
         Iterable<Position> positionList = positionService.findAll();
         modelMap.addAttribute("positionList", positionList);
-        return "externalApply";
+        return "studentExternalApply";
     }
 
     @PostMapping(value = "applyAnExternal")

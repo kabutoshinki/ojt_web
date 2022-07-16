@@ -56,7 +56,7 @@ public class ViewController {
         modelMap.addAttribute("companyDes", companyDes);
         modelMap.addAttribute("jobRe", jobRe);
         modelMap.addAttribute("jobDetail", jobDetail);
-        return "recruitment";
+        return "viewRecruitment";
     }
 
     @RequestMapping(value = "/user")
@@ -78,7 +78,7 @@ public class ViewController {
         }
 
 
-        return "userInformation";
+        return "viewUserInformation";
     }
 
     @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)

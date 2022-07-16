@@ -42,7 +42,7 @@ public class CompanyController {
         Company company = companyService.findByAccount(accountService.currentAccount(request));
         Iterable<StudentApplyJob> candidateList = studentApplyJobsService.findApplyByCompany(company);
         modelMap.addAttribute("candidateList", candidateList);
-        return "candidates";
+        return "companyCandidates";
     }
 
     @RequestMapping(value = "/verifyApplication/{id}/{status}", method = RequestMethod.GET)
