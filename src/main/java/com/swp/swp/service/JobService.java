@@ -117,7 +117,7 @@ public class JobService {
         for (Job x: temp) {
             if (x.getStatus().equals("Accepted") == true &&
                     x.getEndDate().compareTo(currentDate) >= 0 &&
-                    x.getStartDate().compareTo(currentDate) <= 0) {
+                    x.getStartDate().compareTo(currentDate) <= 0 && x.getSlot() > 0) {
                 jobs.add(x);
             }
         }
