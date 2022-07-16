@@ -63,6 +63,13 @@
               </a>
             </li>
 
+            <li>
+              <a href="/employee/employees" class="text-truncate" style="display: ${account.role.equals('ADMIN')=='true'?'':'none'}">
+                <i class="bi bi-award-fill"></i>
+                Employees
+              </a>
+            </li>
+
             <!-- Company -->
             <li>
               <a href="/company" class="text-truncate"

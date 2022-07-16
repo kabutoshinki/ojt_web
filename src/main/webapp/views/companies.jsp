@@ -59,7 +59,7 @@
                             <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                                    <form action="/employee/uploadCompany" method="post" enctype="multipart/form-data">
                                         <div class="modal-content text-center">
                                             <div class="modal-header"
                                                 style="background: orange; text-align: center; display: unset;">
@@ -99,6 +99,8 @@
                             <button class="btn btn-outline-info" formaction="<c:url value=" /" />">
                             <i class="bi bi-box-arrow-in-down"></i> Export
                             </button>
+                            <a href="/template/Company.xlsx" download><button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                                    class="bi bi-box-arrow-in-down"></i> Download template</button></a>
                             <br />
                             <br />
                             <div class="container">

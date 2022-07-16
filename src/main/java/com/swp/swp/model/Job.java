@@ -52,6 +52,7 @@ public class Job {
     @Column(unique = false)
     private Date endDate;
 
+    private String recommend;
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "company_Id")
     private Company company;
@@ -240,6 +241,13 @@ public class Job {
         this.company = company;
     }
 
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
+    }
 
     @Override
     public String toString() {

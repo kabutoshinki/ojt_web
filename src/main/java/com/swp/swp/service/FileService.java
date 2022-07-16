@@ -22,8 +22,8 @@ import java.util.List;
 public class FileService {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
-    static public List<Account> upload(MultipartFile file) throws Exception {
-        List <Account> accountList = new ArrayList<>();
+    static public ArrayList <ArrayList> upload(MultipartFile file) throws Exception {
+        ArrayList <ArrayList> accountList = new ArrayList<>();
         try {
             Path tempDir = Files.createTempDirectory("");
 
@@ -58,21 +58,13 @@ public class FileService {
                 rowId++;
                 if (rowId == 1) continue;
                 //System.out.println(params);
-                Account newAccount = new Account();
-                newAccount.setFullName((String) params.get(1));
-                /*if (params.size() > 3)
-                    newAccount.setStudentId((String) params.get(3));*/
-                newAccount.setEmail((String) params.get(2));
-                accountList.add(newAccount);
-                /*accountList.add(new Account((int)Math.round((Double)params.get(0)), (String) params.get(1), (String) params.get(2),
-                        null, (String) params.get(4), (String) params.get(5), (String) params.get(6), (int)Math.round((Double)params.get(7))));*/
-                //System.out.println("");
+                accountList.add(params);
             }
         }
         catch(Exception e) {
             e.printStackTrace();
         }
-        //System.out.println(accountList);
+        System.out.println(accountList);
         return accountList;
     }
 

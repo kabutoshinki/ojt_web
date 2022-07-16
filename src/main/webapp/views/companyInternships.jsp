@@ -90,7 +90,7 @@
                                             <td class="text-truncate" style="max-width: 150px;" title="${o.application.semester.semester}">${o.application.semester.semester}</td>
                                             <td class="text-truncate" style="max-width: 150px;" title="${o.application.job.position.position}">${o.application.job.position.position}</td>
                                             <td>${o.startDate}</td>
-                                            <td>${o.startDate}</td>
+                                            <td>${o.endDate}</td>
                                             <td>
                                                 <a href="/company/evaluate/${o.id}" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View
                                                     Detail</a>

@@ -50,6 +50,17 @@ public class StudentApplyJobsService {
         return candidates;
     }
 
+    public Iterable<StudentApplyJob> findAllApplications() {
+        Iterable<StudentApplyJob> candidates = studentApplyJobsRepositories.findAll();
+        ArrayList <StudentApplyJob> applyList = new ArrayList<>();
+        for (StudentApplyJob x: candidates) {
+            if (x.getJob().getCompany().getAccount().getFullName().equals("External") == false) {
+                applyList.add(x);
+            }
+        }
+        return applyList;
+    }
+
     public StudentApplyJob findById(int id) {
         return studentApplyJobsRepositories.findById(id);
     }

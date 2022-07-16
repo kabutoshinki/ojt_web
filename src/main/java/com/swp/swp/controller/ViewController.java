@@ -34,6 +34,7 @@ public class ViewController {
     private CompanyService companyService;
 
     @Autowired private OjtProcessService ojtProcessService;
+    @Autowired private CVService cvService;
 
     @RequestMapping(value = "/recruitment/{id}", method = RequestMethod.GET)
     public String jobDetail(ModelMap modelMap, @PathVariable("id") int id, HttpServletRequest request){
@@ -42,8 +43,10 @@ public class ViewController {
         String[] companyDes = jobService.getCompanyDescription(id);
         String[] jobRe = jobService.getJobRequirement(id);
         if (accountService.checkRole("STUDENT", request) == true) {
-            Iterable<CV> cvList = studentService.findByAccount(accountService.currentAccount(request)).getCvList();
+            Student student = studentService.findByAccount(accountService.currentAccount(request));
+            Iterable<CV> cvList = cvService.findAllAvailable(student);
             modelMap.addAttribute("cvList", cvList);
+            modelMap.addAttribute("student", student);
             for (CV cv: cvList) {
                 System.out.println(cv.getName());
             }

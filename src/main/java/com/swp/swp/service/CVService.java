@@ -3,6 +3,7 @@ package com.swp.swp.service;
 import com.swp.swp.database.Database;
 import com.swp.swp.model.Account;
 import com.swp.swp.model.CV;
+import com.swp.swp.model.Student;
 import com.swp.swp.repositories.CVRepositories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class CVService {
         }
     }
 
-    public Iterable<CV> getAll() {
+    public Iterable<CV> findAll() {
         Iterable<CV> CVList = cvRepositories.findAll();
         return CVList;
     }
@@ -38,5 +39,31 @@ public class CVService {
     public CV findById(int id) {
         CV CV = cvRepositories.findById(id);
         return CV;
+    }
+
+    public Iterable<CV> findByStudent(Student student) {
+        Iterable<CV> CVList = cvRepositories.findByStudent(student);
+        return CVList;
+    }
+    public Iterable<CV> findAllAvailable(Student student) {
+        Iterable<CV> CVList = cvRepositories.findByStudent(student);
+        ArrayList<CV> lst = new ArrayList<>();
+        for (CV x: CVList) {
+            if (x.getStatus().equalsIgnoreCase("Active")) {
+                lst.add(x);
+            }
+        }
+        return lst;
+    }
+
+    public int countAllAvailable(Student student) {
+        Iterable<CV> CVList = cvRepositories.findByStudent(student);
+        ArrayList<CV> lst = new ArrayList<>();
+        for (CV x: CVList) {
+            if (x.getStatus().equalsIgnoreCase("Active")) {
+                lst.add(x);
+            }
+        }
+        return lst.size();
     }
 }

@@ -135,8 +135,8 @@
                                                         <th>Evaluation Detail</th>
                                                         <th>Grade</th>
                                                         <th>Status</th>
-                                                        <%--<th>Verifier</th>--%>
-                                                            <%--<th>Action</th>--%>
+                                                        <th>Verifier</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -157,21 +157,18 @@
                                                             </td>
                                                             <td>${o.grade}</td>
                                                             <td>${o.status}</td>
-                                                            <%--<td>${o.employee.account.fullName}</td>--%>
-                                                                <%--<td>
-                                                                    <a style="${o.status!='Processing'?'':'pointer-events: none; background-color: lightgrey'}"
-                                                                        href="verifyApplication/${o.id}/Processing"
-                                                                        class="btn btn-sm btn-outline-success mt-auto mb-auto"
-                                                                        name="op" value="accept">
-                                                                        <i class="bi bi-check-circle"></i> Accept
-                                                                    </a>
-                                                                    <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
-                                                                        href="verifyApplication/${o.id}/Denied"
-                                                                        class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                                                        name="op" value="remove">
-                                                                        <i class="bi bi-x-circle"></i> Deny
-                                                                    </a>
-                                                                    </td>--%>
+                                                            <td class="text-truncate" style="max-width: 150px;" title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
+                                                            <td>
+                                                                <a style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyProcess/${o.id}/Accepted"
+                                                                   class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                                                   value="accept">
+                                                                    <i class="bi bi-check-circle"></i> Accept
+                                                                </a>
+                                                                <a style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyProcess/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                                                   name="op" value="remove">
+                                                                    <i class="bi bi-x-circle"></i> Deny
+                                                                </a>
+                                                            </td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>

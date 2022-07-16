@@ -42,8 +42,8 @@
                                 <ol class="breadcrumb align-items-center">
                                     <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
                                     <li class="breadcrumb-item"><a href="/employee"
-                                            style="padding:0;display: inline;">Employee</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Student_Manage</li>
+                                            style="padding:0;display: inline;">Admin</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage Employee</li>
                                 </ol>
                             </nav>
 
@@ -52,7 +52,7 @@
                                 <div>
                                     <div class="row">
                                         <div class="col">
-                                            <h1 style="color: orange">List of Students</h1>
+                                            <h1 style="color: orange">List of Employees</h1>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"
@@ -87,7 +87,7 @@
                                     <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <form action="/employee/uploadStudent" method="post" enctype="multipart/form-data">
+                                            <form action="/employee/uploadEmployee" method="post" enctype="multipart/form-data">
                                                 <div class="modal-content text-center">
                                                     <div class="modal-header"
                                                         style="background: orange; text-align: center; display: unset;">
@@ -100,9 +100,8 @@
                                                                     file</label>
                                                                 <input type="file" class="custom-file-input" name="file"
                                                                     id="fileImage">
-                                                                <input type="text" name="role" value="STUDENT" hidden>
-                                                                <input type="text" name="redirect" value="students"
-                                                                    hidden>
+                                                                <input type="text" name="role" value="EMPLOYEE" hidden>
+                                                                <input type="text" name="redirect" value="employees" hidden>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -120,7 +119,7 @@
                                     </div>
                                     <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
                                         class="bi bi-box-arrow-in-down"></i> Export</button>
-                                    <a href="/template/Student.xlsx" download><button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                                    <a href="/template/Employee.xlsx" download><button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
                                             class="bi bi-box-arrow-in-down"></i> Download template</button></a>
                                     <br />
                                     <br />
@@ -130,30 +129,23 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">No.</th>
-                                                        <th class="text-center">Student ID</th>
-                                                        <th class="text-center">Student Name</th>
+                                                        <th class="text-center">Employee Name</th>
                                                         <th class="text-center">Email</th>
-                                                        <th class="text-center">Details</th>
-                                                        <th class="text-center">Semester</th>
+                                                        <th class="text-center">Phone</th>
                                                         <th class="text-center">Status</th>
                                                         <th class="text-center">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${studentList}" var="o" varStatus="loop">
+                                                    <c:forEach items="${employeeList}" var="o" varStatus="loop">
                                                         <tr>
                                                             <td>${loop.count}</td>
-                                                            <td>${o.studentId}</td>
                                                             <td class="text-truncate" style="max-width: 150px;"
                                                                 title="${o.account.fullName}">${o.account.fullName}</td>
                                                             <td class="text-truncate" style="max-width: 150px;"
                                                                 title="${o.account.email}">${o.account.email}</td>
-                                                            <td><a href="" class="btn btn-outline-info btn-sm"><i
-                                                                        class="bi bi-eye"></i> View Detail</a>
-                                                            </td>
                                                             <td class="text-truncate" style="max-width: 150px;"
-                                                                title="${o.semester.semester}">${o.semester.semester}
-                                                            </td>
+                                                                title="${o.account.phone}">${o.account.phone}</td>
                                                             <td>${o.account.status}</td>
                                                             <td>
                                                                 <button type="button"
@@ -168,7 +160,7 @@
                                                                 tabindex="-1" aria-labelledby="exampleModalLabel"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
-                                                                    <form action="/employee/removeStudent/${o.id}"
+                                                                    <form action="/employee/removeEmployee/${o.id}"
                                                                         method="post">
                                                                         <div class="modal-content text-center">
                                                                             <div class="modal-header"

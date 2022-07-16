@@ -34,36 +34,7 @@ public class CompanyController {
             return "test";
         return "company";
     }
-    @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
-    public String insertPage(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("COMPANY", request)==false)
-            return "test";
-        Iterable<Position> positions = positionService.findAll();
-        for (Position position : positions) {
-            System.out.println("position: " + position.getPosition());
-        }
-        modelMap.addAttribute("positionList", positions);
-        return "insertJob";
-    }
 
-    
-
-    @PostMapping(value = "/insertJob")
-    
-    public String insertJob(ModelMap modelMap, HttpServletRequest request,
-    @ModelAttribute("Job") Job job){
-            //Insert code get account id here
-            if(accountService.checkRole("COMPANY", request)==false)
-                return "test";
-            boolean insert =  jobService.insertJob(job, 1, job.getPositionId());
-            if(insert==true)
-                return "redirect:/view/display";
-            else{
-                modelMap.addAttribute("mess", "Insert fail");
-                return "redirect:/company/insertPage";
-            }
-        
-    }
     @RequestMapping(value = "/candidates", method = RequestMethod.GET)
     public String candidates(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
@@ -121,16 +92,24 @@ public class CompanyController {
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         OjtProcess process = ojtProcessService.findById(id);
-        process.setAttitude(attitude);
-        process.setKnowledge(knowledge);
-        process.setSoftSkill(softSkill);
-        process.setDescription(jobDescription);
-        process.setGrade(1.0 * (point1 + point2 + point3) / 3.0);
-        process.setAttitudePoint(point3);
-        process.setSoftSkillPoint(point2);
-        process.setKnowledgePoint(point1);
-        process.setStatus("Complete");
-        ojtProcessService.save(process);
+
+        if (process.getStatus().equalsIgnoreCase("Passed") == false
+                && process.getStatus().equalsIgnoreCase("Not Passed") == false) {
+            process.setAttitude(attitude);
+            process.setKnowledge(knowledge);
+            process.setSoftSkill(softSkill);
+            process.setDescription(jobDescription);
+            process.setGrade(1.0 * (point1 + point2 + point3) / 3.0);
+            process.setAttitudePoint(point3);
+            process.setSoftSkillPoint(point2);
+            process.setKnowledgePoint(point1);
+            java.util.Date date = new java.util.Date();
+            java.sql.Date currentDate = new Date(date.getTime());
+            if (process.getEndDate() != null && process.getEndDate().compareTo(currentDate) <= 0) {
+                process.setStatus("Completed");
+            }
+            ojtProcessService.save(process);
+        }
         modelMap.addAttribute("process", process);
         return "redirect:/company/internships";
     }
@@ -211,9 +190,17 @@ public class CompanyController {
             return "test";
         if (endDate.compareTo(startDate) > 0) {
             OjtProcess process = ojtProcessService.findById(id);
-            process.setStartDate(startDate);
-            process.setEndDate(endDate);
-            ojtProcessService.save(process);
+            if (process.getStatus().equalsIgnoreCase("Passed") == false &&
+                    process.getStatus().equalsIgnoreCase("Not Passed") == false) {
+                process.setStartDate(startDate);
+                process.setEndDate(endDate);
+                java.util.Date date = new java.util.Date();
+                java.sql.Date currentDate = new Date(date.getTime());
+                if (process.getEndDate().compareTo(currentDate) <= 0) {
+                    process.setStatus("Completed");
+                }
+                ojtProcessService.save(process);
+            }
         }
         return "redirect:/company/internships";
     }

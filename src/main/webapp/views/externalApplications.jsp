@@ -65,6 +65,9 @@
                                                     <th>No.</th>
                                                     <th>Student ID</th>
                                                     <th>Student Name</th>
+                                                    <th>Company Name</th>
+                                                    <th>Company Email</th>
+                                                    <th>Company Phone</th>
                                                     <th>Semester</th>
                                                     <th>Status</th>
                                                     <th>Verifier</th>
@@ -77,6 +80,9 @@
                                                         <td>${loop.count}</td>
                                                         <td class="text-truncate" style="max-width: 150px;" title="${o.student.studentId}">${o.student.studentId}</td>
                                                         <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.companyName}">${o.companyName}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.companyEmail}">${o.companyEmail}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.companyPhone}">${o.companyPhone}</td>
                                                         <td class="text-truncate" style="max-width: 50px;" title="${o.application.semester.semester}">${o.application.semester.semester}</td>
                                                         <td>${o.application.status}</td>
                                                         <td class="text-truncate" style="max-width: 150px;" title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>

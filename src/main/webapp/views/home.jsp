@@ -30,6 +30,18 @@
                 </head>
 
                 <body>
+                <%--<c:if test = "${successMessage != ''}">
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        ${successMessage}
+                    </div>
+                </c:if>
+                <c:if test = "${dangerMessage != ''}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            ${dangerMessage}
+                    </div>
+                </c:if>--%>
                     <%@include file="header.jsp" %>
                         <hr>
                         <div class="container">
@@ -62,7 +74,7 @@
                         <div class="modal fade" id="externalModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
-                                <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                                <form action="/student/applyAnExternal" method="post" enctype="multipart/form-data">
                                     <div class="modal-content text-center">
                                         <div class="modal-header"
                                             style="background: orange; text-align: center; display: unset;">
@@ -73,17 +85,17 @@
 
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-building"></i></span>
-                                                <input type="text" class="form-control" id="nameCompany" placeholder="Company name" name="nameCompany" required>
+                                                <input type="text" class="form-control" id="nameCompany" placeholder="Company name" name="companyName" required>
                                             </div>
 
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-fill"></i></span>
-                                                <input type="email" class="form-control" id="mailCompany" placeholder="Company mail" name="mailCompany" required>
+                                                <input type="email" class="form-control" id="mailCompany" placeholder="Company mail" name="companyEmail" required>
                                             </div>
 
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-fill"></i></span>
-                                                <input type="tel" class="form-control" id="phoneCompany" placeholder="Company phone" name="phoneCompany" required>
+                                                <input type="tel" class="form-control" id="phoneCompany" placeholder="Company phone" name="companyPhone" required>
                                             </div>
 
                                             <div class="input-group mb-3">
@@ -93,7 +105,7 @@
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                        name="file" aria-describedby="inputGroupFileAddon01" required>
+                                                        name="contract" aria-describedby="inputGroupFileAddon01" required>
                                                     <label class="custom-file-label" for="inputGroupFile01">Choose
                                                         file</label>
                                                 </div>
@@ -107,7 +119,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="file"
+                                                    <input type="file" class="custom-file-input" name="letter"
                                                         aria-describedby="inputGroupFileAddon01" required>
                                                     <label class="custom-file-label" for="inputGroupFile01">Choose
                                                         file</label>
@@ -135,42 +147,45 @@
                                 <div style="margin-bottom:20px; padding:10px; background-color:#336699; color:white;">
                                     <p>Type some text to search the List:</p>
                                     <input class="form-control" id="myInput" type="text" placeholder="Search.." />
-                                    <form class="form-row m-0">
+                                    <form class="form-row m-0" action="/home/filter">
+                                        <%--<div class="col-3 input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text d-none d-lg-block"
+                                                       for="inputGroupSelect01">Major</label>
+                                            </div>
+                                            <select class="custom-select" id="inputGroupSelect01" name="major">
+                                                <option selected value="-1">Select...</option>
+                                                <c:forEach var="o" items="${majorList}">
+                                                    <option value="${o.id}">${o.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>--%>
+
                                         <div class="col-3 input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <label class="input-group-text d-none d-lg-block"
                                                     for="inputGroupSelect01">Position</label>
                                             </div>
                                             <select class="custom-select" id="inputGroupSelect01" name="position">
-                                                <option selected>Select...</option>
-                                                <!-- <c:forEach var="o" items="${positionList}">
-                                    <option value="${o.id}">${o.position}</option>
-                                </c:forEach> -->
-                                                <option>1</option>
-                                                <option>2</option>
+                                                <option  value="-1">Select...</option>
+                                                <c:forEach var="o" items="${positionList}">
+                                                    <option value="${o.id}" ${positionID==o.id?"selected":""}>${o.position}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
 
                                         <div class="col-3 input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <label class="input-group-text d-none d-lg-block"
-                                                    for="inputGroupSelect01">Major</label>
+                                                       for="inputGroupSelect01">Sort</label>
                                             </div>
-                                            <select class="custom-select" id="inputGroupSelect01" name="position">
-                                                <option selected>Select...</option>
-                                                <!-- <c:forEach var="o" items="${positionList}">
-                                    <option value="${o.id}">${o.position}</option>
-                                </c:forEach> -->
-                                                <option>1</option>
-                                                <option>2</option>
+                                            <select class="custom-select" id="inputGroupSelect01" name="sort">
+                                                <option  value="-1">Select...</option>
+                                                <option value="1" ${sortID==1?"selected":""}>Sort increasing by date</option>
+                                                <option value="2" ${sortID==2?"selected":""}>Sort decreasing by date</option>
+                                                <option value="3" ${sortID==3?"selected":""}>Sort increasing by slot</option>
+                                                <option value="4" ${sortID==4?"selected":""}>Sort decreasing by slot</option>
                                             </select>
-                                        </div>
-
-                                        <div class="col-3 input-group mb-3">
-                                            <span class="input-group-text d-none d-lg-block" id="basic-addon1"><i
-                                                    class="bi bi-calendar"></i></span>
-                                            <input type="date" class="form-control" value="${toy.expDate}" id="expDate"
-                                                placeholder="Enter expired date" name="expDate" disabled>
                                         </div>
                                         <div class="col-3">
                                             <button type="submit" class="btn btn-info btn-sm btn-block"
@@ -194,6 +209,7 @@
                                             <strong>Position: </strong>${o.position.position}<br />
                                             <strong>End date: </strong>${o.endDate}<br />
                                             <strong>Available slot: </strong>${o.slot}<br />
+                                            <strong>${o.recommend}</strong>
                                             <div class="mt-3">
                                                 <%--<a href="/view/recruitment/${o.id}"
                                                     style="display: block; margin-top: 1em">

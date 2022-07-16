@@ -22,6 +22,17 @@ public class ExternalRequest {
 
     private int id;
 
+    @Column(nullable = true ,unique = false, length = 300)
+    private String companyName;
+
+    @Column(nullable = true ,unique = false, length = 300)
+    private String companyEmail;
+
+    @Column(nullable = true ,unique = false, length = 300)
+    private String companyPhone;
+
+
+
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "student_id")
     private Student student;
@@ -64,5 +75,29 @@ public class ExternalRequest {
 
     public void setApplication(StudentApplyJob application) {
         this.application = application;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyEmail() {
+        return companyEmail;
+    }
+
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail = companyEmail;
+    }
+
+    public String getCompanyPhone() {
+        return companyPhone;
+    }
+
+    public void setCompanyPhone(String companyPhone) {
+        this.companyPhone = companyPhone;
     }
 }

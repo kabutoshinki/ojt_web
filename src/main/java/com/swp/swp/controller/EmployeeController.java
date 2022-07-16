@@ -15,6 +15,7 @@ import com.swp.swp.repositories.PositionRepositories;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,7 +42,7 @@ public class EmployeeController {
         return "employee";
     }
     @RequestMapping(value = "/companies", method = RequestMethod.GET)
-    public String verifyCompanyPage(ModelMap modelMap, HttpServletRequest request){
+    public String companies(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
@@ -60,7 +61,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/students", method = RequestMethod.GET)
-    public String importPage(ModelMap modelMap, HttpServletRequest request){
+    public String students(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable<Student> studentList = studentService.findAllActive();
@@ -78,11 +79,31 @@ public class EmployeeController {
         return "redirect:/employee/students";
     }
 
-    @RequestMapping(value = "/applications", method = RequestMethod.GET)
-    public String verifyApplication(ModelMap modelMap, HttpServletRequest request){
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
+    public String employees(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Iterable<Employee> employeeList = employeeService.findAllActive();
+        modelMap.addAttribute("employeeList", employeeList);
+        return "employees";
+    }
+
+    @PostMapping(value = "removeEmployee/{id}")
+    public String removeEmployee(HttpServletRequest request, @PathVariable("id") int id) {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
-        Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAll();
+        Employee employee = employeeService.findById(id);
+        employee.getAccount().setStatus("Inactive");
+        employeeService.save(employee);
+        return "redirect:/employee/employees";
+    }
+
+
+    @RequestMapping(value = "/applications", method = RequestMethod.GET)
+    public String applications(ModelMap modelMap, HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAllApplications();
         modelMap.addAttribute("applyList", applyList);
         return "applications";
     }
@@ -123,16 +144,42 @@ public class EmployeeController {
         ExternalRequest x = externalRequestService.findById(id);
         StudentApplyJob application = x.getApplication();
         if (application.getStatus().equalsIgnoreCase("Waiting") ||
-                application.getStatus().equalsIgnoreCase("Processing") ||
+                application.getStatus().equalsIgnoreCase("Passed") ||
                 application.getStatus().equalsIgnoreCase("Denied")) {
             application.setStatus(status);
             application.setEmployee(employee);
+            x.setEmployee(employee);
+            System.out.println(employee.getAccount().getFullName());
+            System.out.println(employee.getAccount().getFullName());
+            System.out.println(x.getEmployee().getAccount().getFullName());
             studentApplyJobsService.save(application);
             externalRequestService.save(x);
         }
         return "redirect:/employee/externalApplications";
     }
 
+
+    @RequestMapping(value = "/verifyProcess/{id}/{status}", method = RequestMethod.GET)
+    public String verifyProcess(@PathVariable("id") int id, @PathVariable("status") String status,
+                                    HttpServletRequest request){
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
+        OjtProcess x = ojtProcessService.findById(id);
+        if (x.getStatus().equalsIgnoreCase("Completed")) {
+            x.setStatus(status);
+            if (x.getStatus().equalsIgnoreCase("Accepted")) {
+                if (x.getGrade() >= 5.0) {
+                    x.setStatus("Passed");
+                } else {
+                    x.setStatus("Not Passed");
+                }
+            }
+            x.setEmployee(employee);
+            ojtProcessService.save(x);
+        }
+        return "redirect:/employee/internships";
+    }
     @RequestMapping(value = "/internships", method = RequestMethod.GET)
     public String studentInternshipResult(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
@@ -149,26 +196,6 @@ public class EmployeeController {
         return "evaluate";
     }
 
-    @RequestMapping(value = "/updateStatus/{idJob}/{status}", method = RequestMethod.GET)
-    public String verifyPage(ModelMap modelMap, @PathVariable("idJob") int id,
-     @PathVariable("status") int status, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
-            return "test";
-       if(status==1){
-           jobService.updateStatus(id, "waiting");
-       }
-       else if(status==2)
-            jobService.updateStatus(id, "Cancel");
-        return "redirect:/employee/verifyPage";
-    }
-    /*@RequestMapping(value = "/candidatesList", method = RequestMethod.GET)
-    public String candidatesList(ModelMap modelMap, HttpServletRequest request){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
-            return "test";
-        Iterable<StudentApplyJob> candidates = studentApplyJobsService.getApplyByCompanyId(1);
-        modelMap.addAttribute("candidates", candidates);
-        return "candidateList";
-    }*/
     @RequestMapping(value = "/verifyRequirement/{id}/{status}", method = RequestMethod.GET)
     public String verify(@PathVariable("id") int id, @PathVariable("status") String status,
     HttpServletRequest request){
@@ -183,40 +210,106 @@ public class EmployeeController {
         return "redirect:/employee/requirements";
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(@RequestParam("file") MultipartFile file, @RequestParam("role") String role, @RequestParam("redirect") String redirect, HttpServletRequest request) throws Exception{
+    @RequestMapping(value = "/uploadStudent", method = RequestMethod.POST)
+    public String uploadStudent(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
-        List<Account> accountList = FileService.upload(file);
+        ArrayList <ArrayList> accountList = FileService.upload(file);
         String body = "Welcome to OJT website. Please use this email to login to the website";
         String subject = "Account for ojt";
-        for (Account account: accountList) {
-            account.setRole(role);
+        for (ArrayList x: accountList) {
+            if (x.size() != 7) continue;
+            Account account = new Account();
+            account.setRole("STUDENT");
+            account.setFullName((String)x.get(2));
+            account.setEmail((String)x.get(3));
+            account.setPhone((String)x.get(5));
+            account.setAddress((String)x.get(6));
             account.setEmail(account.getEmail().toLowerCase());
-            if (role.equalsIgnoreCase("COMPANY")) {
-                Company newCompany = new Company();
-                newCompany.setAccount(account);
-                accountService.save(account);
-                companyService.save(newCompany);
-            } else if (role.equalsIgnoreCase("STUDENT")) {
-                Student newStudent = new Student();
-                newStudent.setAccount(account);
-                newStudent.setStudentId(account.getEmail().substring(account.getEmail().lastIndexOf("se"), account.getEmail().indexOf("@fpt")).toUpperCase());
-                if (accountService.isExist(account.getEmail())) {
-                    account = accountService.findByEmail(account.getEmail());
-                    newStudent = studentService.findByAccount(account);
-                }
-                newStudent.setSemester(semesterService.currentSemester());
-                accountService.save(account);
-                studentService.save(newStudent);
+            Student newStudent = new Student();
+            newStudent.setAccount(account);
+            if (accountService.isExist(account.getEmail())) {
+                account = accountService.findByEmail(account.getEmail());
+                newStudent = studentService.findByAccount(account);
             }
+            newStudent.setSemester(semesterService.currentSemester());
+            newStudent.setStudentId((String)x.get(1));
+            newStudent.setGender((String)x.get(4));
+            accountService.save(account);
+            studentService.save(newStudent);
             //emailService.sendEmail(account.getEmail(), body, subject);
             System.out.println(account);
         }
 
-        return "redirect:/employee/" + redirect;
+        return "redirect:/employee/students";
     }
 
+
+    @RequestMapping(value = "/uploadEmployee", method = RequestMethod.POST)
+    public String uploadEmployee(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
+        if(accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        ArrayList <ArrayList> accountList = FileService.upload(file);
+        String body = "Welcome to OJT website. Please use this email to login to the website";
+        String subject = "Account for ojt";
+        for (ArrayList x: accountList) {
+            if (x.size() != 5) continue;
+            Account account = new Account();
+            account.setRole("EMPLOYEE");
+            account.setFullName((String)x.get(1));
+            account.setEmail((String)x.get(2));
+            account.setPhone((String)x.get(3));
+            account.setAddress((String)x.get(4));
+            account.setEmail(account.getEmail().toLowerCase());
+            Employee newEmployee = new Employee();
+            if (accountService.isExist(account.getEmail())) {
+                account = accountService.findByEmail(account.getEmail());
+                newEmployee = employeeService.findByAccount(account);
+            }
+            newEmployee.setAccount(account);
+            accountService.save(account);
+            employeeService.save(newEmployee);
+            //emailService.sendEmail(account.getEmail(), body, subject);
+            System.out.println(account);
+        }
+
+        return "redirect:/employee/employees";
+    }
+
+    @RequestMapping(value = "/uploadCompany", method = RequestMethod.POST)
+    public String uploadCompany(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        ArrayList <ArrayList> accountList = FileService.upload(file);
+        String body = "Welcome to OJT website. Please use this email to login to the website";
+        String subject = "Account for ojt";
+        for (ArrayList x: accountList) {
+            if (x.size() != 3) continue;
+            Account account = new Account();
+            account.setRole("COMPANY");
+            account.setFullName((String)x.get(1));
+            account.setEmail((String)x.get(2));
+            account.setEmail(account.getEmail().toLowerCase());
+            Company newCompany = new Company();
+            if (accountService.isExist(account.getEmail())) {
+                account = accountService.findByEmail(account.getEmail());
+                newCompany = companyService.findByAccount(account);
+            }
+            newCompany.setAccount(account);
+            accountService.save(account);
+            companyService.save(newCompany);
+            /*if (role.equalsIgnoreCase("COMPANY")) {
+                Company newCompany = new Company();
+                newCompany.setAccount(account);
+                accountService.save(account);
+                companyService.save(newCompany);
+            } else if (role.equalsIgnoreCase("STUDENT")) {*/
+            //emailService.sendEmail(account.getEmail(), body, subject);
+            System.out.println(account);
+        }
+
+        return "redirect:/employee/companies";
+    }
     @RequestMapping(value = "/requirements")
     public String requirements(ModelMap modelMap, HttpServletRequest request) {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
@@ -244,6 +337,7 @@ public class EmployeeController {
         newSemester.setStartDate(startDate);
         newSemester.setEndDate(endDate);
         semesterService.save(newSemester);
+        modelMap.addAttribute("currentSemester", semesterService.currentSemester());
         return "redirect:/employee/semester";
     }
 

@@ -28,9 +28,9 @@ public class MajorService {
         }
     }
 
-    public Iterable<Major> getAll() {
-        Iterable<Major> MajorList = majorRepositories.findAll();
-        return MajorList;
+    public Iterable<Major> findAll() {
+        Iterable<Major> majorList = majorRepositories.findAll();
+        return majorList;
     }
 
     /*public Major findById(int id) {
