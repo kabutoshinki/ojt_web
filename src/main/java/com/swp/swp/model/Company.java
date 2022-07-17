@@ -1,19 +1,10 @@
 package com.swp.swp.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -37,6 +28,11 @@ public class Company implements Serializable{
     @Lob
     private String description;
 
+    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
+    private Set<Job> jobList = new HashSet<>();
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
+    private Set<OjtProcess> processList = new HashSet<>();
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;

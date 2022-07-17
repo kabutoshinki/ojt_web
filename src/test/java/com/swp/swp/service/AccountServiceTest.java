@@ -37,7 +37,7 @@ public class AccountServiceTest {
     @Test
     void testGetAll() {
         ArrayList<Account> expected = (ArrayList<Account>) accountRepositories.findAll();
-        ArrayList<Account> actual = (ArrayList<Account>) accountService.getAll();
+        ArrayList<Account> actual = (ArrayList<Account>) accountService.findAll();
         assertEquals(expected.size(), actual.size());
     }
 
@@ -46,7 +46,7 @@ public class AccountServiceTest {
         Iterable<Account> list = accountRepositories.findAll();
         for (Account account : list) {
             Account expected = accountRepositories.findById(account.getId());
-            Account actual = accountService.getById(account.getId());
+            Account actual = accountService.findById(account.getId());
             assertEquals(expected.getFullName(), actual.getFullName());
         }
         

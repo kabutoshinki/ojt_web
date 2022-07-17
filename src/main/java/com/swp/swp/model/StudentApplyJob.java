@@ -1,15 +1,6 @@
 package com.swp.swp.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="Student_Apply_Job")
@@ -34,26 +25,32 @@ public class StudentApplyJob {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @Column(name = "status", unique = false, length = 300)
     private String status;
-    @Column(name = "semester", unique = false, length = 30)
-    private String semester;
 
-    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cv_id")
+    private CV cv;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "semester_id")
+    private Semester semester;
+
+    @OneToOne(mappedBy = "application")
+    private OjtProcess process;
     public StudentApplyJob() {
     }
 
-
-    public StudentApplyJob(Job job, Student student, Employee employee, String status, String semester) {
+    public StudentApplyJob(Job job, Student student, String status, Semester semester, CV cv) {
         this.job = job;
         this.student = student;
-        this.employee = employee;
         this.status = status;
         this.semester = semester;
+        this.cv = cv;
     }
 
     public int getId() {
@@ -96,11 +93,19 @@ public class StudentApplyJob {
         this.status = status;
     }
 
-    public String getSemester() {
+    public Semester getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(Semester semester) {
         this.semester = semester;
+    }
+
+    public CV getCv() {
+        return cv;
+    }
+
+    public void setCv(CV cv) {
+        this.cv = cv;
     }
 }

@@ -13,7 +13,7 @@
         <title>Homepage</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/CSS/styles.css">
+         <link rel="stylesheet" href="/CSS/styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,18 +40,20 @@
         <div class="container main-content">
             <!-- <div class="row" style="justify-content: center">
                 <c:forEach items="${jobList}" var="o">
-                        <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3"
-                            style="border-radius: 5px;border: 1px solid orange; width: 200px;height: 400px;">
-                            <form style="text-align: center">
-                                <img src="/img/fpt-software.png" class="img-fluid mt-3" width="200"><br />
-                                <hr>
-                                <p style="display: none ;" name="idJob">${o.idJob}</p>
-                                <p style="text-align: center" />${o.company.account.fullName}<br />
-                                <p style="text-align: center;" />${o.slot} Job - Ho Chi Minh<br /><br />
-                                <a href="/view/recruitment/${o.idJob}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
-                            </form>
-                        </div>
-                    </c:forEach>
+                    <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3"
+                        style="border-radius: 5px;border: 1px solid orange; width: 200px;">
+                        <form style="text-align: center">
+                            <img src="/img/fpt-software.png" class="img-fluid mt-3" width="200"><br />
+                            <hr>
+                            <p style="display: none ;" name="id">${o.id}</p>
+                            <p style="text-align: center" />${o.company.account.fullName}<br />
+                            <p style="text-align: center" />Position: ${o.position.position}<br />
+                            <p style="text-align: center" />End Date: ${o.endDate}<br />
+                            <p style="text-align: center;" />${o.slot} Slot${o.slot<=1?"":"s"}<br /><br />
+                            <a href="/view/recruitment/${o.id}"><input type="button" value="Details"  style="background-color: #ccffcc; border-radius: 10px; padding: 4px 25px"/></a>
+                        </form>
+                    </div>
+                </c:forEach>
 
             </div> -->
             <div class="row" style="justify-content: center; padding-top: 3em;">
@@ -64,7 +66,7 @@
                             <strong>End date: </strong>${o.endDate}<br/>
                             <strong>Available slot: </strong>${o.slot}<br/>
                             <div style="box-shadow: #000000;">
-                                <a href="/view/recruitment/${o.idJob}" style="display: block; margin-top: 1em">
+                                <a href="/view/recruitment/${o.id}" style="display: block; margin-top: 1em">
                                     <input class="btn" type="button" value="Details" style="background-color: #00ff66; border-radius: 10px; padding: 4px 25px; width: 150px"></input>
                                 </a>
                             </div>

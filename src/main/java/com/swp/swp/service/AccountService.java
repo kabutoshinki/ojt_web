@@ -1,5 +1,7 @@
 package com.swp.swp.service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.swp.swp.database.Database;
+import com.swp.swp.model.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +33,8 @@ public class AccountService {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         Account account = accountRepositories.findByEmail(email);
-        
+        if (account == null)
+            return false;
         if(account.getRole().equals(role))
             return true;
         else
@@ -61,6 +65,7 @@ public class AccountService {
     }
     public boolean save(Account newAccount) {
         try {
+            newAccount.setStatus("Enable");
             logger.info("insert Data: " + accountRepositories.save(newAccount));
             return true;
         } catch (Exception e) {
@@ -74,14 +79,18 @@ public class AccountService {
         return false;
     }
 
-    public Iterable<Account> getAll() {
+    public Iterable<Account> findAll() {
         Iterable<Account> accountList = accountRepositories.findAll();
         return accountList;
     }
 
-    public Account getById(int id) {
+    public Account findById(int id) {
         Account account = accountRepositories.findById(id);
         return account;
+    }
+
+    public Account findByEmail(String email) {
+        return accountRepositories.findByEmail(email);
     }
 
     public boolean isExist(String value) {

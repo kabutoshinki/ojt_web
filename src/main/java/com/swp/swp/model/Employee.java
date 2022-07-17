@@ -27,14 +27,16 @@ public class Employee {
     private Account account;
 
     @OneToMany(mappedBy = "employee",cascade = CascadeType.REFRESH)
-    private Set<ExternalRequest> requests = new HashSet<>();
+    private Set<ExternalRequest> requestList = new HashSet<>();
 
     @OneToMany(mappedBy = "employee",cascade = CascadeType.REFRESH)
-    private Set<StudentApplyJob> studentApplies = new HashSet<>();
+    private Set<StudentApplyJob> studentApplyList = new HashSet<>();
 
     @OneToMany(mappedBy = "employee",cascade = CascadeType.REFRESH)
-    private Set<Job> jobs = new HashSet<>();
+    private Set<Job> jobList = new HashSet<>();
 
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.REFRESH)
+    private Set<OjtProcess> processList = new HashSet<>();
     public int getId() {
         return id;
     }
@@ -51,27 +53,27 @@ public class Employee {
         this.account = account;
     }
 
-    public Set<ExternalRequest> getRequests() {
-        return requests;
+    public Set<ExternalRequest> getRequestList() {
+        return requestList;
     }
 
-    public void setRequests(Set<ExternalRequest> requests) {
-        this.requests = requests;
+    public void setRequestList(Set<ExternalRequest> requestList) {
+        this.requestList = requestList;
     }
 
-    public Set<StudentApplyJob> getStudentApplies() {
-        return studentApplies;
+    public Set<StudentApplyJob> getStudentApplyList() {
+        return studentApplyList;
     }
 
-    public void setStudentApplies(Set<StudentApplyJob> studentApplies) {
-        this.studentApplies = studentApplies;
+    public void setStudentApplyList(Set<StudentApplyJob> studentApplyList) {
+        this.studentApplyList = studentApplyList;
     }
 
-    public Set<Job> getJobs() {
-        return jobs;
+    public Set<Job> getJobList() {
+        return jobList;
     }
 
-    public void setJobs(Set<Job> jobs) {
-        this.jobs = jobs;
+    public void setJobList(Set<Job> jobList) {
+        this.jobList = jobList;
     }
 }

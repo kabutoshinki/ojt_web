@@ -26,7 +26,7 @@ public class JobServiceTest {
     @Test
     void testGetAll() {
         Iterable<Job> expect = jobRepositories.findAll();
-        Iterable<Job> actual = jobService.getAll();
+        Iterable<Job> actual = jobService.findAll();
         assertEquals(expect.iterator().next().getRequirement(), actual.iterator().next().getRequirement());
     }
 
@@ -34,9 +34,9 @@ public class JobServiceTest {
     void testGetById() {
         Iterable<Job> jobList = jobRepositories.findAll();
         for (Job job : jobList) {
-            Job expected = jobRepositories.findById(job.idJob);
-            Job actual = jobService.getById(job.idJob);
-            assertEquals(expected.idJob, actual.idJob);
+            Job expected = jobRepositories.findById(job.id);
+            Job actual = jobService.findById(job.id);
+            assertEquals(expected.id, actual.id);
         }
 
     }
@@ -46,8 +46,8 @@ public class JobServiceTest {
     void testGetCompanyDescription() {
         Iterable<Job> jobList = jobRepositories.findAll();
         for (Job job : jobList) {
-            String[] expected = jobService.getCompanyDescription(job.idJob);
-            String[] actual = jobService.getCompanyDescription(job.idJob);
+            String[] expected = jobService.getCompanyDescription(job.id);
+            String[] actual = jobService.getCompanyDescription(job.id);
             if(expected!=null){
                 for (int i = 0; i < actual.length; i++) {
                     assertEquals(expected[i].toString(), actual[i].toString());
@@ -60,8 +60,8 @@ public class JobServiceTest {
     void testGetJobDescription() {
         Iterable<Job> jobList = jobRepositories.findAll();
         for (Job job : jobList) {
-            String[] expected = jobService.getJobDescription(job.idJob);
-            String[] actual = jobService.getJobDescription(job.idJob);
+            String[] expected = jobService.getJobDescription(job.id);
+            String[] actual = jobService.getJobDescription(job.id);
             if(expected!=null){
                 for (int i = 0; i < actual.length; i++) {
                     assertEquals(expected[i].toString(), actual[i].toString());
@@ -74,8 +74,8 @@ public class JobServiceTest {
     void testGetJobRequirement() {
         Iterable<Job> jobList = jobRepositories.findAll();
         for (Job job : jobList) {
-            String[] expected = jobService.getJobRequirement(job.idJob);
-            String[] actual = jobService.getJobRequirement(job.idJob);
+            String[] expected = jobService.getJobRequirement(job.id);
+            String[] actual = jobService.getJobRequirement(job.id);
             if(expected!=null){
                 for (int i = 0; i < actual.length; i++) {
                     assertEquals(expected[i].toString(), actual[i].toString());
@@ -86,7 +86,7 @@ public class JobServiceTest {
 
     @Test
     void testInsertJob() {
-        Job job = new Job(10, "description", "requirement", "status");
+        Job job = new Job(10, "description", "requirement", "status", null);
         Iterable<Company> companyList = companyRepositories.findAll();
         Iterable<Position> positonList = positionRepositories.findAll();
         assertTrue(jobService.insertJob(job, companyList.iterator().next().getId(), positonList.iterator().next().getId()));
@@ -97,7 +97,7 @@ public class JobServiceTest {
     void testUpdateStatus() {
         Iterable<Job> jobList = jobRepositories.findAll();
         for (Job job : jobList) {
-            assertTrue(jobService.updateStatus(job.idJob, "status"));
+            assertTrue(jobService.updateStatus(job.id, "status"));
         }
     }
 }

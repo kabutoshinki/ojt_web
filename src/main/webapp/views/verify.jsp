@@ -22,7 +22,8 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
-            <hr/>
+        <%@include file="sliderbar.jsp" %>
+
             <br/>
             <div class="container-fluid" style="border-radius: 40px; padding: 25px;">
                 <div style="background-color: #cccccc;">

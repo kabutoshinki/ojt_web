@@ -25,7 +25,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             Authentication authentication) throws IOException, ServletException {
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getEmail();
-        if(accountService.isExist(email)==false){
+        if(accountService.isExist(email)==false || (accountService.isExist(email) == true && accountService.findByEmail(email).getStatus().equals("Inactive"))){
             System.out.println("This account not have permission");
             response.sendRedirect("/logout");
         }else{
@@ -39,8 +39,12 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             session.setAttribute("email", oAuth2User.getEmail());
             session.setAttribute("userName", oAuth2User.getName());
             session.setAttribute("account", accountService.getByString(email));
-            response.sendRedirect("/home");
-
+            if (accountService.checkRole("STUDENT", request))
+                response.sendRedirect("/home");
+            else if (accountService.checkRole("COMPANY", request))
+                response.sendRedirect("/company");
+            else if (accountService.checkRole("EMPLOYEE", request))
+                response.sendRedirect("/employee");
         }
     }
     

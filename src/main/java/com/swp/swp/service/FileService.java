@@ -76,7 +76,7 @@ public class FileService {
         return accountList;
     }
 
-    public void saveFile(MultipartFile file, String path) {
+    public void saveFile(MultipartFile file, String name, String path) {
         if(file.isEmpty())
         {
             throw  new RuntimeException("please provide a valide file");
@@ -90,7 +90,7 @@ public class FileService {
             String filename = file.getOriginalFilename();
             int index = filename.indexOf('.');
             String extension = filename.substring(index+1, filename.length()).toUpperCase();
-            path += filename;
+            path += name + "." + extension;
             out = new BufferedOutputStream(new FileOutputStream(path));
             out.write(b);
         } catch (IOException e) {

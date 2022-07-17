@@ -37,7 +37,7 @@
 
         <body>
             <jsp:include page="header.jsp"/>
-
+            <br/>
              <div class="container">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb align-items-center">
@@ -129,13 +129,6 @@
                                     <div class="col-sm-3"></div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="inputVisit" class="col-sm-3 col-form-label">Form Visit</label>
-                                    <div class="col-sm-7">
-                                        <a class="btn btn-primary" href="formVisit.html">Create From</a>
-                                    </div>
-                                    <div class="col-sm-2"></div>
-                                </div>
                                 <div class="mt-5 text-center">
                                     <input type="submit" name="submit" class="btn btn-primary">
                                 </div>

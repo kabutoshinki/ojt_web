@@ -21,7 +21,7 @@ public class CompanyServiceTest {
     @Test
     void testGetAll() {
         Iterable<Company> expected = companyRepositories.findAll();
-        Iterable<Company> actual = companyService.getAll();
+        Iterable<Company> actual = companyService.findAll();
         assertEquals(expected.iterator().next().getAccount().getFullName(), actual.iterator().next().getAccount().getFullName());
     }
 
@@ -30,7 +30,7 @@ public class CompanyServiceTest {
         Iterable<Company> compayList = companyRepositories.findAll();
         for (Company company : compayList) {
             Company expected = companyRepositories.findById(company.getId());
-            Company actual = companyService.getById(company.getId());
+            Company actual = companyService.findById(company.getId());
             assertEquals(expected.getAccount().getFullName(), actual.getAccount().getFullName());
         }
     }

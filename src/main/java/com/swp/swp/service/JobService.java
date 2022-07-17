@@ -13,6 +13,10 @@ import com.swp.swp.repositories.CompanyRepositories;
 import com.swp.swp.repositories.JobRepositories;
 import com.swp.swp.repositories.PositionRepositories;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 @Service
 public class JobService {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
@@ -23,14 +27,6 @@ public class JobService {
     CompanyRepositories companyRepositories;
     @Autowired
     PositionRepositories positionRepositories;
-
-    public JobService(JobRepositories jobRepositories, CompanyRepositories companyRepositories,
-            PositionRepositories positionRepositories) {
-        super();
-        this.jobRepositories = jobRepositories;
-        this.positionRepositories = positionRepositories;
-        this.companyRepositories = companyRepositories;
-    }
 
     public String[] getJobDescription(int id) {
         Job job = jobRepositories.findById(id);
@@ -91,17 +87,40 @@ public class JobService {
         }
 
     }
-
-    public Iterable<Job> getAll() {
+    public Iterable<Job> findAll() {
         Iterable<Job> jobs = jobRepositories.findAll();
         return jobs;
     }
-    public Job getById(int id) {
-        try {
-            return jobRepositories.findById(id);
-        } catch (Exception e) {
-            return null;
+
+    public Iterable<Job> findByCompany(Company company) {
+        Iterable<Job> jobList = jobRepositories.findByCompany(company);
+        return jobList;
+    }
+
+    public Iterable <Job> findAllAvailable() {
+        Iterable<Job> temp = jobRepositories.findAll();
+        ArrayList<Job> jobs = new ArrayList<>();
+        for (Job x: temp) {
+            if (x.getStatus().equals("Accepted") == true) {
+                jobs.add(x);
+            }
         }
+        return jobs;
+    }
+
+    public boolean save(Job newJob) {
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\companies");
+        try {
+            logger.info("insert Data: " +  jobRepositories.save(newJob));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public Job findById(int id) {
+        return jobRepositories.findById(id);
     }
     public boolean isExist(String value) {
         // TODO Auto-generated method stub
@@ -112,5 +131,4 @@ public class JobService {
         // TODO Auto-generated method stub
         return null;
     }
-
 }

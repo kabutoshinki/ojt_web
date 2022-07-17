@@ -1,16 +1,8 @@
 package com.swp.swp.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CV")
@@ -30,11 +22,19 @@ public class CV {
     @Column(nullable = true, unique = false, length = 300)
     private String name;
 
+    @Column(nullable = true, unique = false, length = 300)
+    private String description;
+
+    @Column(nullable = true, unique = false, length = 300)
+    private String status;
+
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
     private Student student;
-    
-    
+
+    @OneToMany(mappedBy = "cv" ,cascade = CascadeType.PERSIST)
+    private Set<StudentApplyJob> applyList = new HashSet<>();
     public CV() {
     }
 
@@ -67,11 +67,35 @@ public class CV {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Student getStudent() {
         return student;
     }
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Set<StudentApplyJob> getApplyList() {
+        return applyList;
+    }
+
+    public void setApplyList(Set<StudentApplyJob> applyList) {
+        this.applyList = applyList;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
