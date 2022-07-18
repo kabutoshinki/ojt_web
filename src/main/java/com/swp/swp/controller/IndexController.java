@@ -42,47 +42,15 @@ class IndexController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(ModelMap modelMap, HttpServletRequest request){
-        /*String currentWorkingDir = Paths.get("").toAbsolutePath().normalize().toString() + "\\target\\classes\\static\\";
-        System.out.println(currentWorkingDir);*/
+
         HttpSession session = request.getSession();
-        /*session.setAttribute("currentPath", currentWorkingDir);*/
-        Iterable<Job> jobList = jobService.findAllAvailable();
-        if (accountService.currentAccount(request) != null) {
-            Student student = studentService.findByAccount(accountService.currentAccount(request));
-            for (Job x : jobList) {
-                for (CV y: student.getCvList()) {
-                    System.out.println(jobService.match(x, y));
-                    if (jobService.match(x, y) > 50) {
-                        x.setRecommend("Recommend");
-                    }
-                }
-            }
+        int position = -1, sort = -1;
+        if (request.getParameter("position") != null) {
+            position = Integer.parseInt(request.getParameter("position"));
         }
-        modelMap.addAttribute("jobList",jobList);
-        Iterable<Major> majorsList = majorService.findAll();
-        modelMap.addAttribute("majorsList", majorsList);
-        Iterable<Position> positionList = positionService.findAll();
-        modelMap.addAttribute("positionList", positionList);
-
-
-        modelMap.addAttribute("currentSemester", semesterService.currentSemester());
-
-        String messTrue = (String)session.getAttribute("true");
-        if(messTrue!=null){
-            session.removeAttribute("true");
-            request.setAttribute("mess", "Login Successfully");
+        if (request.getParameter("sort") != null) {
+            sort = Integer.parseInt(request.getParameter("sort"));
         }
-        else
-            request.setAttribute("mess", "Login Fail");
-
-        return "home";
-    }
-
-    @RequestMapping(value = "/home/filter", method = RequestMethod.GET)
-    public String homeFilter(ModelMap modelMap, HttpServletRequest request,
-                             /*@RequestParam("major") int major,*/
-                             @RequestParam("position") int position,
-                             @RequestParam("sort") int sort) {
         ArrayList<Job> jobList = (ArrayList<Job>) jobService.findAllAvailable();
         Iterable<Major> majorsList = majorService.findAll();
         modelMap.addAttribute("majorsList", majorsList);
@@ -93,8 +61,8 @@ class IndexController {
 
         modelMap.addAttribute("positionID", position);
         modelMap.addAttribute("sortID", sort);
-        System.out.println(position);
-        System.out.println(sort);
+
+
         if (position != -1) {
             Position temp = positionService.findById(position);
             jobList = temp.getAvailableJobList();
@@ -118,7 +86,19 @@ class IndexController {
                     break;
             }
         }
+        if (accountService.checkRole("STUDENT", request) == true) {
+            Student student = studentService.findByAccount(accountService.currentAccount(request));
+            for (Job x : jobList) {
+                for (CV y: student.getCvList()) {
+                    System.out.println(jobService.match(x, y));
+                    if (jobService.match(x, y) > 50) {
+                        x.setRecommend("Recommend");
+                    }
+                }
+            }
+        }
         modelMap.addAttribute("jobList",jobList);
+
         return "home";
     }
 }

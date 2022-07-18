@@ -101,7 +101,7 @@ public class JobService {
         Iterable<Job> lst = jobRepositories.findByCompany(company);
         ArrayList<Job> jobList = new ArrayList<>();
         for (Job job: lst) {
-            if (job.getStatus().equalsIgnoreCase("Inactive") == false) {
+            if (job.getStatus().equalsIgnoreCase("Inactive") == false && job.getStatus().equalsIgnoreCase("Hidden") == false) {
                 jobList.add(job);
             }
         }

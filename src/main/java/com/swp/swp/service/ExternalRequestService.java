@@ -52,4 +52,8 @@ public class ExternalRequestService {
         return externalRequestRepositories.findById(id);
     }
 
+    public Iterable<ExternalRequest> findRequestByStudent(Student student) {
+        return externalRequestRepositories.findByStudent(student);
+    }
+
 }

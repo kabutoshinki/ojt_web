@@ -83,7 +83,13 @@ public class StudentApplyJobsService {
         return candidatesList;
     }
     public Iterable<StudentApplyJob> findApplyByStudent(Student student){
-        Iterable <StudentApplyJob> applyList = studentApplyJobsRepositories.findByStudent(student);
+        Iterable <StudentApplyJob> lst = studentApplyJobsRepositories.findByStudent(student);
+        ArrayList <StudentApplyJob> applyList = new ArrayList<>();
+        for (StudentApplyJob x: lst) {
+            if (x.getJob().getStatus().equalsIgnoreCase("Hidden") == false) {
+                applyList.add(x);
+            }
+        }
         return applyList;
     }
 

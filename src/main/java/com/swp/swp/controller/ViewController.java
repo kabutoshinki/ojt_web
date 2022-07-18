@@ -85,6 +85,9 @@ public class ViewController {
     public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
         /*if(accountService.checkRole("COMPANY", request)==false)
             return "test";*/
+        if (accountService.currentAccount(request) == null) {
+            return "test";
+        }
         OjtProcess process = ojtProcessService.findById(id);
         modelMap.addAttribute("process", process);
         return "viewEvaluate";

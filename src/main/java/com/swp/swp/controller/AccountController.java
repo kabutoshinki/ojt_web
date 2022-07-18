@@ -116,6 +116,7 @@ public class AccountController {
             fileService.saveFile(file, path);
             accountService.save(account);
         }
+        session.setAttribute("successMessage", "Update successfully!");
         return "redirect:/view/user";
     }
 

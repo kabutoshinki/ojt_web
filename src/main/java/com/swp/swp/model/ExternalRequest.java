@@ -2,8 +2,6 @@ package com.swp.swp.model;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "ExternalRequest")
@@ -30,6 +28,12 @@ public class ExternalRequest {
 
     @Column(nullable = true ,unique = false, length = 300)
     private String companyPhone;
+
+    @Column(nullable = true ,unique = false, length = 300)
+    private String contractPath;
+
+    @Column(nullable = true ,unique = false, length = 300)
+    private String letterPath;
 
 
 
@@ -99,5 +103,21 @@ public class ExternalRequest {
 
     public void setCompanyPhone(String companyPhone) {
         this.companyPhone = companyPhone;
+    }
+
+    public String getContractPath() {
+        return contractPath;
+    }
+
+    public void setContractPath(String contractPath) {
+        this.contractPath = contractPath;
+    }
+
+    public String getLetterPath() {
+        return letterPath;
+    }
+
+    public void setLetterPath(String letterPath) {
+        this.letterPath = letterPath;
     }
 }
