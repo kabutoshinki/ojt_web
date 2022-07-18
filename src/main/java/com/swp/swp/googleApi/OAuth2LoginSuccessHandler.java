@@ -30,7 +30,6 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             System.out.println("This account not have permission");
             session.setAttribute("warningMessage", "This account not have permission");
             response.sendRedirect("/logout");
-
         }else{
             System.out.println("login success");
 

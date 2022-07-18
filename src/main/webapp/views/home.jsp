@@ -32,6 +32,7 @@
 </head>
 
 <body>
+${mess}
 <%@include file="header.jsp" %>
 <c:if test="${successMessage != null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -221,7 +222,7 @@
             <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3">
                 <form
                         style="text-align: center; display: block; padding-top: 0em; margin-top: 0px;">
-                    <img src="${o.company.account.avatar==null?'':o.company.account.avatar}"
+                    <img src="${o.company.account.avatar==null?'/avatar/avatar.png':o.company.account.avatar}"
                          width="300" height="150px">
                     <hr id="hr"/>
                     <strong>Position: </strong>${o.position.position}<br/>

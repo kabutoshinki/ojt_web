@@ -77,6 +77,10 @@ public class StudentController {
             return "test";
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
+        if (!studentService.alreadyApplied(student, jobService.findById(id).getCompany())) {
+            session.setAttribute("dangerMessage", "You can not apply for this company more this semester.");
+            return "redirect:/student/applications";
+        }
         if (student.getApplicationStatus() == false) {
             /*System.out.println(email);
             System.out.println(account.getFullName());
