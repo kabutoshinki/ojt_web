@@ -52,8 +52,8 @@
         <div class="row align-items-center">
             <div class="col-12 col-lg-4 mb-2">
                 <img style="width:300px" class="img-fluid mb-3" alt="Responsive image"
-                    src="https://www.fpt-software.com/wp-content/uploads/sites/2/2017/06/logofsoft.png" />
-                <a href="" style="text-decoration: none;display: ${account.role.equals('STUDENT')=='true'?'':'none'}" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>
+                     src="${jobDetail.company.account.avatar==null?'':jobDetail.company.account.avatar}" />
+                <a href="" style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}; ${student.applicationStatus==true || student.semester.equals(currentSemester)?'pointer-events: none; background-color: lightgrey':''}" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>
             </div>
             <div class="col-12 col-lg-8 mt-5 mb-2">
                 <p style="font-size: 30px; font-weight:bold;">

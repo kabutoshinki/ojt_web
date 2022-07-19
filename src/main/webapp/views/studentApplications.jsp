@@ -67,11 +67,11 @@
                                         <c:forEach var="o" items="${applyList}" varStatus="loop">
                                             <tr style="text-align: center">
                                                 <td>${loop.count}</td>
-                                                <td>${o.job.position.position}</td>
+                                                <td class="text-truncate" style="max-width: 150px;" title="${o.job.position.position}">${o.job.position.position}</td>
                                                 <td><a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a></td>
-                                                <td>${o.cv.name}</td>
-                                                <td>${o.employee.account.fullName}</td>
-                                                <td>${o.job.company.account.fullName}</td>
+                                                <td class="text-truncate" style="max-width: 150px;" title="${o.cv.name}">${o.cv.name}</td>
+                                                <td class="text-truncate" style="max-width: 150px;" title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
+                                                <td class="text-truncate" style="max-width: 150px;" title="${o.job.company.account.fullName}">${o.job.company.account.fullName}</td>
                                                 <td>${o.status}</td>
                                                 <%--<td>
                                                     <button class="btn btn-outline-primary btn-sm"><i class="bi bi-check-circle"></i> Accept</button>

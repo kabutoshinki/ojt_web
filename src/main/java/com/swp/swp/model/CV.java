@@ -28,6 +28,9 @@ public class CV {
     @Column(nullable = true, unique = false, length = 300)
     private String status;
 
+    @Column(nullable = true, unique = false, length = 300)
+    private String path;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
@@ -97,5 +100,13 @@ public class CV {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

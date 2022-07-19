@@ -60,8 +60,8 @@
                                                 <th>Semester</th>
                                                 <th>Company</th>
                                                 <th>Position</th>
-                                                <th>Start time</th>
-                                                <th>End time</th>
+                                                <th>Start date</th>
+                                                <th>End date</th>
                                                 <th>Evaluation Detail</th>
                                                 <th>Grade</th>
                                                 <th>Status</th>
@@ -73,13 +73,13 @@
                                             <c:forEach items="${processList}" var="o" varStatus="loop">
                                                 <tr>
                                                     <td>${loop.count}</td>
-                                                    <td>${o.application.semester.semester}</td>
-                                                    <td>${o.application.job.company.account.fullName}</td>
-                                                    <td>${o.application.job.position.position}</td>
-                                                    <td>${o.startTime}</td>
-                                                    <td>${o.endTime}</td>
+                                                    <td class="text-truncate" style="max-width: 150px;" title="${o.application.semester.semester}">${o.application.semester.semester}</td>
+                                                    <td class="text-truncate" style="max-width: 150px;" title="${o.application.job.company.account.fullName}">${o.application.job.company.account.fullName}</td>
+                                                    <td class="text-truncate" style="max-width: 150px;" title="${o.application.job.position.position}">${o.application.job.position.position}</td>
+                                                    <td>${o.startDate}</td>
+                                                    <td>${o.endDate}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-outline-info btn-sm"><i
+                                                        <a href="/view/evaluate/${o.id}" class="btn btn-outline-info btn-sm"><i
                                                                 class="bi bi-eye"></i> View Detail</a>
                                                     </td>
                                                     <td>${o.grade}</td>

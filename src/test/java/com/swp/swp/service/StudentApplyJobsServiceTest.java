@@ -38,7 +38,7 @@ public class StudentApplyJobsServiceTest {
         Account account1 = new Account("fullName", "email", "role");
         account.save(account1);
         for (StudentApplyJob account : accountList) {
-            assertNotNull(service.getApplyByStudent(account.getStudent()));
+            assertNotNull(service.findApplyByStudent(account.getStudent()));
         }
       
     }

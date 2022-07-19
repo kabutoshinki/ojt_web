@@ -24,7 +24,8 @@ public class StudentService {
     private StudentRepositories studentRepositories;
 
     public boolean save(Student newStudent) {
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+        //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
         try {
             logger.info("insert Data: " + studentRepositories.save(newStudent));
             File file = new File(currentWorkingDir + "\\" + newStudent.getId());
@@ -32,9 +33,11 @@ public class StudentService {
             //if (!file.exists()){
             File cvFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\CV");
             File imgFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\image");
+            File requestFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\Request");
             file.mkdirs();
             cvFolder.mkdirs();
             imgFolder.mkdirs();
+            requestFolder.mkdirs();
             //}
             System.out.println(file.exists());
             return true;

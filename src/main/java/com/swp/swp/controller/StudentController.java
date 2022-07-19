@@ -21,6 +21,7 @@ import java.util.ArrayList;
 @RequestMapping(path = "student")
 public class StudentController {
     @Autowired AccountService accountService;
+    @Autowired ExternalRequestService externalRequestService;
     @Autowired OjtProcessService ojtProcessService;
     @Autowired
     JobService jobService;
@@ -28,6 +29,8 @@ public class StudentController {
     StudentService studentService;
     @Autowired FileService fileService;
     @Autowired SemesterService semesterService;
+    @Autowired PositionService positionService;
+    @Autowired CompanyService companyService;
     @Autowired
     CVService cvService;
     @Autowired StudentApplyJobsService studentApplyJobsService;
@@ -37,10 +40,18 @@ public class StudentController {
         HttpSession session = request.getSession();
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
+        modelMap.addAttribute("successMessage", "");
+        modelMap.addAttribute("dangerMessage", "");
         Account account = accountService.getByString((String)session.getAttribute("email"));
         Student student = studentService.findByAccount(account);
-        Iterable<StudentApplyJob> apply = studentApplyJobsService.getApplyByStudent(student);
-        modelMap.addAttribute("applyList", apply);
+        System.out.println(student.getAccount().getFullName());
+        Iterable<StudentApplyJob> applyList = studentApplyJobsService.findApplyByStudent(student);
+        for (StudentApplyJob x: applyList) {
+            System.out.println(x.getId() + " " + x.getStudent().getAccount().getFullName() + " " + x.getStatus());
+        }
+        System.out.println();
+        System.out.println();
+        modelMap.addAttribute("applyList", applyList);
         return "studentApplications";
     }
     @RequestMapping(value = "applyForm/{id}", method = RequestMethod.GET)
@@ -48,19 +59,19 @@ public class StudentController {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        Account account = accountService.findByEmail(email);
-        Student student = studentService.findByAccount(account);
-        System.out.println(email);
-        System.out.println(account.getFullName());
-        System.out.println(id);
-        System.out.println(cvId);
-        //int cvId = (int) modelMap.getAttribute("cvId");
-        //int cvId = Integer.parseInt(request.getParameter("cvId"));
-        System.out.println(account.getEmail());
-        StudentApplyJob newStudentApplyJob = new StudentApplyJob(jobService.findById(id), student, "waiting", semesterService.findById(1), cvService.findById(cvId));
-        System.out.println(newStudentApplyJob.getStudent().getStudentId());
-        studentApplyJobsService.save(newStudentApplyJob);
+        Student student = studentService.findByAccount(accountService.currentAccount(request));
+        if (student.getApplicationStatus() == false) {
+            /*System.out.println(email);
+            System.out.println(account.getFullName());
+            System.out.println(id);
+            System.out.println(cvId);
+            //int cvId = (int) modelMap.getAttribute("cvId");
+            //int cvId = Integer.parseInt(request.getParameter("cvId"));
+            System.out.println(account.getEmail());*/
+            StudentApplyJob newStudentApplyJob = new StudentApplyJob(jobService.findById(id), student, "waiting", semesterService.findById(1), cvService.findById(cvId));
+            System.out.println(newStudentApplyJob.getStudent().getStudentId());
+            studentApplyJobsService.save(newStudentApplyJob);
+        }
         return "redirect:/student/applications";
     }
 
@@ -71,22 +82,28 @@ public class StudentController {
             return "test";
         Iterable <StudentApplyJob> applyList = studentService.findByAccount(accountService.currentAccount(request)).getApplyList();
         StudentApplyJob application = studentApplyJobsService.findById(id);
-        if (application.getJob().getSlot() > 0) {
+        if (application.getJob().getSlot() > 0 && studentService.findByAccount(accountService.currentAccount(request)).getApplicationStatus() == false) {
             application.getJob().setSlot(application.getJob().getSlot() - 1);
             jobService.save(application.getJob());
             for (StudentApplyJob x : applyList) {
                 if (x.getId() == id) {
                     x.setStatus(status);
-                } else if (status.equalsIgnoreCase("Interning")) {
+                } else if (status.equalsIgnoreCase("Interning")
+                        && x.getStatus().equalsIgnoreCase("Denied") == false
+                        && x.getStatus().equalsIgnoreCase("Rejected") == false) {
                     x.setStatus("Refused");
                 }
                 studentApplyJobsService.save(x);
+                System.out.println(x.getId() + " " + x.getJob().getCompany().getAccount().getFullName() + " " + x.getStatus());
                 if (x.getStatus().equalsIgnoreCase("Interning")) {
+                    //System.out.println(x.getStudent().getAccount().get);
                     OjtProcess newProcess = new OjtProcess();
                     newProcess.setApplication(x);
                     newProcess.setStatus("Interning");
                     newProcess.setStudent(x.getStudent());
                     newProcess.setCompany(x.getJob().getCompany());
+                    System.out.println(x.getId() + " " + x.getJob().getCompany().getAccount().getFullName() + " " + x.getStatus());
+                    System.out.println(newProcess.getCompany().getAccount().getFullName() + " " + newProcess.getStudent().getAccount().getFullName());
                     ojtProcessService.save(newProcess);
                 }
             }
@@ -99,16 +116,30 @@ public class StudentController {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
-        String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
-        CV newCV = new CV();
-        newCV.setName(name);
-        newCV.setStudent(student);
-        newCV.setDescription(description);
-        newCV.setStatus("Active");
-        cvService.save(newCV);
-        name = newCV.getId() + name;
-        fileService.saveFile(file, name, path);
+        if (cvService.countAllAvailable(student) <= 10) {
+            //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+            String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
+            CV newCV = new CV();
+
+
+            newCV.setStudent(student);
+            newCV.setDescription(description);
+            newCV.setStatus("Active");
+            cvService.save(newCV);
+
+            String filename = file.getOriginalFilename();
+            int index = filename.indexOf('.');
+            String extension = filename.substring(index + 1, filename.length()).toUpperCase();
+            newCV.setName(name + "." + extension);
+            name = newCV.getId() + " - " + name + "." + extension;
+            /*newCV.setPath("\\src\\main\\resources\\static\\students\\" + String.valueOf(student.getId()) + "\\CV\\" + name + ".pdf");*/
+            newCV.setPath("\\students\\" + String.valueOf(student.getId()) + "\\CV\\" + name);
+            path += name;
+
+            cvService.save(newCV);
+            fileService.saveFile(file, path);
+        }
         return "redirect:/student/CVs";
     }
 
@@ -117,12 +148,16 @@ public class StudentController {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
         String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
         CV cv = cvService.findById(cvId);
         cv.setDescription(description);
+        path += cv.getId() + " - " + cv.getName();
         cvService.save(cv);
-        fileService.saveFile(file, cv.getId() + cv.getName(), path);
+        if (file != null && file.isEmpty() == false) {
+            fileService.saveFile(file, path);
+        }
         return "redirect:/student/CVs";
     }
 
@@ -148,7 +183,7 @@ public class StudentController {
                 cvList.add(cv);
         }
         modelMap.addAttribute("cvList", cvList);
-        return "CV";
+        return "studentCV";
     }
     @GetMapping(value = "report")
     public String studentReport(ModelMap modelMap, HttpServletRequest request) {
@@ -156,14 +191,57 @@ public class StudentController {
             return "test";
         Iterable <OjtProcess> processList = ojtProcessService.findByStudent(studentService.findByAccount(accountService.currentAccount(request)));
         modelMap.addAttribute("processList", processList);
-        return "internshipReport";
+        return "studentInternshipReport";
     }
 
-    @GetMapping(value = "evaluate")
-    public String evaluate(ModelMap modelMap, HttpServletRequest request) {
+    @GetMapping(value = "externalApply")
+    public String externalApply(ModelMap modelMap, HttpServletRequest request) {
         if(accountService.checkRole("STUDENT", request)==false)
             return "test";
-        return "evaluate";
+        Iterable<Position> positionList = positionService.findAll();
+        modelMap.addAttribute("positionList", positionList);
+        return "studentExternalApply";
+    }
+
+    @PostMapping(value = "applyAnExternal")
+    public String applyAnExternal(ModelMap modelMap, HttpServletRequest request,
+                                  @RequestParam("companyName") String companyName,
+                                  @RequestParam("companyEmail") String companyEmail,
+                                  @RequestParam("companyPhone") String companyPhone,
+                                  @RequestParam("contract") MultipartFile contract,
+                                  @RequestParam("letter") MultipartFile letter) {
+        if(accountService.checkRole("STUDENT", request)==false)
+            return "test";
+        Student student = studentService.findByAccount(accountService.currentAccount(request));
+        /*Position position = positionService.findById(id);*/
+        if (student.getApplicationStatus() == false) {
+            ExternalRequest newRequest = new ExternalRequest();
+            newRequest.setStudent(student);
+            newRequest.setCompanyName(companyName);
+            newRequest.setCompanyPhone(companyPhone);
+            newRequest.setCompanyEmail(companyEmail);
+            StudentApplyJob apply = new StudentApplyJob();
+            apply.setStatus("Waiting");
+            apply.setStudent(student);
+            apply.setSemester(student.getSemester());
+            apply.setJob(jobService.firstOfCompany(companyService.findByAccount(accountService.findByEmail(""))));
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+            String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
+            File requestFolder = new File(currentWorkingDir + "\\" + student.getId() + "\\Request\\" + newRequest.getId());
+            requestFolder.mkdirs();
+            String filename = contract.getOriginalFilename();
+            int index = filename.indexOf('.');
+            String extension = filename.substring(index + 1, filename.length()).toUpperCase();
+            fileService.saveFile(contract, path + "contract" + "." + extension);
+            filename = letter.getOriginalFilename();
+            index = filename.indexOf('.');
+            extension = filename.substring(index + 1, filename.length()).toUpperCase();
+            fileService.saveFile(letter, path + "letter" + "." + extension);
+            newRequest.setApplication(apply);
+            studentApplyJobsService.save(apply);
+            externalRequestService.save(newRequest);
+        }
+        return "redirect:/student/applications";
     }
 
 }

@@ -38,4 +38,9 @@ public class SemesterService {
         Semester semester = semesterRepositories.findById(id);
         return semester;
     }
+
+    public Semester currentSemester() {
+        Semester semester = semesterRepositories.findTopByOrderByIdDesc();
+        return semester;
+    }
 }

@@ -1,5 +1,7 @@
 package com.swp.swp.model;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,6 +59,23 @@ public class Position {
     public Set<Job> getJobList() {
         return jobList;
     }
+
+    public ArrayList<Job> getAvailableJobList() {
+        ArrayList<Job> jobs = new ArrayList<>();
+        java.util.Date date = new java.util.Date();
+        java.sql.Date currentDate = new Date(date.getTime());
+
+        for (Job x: jobList) {
+            if (x.getStatus().equals("Accepted") == true &&
+                    x.getEndDate().compareTo(currentDate) >= 0 &&
+                    x.getStartDate().compareTo(currentDate) <= 0) {
+                jobs.add(x);
+            }
+        }
+        return jobs;
+    }
+
+
 
     public void setJobList(Set<Job> jobList) {
         this.jobList = jobList;

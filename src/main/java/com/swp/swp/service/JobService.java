@@ -1,6 +1,7 @@
 package com.swp.swp.service;
 
 import com.swp.swp.database.Database;
+import com.swp.swp.model.CV;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import com.swp.swp.repositories.PositionRepositories;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @Service
 public class JobService {
@@ -97,11 +100,35 @@ public class JobService {
         return jobList;
     }
 
+    public Job firstOfCompany(Company company) {
+        Iterable<Job> jobList = jobRepositories.findByCompany(company);
+        for (Job job: jobList) {
+            return job;
+        }
+        return null;
+    }
+
+    public Iterable<Job> findAllActiveByCompany(Company company) {
+        Iterable<Job> lst = jobRepositories.findByCompany(company);
+        ArrayList<Job> jobList = new ArrayList<>();
+        for (Job job: lst) {
+            if (job.getStatus().equalsIgnoreCase("Inactive") == false) {
+                jobList.add(job);
+            }
+        }
+        return jobList;
+    }
+
     public Iterable <Job> findAllAvailable() {
         Iterable<Job> temp = jobRepositories.findAll();
         ArrayList<Job> jobs = new ArrayList<>();
+        java.util.Date date = new java.util.Date();
+        java.sql.Date currentDate = new Date(date.getTime());
+
         for (Job x: temp) {
-            if (x.getStatus().equals("Accepted") == true) {
+            if (x.getStatus().equals("Accepted") == true &&
+                    x.getEndDate().compareTo(currentDate) >= 0 &&
+                    x.getStartDate().compareTo(currentDate) <= 0 && x.getSlot() > 0) {
                 jobs.add(x);
             }
         }
@@ -130,5 +157,61 @@ public class JobService {
     public Job getByString(String value) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public Double match(Job job, CV cv) {
+        double percent = 0;
+        HashSet<String> set = new HashSet();
+        String temp = "";
+        System.out.println(); System.out.println();
+        System.out.println(job.getDescription());
+        System.out.println(job.getRequirement());
+        System.out.println(cv.getDescription());
+        for (int i = 0; i < job.getDescription().length(); i++) {
+            if (!Character.isLetter(job.getDescription().charAt(i))) {
+                temp = temp.toLowerCase();
+                set.add(temp);
+                System.out.println(temp);
+                temp = "";
+            } else {
+                temp += job.getDescription().charAt(i);
+            }
+        }
+        if (!temp.isEmpty()) { set.add(temp); System.out.println(temp); }
+        temp = "";
+        for (int i = 0; i < job.getRequirement().length(); i++) {
+            if (!Character.isLetter(job.getRequirement().charAt(i))) {
+                temp = temp.toLowerCase();
+                set.add(temp);
+                System.out.println(temp);
+                temp = "";
+            } else {
+                temp += job.getRequirement().charAt(i);
+            }
+        }
+        if (!temp.isEmpty()) { set.add(temp); System.out.println(temp); }
+        int matched = 0, total = 0;
+        temp = "";
+        for (int i = 0; i < cv.getDescription().length(); i++) {
+            if (!Character.isLetter(cv.getDescription().charAt(i))) {
+                temp = temp.toLowerCase();
+                System.out.println(temp);
+                if (set.contains(temp)) {
+                    matched++;
+                }
+                total++;
+                temp = "";
+            } else {
+                temp += cv.getDescription().charAt(i);
+            }
+        }
+        if (!temp.isEmpty()) {
+            System.out.println(temp);
+            if (set.contains(temp)) {
+                matched++;
+            }
+            total++;
+        }
+        return 1.0 * matched / total * 100;
     }
 }

@@ -33,6 +33,9 @@ public class ViewController {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired private OjtProcessService ojtProcessService;
+    @Autowired private CVService cvService;
+
     @RequestMapping(value = "/recruitment/{id}", method = RequestMethod.GET)
     public String jobDetail(ModelMap modelMap, @PathVariable("id") int id, HttpServletRequest request){
         Job jobDetail = jobService.findById(id);
@@ -40,8 +43,10 @@ public class ViewController {
         String[] companyDes = jobService.getCompanyDescription(id);
         String[] jobRe = jobService.getJobRequirement(id);
         if (accountService.checkRole("STUDENT", request) == true) {
-            Iterable<CV> cvList = studentService.findByAccount(accountService.currentAccount(request)).getCvList();
+            Student student = studentService.findByAccount(accountService.currentAccount(request));
+            Iterable<CV> cvList = cvService.findAllAvailable(student);
             modelMap.addAttribute("cvList", cvList);
+            modelMap.addAttribute("student", student);
             for (CV cv: cvList) {
                 System.out.println(cv.getName());
             }
@@ -51,7 +56,7 @@ public class ViewController {
         modelMap.addAttribute("companyDes", companyDes);
         modelMap.addAttribute("jobRe", jobRe);
         modelMap.addAttribute("jobDetail", jobDetail);
-        return "recruitment";
+        return "viewRecruitment";
     }
 
     @RequestMapping(value = "/user")
@@ -73,14 +78,15 @@ public class ViewController {
         }
 
 
-        return "userInformation";
+        return "viewUserInformation";
     }
-    @RequestMapping(value = "/view2")
-    public String view2(){
-        return "listofstudent";
-    }
-    @RequestMapping(value = "/view3")
-    public String view3(){
-        return "applylist";
+
+    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
+    public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
+        /*if(accountService.checkRole("COMPANY", request)==false)
+            return "test";*/
+        OjtProcess process = ojtProcessService.findById(id);
+        modelMap.addAttribute("process", process);
+        return "viewEvaluate";
     }
 }

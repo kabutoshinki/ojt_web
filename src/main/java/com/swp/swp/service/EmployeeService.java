@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class EmployeeService {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
@@ -27,12 +29,23 @@ public class EmployeeService {
         }
     }
 
-    public Iterable<Employee> getAll() {
+    public Iterable<Employee> findAll() {
         Iterable<Employee> employeeList = employeeRepositories.findAll();
         return employeeList;
     }
 
-    public Employee getById(int id) {
+    public Iterable<Employee> findAllActive() {
+        Iterable<Employee> employeeList = employeeRepositories.findAll();
+        ArrayList<Employee> temp = new ArrayList<>();
+        for (Employee x: employeeList) {
+            if (x.getAccount().getRole().equalsIgnoreCase("EMPLOYEE"))
+            if (x.getAccount().getStatus() == null
+                    || x.getAccount().getStatus().equalsIgnoreCase("Inactive") == false)
+                temp.add(x);
+        }
+        return temp;
+    }
+    public Employee findById(int id) {
         Employee employee = employeeRepositories.findById(id);
         return employee;
     }

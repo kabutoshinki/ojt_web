@@ -15,7 +15,7 @@ import com.swp.swp.model.Company;
 public class CompanyRepositoriesTest {
     @Autowired CompanyRepositories companyRepositories;
     @Test
-    void testFindById() {
+    void testFindByCompanyId() {
         Iterable<Company> companyList = companyRepositories.findAll();
         for (Company company : companyList) {
             assertNotNull(companyRepositories.findById(company.getId()));

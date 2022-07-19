@@ -31,7 +31,7 @@ public class Major {
     private int id;
 
     @Column(nullable = true ,unique = false, length = 300)
-    private String major;
+    private String name;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private Set<Position> positionList = new HashSet<>();
@@ -41,18 +41,18 @@ public class Major {
     }
 
 
-    public Major(String major) {
-        this.major = major;
+    public Major(String name) {
+        this.name = name;
     }
 
 
-    public String getMajor() {
-        return major;
+    public String getName() {
+        return name;
     }
 
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setName(String name) {
+        this.name = name;
     }
 
 
@@ -64,7 +64,4 @@ public class Major {
     public void setPositionList(Set<Position> positionList) {
         this.positionList = positionList;
     }
-
-
-    
 }

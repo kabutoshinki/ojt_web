@@ -33,8 +33,9 @@
 
             <body>
                 <%@include file="header.jsp" %>
-                <%@include file="sliderbar.jsp" %>
+                    <%@include file="sliderbar.jsp" %>
                     <br />
+
                     <div class="container">
 
                         <nav aria-label="breadcrumb">
@@ -66,7 +67,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-success">
-                                                    <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel"><i
+                                                    <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel2"><i
                                                             class="bi bi-check-circle" style="font-size:100px"></i></h5>
                                                 </div>
                                                 <div class="modal-body text-center">
@@ -123,51 +124,45 @@
                                                     <th>No.</th>
                                                     <th>Student ID</th>
                                                     <th>Student Name</th>
-                                                    <th>Major</th>
-                                                    <th>External Company</th>
-                                                    <th>CV</th>
                                                     <th>Company</th>
+                                                    <th>Job</th>
+                                                    <th>CV</th>
+                                                    <th>Semester</th>
                                                     <th>Status</th>
+                                                    <th>Verifier</th>
                                                     <th>Operation</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${studentList}" var="o" varStatus="loop">
+                                                <c:forEach items="${applyList}" var="o" varStatus="loop">
                                                     <tr>
                                                         <td>${loop.count}</td>
-                                                        <td>${o.studentId}</td>
-                                                        <td>${o.account.fullName}</td>
-                                                        <td>${o.account.email}</td>
-                                                        <td><a href="" class="btn btn-outline-info"><i
-                                                                    class="bi bi-eye"></i> View Detail</a></td>
+                                                        <td>${o.student.studentId}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.job.company.account.fullName}">${o.job.company.account.fullName}</td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-danger"><i
-                                                                    class="bi bi-trash-fill" style="color: red"></i>
-                                                                Remove</a>
-                                                        </td>
-                                                    </tr </c:forEach>
-
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <a href="" class="btn btn-outline-info btn-sm"><i
-                                                                class="bi bi-eye"></i> Contract</a>
+                                                            <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
                                                         </td>
                                                         <td>
-                                                            <a href="" class="btn btn-outline-info btn-sm"><i
-                                                                class="bi bi-eye"></i> CV</a>
+                                                            <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
                                                         </td>
-                                                        <td>1</td>
-                                                        <td>1</td>
+                                                        <td>${o.semester.semester}</td>
+                                                        <td>${o.status}</td>
+                                                        <td class="text-truncate" style="max-width: 150px;" title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
                                                         <td>
-                                                            <a  class="btn btn-outline-success btn-sm"><i class="bi bi-check-circle"></i> Verify</a>
-                                                            <a href="" class="btn btn-outline-danger btn-sm"><i class="bi bi-x-circle"></i> Deny</a>
+                                                            <a style="${o.status=='Waiting' || o.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Processing"
+                                                               class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                                               value="accept">
+                                                                <i class="bi bi-check-circle"></i> Accept
+                                                            </a>
+                                                            <a style="${o.status=='Processing' || o.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                                               name="op" value="remove">
+                                                                <i class="bi bi-x-circle"></i> Deny
+                                                            </a>
                                                         </td>
                                                     </tr>
-                                                    
+                                                </c:forEach>
+
                                             </tbody>
                                         </table>
 

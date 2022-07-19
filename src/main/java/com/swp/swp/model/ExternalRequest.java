@@ -22,13 +22,28 @@ public class ExternalRequest {
 
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Column(nullable = true ,unique = false, length = 300)
+    private String companyName;
+
+    @Column(nullable = true ,unique = false, length = 300)
+    private String companyEmail;
+
+    @Column(nullable = true ,unique = false, length = 300)
+    private String companyPhone;
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "application_id")
+    private StudentApplyJob application;
 
     public int getId() {
         return id;
@@ -52,5 +67,37 @@ public class ExternalRequest {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public StudentApplyJob getApplication() {
+        return application;
+    }
+
+    public void setApplication(StudentApplyJob application) {
+        this.application = application;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyEmail() {
+        return companyEmail;
+    }
+
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail = companyEmail;
+    }
+
+    public String getCompanyPhone() {
+        return companyPhone;
+    }
+
+    public void setCompanyPhone(String companyPhone) {
+        this.companyPhone = companyPhone;
     }
 }

@@ -15,45 +15,58 @@
           <ul class="list-unstyled components">
             <li>
               <a href="/employee" class="text-truncate"
-                style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}">
+                style="display: ${account.role.equals('EMPLOYEE')=='true' || account.role.equals('ADMIN')=='true'?'':'none'}">
                 <i class='fas fa-home'></i>
                 Home
               </a>
             </li>
             <li>
-              <a href="/employee/students" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}">
+              <a href="/employee/students" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true' || account.role.equals('ADMIN')=='true'?'':'none'}">
                 <i class='fas fa-user-graduate'></i>
                 Students
               </a>
             </li>
             <li>
-              <a href="/employee/companies" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}">
+              <a href="/employee/companies" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true' || account.role.equals('ADMIN')=='true'?'':'none'}">
                 <i class='fas fa-building'></i>
                 Companies
               </a>
             </li>
             <li>
-              <a href="/employee/requirements" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}">
+              <a href="/employee/requirements" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true' || account.role.equals('ADMIN')=='true'?'':'none'}">
                 <i class='fas fa-book-reader'></i>
                 Internship Requirement
               </a>
             </li>
             <li>
-              <a href="/employee/applications" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}">
+              <a href="/employee/applications" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true' || account.role.equals('ADMIN')=='true'?'':'none'}">
                 <i class="bi bi-person-check-fill"></i>
                 Student Application
               </a>
             </li>
             <li>
-              <a href="/employee/verifyApplication" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}">
+              <a href="/employee/externalApplications" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true' || account.role.equals('ADMIN')=='true'?'':'none'}">
                 <i class="bi bi-file-person"></i>
                 Student External Application
               </a>
             </li>
             <li>
-              <a href="/employee/internships" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}">
+              <a href="/employee/internships" class="text-truncate" style="display: ${account.role.equals('EMPLOYEE')=='true' || account.role.equals('ADMIN')=='true'?'':'none'}">
                 <i class="bi bi-award-fill"></i>
                 Internship Result
+              </a>
+            </li>
+            <li>
+              <a href="/employee/semester" class="text-truncate" style="display: ${account.role.equals('ADMIN')=='true'?'':'none'}">
+                <i class="bi bi-award-fill"></i>
+                Semester
+              </a>
+            </li>
+
+            <li>
+              <a href="/employee/employees" class="text-truncate" style="display: ${account.role.equals('ADMIN')=='true'?'':'none'}">
+                <i class="bi bi-award-fill"></i>
+                Employees
               </a>
             </li>
 

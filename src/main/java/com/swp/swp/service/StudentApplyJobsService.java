@@ -44,6 +44,17 @@ public class StudentApplyJobsService {
         return candidates;
     }
 
+    public Iterable<StudentApplyJob> findAllApplications() {
+        Iterable<StudentApplyJob> candidates = studentApplyJobsRepositories.findAll();
+        ArrayList <StudentApplyJob> applyList = new ArrayList<>();
+        for (StudentApplyJob x: candidates) {
+            if (x.getJob().getCompany().getAccount().getFullName().equals("External") == false) {
+                applyList.add(x);
+            }
+        }
+        return applyList;
+    }
+
     public StudentApplyJob findById(int id) {
         return studentApplyJobsRepositories.findById(id);
     }
@@ -65,9 +76,9 @@ public class StudentApplyJobsService {
         }
         return candidatesList;
     }
-    public Iterable<StudentApplyJob> getApplyByStudent(Student student){
-        Iterable <StudentApplyJob> apply = studentApplyJobsRepositories.findByStudent(student);
-        return apply;
+    public Iterable<StudentApplyJob> findApplyByStudent(Student student){
+        Iterable <StudentApplyJob> applyList = studentApplyJobsRepositories.findByStudent(student);
+        return applyList;
     }
 
     public StudentApplyJob getByString(String value) {

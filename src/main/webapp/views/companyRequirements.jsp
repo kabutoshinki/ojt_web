@@ -65,19 +65,6 @@
                                                 <h5 class="modal-title" id="exampleModalLabel2">Import Form</h5>
                                             </div>
                                             <div class="modal-body text-center">
-                                                <!-- <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="basic-addon1">Position</span>   
-                                                    </div>
-                                                    <select name="position"
-                                                        class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3"
-                                                        id="position" aria-label=".form-select-lg example">
-                                                        <c:forEach var="o" items="${positionList}">
-                                                            <option value="${o.id}">${o.position}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div> -->
-                                                
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                       <label class="input-group-text" for="inputGroupSelect01">Position</label>
@@ -134,6 +121,9 @@
                                         <th class="text-center">No</th>
                                         <th class="text-center">Position</th>
                                         <th class="text-center">Detail</th>
+                                        <th class="text-center">Start Date</th>
+                                        <th class="text-center">End Date</th>
+                                        <th class="text-center">Slots</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Verifier</th>
                                         <th class="text-center">Operations</th>
@@ -148,22 +138,109 @@
                                                 <a href="/view/recruitment/${o.id}" class="btn btn-outline-info btn-sm "><i
                                                         class="bi bi-eye"></i> View Detail</a>
                                             </td>
+                                            <td>${o.startDate}</td>
+                                            <td>${o.endDate}</td>
+                                            <td>${o.slot}</td>
                                             <td>${o.status}</td>
                                             <td>${o.employee.account.fullName}</td>
                                             <td>
-                                                <%--<a
-                                                    style="${o.status!='Accepted'?'':'pointer-events: none; background-color: lightgrey'}"
-                                                    href="verifyRequirement/${o.id}/Accepted"
-                                                    class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
-                                                    value="accept">
-                                                    <i class="bi bi-check-circle"></i> Accept
-                                                    </a>
-                                                    <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
-                                                        href="verifyRequirement/${o.id}/Denied"
-                                                        class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
-                                                        value="remove">
-                                                        <i class="bi bi-x-circle"></i> Deny
-                                                    </a>--%>
+                                                <button type="button" class="btn btn-outline-primary btn-sm"
+                                                        data-toggle="modal" data-target="#updateModel_${o.id}">
+                                                    <i class="fa fa-refresh"></i> Update
+                                                </button>
+                                                <button type="button" class="btn btn-outline-danger btn-sm" style="color: red"
+                                                        data-toggle="modal" data-target="#removeModel_${o.id}">
+                                                    <i class="fa fa-trash"></i> Remove
+                                                </button>
+                                                <!-- ++++++++++++++++ Update Requirement +++++++++++++++++ -->
+                                                <div class="modal fade" id="updateModel_${o.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form action="/company/updateRequirement/${o.id}" method="post">
+                                                            <div class="modal-content text-center">
+                                                                <div class="modal-header"
+                                                                     style="background: orange; text-align: center; display: unset;">
+                                                                    <h5 class="modal-title" id="exampleModalLabel2">Update Form</h5>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="input-group-prepend">
+                                                                            <label class="input-group-text" for="inputGroupSelect01">Position</label>
+                                                                        </div>
+                                                                        <select class="custom-select" id="inputGroupSelect01" name="position">
+                                                                            <option selected>Choose...</option>
+                                                                            <c:forEach var="po" items="${positionList}">
+                                                                                <option value="${po.id}" ${po.id==o.position.id?"":"selected"}>${o.position.position}</option>
+                                                                            </c:forEach>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">Description</span>
+                                                                        <input type="text" class="form-control" id="description" value="${o.description}"
+                                                                               placeholder="Enter Description" name="description" required>
+                                                                    </div>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">Requirement</span>
+                                                                        <input type="text" class="form-control" id="requirement" value="${o.requirement}"
+                                                                               placeholder="Enter Requirement" name="requirement" required>
+                                                                    </div>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">Start date</span>
+                                                                        <input type="date" class="form-control" id="startDate" value="${o.startDate}"
+                                                                               placeholder="Enter Start Date" name="startDate" required>
+                                                                    </div>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">End date</span>
+                                                                        <input type="date" class="form-control" id="endDate" value="${o.endDate}"
+                                                                               placeholder="Enter End Date" name="endDate" required>
+                                                                    </div>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">Slot</span>
+                                                                        <input type="number" class="form-control" id="slot" min="1" value="${o.slot}"
+                                                                               max="100" placeholder="Enter Slot" name="slot" required>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-sm btn-outline-success"
+                                                                            id="import"><i class="bi bi-check-circle"></i>Upload</button>
+                                                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                            data-dismiss="modal"><i class="bi bi-x-circle"></i>Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- ++++++++++++++++ End Update Requirement +++++++++++++++++ -->
+                                                <!-- ++++++++++++++++ Remove CV +++++++++++++++++ -->
+                                                <div class="modal fade" id="removeModel_${o.id}" tabindex="-1"
+                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form action="/company/removeRequirement/${o.id}" method="post"
+                                                              enctype="multipart/form-data">
+                                                            <div class="modal-content text-center">
+                                                                <div class="modal-header"
+                                                                     style="background: orange; text-align: center; display: unset;">
+                                                                    <h5 class="modal-title" id="exampleModalLabel4">
+                                                                        Remove Form</h5>
+                                                                </div>
+                                                                <h1>Are you sure you want to remove ${o.position.position}? This action cannot be undone.</h1>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-outline-danger btn-sm" style="color: red">
+                                                                        <i class="bi bi-trash-fill"></i>
+                                                                        Remove
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">
+                                                                        <i class="bi bi-x-circle"></i>
+                                                                        Cancel
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                                             </td>
                                         </tr>
                                     </c:forEach>

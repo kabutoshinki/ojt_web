@@ -11,6 +11,7 @@ import com.swp.swp.model.Student;
 import com.swp.swp.repositories.AccountRepositories;
 import com.swp.swp.service.AccountService;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -58,18 +59,10 @@ public class AccountController {
     @Autowired
     private FileService fileService;
 
-    @RequestMapping(value = "/insertPage", method = RequestMethod.GET)
-    public String getAllAccounts(ModelMap modelMap, HttpServletRequest request){
-        System.out.println("insert information page");
-        HttpSession session = request.getSession();
-        Account account = accountService.getByString((String) session.getAttribute("email"));
-        modelMap.addAttribute("user", account);
-        //System.out.println("Account: " + account.getEmail());
-        return "studentInformation";
-    }
 
-    @PostMapping(value = "/update")
-    public String viewUserInformation(ModelMap modelMap, @RequestParam("avatar") MultipartFile file, HttpServletRequest request) {
+    @PostMapping(value = "/updateInformation")
+    public String updateInformation(ModelMap modelMap, HttpServletRequest request,
+                                    @RequestParam("avatar") MultipartFile file) {
         HttpSession session = request.getSession();
         Account account = accountService.currentAccount(request);
         if (request.getParameter("address") != null) {
@@ -78,17 +71,21 @@ public class AccountController {
         if (request.getParameter("phone") != null) {
             account.setPhone(request.getParameter("phone"));
         }
-        if (file != null) {
+        /*if (request.getParameter("file") != null) {
+            Part file = request.getPart("avatar");
             Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\avatar\\");
             String path = currentWorkingDir.normalize().toString();
             fileService.saveFile(file, account.getId() + "", path);
-        }
+        }*/
         if (account.getRole().equals("STUDENT")) {
-            Student student = (Student) session.getAttribute("student");
+            Student student = studentService.findByAccount(accountService.currentAccount(request));
             if (request.getParameter("studentId") != null) {
                 student.setStudentId(request.getParameter("studentId"));
             }
-            if (request.getParameter("dateOfBirth") != null) {
+            /*System.out.println("kadjnwdjkhadkwa" + request.getParameter("dateOfBirth"));
+            System.out.println("ccccccccc" + request.getParameter("dateOfBirth").toString());*/
+
+            if (request.getParameter("dateOfBirth") != null && request.getParameter("dateOfBirth").isEmpty() == false) {
                 student.setDateOfBirth(Date.valueOf(request.getParameter("dateOfBirth")));
             }
             if (request.getParameter("gender") != null) {
@@ -99,7 +96,7 @@ public class AccountController {
             modelMap.addAttribute("student", student);
         }
         if (account.getRole().equals("COMPANY")) {
-            Company company = (Company) session.getAttribute("company");
+            Company company = companyService.findByAccount(accountService.currentAccount(request));
             if (request.getParameter("description") != null) {
                 company.setDescription(request.getParameter("description"));
             }
@@ -108,40 +105,20 @@ public class AccountController {
             modelMap.addAttribute("company", company);
         }
         accountService.save(account);
+        if (file.isEmpty() == false) {
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
+            String path = currentWorkingDir.normalize().toString();
+            String filename = file.getOriginalFilename();
+            int index = filename.indexOf('.');
+            String extension = filename.substring(index+1, filename.length()).toUpperCase();
+            path += File.separator + String.valueOf(account.getId()) + "." + extension;
+            account.setAvatar("\\avatar\\" + String.valueOf(account.getId()) + "." + extension);
+            fileService.saveFile(file, path);
+            accountService.save(account);
+        }
         return "redirect:/view/user";
     }
 
-    @PostMapping(value = "/insert")
-    public String insert(@ModelAttribute("information") Account infor, RedirectAttributes ra,
-    @RequestParam("imgavatar") MultipartFile img, HttpServletRequest request) throws IOException{
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        String fileName = StringUtils.cleanPath(img.getOriginalFilename());
-        Account account = accountService.getByString(email);
-        String uploadDir = "D:/swp_project/src/main/resources/static/img/"; //+ account.getAccountId();
-
-        Path uploadPath = Paths.get(uploadDir);
-        if(!Files.exists(uploadPath)){
-            Files.createDirectories(uploadPath);
-        }
-        try(InputStream inputStream = img.getInputStream()) {
-            System.out.println("filePath.toFile().getAbsolutePath()");
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-
-            System.out.println(filePath.toFile().getAbsolutePath());
-        } catch (IOException e) {
-            System.out.println("ERROR: "+e.getStackTrace());
-            throw new IOException("Could not save uploaded file: " + fileName);
-        }
-        /*if(!accountService.insertInfor(email, infor.getFullName(), infor.getAddress(),
-        infor.getDateOfBirth(), infor.getPhone(), fileName)){
-            System.out.println("Insert Failed");
-        }*/
-        ra.addFlashAttribute("mess", "Insert completed");
-        return "test";
-    }
-    
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(ModelMap modelMap, @ModelAttribute("account") Account account){
         

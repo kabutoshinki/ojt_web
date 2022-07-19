@@ -42,7 +42,7 @@
                                 <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
                                 <li class="breadcrumb-item"><a href="/employee"
                                         style="padding:0;display: inline;">Employee</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Student_Internship_Result</li>
+                                <li class="breadcrumb-item active" aria-current="page">Semester</li>
                             </ol>
                         </nav>
 
@@ -51,54 +51,53 @@
                             <div>
                                 <div class="row">
                                     <div class="col">
-                                        <h1 style="color: orange">List Of Student Internship Result</h1>
+                                        <h1 style="color: orange">List Of Semester</h1>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-outline-primary mb-3" data-toggle="modal"
-                                    data-target="#mo">
-                                    <i class="bi bi-box-arrow-in-down"> Import</i>
+                                        data-target="#mo">
+                                    <i class="bi bi-box-arrow-in-down"> New semester </i>
                                 </button>
-
-                                <!-- Notification-->
-                                <c:if test="${not empty file}">
-                                    <div class="modal fade" id="success" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-success">
-                                                    <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel"><i
-                                                            class="bi bi-check-circle" style="font-size:100px"></i></h5>
-                                                </div>
-                                                <div class="modal-body text-center">
-                                                    Success Import
-                                                </div>
-                                                <div class="modal-footer mr-auto ml-auto">
-                                                    <button type="button" class="btn btn-danger" id="close"
-                                                        data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:if>
-
                                 <!-- +++++++++++++++++++++++++++++++++ -->
                                 <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                                        <form action="/employee/newSemester" method="post" enctype="multipart/form-data">
                                             <div class="modal-content text-center">
                                                 <div class="modal-header"
                                                     style="background: orange; text-align: center; display: unset;">
                                                     <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
                                                 </div>
                                                 <div class="modal-body text-center">
-                                                    <div class="form-group">
-                                                        <input type="file" name="file" class="form-control-file"
-                                                            required multiple>
-                                                        <input type="text" name="role" value="STUDENT" hidden>
-                                                        <input type="text" name="redirect" value="students" hidden>
-                                                    </div>
+                                                    <!-- <div class="form-group">
+                                                        <input type="text" name="current" class="form-control-file" value="${currentSemester.semester}" readonly>
+                                                        <input type="text" name="current" class="form-control-file" value="${currentSemester.nextSemester.semester}" readonly>
+                                                        <input type="date" name="startDate" required>
+                                                        <input type="date" name="endDate" required>
 
+                                                    </div> -->
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                          <div class="input-group-text">Semester</div>
+                                                        </div>
+                                                        <input type="text" name="current" class="form-control" value="${currentSemester.semester}" readonly>
+                                                    </div>
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                          <div class="input-group-text">Next Semester</div>
+                                                        </div>
+                                                        <input type="text" name="current" class="form-control" value="${currentSemester.nextSemester.semester}" readonly>
+                                                    </div>  
+                                                    <div class="form-row">
+                                                        <div class="col-6 input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Start Date</i></span>
+                                                            <input type="date" class="form-control" name="startDate" required>
+                                                        </div>
+                                                        <div class="col-6 input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">End Date</span>
+                                                            <input type="date" class="form-control" name="endDate" required>
+                                                        </div>
+                                                    </div>    
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-sm btn-outline-success"
@@ -111,9 +110,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-info mb-3" formaction="<c:url value=" /" />"><i
-                                    class="bi bi-box-arrow-in-down"></i> Export</button>
-                                <br />
 
                                 <div class="container">
                                     <div class="table-responsive-xl">
@@ -121,52 +117,20 @@
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
-                                                    <th>Student ID</th>
-                                                    <th>Student Name</th>
                                                     <th>Semester</th>
-                                                    <th>Company</th>
-                                                    <th>Application Detail</th>
-                                                    <th>Start time</th>
-                                                    <th>End time</th>
-                                                    <th>Evaluation Detail</th>
-                                                    <th>Grade</th>
-                                                    <th>Status</th>
-                                                    <%--<th>Verifier</th>--%>
-                                                    <%--<th>Action</th>--%>
+                                                    <th>Year</th>
+                                                    <th>Start date</th>
+                                                    <th>End date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${processList}" var="o" varStatus="loop">
+                                                <c:forEach items="${semesterList}" var="o" varStatus="loop">
                                                     <tr>
                                                         <td>${loop.count}</td>
-                                                        <td>${o.student.studentId}</td>
-                                                        <td>${o.student.account.fullName}</td>
-                                                        <td>${o.application.semester.semester}</td>
-                                                        <td>${o.application.job.company.account.fullName}</td>
-                                                        <td>
-                                                            <a href="" class="btn btn-outline-info btn-sm"><i
-                                                                    class="bi bi-eye"></i> View Detail</a>
-                                                        </td>
-                                                        <td>${o.startTime}</td>
-                                                        <td>${o.endTime}</td>
-                                                        <td>
-                                                            <a href="" class="btn btn-outline-info btn-sm"><i
-                                                                    class="bi bi-eye"></i> View Detail</a>
-                                                        </td>
-                                                        <td>${o.grade}</td>
-                                                        <td>${o.status}</td>
-                                                        <%--<td>${o.employee.account.fullName}</td>--%>
-                                                        <%--<td>
-                                                            <a style="${o.status!='Processing'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Processing"
-                                                               class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
-                                                               value="accept">
-                                                                <i class="bi bi-check-circle"></i> Accept
-                                                            </a>
-                                                            <a style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}" href="verifyApplication/${o.id}/Denied" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                                               name="op" value="remove">
-                                                                <i class="bi bi-x-circle"></i> Deny
-                                                            </a>
-                                                        </td>--%>
+                                                        <td>${o.semester}</td>
+                                                        <td>${o.year}</td>
+                                                        <td>${o.startDate}</td>
+                                                        <td>${o.endDate}</td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

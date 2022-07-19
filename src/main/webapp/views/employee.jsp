@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <a href="/employee/verifyApplication">
+                        <a href="/employee/externalApplications">
                             <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
                                 <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
                                     style="  height: 150px;" alt="Card image cap">
@@ -120,6 +120,30 @@
                                     alt="Card image cap">
                                 <div class="card-body">
                                     <p class="card-text"><strong>Internship Result</strong></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-lg-4" ${account.role=="ADMIN"?"":"hidden"}>
+                        <a href="/employee/semester">
+                            <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                <img class="card-img-top img-fluid" src="/img/semester.png" style="  height: 150px;"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Semester</strong></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-lg-4" ${account.role=="ADMIN"?"":"hidden"}>
+                        <a href="/employee/employees">
+                            <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
+                                <img class="card-img-top img-fluid" src="/img/employee.png" style="  height: 150px;"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Employee</strong></p>
                                 </div>
                             </div>
                         </a>

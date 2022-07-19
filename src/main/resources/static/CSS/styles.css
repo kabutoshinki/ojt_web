@@ -156,17 +156,10 @@ form {
     padding-bottom: 2em;
     padding-top: 0px;
     cursor: pointer;
-    border: 2px solid orange;
+    border: 3px solid orange;
     /* box-shadow: 1px 1px darkblue; */
 }
 .list-comp img{
     width: 100%;
 }
 
-#hr{
-    background-color: black;
-    border: 1px solid black;
-}
-.strong{
-    margin-top: 1em;
-}

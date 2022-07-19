@@ -71,7 +71,7 @@
                                         <th>Student ID</th>
                                         <th>Student Name</th>
                                         <th>Semester</th>
-                                        <th>Application Detail</th>
+                                        <th>Position</th>
                                         <th>Start time</th>
                                         <th>End time</th>
                                         <th>Evaluation Detail</th>
@@ -86,27 +86,62 @@
                                         <tr>
                                             <td>${loop.count}</td>
                                             <td>${o.student.studentId}</td>
-                                            <td>${o.student.account.fullName}</td>
-                                            <td>${o.application.semester.semester}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.student.account.fullName}">${o.student.account.fullName}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.application.semester.semester}">${o.application.semester.semester}</td>
+                                            <td class="text-truncate" style="max-width: 150px;" title="${o.application.job.position.position}">${o.application.job.position.position}</td>
+                                            <td>${o.startDate}</td>
+                                            <td>${o.endDate}</td>
                                             <td>
-                                                <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View
-                                                    Detail</a>
-                                            </td>
-                                            <td>${o.startTime}</td>
-                                            <td>${o.endTime}</td>
-                                            <td>
-                                                <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View
+                                                <a href="/company/evaluate/${o.id}" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View
                                                     Detail</a>
                                             </td>
                                             <td>${o.grade}</td>
                                             <td>${o.status}</td>
-                                            <%--<td>${o.employee.account.fullName}</td>--%>
-                                                <td>
-                                                    <a href="" class="btn btn-sm btn-outline-success mt-auto mb-auto"
-                                                        name="op" value="accept">
-                                                        <i class="bi bi-check-circle"></i> Update
-                                                    </a>
-                                                </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-primary btn-sm"
+                                                        data-toggle="modal" data-target="#updateModel_${o.id}">
+                                                    <i class="fa fa-refresh"></i> Update
+                                                </button>
+                                                <%--<button type="button" class="btn btn-outline-danger btn-sm" style="color: red"
+                                                        data-toggle="modal" data-target="#removeModel_${o.id}">
+                                                    <i class="fa fa-trash"></i> Remove
+                                                </button>--%>
+
+                                                <!-- ++++++++++++++++ Update Requirement +++++++++++++++++ -->
+                                                <div class="modal fade" id="updateModel_${o.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form action="/company/updateProcess/${o.id}" method="post">
+                                                            <div class="modal-content text-center">
+                                                                <div class="modal-header"
+                                                                     style="background: orange; text-align: center; display: unset;">
+                                                                    <h5 class="modal-title" id="exampleModalLabel2">Update Form</h5>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">Start date</span>
+                                                                        <input type="date" class="form-control" id="startDate" value="${o.startDate}"
+                                                                               placeholder="Enter Start Date" name="startDate" required>
+                                                                    </div>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">End date</span>
+                                                                        <input type="date" class="form-control" id="endDate" value="${o.endDate}"
+                                                                               placeholder="Enter End Date" name="endDate" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-sm btn-outline-success"
+                                                                            id="import"><i class="bi bi-check-circle"></i>Upload</button>
+                                                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                            data-dismiss="modal"><i class="bi bi-x-circle"></i>Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- ++++++++++++++++ End Update Requirement +++++++++++++++++ -->
+
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
