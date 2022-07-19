@@ -73,19 +73,19 @@ style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV</a>
             </div>
 
             <ul class="navbar-nav menu mr-auto ml-auto p-0 align-items-center">
-                <li class="nav-item active mr-3"><a class="nav-link" href="/home">Home</a></li>
-                <li class="nav-item active mr-3"><a href="/student/CVs"
+                <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
+                <li class="nav-item active"><a href="/student/CVs"
                                                     style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">My CVs</a></li>
-                <li class="nav-item active mr-3"><a href="/student/applications"
+                <li class="nav-item active"><a href="/student/applications"
                                                     style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">My Applications</a></li>
-                <li class="nav-item active mr-3"><a href="/student/externalApplications"
+                <li class="nav-item active"><a href="/student/externalApplications"
                                                     style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">My External Applications</a></li>
-                <li class="nav-item active mr-3"><a href="/student/report"
+                <li class="nav-item active"><a href="/student/report"
                                                     style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">Internship Report</a></li>
             </ul>
             <div class="d-flex align-items-center justify-content-around">
                 <div class="text-light" style="display: ${email==null?'':'none'};">
-                    <a href="/oauth2/authorization/google" style="color: black"><i class="fa-solid fa-user-large"></i>
+                    <a href="/oauth2/authorization/google" style="color: black"><i class="bi bi-google"></i>
                         Login</a>
                 </div>
             </div>
@@ -94,7 +94,9 @@ style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV</a>
 
                     <div class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                          aria-haspopup="true" aria-expanded="false" style="display: ${email!=null?'':'none'};">
-                        <i class="bi bi-person-circle rounded-circle"></i></i>
+                        <!-- <i class="bi bi-person-circle rounded-circle"></i> -->
+                        <img src="${account.avatar==null?'/img/avatar.png':account.avatar}"
+                         width="30" class="img-fluid rounded-circle" height="30px">
                     </div>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/view/user">My Profile</a>

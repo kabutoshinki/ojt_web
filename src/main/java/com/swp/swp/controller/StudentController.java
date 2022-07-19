@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.ArrayList;
 
 @Controller
@@ -77,10 +78,28 @@ public class StudentController {
             return "test";
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        if (!studentService.alreadyApplied(student, jobService.findById(id).getCompany())) {
+
+        java.util.Date date = new java.util.Date();
+        java.sql.Date currentDate = new Date(date.getTime());
+
+        Job job = jobService.findById(id);
+
+        if (semesterService.currentSemester().equals(student.getSemester()) == false) {
+            session.setAttribute("dangerMessage", "You can not apply for this semester.");
+            return "redirect:/student/applications";
+        } else {
+            if (semesterService.currentSemester().getStartDate().compareTo(currentDate) > 0 &&
+                    semesterService.currentSemester().getEndDate().compareTo(currentDate) < 0) {
+                session.setAttribute("dangerMessage", "You can apply a job for this semester from " +
+                        String.valueOf(semesterService.currentSemester().getStartDate()) + " to " + String.valueOf(semesterService.currentSemester().getEndDate()));
+                return "redirect:/student/applications";
+            }
+        }
+        if (studentService.alreadyApplied(student, job.getCompany())) {
             session.setAttribute("dangerMessage", "You can not apply for this company more this semester.");
             return "redirect:/student/applications";
         }
+
         if (student.getApplicationStatus() == false) {
             /*System.out.println(email);
             System.out.println(account.getFullName());
@@ -251,6 +270,14 @@ public class StudentController {
             return "test";
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
+        boolean flag = false;
+        for (ExternalRequest x: student.getRequestList()) {
+            if (x.getApplication().getSemester().equals(semesterService.currentSemester())
+                    && x.getApplication().getStatus().equalsIgnoreCase("Denied") == false) {
+                session.setAttribute("dangerMessage", "You can not apply more external job this semester.");
+                return "redirect:/student/externalApplications";
+            }
+        }
         /*Position position = positionService.findById(id);*/
         if (student.getApplicationStatus() == false) {
             ExternalRequest newRequest = new ExternalRequest();

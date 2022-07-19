@@ -35,8 +35,6 @@ public class ExternalRequest {
     @Column(nullable = true ,unique = false, length = 300)
     private String letterPath;
 
-
-
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "student_id")
     private Student student;
@@ -120,4 +118,5 @@ public class ExternalRequest {
     public void setLetterPath(String letterPath) {
         this.letterPath = letterPath;
     }
+
 }

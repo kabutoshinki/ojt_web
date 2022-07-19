@@ -32,29 +32,6 @@
 
 <body>
 <%@include file="header.jsp" %>
-<c:if test="${successMessage != null}">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-            ${successMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${dangerMessage != null}">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            ${dangerMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${warningMessage != null}">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            ${warningMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<%
-    session.setAttribute("successMessage", null);
-    session.setAttribute("dangerMessage", null);
-    session.setAttribute("warningMessage", null);
-%>
 
 <%@include file="sliderbar.jsp" %>
 <br/>
@@ -67,6 +44,30 @@
             <li class="breadcrumb-item active" aria-current="page">Companies</li>
         </ol>
     </nav>
+
+    <c:if test="${successMessage != null}">
+        <div class="container alert alert-success alert-dismissible fade show" role="alert">
+                ${successMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${dangerMessage != null}">
+        <div class="container alert alert-danger alert-dismissible fade show" role="alert">
+                ${dangerMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${warningMessage != null}">
+        <div class="container alert alert-warning alert-dismissible fade show" role="alert">
+                ${warningMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <% session.setAttribute("successMessage", null);
+        session.setAttribute("dangerMessage",
+                null);
+        session.setAttribute("warningMessage", null); %>
+
     <br/>
 
     <div class="row">
@@ -74,7 +75,8 @@
             <h1 style="color: orange">List of Companies</h1>
         </div>
     </div>
-    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#mo">
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+            data-target="#mo">
         <i class="bi bi-box-arrow-in-down"> Import</i>
     </button>
 
@@ -82,7 +84,8 @@
     <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
-            <form action="/employee/uploadCompany" method="post" enctype="multipart/form-data">
+            <form action="/employee/uploadCompany" method="post"
+                  enctype="multipart/form-data">
                 <div class="modal-content text-center">
                     <div class="modal-header"
                          style="background: orange; text-align: center; display: unset;">
@@ -90,18 +93,18 @@
                     </div>
                     <div class="modal-body text-center">
                         <!-- <div class="form-group">
-                        <input type="file" name="file" class="form-control-file" required
-                            multiple>
-                        <input type="text" name="role" value="COMPANY" hidden>
-                        <input type="text" name="redirect" value="companies" hidden>
-                    </div> -->
+<input type="file" name="file" class="form-control-file" required
+multiple>
+<input type="text" name="role" value="COMPANY" hidden>
+<input type="text" name="redirect" value="companies" hidden>
+</div> -->
 
                         <div class="form-group">
                             <div class="custom-file mt-3">
                                 <label class="custom-file-label" for="customFile">Choose
                                     file</label>
                                 <input type="file" class="custom-file-input" name="file"
-                                       id="fileImage">
+                                       id="fileImage" accept=".xlsx,.XLS">
                                 <input type="text" name="role" value="COMPANY" hidden>
                                 <input type="text" name="redirect" value="companies" hidden>
                             </div>
@@ -121,9 +124,11 @@
             </form>
         </div>
     </div>
-    <button class="btn btn-outline-info" formaction="<c:url value=" /" />">
-        <i class="bi bi-box-arrow-in-down"></i> Export
-    </button>
+    <a href="/file.xls" download>
+        <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                class="bi bi-box-arrow-in-down"></i> Export
+        </button>
+    </a>
     <a href="/template/Company.xlsx" download>
         <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
                 class="bi bi-box-arrow-in-down"></i> Download template
@@ -150,12 +155,16 @@
                         <td>${loop.count}</td>
                         <td class="text-truncate" style="max-width: 150px;"
                             title="${o.account.fullName}">${o.account.fullName}</td>
-                        <td><a
-                                href="mailto: ${o.account.email}" class="text-truncate" style="max-width: 150px;"
-                                title="${o.account.email}">${o.account.email}</a>
+                        <td><a href="mailto: ${o.account.email}" class="text-truncate"
+                               style="max-width: 150px;"
+                               title="${o.account.email}">${o.account.email}</a>
                         </td>
-                        <td><a href="" class="btn btn-outline-info btn-sm"><i
-                                class="bi bi-eye"></i> View Detail</a></td>
+                        <td>
+                            <button class="btn btn-outline-info btn-sm" data-toggle="modal"
+                                    data-target="#inforModal_${o.id}"><i
+                                    class="bi bi-eye"></i> View Detail
+                            </button>
+                        </td>
                         <td>
                             <button type="button" class="btn btn-outline-danger btn-sm"
                                     style="color: red" data-toggle="modal"
@@ -163,44 +172,112 @@
                                 <i class="bi bi-trash-fill"></i> Remove
                             </button>
                         </td>
-                        <!-- ++++++++++++++++ Remove Company +++++++++++++++++ -->
-                        <div class="modal fade" id="modelRemove_${o.id}" tabindex="-1"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <form action="/employee/removeCompany/${o.id}"
-                                      method="post">
-                                    <div class="modal-content text-center">
-                                        <div class="modal-header"
-                                             style="background: orange; text-align: center; display: unset;">
-                                            <h5 class="modal-title" id="exampleModalLabel4">
-                                                Remove Form
-                                            </h5>
-                                        </div>
-                                        <h4>Are you sure you want to remove</h4>
-                                        <h1 class="text-truncate text-center"
-                                            title="${o.account.fullName}">
-                                                ${o.account.fullName}</h1>
-                                        <h4>This action cannot be undone.</h4>
-                                        <div class="modal-footer">
-                                            <button type="submit"
-                                                    class="btn btn-outline-danger btn-sm"
-                                                    style="color: red">
-                                                <i class="bi bi-trash-fill"></i>
-                                                Remove
-                                            </button>
-                                            <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary"
-                                                    data-dismiss="modal">
-                                                <i class="bi bi-x-circle"></i>
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
                     </tr>
+                    <!-- ++++++++++++++++ Remove Company +++++++++++++++++ -->
+                    <div class="modal fade" id="modelRemove_${o.id}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="/employee/removeCompany/${o.id}"
+                                  method="post">
+                                <div class="modal-content text-center">
+                                    <div class="modal-header"
+                                         style="background: orange; text-align: center; display: unset;">
+                                        <h5 class="modal-title"
+                                            id="exampleModalLabel4">
+                                            Remove Form
+                                        </h5>
+                                    </div>
+                                    <h4>Are you sure you want to remove</h4>
+                                    <h1 class="text-truncate text-center"
+                                        title="${o.account.fullName}">
+                                            ${o.account.fullName}</h1>
+                                    <h4>This action cannot be undone.</h4>
+                                    <div class="modal-footer">
+                                        <button type="submit"
+                                                class="btn btn-outline-danger btn-sm"
+                                                style="color: red">
+                                            <i class="bi bi-trash-fill"></i>
+                                            Remove
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                data-dismiss="modal">
+                                            <i class="bi bi-x-circle"></i>
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+                    <!-- User information -->
+                    <div class="modal fade" id="inforModal_${o.id}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content text-center">
+                                <div class="modal-header"
+                                     style="background: orange; text-align: center; display: unset;">
+                                    <h5 class="modal-title" id="exampleModalLabel">User
+                                        Profile
+                                    </h5>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div class="mb-3">
+                                        <img src="${o.account.avatar==null?'/img/default.png':o.account.avatar}" alt="avatar image"
+                                             class="img-fluid" style="height: 150px;"
+                                             disabled>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1"><i
+                                                                                class='fas fa-user-graduate'></i></span>
+                                        <input type="text" class="form-control"
+                                               id="companyName"
+                                               name="companyName" value="${o.account.fullName}" disabled>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1"><i
+                                                                                class="bi bi-envelope-fill"></i></span>
+                                        <input type="email" class="form-control"
+                                               id="companyEmail" name="companyEmail" value="${o.account.email}"
+                                               disabled>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1"><i
+                                                                                class="bi bi-telephone-fill"></i></span>
+                                        <input type="tel" class="form-control"
+                                               id="companyPhone" name="companyPhone" value="${o.account.phone}" disabled>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1"><i
+                                                                                class="bi bi-geo-alt-fill"></i></span>
+                                        <textarea class="form-control"
+                                                  id="companyAddress" name="companyAddress" value="${o.account.address}" disabled>value="${o.account.address}"</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer mr-auto ml-auto">
+                                    <button type="button" class="btn btn-outline-danger"
+                                            data-dismiss="modal"><i
+                                            class="bi bi-x-circle"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
                 </c:forEach>
                 </tbody>
             </table>

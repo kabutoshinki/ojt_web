@@ -32,7 +32,6 @@ public class Semester {
 
     @Column(unique = false, nullable = true)
     private Date endDate;
-
     @OneToMany(mappedBy = "semester", cascade = CascadeType.REFRESH)
     private Set<Student> studentList = new HashSet<>();
     @OneToMany(mappedBy = "semester", cascade = CascadeType.REFRESH)
@@ -118,4 +117,5 @@ public class Semester {
         }
         return nextSemester;
     }
+
 }

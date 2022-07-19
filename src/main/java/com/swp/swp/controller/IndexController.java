@@ -48,39 +48,9 @@ class IndexController {
         if (request.getParameter("position") != null) {
             position = Integer.parseInt(request.getParameter("position"));
         }
-<<<<<<< HEAD
-        modelMap.addAttribute("jobList",jobList);
-        Iterable<Major> majorsList = majorService.findAll();
-        modelMap.addAttribute("majorsList", majorsList);
-        Iterable<Position> positionList = positionService.findAll();
-        modelMap.addAttribute("positionList", positionList);
-
-
-        modelMap.addAttribute("currentSemester", semesterService.currentSemester());
-
-        String messTrue = (String)session.getAttribute("true");
-        if(messTrue!=null){
-            if(messTrue.equals("true")){
-                session.removeAttribute("true");
-                request.setAttribute("mess", "Login Successfully");
-            }
-            else
-                request.setAttribute("mess", "Login Fail");
-        }
-
-        return "home";
-    }
-
-    @RequestMapping(value = "/home/filter", method = RequestMethod.GET)
-    public String homeFilter(ModelMap modelMap, HttpServletRequest request,
-                             /*@RequestParam("major") int major,*/
-                             @RequestParam("position") int position,
-                             @RequestParam("sort") int sort) {
-=======
         if (request.getParameter("sort") != null) {
             sort = Integer.parseInt(request.getParameter("sort"));
         }
->>>>>>> 0e2c378a23badc5d0378615c98f5b267f85da4c8
         ArrayList<Job> jobList = (ArrayList<Job>) jobService.findAllAvailable();
         Iterable<Major> majorsList = majorService.findAll();
         modelMap.addAttribute("majorsList", majorsList);

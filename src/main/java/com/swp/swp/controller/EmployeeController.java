@@ -23,6 +23,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired PositionService positionService;
+    @Autowired FileService fileService;
     @Autowired
     SemesterService semesterService;
     @Autowired private JobService jobService;
@@ -47,6 +48,7 @@ public class EmployeeController {
             return "test";
         HttpSession session = request.getSession();
         Iterable<Company> companyList = companyService.findAllActive();
+        fileService.exportCompanyList(companyList);
         modelMap.addAttribute("companyList",companyList);
         return "employeeCompanies";
     }
@@ -67,6 +69,7 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable<Student> studentList = studentService.findAllActive();
+        fileService.exportStudentList(studentList);
         modelMap.addAttribute("studentList", studentList);
         return "employeeStudents";
     }
@@ -111,6 +114,7 @@ public class EmployeeController {
             return "test";
         Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAllApplications();
         modelMap.addAttribute("applyList", applyList);
+        fileService.exportApplyList(applyList);
         return "employeeApplications";
     }
 
@@ -120,6 +124,7 @@ public class EmployeeController {
             return "test";
         Iterable<ExternalRequest> applyList = externalRequestService.findAll();
         modelMap.addAttribute("applyList", applyList);
+        fileService.exportExternalApplyList(applyList);
         return "employeeExternalApplications";
     }
 
@@ -206,6 +211,7 @@ public class EmployeeController {
             return "test";
         Iterable <OjtProcess> processList = ojtProcessService.findAll();
         modelMap.addAttribute("processList", processList);
+        fileService.exportProcessList(processList);
         return "employeeInternships";
     }
 
@@ -234,6 +240,10 @@ public class EmployeeController {
         ArrayList <ArrayList> accountList = FileService.upload(file);
         String body = "Welcome to OJT website. Please use this email to login to the website";
         String subject = "Account for ojt";
+        int countSuccess = 0;
+        ArrayList <String> exist = new ArrayList<>();
+        ArrayList <String> conflict = new ArrayList<>();
+
         for (ArrayList x: accountList) {
             if (x.size() != 7) continue;
             Account account = new Account();
@@ -247,7 +257,19 @@ public class EmployeeController {
             newStudent.setAccount(account);
             if (accountService.isExist(account.getEmail())) {
                 account = accountService.findByEmail(account.getEmail());
-                newStudent = studentService.findByAccount(account);
+                Student oldStudent = studentService.findByAccount(account);
+                if (oldStudent.getStudentId() != (String)x.get(1)) {
+                    conflict.add(account.getEmail());
+                    continue;
+                } else {
+                    exist.add(account.getEmail());
+                }
+            } else {
+                if (studentService.findByStudentId((String)x.get(1)) != null) {
+                    conflict.add(account.getEmail());
+                } else {
+                    countSuccess += 1;
+                }
             }
             newStudent.setSemester(semesterService.currentSemester());
             newStudent.setStudentId((String)x.get(1));
@@ -257,7 +279,24 @@ public class EmployeeController {
             emailService.sendEmail(account.getEmail(), body, subject);
             System.out.println(account);
         }
-
+        if (countSuccess > 0)
+            session.setAttribute("successMessage", "Successfully added 4 accounts");
+        if (exist.isEmpty() == false) {
+            String s = String.valueOf(exist.size()) + " accounts ";
+            for (String x: exist) {
+                s += x + " ";
+            }
+            s += " already exist. They will be change to current semester.";
+            session.setAttribute("warningMessage", s);
+        }
+        if (conflict.isEmpty() == false) {
+            String s = String.valueOf(conflict.size()) + " accounts ";
+            for (String x: conflict) {
+                s += x + " ";
+            }
+            s += " were conflicted. Can not be added.";
+            session.setAttribute("dangerMessage", s);
+        }
         return "redirect:/employee/students";
     }
 
@@ -348,11 +387,15 @@ public class EmployeeController {
             return "test";
         HttpSession session = request.getSession();
         Semester newSemester = semesterService.currentSemester().getNextSemester();
-        newSemester.setStartDate(startDate);
-        newSemester.setEndDate(endDate);
-        semesterService.save(newSemester);
-        modelMap.addAttribute("currentSemester", semesterService.currentSemester());
-        session.setAttribute("successMessage", "Successfully!");
+        if (startDate.compareTo(endDate) <= 0) {
+            newSemester.setStartDate(startDate);
+            newSemester.setEndDate(endDate);
+            semesterService.save(newSemester);
+            modelMap.addAttribute("currentSemester", semesterService.currentSemester());
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Create failed. Start date must before end date.");
+        }
         return "redirect:/employee/semester";
     }
 
