@@ -297,130 +297,117 @@
                             <!-- ++++++++++++++++++++++++++++++++++++ -->
 
                             <!-- -->
-                            <!-- Modal Evaluate -->
-
-                            <div class="modal fade" id="evaluateModal_${o.id}"
-                                 tabindex="-1" aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
+                            <div class="modal fade" id="evaluateModal_${o.id}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
 
                                     <div class="modal-content text-center">
-                                        <div class="modal-header"
-                                             style="background: orange; text-align: center; display: unset;">
-                                            <h5 class="modal-title"
-                                                id="exampleModalLabel">Evaluate Detail
-                                            </h5>
-                                        </div>
-                                        <div class="modal-body text-center">
-
-                                            <div class="mb-3">
-                                                <img src="${o.company.account.avatar==null?'/img/default.png':o.company.account.avatar}"
-                                                     alt="avatar image" class="img-fluid"
-                                                     style="height: 150px;" disabled>
+                                            <div class="modal-header"
+                                                 style="background: orange; text-align: center; display: unset;">
+                                                <h5 class="modal-title" id="exampleModalLabel">Evaluate
+                                                    Detail
+                                                </h5>
                                             </div>
+                                            <div class="modal-body text-center">
 
-                                            <div class="input-group mb-3">
-                                                                                <span class="input-group-text"
-                                                                                      id="basic-addon1">Job
-                                                                                    Description</span>
-
-                                                <textarea class="form-control"
-                                                          id="description"
-                                                          placeholder="Enter Description"
-                                                          name="description" value=""
-                                                          disabled></textarea>
-
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="col-9 input-group mb-3">
-                                                                                    <span class="input-group-text"
-                                                                                          id="basic-addon1">Knowledge</span>
-                                                    <textarea class="form-control"
-                                                              id="requirement"
-                                                              placeholder="Enter Requirement"
-                                                              name="requirement" value=""
-                                                              disabled></textarea>
+                                                <div class="mb-3">
+                                                    <img src="${o.student.account.avatar==null?'/img/default.png':o.student.account.avatar}"
+                                                         alt="avatar image"
+                                                         class="img-fluid" style="height: 150px;"
+                                                         disabled>
                                                 </div>
 
-                                                <div class="col-3 input-group mb-3">
+                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text" id="basic-addon1">Job
+                                                                        Description</span>
 
-                                                    <input type="number"
-                                                           class="form-control"
-                                                           name="grade1" id="grade1"
-                                                           value="10" disabled>
+                                                    <textarea class="form-control" id="description"
+                                                              placeholder="Enter Description"
+                                                              name="jobDescription" disabled
+                                                              value="${o.description}">${o.description}</textarea>
 
                                                 </div>
+
+                                                <div class="form-row">
+                                                    <div class="col-9 input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1">Knowledge</span>
+                                                        <textarea class="form-control" id="requirement"
+                                                                  placeholder="Enter Knowledge Evaluate"
+                                                                  name="knowledge" value="${o.knowledge}" disabled
+                                                        >${o.knowledge}</textarea>
+                                                    </div>
+
+                                                    <div class="col-3 input-group mb-3">
+                                                        <input name="point1" class="form-control"
+                                                                id="grade1"
+                                                                aria-label=".form-select-lg example" value="${o.knowledgePoint}"
+                                                                disabled>
+
+                                                        </input>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="col-9 input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1">Soft skill</span>
+                                                        <textarea class="form-control" id="requirement"
+                                                                  placeholder="Enter Soft Skill Evaluate"
+                                                                  name="softSkill" value="${o.softSkill}" disabled
+                                                        >${o.softSkill}</textarea>
+                                                    </div>
+
+                                                    <div class="col-3 input-group mb-3">
+                                                        <input name="point2" class="form-control"
+                                                                id="grade2"
+                                                                aria-label=".form-select-lg example" value="${o.softSkillPoint}"
+                                                                disabled>
+                                                        </input>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="col-9 input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1">Attitude</span>
+                                                        <textarea class="form-control" id="requirement"
+                                                                  placeholder="Enter Attitude Evaluate"
+                                                                  name="attitude" value="${o.attitude}"
+                                                                  disabled>${o.attitude}</textarea>
+                                                    </div>
+
+                                                    <div class="col-3 input-group mb-3">
+                                                        <input name="point3" class="form-control"
+                                                                id="grade3"
+                                                                aria-label=".form-select-lg example" value="${o.attitudePoint}"
+                                                                disabled>
+                                                        </input>
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text"
+                                                                          id="basic-addon1">Grade</span>
+                                                    <input type="number" class="form-control" id="total"
+                                                           value="${o.grade}" name="total" disabled>
+                                                </div>
+
                                             </div>
 
-                                            <div class="form-row">
-                                                <div class="col-9 input-group mb-3">
-                                                                                    <span class="input-group-text"
-                                                                                          id="basic-addon1">Soft
-                                                                                        skill</span>
-                                                    <textarea class="form-control"
-                                                              id="requirement"
-                                                              placeholder="Enter Requirement"
-                                                              name="requirement" value=""
-                                                              disabled></textarea>
-                                                </div>
 
-                                                <div class="col-3 input-group mb-3">
-
-                                                    <input type="number"
-                                                           class="form-control"
-                                                           name="grade2" id="grade2"
-                                                           value="10" disabled>
-
-                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-danger"
+                                                        data-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                                    Close
+                                                </button>
                                             </div>
-
-                                            <div class="form-row">
-                                                <div class="col-9 input-group mb-3">
-                                                                                    <span class="input-group-text"
-                                                                                          id="basic-addon1">Attitude</span>
-                                                    <textarea class="form-control"
-                                                              id="requirement"
-                                                              placeholder="Enter Requirement"
-                                                              name="requirement" value=""
-                                                              disabled></textarea>
-                                                </div>
-
-                                                <div class="col-3 input-group mb-3">
-
-                                                    <input type="number"
-                                                           class="form-control"
-                                                           name="grade3" id="grade3"
-                                                           value="10" disabled>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="input-group mb-3">
-                                                                                <span class="input-group-text"
-                                                                                      id="basic-addon1">Total</span>
-                                                <input type="number"
-                                                       class="form-control" id="total"
-                                                       value="0" name="total" disabled>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <button type="button"
-                                                    class="btn btn-outline-danger"
-                                                    data-dismiss="modal"><i
-                                                    class="bi bi-x-circle"></i>
-                                                Close
-                                            </button>
-                                        </div>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <!-- ++++++++++++++++++++++++++++++++++++++++ -->
+                            <!-- +++++++++++++++++++++++++++++++++++++++++ -->
                         </c:forEach>
 
                         </tbody>
@@ -462,7 +449,7 @@
 
 
         let sum = parseInt(grade1) + parseInt(grade2) + parseInt(grade3);
-        return sum;
+        return sum / 3;
     }
 
 

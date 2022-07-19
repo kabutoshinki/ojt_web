@@ -138,7 +138,8 @@
                                 <div class="modal-body text-center">
 
                                     <div class="mb-3">
-                                        <img src="/img/default.png" alt="avatar image"
+                                        <img src="${o.company.account.avatar==null?'/img/default.png':o.company.account.avatar}"
+                                             alt="avatar image"
                                              class="img-fluid" style="height: 150px;" disabled>
                                     </div>
 
@@ -155,7 +156,7 @@
 
                                         <textarea class="form-control" id="description"
                                                   placeholder="Enter Description" name="description"
-                                                  value="" disabled></textarea>
+                                                  value="${o.description}" disabled>${o.description}</textarea>
 
                                     </div>
                                     <div class="input-group mb-3">
@@ -163,7 +164,7 @@
                                                                   id="basic-addon1">Requirement</span>
                                         <textarea class="form-control" id="requirement"
                                                   placeholder="Enter Requirement" name="requirement"
-                                                  value="" disabled></textarea>
+                                                  value="${o.requirement}" disabled>${o.requirement}</textarea>
                                     </div>
 
                                     <div class="form-row">

@@ -120,13 +120,13 @@
                                                 </td>
                                                 <td>${o.status}</td>
                                                 <td>
-                                                    <a style="${o.status!='Passed' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                    <a style="${o.status!='Passed Interview' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
                                                         href="verifyApplication/${o.id}/nextStep"
                                                         class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                                                         value="accept">
                                                         <i class="bi bi-check-circle"></i> Next Step
                                                     </a>
-                                                    <a style="${o.status!='Rejected' && o.status!='Passed'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                    <a style="${o.status!='Rejected' && o.status!='Passed Interview'?'':'pointer-events: none; background-color: lightgrey'}"
                                                         href="verifyApplication/${o.id}/Rejected"
                                                         class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
                                                         value="remove">

@@ -134,22 +134,16 @@
                         <div class="modal-content text-center">
                             <div class="modal-header"
                                  style="background: orange; text-align: center; display: unset;">
-                                <h5 class="modal-title" id="exampleModalLabel">
-                                        ${o.job.company.account.fullName}
+                                <h5 class="modal-title"
+                                    id="exampleModalLabel">${o.job.company.account.fullName}
                                 </h5>
                             </div>
                             <div class="modal-body text-center">
 
                                 <div class="mb-3">
-                                    <img src="/img/default.png" alt="avatar image"
-                                         class="img-fluid" style="height: 150px;" disabled>
-                                </div>
-
-                                <div class="input-group mb-3">
-                                                            <span class="input-group-text"
-                                                                  id="basic-addon1">Semester</span>
-                                    <input class="form-control" id="semester" name="semester"
-                                           value="${o.semester.semester}" disabled></input>
+                                    <img src="${o.job.company.account.avatar==null?'/img/default.png':o.job.company.account.avatar}"
+                                         alt="avatar image" class="img-fluid"
+                                         style="height: 150px;" disabled>
                                 </div>
 
                                 <div class="input-group mb-3">
@@ -160,26 +154,52 @@
                                 </div>
 
                                 <div class="input-group mb-3">
-                                                            <span class="input-group-text"
-                                                                  id="basic-addon1">Description</span>
+                                                                                <span class="input-group-text"
+                                                                                      id="basic-addon1">Description</span>
 
-                                    <textarea class="form-control" id="description"
-                                              placeholder="Enter Description" name="description"
-                                              value="" disabled></textarea>
+                                    <textarea class="form-control"
+                                              id="description"
+                                              placeholder="Enter Description"
+                                              name="description" value="${o.job.description}"
+                                              disabled>${o.job.description}</textarea>
 
                                 </div>
                                 <div class="input-group mb-3">
-                                                            <span class="input-group-text"
-                                                                  id="basic-addon1">Requirement</span>
-                                    <textarea class="form-control" id="requirement"
-                                              placeholder="Enter Requirement" name="requirement"
-                                              value="" disabled></textarea>
+                                                                                <span class="input-group-text"
+                                                                                      id="basic-addon1">Requirement</span>
+                                    <textarea class="form-control"
+                                              id="requirement"
+                                              placeholder="Enter Requirement"
+                                              name="requirement" value="${o.job.requirement}"
+                                              disabled>${o.job.requirement}</textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-6 input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">Start
+                                                                    Date</i></span>
+                                        <input type="date" class="form-control p-2"
+                                               name="startDate" value="${o.job.startDate}" disabled>
+                                    </div>
+                                    <div class="col-6 input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">End
+                                                                    Date</span>
+                                        <input type="date" class="form-control" name="endDate"
+                                               value="${o.job.endDate}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Slot</span>
+                                    <input type="number" class="form-control" id="slot"
+                                           name="slot" value="${o.job.slot}" disabled>
                                 </div>
 
                             </div>
                             <div class="modal-footer mr-auto ml-auto">
-                                <button type="button" class="btn btn-outline-danger"
-                                        data-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                <button type="button"
+                                        class="btn btn-outline-danger"
+                                        data-dismiss="modal"><i
+                                        class="bi bi-x-circle"></i>
                                     Close
                                 </button>
                             </div>
@@ -188,7 +208,7 @@
                     </div>
                 </div>
 
-                <!-- ++++++++++++++++++++++++++++++++++++++++++++ -->
+                <!-- +++++++++++++++++++++++++++++++++++++++++++ -->
             </c:forEach>
             </tbody>
         </table>

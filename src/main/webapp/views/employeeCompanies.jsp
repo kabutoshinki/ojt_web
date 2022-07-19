@@ -261,7 +261,7 @@ multiple>
                                                                               id="basic-addon1"><i
                                                                                 class="bi bi-geo-alt-fill"></i></span>
                                         <textarea class="form-control"
-                                                  id="companyAddress" name="companyAddress" value="${o.account.address}" disabled>value="${o.account.address}"</textarea>
+                                                  id="companyAddress" name="companyAddress" value="${o.account.address}" disabled>${o.account.address}</textarea>
                                     </div>
                                 </div>
 

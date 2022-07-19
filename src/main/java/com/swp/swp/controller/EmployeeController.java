@@ -280,7 +280,7 @@ public class EmployeeController {
             System.out.println(account);
         }
         if (countSuccess > 0)
-            session.setAttribute("successMessage", "Successfully added 4 accounts");
+            session.setAttribute("successMessage", "Successfully added " + countSuccess + " accounts");
         if (exist.isEmpty() == false) {
             String s = String.valueOf(exist.size()) + " accounts ";
             for (String x: exist) {
