@@ -71,4 +71,13 @@ public class StudentService {
         return studentRepositories.findByAccount(account);
     }
 
+    public boolean alreadyApplied(Student student, Company company) {
+        for (StudentApplyJob x: student.getApplyList()) {
+            if (x.getJob().getCompany().equals(company) && x.getSemester().equals(student.getSemester())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -61,7 +61,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb align-items-center">
             <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">My Applications</li>
+            <li class="breadcrumb-item active" aria-current="page">My External Applications</li>
         </ol>
     </nav>
 </div>
@@ -78,46 +78,57 @@
             <thead>
             <tr style="text-align: center">
                 <th class="text-center">No.</th>
-                <th class="text-center">Position</th>
-                <th class="text-center">Details</th>
-                <th class="text-center">CV</th>
+                <th class="text-center">Company Name</th>
+                <th class="text-center">Company Email</th>
+                <th class="text-center">Company Phone</th>
+                <th class="text-center">Resources</th>
                 <th class="text-center">Semester</th>
-                <th class="text-center">Verifier</th>
-                <th class="text-center">Company</th>
+                <th class="text-center">Evaluation Detail</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
+                <th class="text-center">Verifier</th>
+                <th class="text-center">Operation</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="o" items="${applyList}" varStatus="loop">
+            <c:forEach var="o" items="${requestList}" varStatus="loop">
                 <tr style="text-align: center">
                     <td>${loop.count}</td>
                     <td class="text-truncate" style="max-width: 150px;"
-                        title="${o.job.position.position}">${o.job.position.position}</td>
-                    <td><a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i
-                            class="bi bi-eye"></i> View Detail</a></td>
-                    <td title="${o.cv.name}"><a href="${o.cv.path}" class="btn btn-outline-info btn-sm">${o.cv.name}</a></td>
-                    <td class="text-truncate" style="max-width: 150px;" title="${o.semester.semester}">${o.cv.name}</td>
+                        title="${o.companyName}">${o.companyName}</td>
+                    <td><a
+                            href="mailto: ${o.companyEmail}" class="text-truncate" style="max-width: 150px;"
+                            title="${o.companyEmail}">${o.companyEmail}</a>
+                    </td>
+                    <td class="text-truncate" style="max-width: 150px;"
+                        title="${o.companyPhone}">${o.companyPhone}</td>
+                    <td title="Resources">
+                        <a href="${o.contractPath}" class="btn btn-outline-info btn-sm">Contract</a>
+                        <a href="${o.letterPath}" class="btn btn-outline-info btn-sm">Letter</a>
+                    </td>
+                    <td class="text-truncate" style="max-width: 50px;"
+                        title="${o.application.semester.semester}">${o.application.semester.semester}</td>
+                    <td>
+                        <c:if test="${o.application.status.equals('Passed') ||
+                        o.application.status.equals('Completed') ||
+                        o.application.status.equals('Not Passed') ||
+                        o.application.status.equals('Interning')}">
+                        <a href="/student/evaluate/${o.application.id}" class="btn btn-outline-info btn-sm"><i
+                                class="bi bi-eye"></i> View Detail</a>
+                        </c:if>
+                    </td>
+                    <td>${o.application.status}</td>
                     <td class="text-truncate" style="max-width: 150px;"
                         title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
-                    <td class="text-truncate" style="max-width: 150px;"
-                        title="${o.job.company.account.fullName}">${o.job.company.account.fullName}</td>
-                    <td>${o.status}</td>
-                        <%--<td>
-                            <button class="btn btn-outline-primary btn-sm"><i class="bi bi-check-circle"></i> Accept</button>
-                            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-x-circle"></i> Reject</button>
-                        </td>--%>
                     <td>
-                        <input type="text" name="redirect" value="applications" hidden>
-                        <a style="${o.status=='Passed Interview' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
-                           href="verifyIntern/${o.id}/Interning/applications"
+                        <a style="${o.application.status=='Accepted' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
+                           href="verifyIntern/${o.application.id}/Interning/externalApplications"
                            class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                            value="accept">
                             <i class="bi bi-check-circle"></i> Intern
                         </a>
 
-                        <a style="${o.status=='Passed Interview' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
-                           href="verifyIntern/${o.id}/Refused/applications" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                        <a style="${o.application.status=='Accepted' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
+                           href="verifyIntern/${o.application.id}/Refused/externalApplications" class="btn btn-sm btn-outline-danger mt-auto mb-auto"
                            name="op" value="remove">
                             <i class="bi bi-x-circle"></i> Refuse
                         </a>

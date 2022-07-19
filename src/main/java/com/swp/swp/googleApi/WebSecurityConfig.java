@@ -33,7 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 
 
             http.csrf().disable().httpBasic().and().authorizeRequests()
+<<<<<<< HEAD
                 .antMatchers("/", "/home/**","/view/**","/oauth2/authorization/google","/webjars/**","/webapp/**", "/oauth/**","/img/**","/CSS/**").permitAll()
+=======
+                .antMatchers("/", "/home/**","/avatar/**","/view/**","/oauth2/authorization/google","/webjars/**","/webapp/**", "/oauth/**","/img/**","/CSS/**").permitAll()
+>>>>>>> 0e2c378a23badc5d0378615c98f5b267f85da4c8
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/oauth2/authorization/google").permitAll()

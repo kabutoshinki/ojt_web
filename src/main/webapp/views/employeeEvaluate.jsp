@@ -67,7 +67,7 @@
     </nav>
 </div>
 <!-- content -->
-<form class="mt-5" action="/company/updateEvaluate/${process.id}">
+<form class="mt-5" action="/employee/updateEvaluate/${process.id}">
     <div class="container rounded mt-5 mb-5">
         <div class="row form">
             <div class="col-lg-4 border-right">

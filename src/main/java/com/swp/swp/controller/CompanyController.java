@@ -3,6 +3,7 @@ package com.swp.swp.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.swp.swp.model.*;
 import com.swp.swp.service.*;
@@ -50,18 +51,22 @@ public class CompanyController {
                                     HttpServletRequest request){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         StudentApplyJob x = studentApplyJobsService.findById(id);
         if (x.getStatus().equalsIgnoreCase("Processing") || x.getStatus().equalsIgnoreCase("Interviewing")) {
             if (status.equalsIgnoreCase("nextStep")) {
                 if (x.getStatus().equalsIgnoreCase("Processing")) {
                     x.setStatus("Interviewing");
                 } else if (x.getStatus().equalsIgnoreCase("Interviewing")) {
-                    x.setStatus("Passed");
+                    x.setStatus("Passed Interview");
                 }
             } else {
                 x.setStatus(status);
             }
             studentApplyJobsService.save(x);
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/company/candidates";
     }
@@ -91,6 +96,7 @@ public class CompanyController {
                                  @RequestParam("point1") int point1, @RequestParam("point2") int point2, @RequestParam("point3") int point3) {
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         OjtProcess process = ojtProcessService.findById(id);
 
         if (process.getStatus().equalsIgnoreCase("Passed") == false
@@ -109,6 +115,9 @@ public class CompanyController {
                 process.setStatus("Completed");
             }
             ojtProcessService.save(process);
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
         }
         modelMap.addAttribute("process", process);
         return "redirect:/company/internships";
@@ -132,6 +141,7 @@ public class CompanyController {
                                     @RequestParam("slot") int slot){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         if (endDate.compareTo(startDate) > 0 && startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis())) >= 0) {
             Position position = positionService.findById(positionId);
             Job newJob = new Job();
@@ -144,6 +154,9 @@ public class CompanyController {
             newJob.setEndDate(endDate);
             newJob.setSlot(slot);
             jobService.save(newJob);
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/company/requirements";
     }
@@ -155,6 +168,7 @@ public class CompanyController {
                                     @RequestParam("slot") int slot, @PathVariable("id") int id){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         if (endDate.compareTo(startDate) > 0) {
             Position position = positionService.findById(positionId);
             Job newJob = jobService.findById(id);
@@ -167,6 +181,9 @@ public class CompanyController {
             newJob.setEndDate(endDate);
             newJob.setSlot(slot);
             jobService.save(newJob);
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/company/requirements";
     }
@@ -175,9 +192,11 @@ public class CompanyController {
     public String removeRequirement(HttpServletRequest request, @PathVariable("id") int id) {
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Job job = jobService.findById(id);
         job.setStatus("Inactive");
         jobService.save(job);
+        session.setAttribute("successMessage", "Successfully!");
         return "redirect:/company/requirements";
     }
 
@@ -188,6 +207,7 @@ public class CompanyController {
                                 @PathVariable("id") int id){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         if (endDate.compareTo(startDate) > 0) {
             OjtProcess process = ojtProcessService.findById(id);
             if (process.getStatus().equalsIgnoreCase("Passed") == false &&
@@ -201,6 +221,9 @@ public class CompanyController {
                 }
                 ojtProcessService.save(process);
             }
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/company/internships";
     }

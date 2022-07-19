@@ -53,9 +53,15 @@ public class Database {
             public void run(String... args) throws Exception {
                 File file = new File(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
                 file.mkdirs();
+<<<<<<< HEAD
                 Account employeeAccountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                 Account companyAccount1 = new Account("FPT SOFTWARE","hoannsse150010@fpt.edu.vn", "COMPANY");
                 Account companyAccount2 = new Account("FPT SOFTWARE2","hoanghuy1vip@gmail.com","COMPANY");
+=======
+                Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
+                Account accountB = new Account("FPT SOFTWARE","hoannsse150010@fpt.edu.vn", "COMPANY");
+                Account accountC = new Account("FPT SOFTWARE2","hoanghuy1vipx@gmail.com","COMPANY");
+>>>>>>> 0e2c378a23badc5d0378615c98f5b267f85da4c8
                 Account accountExternal = new Account("External","","COMPANY");
                 Company companyExternal = new Company();
                 companyExternal.setAccount(accountExternal);
@@ -113,7 +119,7 @@ public class Database {
 
                 Job jobExternal = new Job();
                 jobExternal.setCompany(companyExternal);
-                jobExternal.setStatus("Inactive");
+                jobExternal.setStatus("Hidden");
                 jobExternal.setSlot(1000000000);
 
                 CV cv = new CV("test", studentD);

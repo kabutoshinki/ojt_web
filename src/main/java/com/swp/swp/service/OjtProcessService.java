@@ -1,10 +1,7 @@
 package com.swp.swp.service;
 
 import com.swp.swp.database.Database;
-import com.swp.swp.model.Account;
-import com.swp.swp.model.Company;
-import com.swp.swp.model.OjtProcess;
-import com.swp.swp.model.Student;
+import com.swp.swp.model.*;
 import com.swp.swp.repositories.CompanyRepositories;
 import com.swp.swp.repositories.OjtProcessRepositories;
 import org.slf4j.Logger;
@@ -53,5 +50,8 @@ public class OjtProcessService {
 
     public Iterable<OjtProcess> findByCompany(Company company) {
         return ojtProcessRepositories.findByCompany(company);
+    }
+    public OjtProcess findByApplication(StudentApplyJob application) {
+        return ojtProcessRepositories.findByApplication(application);
     }
 }

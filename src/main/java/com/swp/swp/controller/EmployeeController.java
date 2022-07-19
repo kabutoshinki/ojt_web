@@ -54,9 +54,11 @@ public class EmployeeController {
     public String removeCompany(HttpServletRequest request, @PathVariable("id") int id) {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Company company = companyService.findById(id);
         company.getAccount().setStatus("Inactive");
         companyService.save(company);
+        session.setAttribute("successMessage", "Removed!");
         return "redirect:/employee/companies";
     }
 
@@ -73,9 +75,11 @@ public class EmployeeController {
     public String removeStudent(HttpServletRequest request, @PathVariable("id") int id) {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Student student = studentService.findById(id);
         student.getAccount().setStatus("Inactive");
         studentService.save(student);
+        session.setAttribute("successMessage", "Removed!");
         return "redirect:/employee/students";
     }
 
@@ -90,11 +94,13 @@ public class EmployeeController {
 
     @PostMapping(value = "removeEmployee/{id}")
     public String removeEmployee(HttpServletRequest request, @PathVariable("id") int id) {
-        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
+        if(accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Employee employee = employeeService.findById(id);
         employee.getAccount().setStatus("Inactive");
         employeeService.save(employee);
+        session.setAttribute("successMessage", "Removed!");
         return "redirect:/employee/employees";
     }
 
@@ -123,6 +129,7 @@ public class EmployeeController {
                          HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         StudentApplyJob x = studentApplyJobsService.findById(id);
         if (x.getStatus().equalsIgnoreCase("Waiting") ||
@@ -131,6 +138,7 @@ public class EmployeeController {
             x.setStatus(status);
             x.setEmployee(employee);
             studentApplyJobsService.save(x);
+            session.setAttribute("successMessage", "Successfully!");
         }
         return "redirect:/employee/applications";
     }
@@ -140,11 +148,12 @@ public class EmployeeController {
                                     HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         ExternalRequest x = externalRequestService.findById(id);
         StudentApplyJob application = x.getApplication();
         if (application.getStatus().equalsIgnoreCase("Waiting") ||
-                application.getStatus().equalsIgnoreCase("Passed") ||
+                application.getStatus().equalsIgnoreCase("Accepted") ||
                 application.getStatus().equalsIgnoreCase("Denied")) {
             application.setStatus(status);
             application.setEmployee(employee);
@@ -154,6 +163,9 @@ public class EmployeeController {
             System.out.println(x.getEmployee().getAccount().getFullName());
             studentApplyJobsService.save(application);
             externalRequestService.save(x);
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/employee/externalApplications";
     }
@@ -164,19 +176,27 @@ public class EmployeeController {
                                     HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         OjtProcess x = ojtProcessService.findById(id);
         if (x.getStatus().equalsIgnoreCase("Completed")) {
+            StudentApplyJob application = x.getApplication();
             x.setStatus(status);
             if (x.getStatus().equalsIgnoreCase("Accepted")) {
                 if (x.getGrade() >= 5.0) {
                     x.setStatus("Passed");
+                    application.setStatus("Passed");
                 } else {
                     x.setStatus("Not Passed");
+                    application.setStatus("Not Passed");
                 }
             }
             x.setEmployee(employee);
             ojtProcessService.save(x);
+            studentApplyJobsService.save(application);
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/employee/internships";
     }
@@ -195,12 +215,14 @@ public class EmployeeController {
     HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         jobService.updateStatus(id, status);
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         Job job = jobService.findById(id);
         job.setStatus(status);
         job.setEmployee(employee);
         jobService.save(job);
+        session.setAttribute("successMessage", "Successfully!");
         return "redirect:/employee/requirements";
     }
 
@@ -208,6 +230,7 @@ public class EmployeeController {
     public String uploadStudent(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         ArrayList <ArrayList> accountList = FileService.upload(file);
         String body = "Welcome to OJT website. Please use this email to login to the website";
         String subject = "Account for ojt";
@@ -231,7 +254,7 @@ public class EmployeeController {
             newStudent.setGender((String)x.get(4));
             accountService.save(account);
             studentService.save(newStudent);
-            //emailService.sendEmail(account.getEmail(), body, subject);
+            emailService.sendEmail(account.getEmail(), body, subject);
             System.out.println(account);
         }
 
@@ -243,6 +266,7 @@ public class EmployeeController {
     public String uploadEmployee(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
         if(accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         ArrayList <ArrayList> accountList = FileService.upload(file);
         String body = "Welcome to OJT website. Please use this email to login to the website";
         String subject = "Account for ojt";
@@ -274,6 +298,7 @@ public class EmployeeController {
     public String uploadCompany(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         ArrayList <ArrayList> accountList = FileService.upload(file);
         String body = "Welcome to OJT website. Please use this email to login to the website";
         String subject = "Account for ojt";
@@ -292,13 +317,7 @@ public class EmployeeController {
             newCompany.setAccount(account);
             accountService.save(account);
             companyService.save(newCompany);
-            /*if (role.equalsIgnoreCase("COMPANY")) {
-                Company newCompany = new Company();
-                newCompany.setAccount(account);
-                accountService.save(account);
-                companyService.save(newCompany);
-            } else if (role.equalsIgnoreCase("STUDENT")) {*/
-            //emailService.sendEmail(account.getEmail(), body, subject);
+            emailService.sendEmail(account.getEmail(), body, subject);
             System.out.println(account);
         }
 
@@ -327,12 +346,75 @@ public class EmployeeController {
     public String newSemester(ModelMap modelMap, HttpServletRequest request, @RequestParam("startDate")Date startDate, @RequestParam("endDate")Date endDate) {
         if(accountService.checkRole("ADMIN", request)==false)
             return "test";
+        HttpSession session = request.getSession();
         Semester newSemester = semesterService.currentSemester().getNextSemester();
         newSemester.setStartDate(startDate);
         newSemester.setEndDate(endDate);
         semesterService.save(newSemester);
         modelMap.addAttribute("currentSemester", semesterService.currentSemester());
+        session.setAttribute("successMessage", "Successfully!");
         return "redirect:/employee/semester";
     }
 
+    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
+    public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        OjtProcess process = ojtProcessService.findByApplication(studentApplyJobsService.findById(id));
+        modelMap.addAttribute("process", process);
+        return "employeeEvaluate";
+    }
+
+    @RequestMapping(value = "/updateEvaluate/{id}", method = RequestMethod.GET)
+    public String updateEvaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id,
+                                 @RequestParam("jobDescription") String jobDescription, @RequestParam("knowledge") String knowledge,
+                                 @RequestParam("softSkill") String softSkill, @RequestParam("attitude") String attitude,
+                                 @RequestParam("point1") int point1, @RequestParam("point2") int point2, @RequestParam("point3") int point3) {
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        HttpSession session = request.getSession();
+        OjtProcess process = ojtProcessService.findById(id);
+
+        if (process.getStatus().equalsIgnoreCase("Passed") == false
+                && process.getStatus().equalsIgnoreCase("Not Passed") == false) {
+            process.setAttitude(attitude);
+            process.setKnowledge(knowledge);
+            process.setSoftSkill(softSkill);
+            process.setDescription(jobDescription);
+            process.setGrade(1.0 * (point1 + point2 + point3) / 3.0);
+            System.out.println(point1);
+            System.out.println(point2);
+            System.out.println(point3);
+            process.setAttitudePoint(point3);
+            process.setSoftSkillPoint(point2);
+            process.setKnowledgePoint(point1);
+            /*java.util.Date date = new java.util.Date();
+            java.sql.Date currentDate = new Date(date.getTime());
+            if (process.getEndDate() != null && process.getEndDate().compareTo(currentDate) <= 0) {
+                process.setStatus("Completed");
+            }*/
+            System.out.println(jobDescription);
+            StudentApplyJob application = process.getApplication();
+            process.setStatus("Completed");
+            if (process.getStatus().equalsIgnoreCase("Completed")) {
+
+                if (process.getGrade() >= 5.0) {
+                    process.setStatus("Passed");
+                    application.setStatus("Passed");
+                } else {
+                    process.setStatus("Not Passed");
+                    application.setStatus("Not Passed");
+                }
+
+                process.setEmployee(employeeService.findByAccount(accountService.currentAccount(request)));
+            }
+            ojtProcessService.save(process);
+            studentApplyJobsService.save(application);
+            session.setAttribute("successMessage", "Successfully!");
+        } else {
+            session.setAttribute("dangerMessage", "Failed!");
+        }
+        modelMap.addAttribute("process", process);
+        return "redirect:/employee/externalApplications";
+    }
 }

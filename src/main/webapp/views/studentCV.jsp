@@ -32,22 +32,45 @@
 
 <body>
 <%@include file="header.jsp" %>
-<br />
-<div class="container">
+<c:if test="${successMessage != null}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ${successMessage}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+</c:if>
+<c:if test="${dangerMessage != null}">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ${dangerMessage}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+</c:if>
+<c:if test="${warningMessage != null}">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            ${warningMessage}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+</c:if>
+<%
+    session.setAttribute("successMessage", null);
+    session.setAttribute("dangerMessage", null);
+    session.setAttribute("warningMessage", null);
+%>
 
+<br/>
+<div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb align-items-center">
             <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">CV List</li>
+            <li class="breadcrumb-item active" aria-current="page">My CVs</li>
         </ol>
     </nav>
 
-    <br />
+    <br/>
     <div class="container" style="justify-content: center;">
         <div>
             <div class="row">
                 <div class="col">
-                    <h1 style="color: orange">List of CV</h1>
+                    <h1 style="color: orange">My CVs</h1>
                 </div>
             </div>
             <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
@@ -70,7 +93,8 @@
                             </div>
                             <div class="modal-footer mr-auto ml-auto">
                                 <button type="button" class="btn btn-danger" id="close"
-                                        data-dismiss="modal">Close</button>
+                                        data-dismiss="modal">Close
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -119,10 +143,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-sm btn-outline-success"
-                                        id="import"><i class="bi bi-check-circle"></i> Import</button>
+                                        id="import"><i class="bi bi-check-circle"></i> Import
+                                </button>
                                 <button type="button" class="btn btn-sm btn-outline-danger"
                                         data-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                    Cancel</button>
+                                    Cancel
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -130,9 +156,8 @@
             </div>
 
 
-
-            <br />
-            <br />
+            <br/>
+            <br/>
             <div class="container">
 
                 <div class="table-responsive">
@@ -140,7 +165,7 @@
                         <thead>
                         <tr>
                             <th class="text-center">No.</th>
-                            <th class="text-center">CV </th>
+                            <th class="text-center">CV</th>
                             <th class="text-center">Description</th>
                             <th class="text-center">View CV</th>
                             <th class="text-center">Operation</th>
@@ -151,15 +176,16 @@
                             <tr style="text-align: center;">
                                 <td>${loop.count}</td>
                                 <td class="text-truncate" style="max-width: 150px;" title="${o.name}">${o.name}</td>
-                                <td class="text-truncate" style="max-width: 150px;" title="${o.description}">${o.description}</td>
-                                <%--<td>${currentPath}${o.path}</td>--%>
+                                <td class="text-truncate" style="max-width: 150px;"
+                                    title="${o.description}">${o.description}</td>
+                                    <%--<td>${currentPath}${o.path}</td>--%>
 
                                 <td><a href="${o.path}" class="btn btn-outline-info btn-sm"><i
                                         class="bi bi-eye"></i> View Detail</a></td>
                                     <%--<td><a href="file:///${currentPath}${o.path}" class="btn btn-outline-info btn-sm"><i
                                         class="bi bi-eye"></i> View Detail</a></td>--%>
-                                <%--<td><a href="file://D:\Java\swp_project\src\main\resources\static\students\1\CV\2x.pdf" class="btn btn-outline-info btn-sm"><i
-                                    class="bi bi-eye"></i> View Detail</a></td>--%>
+                                    <%--<td><a href="file://D:\Java\swp_project\src\main\resources\static\students\1\CV\2x.pdf" class="btn btn-outline-info btn-sm"><i
+                                        class="bi bi-eye"></i> View Detail</a></td>--%>
                                 <td>
                                     <button type="button" class="btn btn-outline-primary btn-sm"
                                             data-toggle="modal" data-target="#modelUpdate_${o.id}">
@@ -189,19 +215,20 @@
                                                 <div class="custom-file mt-3">
                                                     <label class="custom-file-label" for="customFile">Choose
                                                         file</label>
-                                                    <input type="file" class="custom-file-input" name="file" id="fileImage">
+                                                    <input type="file" class="custom-file-input" name="file"
+                                                           id="fileImage">
                                                 </div>
                                             </div>
 
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text" >Name CV</span>
+                                                <span class="input-group-text">Name CV</span>
                                                 <input type="text" class="form-control" value="${o.name}" disabled
                                                        placeholder="Enter name" name="name" required>
                                             </div>
 
                                             <div class="input-group mb-3">
-                                                 <span class="input-group-text">Description</span>
-                                                 <input type="text" class="form-control" value="${o.description}"
+                                                <span class="input-group-text">Description</span>
+                                                <input type="text" class="form-control" value="${o.description}"
                                                        placeholder="Enter Description" name="description" required>
                                             </div>
                                             <div class="modal-footer">
@@ -209,12 +236,14 @@
                                                         class="btn btn-sm btn-outline-success"
                                                         id="update"><i
                                                         class="bi bi-check-circle"></i>
-                                                    Update</button>
+                                                    Update
+                                                </button>
                                                 <button type="button"
                                                         class="btn btn-sm btn-outline-danger"
                                                         data-dismiss="modal"><i
                                                         class="bi bi-x-circle"></i>
-                                                    Cancel</button>
+                                                    Cancel
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -234,15 +263,17 @@
                                                 <h5 class="modal-title" id="exampleModalLabel4">
                                                     Remove Form</h5>
                                             </div>
-                                            <h4>Are you sure you want to remove CV</h4> 
+                                            <h4>Are you sure you want to remove CV</h4>
                                             <h1 class="text-truncate text-center" title="${o.name}">${o.name} </h1>
                                             <h4>This action cannot be undone.</h4>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-outline-danger btn-sm" style="color: red">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                        style="color: red">
                                                     <i class="bi bi-trash-fill"></i>
                                                     Remove
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                        data-dismiss="modal">
                                                     <i class="bi bi-x-circle"></i>
                                                     Cancel
                                                 </button>
@@ -260,11 +291,11 @@
             </div>
         </div>
     </div>
-    <br />
+    <br/>
 
 </div>
 </div>
-<jsp:include page="footer.jsp" />
+<jsp:include page="footer.jsp"/>
 <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src=" https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src=" https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
