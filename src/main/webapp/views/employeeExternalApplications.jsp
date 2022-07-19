@@ -133,18 +133,24 @@
                                                                     title="${o.employee.account.fullName}">
                                                                     ${o.employee.account.fullName}</td>
                                                                 <td>
-                                                                    <a style="${o.application.status=='Waiting' || o.application.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
-                                                                        href="verifyExternalApplication/${o.id}/Accepted"
+                                                                    
+                                                                    <button
+                                                                        style="${o.application.status=='Waiting' || o.application.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
                                                                         class="btn btn-sm btn-outline-success mt-auto mb-auto"
-                                                                        name="op" value="accept">
+                                                                        name="op" value="accept" data-toggle="modal"
+                                                                        data-target="#acceptModal${o.id}">
                                                                         <i class="bi bi-check-circle"></i> Accept
-                                                                    </a>
-                                                                    <a style="${o.application.status=='Processing' || o.application.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}"
-                                                                        href="verifyExternalApplication/${o.id}/Denied"
+                                                                    </button>
+                                                                    <!-- denyModal${o.id} -->
+                                                                    <button
+                                                                        style="${o.application.status=='Processing' || o.application.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                                        data-toggle="modal"
+                                                                        data-target="#denyModal${o.id}"
                                                                         class="btn btn-sm btn-outline-danger mt-auto mb-auto"
                                                                         name="op" value="remove">
                                                                         <i class="bi bi-x-circle"></i> Deny
-                                                                    </a>
+                                                                    </button>
+
                                                                 </td>
                                                             </tr>
 
@@ -229,6 +235,73 @@
                                                             </div>
 
                                                             <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+                                                            <!-- Accept Modal -->
+                                                            <div class="modal fade" id="acceptModal${o.id}"
+                                                                tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <form action="verifyRequirement/${o.id}/Accepted"
+                                                                        method="post">
+                                                                        <div class="modal-content text-center">
+                                                                            <div class="modal-header"
+                                                                                style="background: orange; text-align: center; display: unset;">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel4">
+                                                                                    Accept Form</h5>
+                                                                            </div>
+                                                                            <h4>Are you sure you want to accpet this
+                                                                                student</h4>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-outline-success btn-sm">
+                                                                                    <i class="bi bi-check-circle"></i>
+                                                                                    Accept
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-sm btn-outline-secondary"
+                                                                                    data-dismiss="modal">
+                                                                                    <i class="bi bi-x-circle"></i>
+                                                                                    Cancel
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- ++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                                                            <!-- Deny Modal -->
+                                                            <div class="modal fade" id="denyModal${o.id}" tabindex="-1"
+                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <form action="#" method="post">
+                                                                        <div class="modal-content text-center">
+                                                                            <div class="modal-header"
+                                                                                style="background: orange; text-align: center; display: unset;">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel4">
+                                                                                    Deny Form</h5>
+                                                                            </div>
+                                                                            <h4>Are you sure you want to deny this
+                                                                                student</h4>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-outline-danger btn-sm">
+                                                                                    <i class="bi bi-x-circle"></i>
+                                                                                    Deny
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-sm btn-outline-secondary"
+                                                                                    data-dismiss="modal">
+                                                                                    <i class="bi bi-x-circle"></i>
+                                                                                    Cancel
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- +++++++++++++++++++++++++++++++++++++  -->
                                                         </c:forEach>
 
                                                     </tbody>
