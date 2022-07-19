@@ -67,6 +67,11 @@ public class StudentService {
         return student;
     }
 
+    public Student findByStudentId(String id) {
+        Student student = studentRepositories.findByStudentId(id);
+        return student;
+    }
+
     public Student findByAccount(Account account) {
         return studentRepositories.findByAccount(account);
     }

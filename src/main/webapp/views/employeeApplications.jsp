@@ -33,29 +33,6 @@
 
 <body>
 <%@include file="header.jsp" %>
-<c:if test="${successMessage != null}">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-            ${successMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${dangerMessage != null}">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            ${dangerMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${warningMessage != null}">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            ${warningMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<%
-    session.setAttribute("successMessage", null);
-    session.setAttribute("dangerMessage", null);
-    session.setAttribute("warningMessage", null);
-%>
 
 <%@include file="sliderbar.jsp" %>
 <br/>
@@ -71,7 +48,30 @@
         </ol>
     </nav>
 
+    <c:if test="${successMessage != null}">
+        <div class="container alert alert-success alert-dismissible fade show" role="alert">
+                ${successMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${dangerMessage != null}">
+        <div class="container alert alert-danger alert-dismissible fade show" role="alert">
+                ${dangerMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${warningMessage != null}">
+        <div class="container alert alert-warning alert-dismissible fade show" role="alert">
+                ${warningMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <% session.setAttribute("successMessage", null);
+        session.setAttribute("dangerMessage",
+                null);
+        session.setAttribute("warningMessage", null); %>
     <br/>
+
     <div class="container" style="justify-content: center;">
         <div>
             <div class="row">
@@ -86,8 +86,9 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-success">
-                                <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel2"><i
-                                        class="bi bi-check-circle" style="font-size:100px"></i></h5>
+                                <h5 class="modal-title ml-auto mr-auto"
+                                    id="exampleModalLabel2"><i class="bi bi-check-circle"
+                                                               style="font-size:100px"></i></h5>
                             </div>
                             <div class="modal-body text-center">
                                 Success Import
@@ -103,21 +104,24 @@
             </c:if>
 
             <!-- +++++++++++++++++++++++++++++++++ -->
-            <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+            <div class="modal fade" id="mo" tabindex="-1"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="/employee/upload" method="post" enctype="multipart/form-data">
+                    <form action="/employee/upload" method="post"
+                          enctype="multipart/form-data">
                         <div class="modal-content text-center">
                             <div class="modal-header"
                                  style="background: orange; text-align: center; display: unset;">
-                                <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Import Form
+                                </h5>
                             </div>
                             <div class="modal-body text-center">
                                 <div class="form-group">
                                     <input type="file" name="file" class="form-control-file"
                                            required multiple>
                                     <input type="text" name="role" value="STUDENT" hidden>
-                                    <input type="text" name="redirect" value="students" hidden>
+                                    <input type="text" name="redirect" value="students"
+                                           hidden>
                                 </div>
 
                             </div>
@@ -134,9 +138,11 @@
                     </form>
                 </div>
             </div>
-            <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                    class="bi bi-box-arrow-in-down"></i> Export
-            </button>
+            <a href="/file.xls" download>
+                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
+                        class="bi bi-box-arrow-in-down"></i> Export
+                </button>
+            </a>
             <br/>
             <br/>
             <div class="container">
@@ -147,10 +153,8 @@
                             <th>No.</th>
                             <th>Student ID</th>
                             <th>Student Name</th>
-                            <th>Company</th>
-                            <th>Job</th>
+                            <th>Job Information</th>
                             <th>CV</th>
-                            <th>Semester</th>
                             <th>Status</th>
                             <th>Verifier</th>
                             <th>Operation</th>
@@ -162,25 +166,28 @@
                                 <td>${loop.count}</td>
                                 <td>${o.student.studentId}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
-                                    title="${o.student.account.fullName}">${o.student.account.fullName}</td>
-                                <td class="text-truncate" style="max-width: 150px;"
-                                    title="${o.job.company.account.fullName}">${o.job.company.account.fullName}</td>
+                                    title="${o.student.account.fullName}">
+                                        ${o.student.account.fullName}</td>
                                 <td>
-                                    <a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i
-                                            class="bi bi-eye"></i> View Detail</a>
+                                    <button class="btn btn-outline-info btn-sm"
+                                            data-toggle="modal"
+                                            data-target="#viewModal_${o.id}">
+                                        <i class="bi bi-eye"></i> View
+                                    </button>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> View Detail</a>
+                                    <a href="" class="btn btn-outline-info btn-sm"><i
+                                            class="bi bi-eye"></i> View CV</a>
                                 </td>
-                                <td>${o.semester.semester}</td>
                                 <td>${o.status}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
-                                    title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
+                                    title="${o.employee.account.fullName}">
+                                        ${o.employee.account.fullName}</td>
                                 <td>
                                     <a style="${o.status=='Waiting' || o.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
                                        href="verifyApplication/${o.id}/Processing"
-                                       class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
-                                       value="accept">
+                                       class="btn btn-sm btn-outline-success mt-auto mb-auto"
+                                       name="op" value="accept">
                                         <i class="bi bi-check-circle"></i> Accept
                                     </a>
                                     <a style="${o.status=='Processing' || o.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}"
@@ -191,6 +198,73 @@
                                     </a>
                                 </td>
                             </tr>
+
+                            <!-- View Modal -->
+
+                            <div class="modal fade" id="viewModal_${o.id}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header"
+                                             style="background: orange; text-align: center; display: unset;">
+                                            <h5 class="modal-title"
+                                                id="exampleModalLabel">${o.job.company.account.fullName}
+                                            </h5>
+                                        </div>
+                                        <div class="modal-body text-center">
+
+                                            <div class="mb-3">
+                                                <img src="/img/default.png"
+                                                     alt="avatar image" class="img-fluid"
+                                                     style="height: 150px;" disabled>
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text"
+                                                                                      id="basic-addon1">Semester</span>
+                                                <input class="form-control"
+                                                       id="semester"
+                                                       name="semester" value="${o.semester.semester}"
+                                                       disabled></input>
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text"
+                                                                                      id="basic-addon1">Description</span>
+
+                                                <textarea class="form-control"
+                                                          id="description"
+                                                          placeholder="Enter Description"
+                                                          name="description" value=""
+                                                          disabled></textarea>
+
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text"
+                                                                                      id="basic-addon1">Requirement</span>
+                                                <textarea class="form-control"
+                                                          id="requirement"
+                                                          placeholder="Enter Requirement"
+                                                          name="requirement" value=""
+                                                          disabled></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer mr-auto ml-auto">
+                                            <button type="button"
+                                                    class="btn btn-outline-danger"
+                                                    data-dismiss="modal"><i
+                                                    class="bi bi-x-circle"></i>
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- +++++++++++++++++++++++++++++++++++++++++++ -->
                         </c:forEach>
 
                         </tbody>

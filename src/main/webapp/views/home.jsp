@@ -27,43 +27,43 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/dda2b72c9e.js" cross-origin="anonymous"></script>
-    <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>--%>
+    <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        --%>
 </head>
 
 <body>
 ${mess}
 <%@include file="header.jsp" %>
 <c:if test="${successMessage != null}">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="container alert alert-success alert-dismissible fade show" role="alert">
             ${successMessage}
         <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
 </c:if>
 <c:if test="${dangerMessage != null}">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="container alert alert-danger alert-dismissible fade show" role="alert">
             ${dangerMessage}
         <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
 </c:if>
 <c:if test="${warningMessage != null}">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="container alert alert-warning alert-dismissible fade show" role="alert">
             ${warningMessage}
         <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
 </c:if>
-<%
-    session.setAttribute("successMessage", null);
+<% session.setAttribute("successMessage", null);
     session.setAttribute("dangerMessage", null);
-    session.setAttribute("warningMessage", null);
-%>
+    session.setAttribute("warningMessage", null); %>
 
 
 <div class="container">
     <div class="row align-items-center text-center">
         <div class="col-12 ${account.role.equals('STUDENT')=='true'?'col-md-8':'col-12'}">
-            <h1 class="ml-5"
-                style="text-align: center;display: inline ;color: orange;">
+            <h1 class="ml-5" style="text-align: center;display: inline ;color: orange;">
                 Looking for an internship chance?
             </h1>
         </div>
@@ -97,31 +97,35 @@ ${mess}
                 <div class="modal-body text-center">
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-building"></i></span>
-                        <input type="text" class="form-control" id="nameCompany" placeholder="Company name"
-                               name="companyName" required>
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="bi bi-building"></i></span>
+                        <input type="text" class="form-control" id="nameCompany"
+                               placeholder="Company name" name="companyName" required>
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-fill"></i></span>
-                        <input type="email" class="form-control" id="mailCompany" placeholder="Company mail"
-                               name="companyEmail" required>
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="bi bi-envelope-fill"></i></span>
+                        <input type="email" class="form-control" id="mailCompany"
+                               placeholder="Company mail" name="companyEmail" required>
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-fill"></i></span>
-                        <input type="tel" class="form-control" id="phoneCompany" placeholder="Company phone"
-                               name="companyPhone" required>
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="bi bi-telephone-fill"></i></span>
+                        <input type="tel" class="form-control" id="phoneCompany"
+                               placeholder="Company phone" name="companyPhone" required>
                     </div>
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroupFileAddon01"
-                                                          style="height: 35px;">Contract</span>
+                                                        <span class="input-group-text" id="inputGroupFileAddon01"
+                                                              style="height: 35px;">Contract</span>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                   name="contract" aria-describedby="inputGroupFileAddon01" required>
+                            <input type="file" class="custom-file-input"
+                                   id="inputGroupFile01" name="contract"
+                                   aria-describedby="inputGroupFileAddon01" accept=".pdf" required>
                             <label class="custom-file-label" for="inputGroupFile01">Choose
                                 file</label>
                         </div>
@@ -129,22 +133,22 @@ ${mess}
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroupFileAddon01"
-                                                          style="height: 35px;">
-                                                        Letter
-                                                    </span>
+                                                        <span class="input-group-text" id="inputGroupFileAddon01"
+                                                              style="height: 35px;">
+                                                            Letter
+                                                        </span>
                         </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" name="letter"
-                                   aria-describedby="inputGroupFileAddon01" required>
+                                   aria-describedby="inputGroupFileAddon01" accept=".pdf" required>
                             <label class="custom-file-label" for="inputGroupFile01">Choose
                                 file</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-sm btn-outline-success" id="import"><i
-                            class="bi bi-check-circle"></i>
+                    <button type="submit" class="btn btn-sm btn-outline-success"
+                            id="import"><i class="bi bi-check-circle"></i>
                         Upload
                     </button>
                     <button type="button" class="btn btn-sm btn-outline-danger"
@@ -162,14 +166,15 @@ ${mess}
 
     <br/>
     <div>
-        <div style="margin-bottom:20px; padding:10px; background-color:#336699; color:white;">
+        <div
+                style="margin-bottom:20px; padding:10px; background-color:#336699; color:white;">
             <p>Type some text to search the List:</p>
             <input class="form-control" id="myInput" type="text" placeholder="Search.."/>
             <form class="form-row m-0" action="/home">
                 <%--<div class="col-3 input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text d-none d-lg-block"
-                               for="inputGroupSelect01">Major</label>
+                            for="inputGroupSelect01">Major</label>
                     </div>
                     <select class="custom-select" id="inputGroupSelect01" name="major">
                         <option selected value="-1">Select...</option>
@@ -187,7 +192,8 @@ ${mess}
                     <select class="custom-select" id="inputGroupSelect01" name="position">
                         <option value="-1">Select...</option>
                         <c:forEach var="o" items="${positionList}">
-                            <option value="${o.id}" ${positionID==o.id?"selected":""}>${o.position}</option>
+                            <option value="${o.id}" ${positionID==o.id?"selected":""}>${o.position}
+                            </option>
                         </c:forEach>
                     </select>
                 </div>
@@ -199,10 +205,14 @@ ${mess}
                     </div>
                     <select class="custom-select" id="inputGroupSelect01" name="sort">
                         <option value="-1">Select...</option>
-                        <option value="1" ${sortID==1?"selected":""}>Sort increasing by date</option>
-                        <option value="2" ${sortID==2?"selected":""}>Sort decreasing by date</option>
-                        <option value="3" ${sortID==3?"selected":""}>Sort increasing by slot</option>
-                        <option value="4" ${sortID==4?"selected":""}>Sort decreasing by slot</option>
+                        <option value="1" ${sortID==1?"selected":""}>Sort increasing by date
+                        </option>
+                        <option value="2" ${sortID==2?"selected":""}>Sort decreasing by date
+                        </option>
+                        <option value="3" ${sortID==3?"selected":""}>Sort increasing by slot
+                        </option>
+                        <option value="4" ${sortID==4?"selected":""}>Sort decreasing by slot
+                        </option>
                     </select>
                 </div>
                 <div class="col-3">
@@ -222,8 +232,8 @@ ${mess}
             <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3">
                 <form
                         style="text-align: center; display: block; padding-top: 0em; margin-top: 0px;">
-                    <img src="${o.company.account.avatar==null?'/avatar/avatar.png':o.company.account.avatar}"
-                         width="300" height="150px">
+                    <img src="${o.company.account.avatar==null?'/img/avatar.png':o.company.account.avatar}"
+                         width="300" class="mt-3" height="150px">
                     <hr id="hr"/>
                     <strong>Position: </strong>${o.position.position}<br/>
                     <strong>End date: </strong>${o.endDate}<br/>
@@ -244,7 +254,8 @@ ${mess}
     </div>
     <br/>
     <div class="" style="text-align: center">
-        <a href="" style="font-size: 18px"><i class="bi bi-arrow-down-short"></i>Xem thêm</a>
+        <a href="" style="font-size: 18px"><i class="bi bi-arrow-down-short"></i>Xem
+            thêm</a>
     </div>
 </div>
 <%@include file="footer.jsp" %>

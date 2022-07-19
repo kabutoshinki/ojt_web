@@ -76,7 +76,7 @@
     <div class="row align-items-center">
         <div class="col-12 col-lg-4 mb-2">
             <img style="width:300px" class="img-fluid mb-3" alt="Responsive image"
-                 src="${jobDetail.company.account.avatar==null?'':jobDetail.company.account.avatar}"/>
+                 src="${jobDetail.company.account.avatar==null?'/img/avatar.png':jobDetail.company.account.avatar}"/>
             <a href=""
                style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}; ${student.applicationStatus==true || student.semester.equals(currentSemester)?'pointer-events: none; background-color: lightgrey':''}"
                class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#CV">APPLY</a>

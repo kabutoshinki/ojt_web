@@ -30,29 +30,7 @@
 
 <body>
 <jsp:include page="header.jsp"/>
-<c:if test="${successMessage != null}">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-            ${successMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${dangerMessage != null}">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            ${dangerMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${warningMessage != null}">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            ${warningMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<%
-    session.setAttribute("successMessage", null);
-    session.setAttribute("dangerMessage", null);
-    session.setAttribute("warningMessage", null);
-%>
+
 
 <jsp:include page="sliderbar.jsp"/>
 <br/>
@@ -65,6 +43,28 @@
             <li class="breadcrumb-item active" aria-current="page">Requirements</li>
         </ol>
     </nav>
+
+    <c:if test="${successMessage != null}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                ${successMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${dangerMessage != null}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${dangerMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${warningMessage != null}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                ${warningMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <% session.setAttribute("successMessage", null);
+        session.setAttribute("dangerMessage", null);
+        session.setAttribute("warningMessage", null); %>
 
     <div class="form-group row align-items-center">
         <label for="inputDateVisit" class="col col-form-label title">
@@ -97,12 +97,17 @@
                         <td class="text-truncate" style="max-width: 150px;"
                             title="${o.position.position}">${o.position.position}</td>
                         <td>
-                            <a href="/view/recruitment/${o.id}" class="btn btn-outline-info"><i
-                                    class="bi bi-eye"></i> View Detail</a>
+                            <!-- <a href="/view/recruitment/${o.id}" class="btn btn-outline-info"><i
+                                    class="bi bi-eye"></i> View Detail</a> -->
+                            <button class="btn btn-outline-info btn-sm " data-toggle="modal"
+                                    data-target="#companylModal_${o.id}"><i class="bi bi-eye"></i>
+                                View
+                            </button>
                         </td>
                         <td>${o.status}</td>
                         <td class="text-truncate" style="max-width: 150px;"
-                            title="${o.employee.account.fullName}">${o.employee.account.fullName}</td>
+                            title="${o.employee.account.fullName}">${o.employee.account.fullName}
+                        </td>
                         <td>
                             <a style="${o.status!='Accepted'?'':'pointer-events: none; background-color: lightgrey'}"
                                href="verifyRequirement/${o.id}/Accepted"
@@ -118,6 +123,82 @@
                             </a>
                         </td>
                     </tr>
+
+                    <div class="modal fade" id="companylModal_${o.id}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content text-center">
+                                <div class="modal-header"
+                                     style="background: orange; text-align: center; display: unset;">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                            ${o.company.account.fullName}
+                                    </h5>
+                                </div>
+                                <div class="modal-body text-center">
+
+                                    <div class="mb-3">
+                                        <img src="/img/default.png" alt="avatar image"
+                                             class="img-fluid" style="height: 150px;" disabled>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                                            <span class="input-group-text"
+                                                                  id="basic-addon1">Position</span>
+                                        <input class="form-control" id="position" name="position"
+                                               value="${o.position.position}" disabled></input>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                                            <span class="input-group-text"
+                                                                  id="basic-addon1">Description</span>
+
+                                        <textarea class="form-control" id="description"
+                                                  placeholder="Enter Description" name="description"
+                                                  value="" disabled></textarea>
+
+                                    </div>
+                                    <div class="input-group mb-3">
+                                                            <span class="input-group-text"
+                                                                  id="basic-addon1">Requirement</span>
+                                        <textarea class="form-control" id="requirement"
+                                                  placeholder="Enter Requirement" name="requirement"
+                                                  value="" disabled></textarea>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-6 input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">Start
+                                                                    Date</i></span>
+                                            <input type="date" class="form-control p-2"
+                                                   name="startDate" value="${o.startDate}" disabled>
+                                        </div>
+                                        <div class="col-6 input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">End
+                                                                    Date</span>
+                                            <input type="date" class="form-control" name="endDate"
+                                                   value="${o.endDate}" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Slot</span>
+                                        <input type="number" class="form-control" id="slot"
+                                               name="slot" value="${o.slot}" disabled>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer mr-auto ml-auto">
+                                    <button type="button" class="btn btn-outline-danger"
+                                            data-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </c:forEach>
                 </tbody>
             </table>
