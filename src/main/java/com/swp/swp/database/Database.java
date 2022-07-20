@@ -55,6 +55,7 @@ public class Database {
                                                 Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
                                 file.mkdirs();
                                 Account employeeAccountA = new Account("test3", "danghuudat163@gmail.com", "EMPLOYEE");
+                                Account employeeAccountB = new Account("test3", "trungskse150457@fpt.edu.vn", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "hoannsse150010@fpt.edu.vn",
                                                 "COMPANY");
                                 Account companyAccount2 = new Account("FPT SOFTWARE2", "kabutoshinki@gmail.com",
