@@ -171,7 +171,7 @@ public class StudentController {
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
         if (cvService.countAllAvailable(student) < 10) {
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
             // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
             String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
             CV newCV = new CV();
@@ -207,7 +207,7 @@ public class StudentController {
 
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
         // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
         String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
         CV cv = cvService.findById(cvId);
@@ -216,7 +216,7 @@ public class StudentController {
         String filename = file.getOriginalFilename();
         int index = filename.indexOf('.');
         String extension = filename.substring(index + 1, filename.length()).toUpperCase();
-        System.out.println(path);
+        System.out.println("Path: "+currentWorkingDir.toAbsolutePath());
         cvService.save(cv);
         if (file != null && file.isEmpty() == false) {
             fileService.saveFile(file, path);
