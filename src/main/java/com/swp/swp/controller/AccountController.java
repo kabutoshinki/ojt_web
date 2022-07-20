@@ -105,16 +105,16 @@ public class AccountController {
             modelMap.addAttribute("company", company);
         }
         accountService.save(account);
-        
+
         if (file.isEmpty() == false) {
             // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/avatar");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/Avatar");
             String path = currentWorkingDir.normalize().toString();
             String filename = file.getOriginalFilename();
             int index = filename.indexOf('.');
             String extension = filename.substring(index+1, filename.length()).toUpperCase();
             path += File.separator + String.valueOf(account.getId()) + "." + extension;
-            account.setAvatar("\\avatar\\" + String.valueOf(account.getId()) + "." + extension);
+            account.setAvatar("\\Avatar\\" + String.valueOf(account.getId()) + "." + extension);
             fileService.saveFile(file, path);
             accountService.save(account);
         }
