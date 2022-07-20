@@ -54,8 +54,13 @@ public class CompanyService {
         Iterable<Company> companyList = companyRepositories.findAll();
         ArrayList <Company> temp = new ArrayList<>();
         for (Company x: companyList) {
-            if (x.getAccount().getStatus() == null || x.getAccount().getStatus().equalsIgnoreCase("Inactive") == false)
+            if (x.getAccount().getStatus() == null
+                    || (x.getAccount().getStatus().equalsIgnoreCase("Inactive") == false
+                    && x.getAccount().getStatus().equalsIgnoreCase("Hidden") == false)) {
+                System.out.println(x.getAccount().getFullName());
+                System.out.println(x.getAccount().getStatus());
                 temp.add(x);
+            }
         }
         return temp;
     }

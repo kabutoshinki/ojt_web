@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.swp.swp.repositories.PositionRepositories;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,10 @@ public class EmployeeController {
             return "test";
         HttpSession session = request.getSession();
         Iterable<Company> companyList = companyService.findAllActive();
-        fileService.exportCompanyList(companyList);
-        modelMap.addAttribute("companyList",companyList);
+        /*fileService.exportCompanyList(companyList);
+        modelMap.addAttribute("companyList",companyList);*/
+        //modelMap.addAttribute("studentList", studentList);
+        session.setAttribute("companyList", companyList);
         return "employeeCompanies";
     }
     @PostMapping(value = "removeCompany/{id}")
@@ -68,9 +71,11 @@ public class EmployeeController {
     public String students(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
+
         Iterable<Student> studentList = studentService.findAllActive();
-        fileService.exportStudentList(studentList);
-        modelMap.addAttribute("studentList", studentList);
+        HttpSession session = request.getSession();
+        //modelMap.addAttribute("studentList", studentList);
+        session.setAttribute("studentList", studentList);
         return "employeeStudents";
     }
 
@@ -113,8 +118,10 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAllApplications();
-        modelMap.addAttribute("applyList", applyList);
-        fileService.exportApplyList(applyList);
+        HttpSession session = request.getSession();
+        session.setAttribute("applyList", applyList);
+        /*modelMap.addAttribute("applyList", applyList);
+        fileService.exportApplyList(applyList);*/
         return "employeeApplications";
     }
 
@@ -123,8 +130,15 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable<ExternalRequest> applyList = externalRequestService.findAll();
-        modelMap.addAttribute("applyList", applyList);
-        fileService.exportExternalApplyList(applyList);
+        ArrayList<Pair> lst = new ArrayList<>();
+        for (ExternalRequest x: applyList) {
+            lst.add(new Pair(x, ojtProcessService.findByApplication(x.getApplication())));
+        }
+        //modelMap.addAttribute("applyList", applyList);
+        /*modelMap.addAttribute("applyList", lst);
+        fileService.exportExternalApplyList(applyList);*/
+        HttpSession session = request.getSession();
+        session.setAttribute("applyList", lst);
         return "employeeExternalApplications";
     }
 
@@ -210,8 +224,10 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         Iterable <OjtProcess> processList = ojtProcessService.findAll();
-        modelMap.addAttribute("processList", processList);
-        fileService.exportProcessList(processList);
+        /*modelMap.addAttribute("processList", processList);
+        fileService.exportProcessList(processList);*/
+        HttpSession session = request.getSession();
+        session.setAttribute("processList", processList);
         return "employeeInternships";
     }
 
@@ -408,18 +424,31 @@ public class EmployeeController {
         return "employeeEvaluate";
     }
 
-    @RequestMapping(value = "/updateEvaluate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateExternalEvaluate/{id}", method = RequestMethod.GET)
     public String updateEvaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id,
+                                 @RequestParam("startDate") Date startDate,
+                                 @RequestParam("endDate") Date endDate,
                                  @RequestParam("jobDescription") String jobDescription, @RequestParam("knowledge") String knowledge,
                                  @RequestParam("softSkill") String softSkill, @RequestParam("attitude") String attitude,
                                  @RequestParam("point1") int point1, @RequestParam("point2") int point2, @RequestParam("point3") int point3) {
         if(accountService.checkRole("EMPLOYEE", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        OjtProcess process = ojtProcessService.findById(id);
-
-        if (process.getStatus().equalsIgnoreCase("Passed") == false
+        ExternalRequest request1 = externalRequestService.findById(id);
+        StudentApplyJob application = request1.getApplication();
+        OjtProcess process = ojtProcessService.findByApplication(application);
+        System.out.println(startDate);
+        System.out.println(endDate);
+        System.out.println(((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24) ) % 365);
+        if (endDate.compareTo(startDate) < 0) {
+            session.setAttribute("dangerMessage", "Start date can not be after End date");
+        } else if (((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24) ) % 365 < 84) {
+            session.setAttribute("dangerMessage", "The process time was not enough 12 weeks.");
+        }
+        else if (process.getStatus().equalsIgnoreCase("Passed") == false
                 && process.getStatus().equalsIgnoreCase("Not Passed") == false) {
+            process.setStartDate(startDate);
+            process.setEndDate(endDate);
             process.setAttitude(attitude);
             process.setKnowledge(knowledge);
             process.setSoftSkill(softSkill);
@@ -437,7 +466,6 @@ public class EmployeeController {
                 process.setStatus("Completed");
             }*/
             System.out.println(jobDescription);
-            StudentApplyJob application = process.getApplication();
             process.setStatus("Completed");
             if (process.getStatus().equalsIgnoreCase("Completed")) {
 
@@ -459,5 +487,64 @@ public class EmployeeController {
         }
         modelMap.addAttribute("process", process);
         return "redirect:/employee/externalApplications";
+    }
+
+    @RequestMapping("/writeStudentFile")
+    public String writeStudentFile(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        HttpSession session = request.getSession();
+        ArrayList<Student> studentList = (ArrayList<Student>) session.getAttribute("studentList");
+        System.out.println(studentList);
+        fileService.exportStudentList(studentList);
+        return "redirect:/file.xls";
+    }
+
+    @RequestMapping("/writeCompanyFile")
+    public String writeCompanyFile(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        HttpSession session = request.getSession();
+        ArrayList<Company> companyList = (ArrayList<Company>) session.getAttribute("companyList");
+        System.out.println(companyList);
+        fileService.exportCompanyList(companyList);
+        return "redirect:/file.xls";
+    }
+
+    @RequestMapping("/writeApplicationFile")
+    public String writeApplyFile(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        HttpSession session = request.getSession();
+        ArrayList<StudentApplyJob> applyList = (ArrayList<StudentApplyJob>) session.getAttribute("applyList");
+        System.out.println(applyList);
+        fileService.exportApplyList(applyList);
+        return "redirect:/file.xls";
+    }
+
+    @RequestMapping("/writeExternalApplicationFile")
+    public String writeExternalApplicationFile(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        HttpSession session = request.getSession();
+        ArrayList<Pair> applyList = (ArrayList<Pair>) session.getAttribute("applyList");
+        ArrayList<ExternalRequest> lst = new ArrayList<>();
+        for (Pair x: applyList) {
+            lst.add((ExternalRequest) x.getKey());
+        }
+        System.out.println(lst);
+        fileService.exportExternalApplyList(lst);
+        return "redirect:/file.xls";
+    }
+
+    @RequestMapping("/writeProcessFile")
+    public String writeProcessFile(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("EMPLOYEE", request)==false)
+            return "test";
+        HttpSession session = request.getSession();
+        ArrayList<OjtProcess> processList = (ArrayList<OjtProcess>) session.getAttribute("processList");
+        System.out.println(processList);
+        fileService.exportProcessList(processList);
+        return "redirect:/file.xls";
     }
 }

@@ -214,14 +214,14 @@
                                         <div class="modal fade" id="acceptModal${o.id}" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                <form action="verifyRequirement/${o.id}/Accepted" method="post">
+                                                <form action="verifyRequirement/${o.id}/Accepted">
                                                     <div class="modal-content text-center">
                                                         <div class="modal-header"
                                                             style="background: orange; text-align: center; display: unset;">
                                                             <h5 class="modal-title" id="exampleModalLabel4">
                                                                 Accept Form</h5>
                                                         </div>
-                                                        <h4>Are you sure you want to accpet this student</h4>
+                                                        <h4>Are you sure you want to accept this requirement</h4>
                                                         <div class="modal-footer">
                                                             <button type="submit"
                                                                 class="btn btn-outline-success btn-sm">
@@ -245,14 +245,14 @@
                                         <div class="modal fade" id="denyModal${o.id}" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                <form action="#" method="post">
+                                                <form action="verifyRequirement/${o.id}/Denied">
                                                     <div class="modal-content text-center">
                                                         <div class="modal-header"
                                                             style="background: orange; text-align: center; display: unset;">
                                                             <h5 class="modal-title" id="exampleModalLabel4">
                                                                 Deny Form</h5>
                                                         </div>
-                                                        <h4>Are you sure you want to deny this student</h4>
+                                                        <h4>Are you sure you want to deny this requirement</h4>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-outline-danger btn-sm">
                                                                 <i class="bi bi-x-circle"></i>

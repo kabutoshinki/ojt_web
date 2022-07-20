@@ -81,7 +81,13 @@ public class JobService {
     }
     public Iterable<Job> findAll() {
         Iterable<Job> jobs = jobRepositories.findAll();
-        return jobs;
+        ArrayList<Job> jobList = new ArrayList<>();
+        for (Job job: jobs) {
+            if (job.getStatus().equalsIgnoreCase("Hidden") == false) {
+                jobList.add(job);
+            }
+        }
+        return jobList;
     }
 
     public Iterable<Job> findByCompany(Company company) {

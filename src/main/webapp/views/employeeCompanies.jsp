@@ -124,7 +124,7 @@ multiple>
             </form>
         </div>
     </div>
-    <a href="/file.xls" download>
+    <a href="/employee/writeCompanyFile">
         <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
                 class="bi bi-box-arrow-in-down"></i> Export
         </button>
@@ -225,7 +225,8 @@ multiple>
                                 </div>
                                 <div class="modal-body text-center">
                                     <div class="mb-3">
-                                        <img src="${o.account.avatar==null?'/img/default.png':o.account.avatar}" alt="avatar image"
+                                        <img src="${o.account.avatar==null?'/img/default.png':o.account.avatar}"
+                                             alt="avatar image"
                                              class="img-fluid" style="height: 150px;"
                                              disabled>
                                     </div>
@@ -253,7 +254,8 @@ multiple>
                                                                               id="basic-addon1"><i
                                                                                 class="bi bi-telephone-fill"></i></span>
                                         <input type="tel" class="form-control"
-                                               id="companyPhone" name="companyPhone" value="${o.account.phone}" disabled>
+                                               id="companyPhone" name="companyPhone" value="${o.account.phone}"
+                                               disabled>
                                     </div>
 
                                     <div class="input-group mb-3">
@@ -261,7 +263,8 @@ multiple>
                                                                               id="basic-addon1"><i
                                                                                 class="bi bi-geo-alt-fill"></i></span>
                                         <textarea class="form-control"
-                                                  id="companyAddress" name="companyAddress" value="${o.account.address}" disabled>${o.account.address}</textarea>
+                                                  id="companyAddress" name="companyAddress" value="${o.account.address}"
+                                                  disabled>${o.account.address}</textarea>
                                     </div>
                                 </div>
 

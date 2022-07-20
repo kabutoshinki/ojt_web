@@ -114,7 +114,7 @@
                                                         View Detail</a>
                                                 </td> -->
                                                 <td>
-                                                    <a href="" class="btn btn-outline-info btn-sm"><i
+                                                    <a href="${o.cv.path}" class="btn btn-outline-info btn-sm"><i
                                                             class="bi bi-eye"></i>
                                                         ${o.cv.name}</a>
                                                 </td>
@@ -238,7 +238,7 @@
                                             <div class="modal fade" id="acceptModal${o.id}" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
-                                                    <form action="verifyRequirement/${o.id}/Accepted" method="post">
+                                                    <form action="verifyApplication/${o.id}/nextStep">
                                                         <div class="modal-content text-center">
                                                             <div class="modal-header"
                                                                 style="background: orange; text-align: center; display: unset;">
@@ -269,7 +269,7 @@
                                             <div class="modal fade" id="denyModal${o.id}" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
-                                                    <form action="#" method="post">
+                                                    <form action="verifyApplication/${o.id}/Rejected">
                                                         <div class="modal-content text-center">
                                                             <div class="modal-header"
                                                                 style="background: orange; text-align: center; display: unset;">

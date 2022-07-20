@@ -209,7 +209,8 @@
 
                                             <textarea class="form-control" id="description"
                                                       placeholder="Enter Description"
-                                                      name="jobDescription" required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
+                                                      name="jobDescription"
+                                                      required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
                                                       value="${o.description}">${o.description}</textarea>
 
                                         </div>
@@ -220,7 +221,8 @@
                                                                               id="basic-addon1">Knowledge</span>
                                                 <textarea class="form-control" id="requirement"
                                                           placeholder="Enter Knowledge Evaluate"
-                                                          name="knowledge" value="${o.knowledge}" required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
+                                                          name="knowledge" value="${o.knowledge}"
+                                                          required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
                                                 >${o.knowledge}</textarea>
                                             </div>
 
@@ -245,7 +247,8 @@
                                                                               id="basic-addon1">Soft skill</span>
                                                 <textarea class="form-control" id="requirement"
                                                           placeholder="Enter Soft Skill Evaluate"
-                                                          name="softSkill" value="${o.softSkill}" required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
+                                                          name="softSkill" value="${o.softSkill}"
+                                                          required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
                                                 >${o.softSkill}</textarea>
                                             </div>
 
@@ -300,7 +303,8 @@
 
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-outline-success" ${o.status=="Passed" || o.status == "Not Passed"?"hidden":""}
+                                        <button type="submit"
+                                                class="btn btn-outline-success" ${o.status=="Passed" || o.status == "Not Passed"?"hidden":""}
                                                 id="import"><i class="bi bi-check-circle"></i>
                                             Save
                                         </button>

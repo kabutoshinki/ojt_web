@@ -147,7 +147,7 @@
                 </div>
             </div>
             <%--<a href="/employee/writeStudentFile" download>--%>
-            <a href="/file.xls" download>
+            <a href="/employee/writeStudentFile">
                 <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
                         class="bi bi-box-arrow-in-down"></i> Export
                 </button>
@@ -157,6 +157,7 @@
                         class="bi bi-box-arrow-in-down"></i> Download template
                 </button>
             </a>
+
             <br/>
             <br/>
             <div class="container">

@@ -44,12 +44,15 @@ class IndexController {
     public String home(ModelMap modelMap, HttpServletRequest request){
 
         HttpSession session = request.getSession();
-        int position = -1, sort = -1;
+        int position = -1, sort = -1, recommend = -1;
         if (request.getParameter("position") != null) {
             position = Integer.parseInt(request.getParameter("position"));
         }
         if (request.getParameter("sort") != null) {
             sort = Integer.parseInt(request.getParameter("sort"));
+        }
+        if (request.getParameter("recommend") != null) {
+            recommend = Integer.parseInt(request.getParameter("recommend"));
         }
         ArrayList<Job> jobList = (ArrayList<Job>) jobService.findAllAvailable();
         Iterable<Major> majorsList = majorService.findAll();
@@ -61,6 +64,7 @@ class IndexController {
 
         modelMap.addAttribute("positionID", position);
         modelMap.addAttribute("sortID", sort);
+        modelMap.addAttribute("recommendID", recommend);
 
 
         if (position != -1) {
@@ -93,7 +97,16 @@ class IndexController {
                     System.out.println(jobService.match(x, y));
                     if (jobService.match(x, y) > 50) {
                         x.setRecommend("Recommend");
+                        break;
                     }
+                }
+            }
+            if (recommend == 1) {
+                ArrayList <Job> temp = jobList;
+                jobList.clear();
+                for (Job x: temp) {
+                    if (x.getRecommend().equalsIgnoreCase("Recommend"))
+                        jobList.add(x);
                 }
             }
         }
