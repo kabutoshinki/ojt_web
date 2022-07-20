@@ -106,7 +106,8 @@ public class AccountController {
         }
         accountService.save(account);
         if (file.isEmpty() == false) {
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
+            // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\avatar\\");
             String path = currentWorkingDir.normalize().toString();
             String filename = file.getOriginalFilename();
             int index = filename.indexOf('.');

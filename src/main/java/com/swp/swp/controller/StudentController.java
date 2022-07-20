@@ -171,8 +171,8 @@ public class StudentController {
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
         if (cvService.countAllAvailable(student) < 10) {
-            //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+            // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
             String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
             CV newCV = new CV();
 
@@ -207,8 +207,8 @@ public class StudentController {
 
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
+        // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
         String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
         CV cv = cvService.findById(cvId);
         cv.setDescription(description);
