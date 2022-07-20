@@ -298,7 +298,7 @@ public class StudentController {
             apply.setStudent(student);
             apply.setSemester(student.getSemester());
             apply.setJob(jobService.firstOfCompany(companyService.findByAccount(accountService.findByEmail(""))));
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
             String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
             File requestFolder = new File(currentWorkingDir + "\\" + student.getId() + "\\Request\\" + newRequest.getId());
             requestFolder.mkdirs();

@@ -57,7 +57,7 @@ public class Database {
                                 Account employeeAccountA = new Account("test3", "danghuudat163@gmail.com", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "hoannsse150010@fpt.edu.vn",
                                                 "COMPANY");
-                                Account companyAccount2 = new Account("FPT SOFTWARE2", "hoanghuy1vip@gmail.com",
+                                Account companyAccount2 = new Account("FPT SOFTWARE2", "kabutoshinki@gmail.com",
                                                 "COMPANY");
                                 Account accountExternal = new Account("External", "", "COMPANY");
                                 accountExternal.setStatus("Hidden");
