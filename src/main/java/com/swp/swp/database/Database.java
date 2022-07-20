@@ -51,9 +51,6 @@ public class Database {
                         @Override
                         public void run(String... args) throws Exception {
 
-                                File file = new File(
-                                                Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
-                                file.mkdirs();
                                 Account employeeAccountA = new Account("test3", "danghuudat163@gmail.com", "EMPLOYEE");
                                 Account employeeAccountB = new Account("test3", "trungskse150457@fpt.edu.vn", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "hoannsse150010@fpt.edu.vn",
@@ -179,6 +176,7 @@ public class Database {
 
                                 logger.info("insert Data: " + accountService.save(accountAdmin));
                                 logger.info("insert Data: " + accountService.save(employeeAccountA));
+                                logger.info("insert Data: " + accountService.save(employeeAccountB));
                                 logger.info("insert Data: " + accountService.save(companyAccount1));
                                 logger.info("insert Data: " + accountService.save(companyAccount2));
                                 logger.info("insert Data: " + accountService.save(studentAccount1));
