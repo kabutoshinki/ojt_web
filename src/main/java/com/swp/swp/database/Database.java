@@ -70,6 +70,8 @@ public class Database {
                                 employeeAdmin.setAccount(accountAdmin);
                                 Employee employeeA = new Employee();
                                 employeeA.setAccount(employeeAccountA);
+                                Employee employeeB= new Employee();
+                                employeeA.setAccount(employeeAccountB);
                                 Student studentD = new Student();
                                 studentD.setStudentId("SE1500000");
 
@@ -170,6 +172,7 @@ public class Database {
                                 logger.info("insert Data: " + companyService.save(companyExternal));
 
                                 logger.info("insert Data: " + employeeService.save(employeeA));
+                                logger.info("insert Data: " + employeeService.save(employeeB));
                                 logger.info("insert Data: " + employeeService.save(employeeAdmin));
 
                                 logger.info("insert Data: " + studentService.save(studentD));
