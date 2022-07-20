@@ -33,29 +33,7 @@
 
 <body>
 <%@include file="header.jsp" %>
-<c:if test="${successMessage != null}">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-            ${successMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${dangerMessage != null}">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            ${dangerMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<c:if test="${warningMessage != null}">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            ${warningMessage}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-</c:if>
-<%
-    session.setAttribute("successMessage", null);
-    session.setAttribute("dangerMessage", null);
-    session.setAttribute("warningMessage", null);
-%>
+
 
 <%@include file="sliderbar.jsp" %>
 <br/>
@@ -70,6 +48,29 @@
             <li class="breadcrumb-item active" aria-current="page">Students</li>
         </ol>
     </nav>
+    <c:if test="${successMessage != null}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                ${successMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${dangerMessage != null}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${dangerMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <c:if test="${warningMessage != null}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                ${warningMessage}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </c:if>
+    <%
+        session.setAttribute("successMessage", null);
+        session.setAttribute("dangerMessage", null);
+        session.setAttribute("warningMessage", null);
+    %>
 
     <br/>
     <div class="container" style="justify-content: center;">
@@ -124,7 +125,7 @@
                                         <label class="custom-file-label" for="customFile">Choose
                                             file</label>
                                         <input type="file" class="custom-file-input" name="file"
-                                               id="fileImage" accept=".xlsx,.XLS" >
+                                               id="fileImage" accept=".xlsx,.XLS">
                                         <input type="text" name="role" value="STUDENT" hidden>
                                         <input type="text" name="redirect" value="students"
                                                hidden>
@@ -146,9 +147,9 @@
                 </div>
             </div>
             <%--<a href="/employee/writeStudentFile" download>--%>
-            <a href="/file.xls" download>
+            <a href="/employee/writeStudentFile">
                 <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                    class="bi bi-box-arrow-in-down"></i> Export
+                        class="bi bi-box-arrow-in-down"></i> Export
                 </button>
             </a>
             <a href="/template/Student.xlsx" download>
@@ -156,6 +157,7 @@
                         class="bi bi-box-arrow-in-down"></i> Download template
                 </button>
             </a>
+
             <br/>
             <br/>
             <div class="container">
@@ -181,7 +183,8 @@
                                 <td class="text-truncate" style="max-width: 150px;"
                                     title="${o.account.fullName}">${o.account.fullName}</td>
                                 <td><a
-                                        href="mailto: ${o.account.email}" class="text-truncate" style="max-width: 150px;"
+                                        href="mailto: ${o.account.email}" class="text-truncate"
+                                        style="max-width: 150px;"
                                         title="${o.account.email}">${o.account.email}</a>
                                 </td>
                                 <td>
@@ -254,7 +257,8 @@
                                         </div>
                                         <div class="modal-body text-center">
                                             <div class="mb-3">
-                                                <img src="${o.account.avatar==null?'/img/default.png':o.account.avatar}" alt="avatar image"
+                                                <img src="${o.account.avatar==null?'/img/default.png':o.account.avatar}"
+                                                     alt="avatar image"
                                                      class="img-fluid" style="height: 150px;"
                                                      disabled>
                                             </div>
@@ -264,8 +268,8 @@
                                                                               id="basic-addon1"><i
                                                                                 class='fas fa-user-graduate'></i></span>
                                                 <input type="text" class="form-control"
-                                                       id="companyName"
-                                                       name="companyName" value="${o.account.fullName}" disabled>
+                                                       id="studentName"
+                                                       name="studentName" value="${o.account.fullName}" disabled>
                                             </div>
 
                                             <div class="input-group mb-3">
@@ -273,7 +277,7 @@
                                                                               id="basic-addon1"><i
                                                                                 class="bi bi-envelope-fill"></i></span>
                                                 <input type="email" class="form-control"
-                                                       id="companyEmail" name="companyEmail" value="${o.account.email}"
+                                                       id="studentEmail" name="studentEmail" value="${o.account.email}"
                                                        disabled>
                                             </div>
 
@@ -282,16 +286,21 @@
                                                                               id="basic-addon1"><i
                                                                                 class="bi bi-telephone-fill"></i></span>
                                                 <input type="tel" class="form-control"
-                                                       id="companyPhone" name="companyPhone" value="${o.account.phone}" disabled>
+                                                       id="studentPhone" name="studentPhone" value="${o.account.phone}"
+                                                       disabled>
                                             </div>
+
 
                                             <div class="input-group mb-3">
                                                                         <span class="input-group-text"
                                                                               id="basic-addon1"><i
                                                                                 class="bi bi-geo-alt-fill"></i></span>
                                                 <textarea class="form-control"
-                                                          id="companyAddress" name="companyAddress" value="${o.description}"  disabled>${o.description}</textarea>
+                                                          id="studentAddress" name="studentAddress"
+                                                          value="${o.account.address}"
+                                                          disabled>${o.account.address}</textarea>
                                             </div>
+
                                         </div>
 
                                         <div class="modal-footer mr-auto ml-auto">

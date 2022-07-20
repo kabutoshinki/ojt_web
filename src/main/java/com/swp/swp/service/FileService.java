@@ -268,15 +268,19 @@ public class FileService {
             rowhead.createCell(2).setCellValue("Full name");
             rowhead.createCell(3).setCellValue("Email");
             rowhead.createCell(4).setCellValue("Phone");
-            rowhead.createCell(5).setCellValue("Job Description");
-            rowhead.createCell(6).setCellValue("Knowledge");
-            rowhead.createCell(7).setCellValue("Knowledge Point");
-            rowhead.createCell(8).setCellValue("Soft Skill");
-            rowhead.createCell(9).setCellValue("Soft Skill Point");
-            rowhead.createCell(10).setCellValue("Attitude");
-            rowhead.createCell(11).setCellValue("Attitude Point");
+            rowhead.createCell(5).setCellValue("Start Date");
+            rowhead.createCell(6).setCellValue("End Date");
+            rowhead.createCell(7).setCellValue("Job Description");
+            rowhead.createCell(8).setCellValue("Knowledge");
+            rowhead.createCell(9).setCellValue("Knowledge Point");
+            rowhead.createCell(10).setCellValue("Soft Skill");
+            rowhead.createCell(11).setCellValue("Soft Skill Point");
+            rowhead.createCell(12).setCellValue("Attitude");
+            rowhead.createCell(13).setCellValue("Attitude Point");
+            rowhead.createCell(14).setCellValue("Total Grade");
 
-            rowhead.createCell(12).setCellValue("Status");
+
+            rowhead.createCell(15).setCellValue("Status");
             int count = 1;
             for (OjtProcess process: processList) {
                 HSSFRow row = sheet.createRow((short) count);
@@ -286,14 +290,17 @@ public class FileService {
                 row.createCell(2).setCellValue(process.getStudent().getAccount().getFullName());
                 row.createCell(3).setCellValue(process.getStudent().getAccount().getEmail());
                 row.createCell(4).setCellValue(process.getStudent().getAccount().getPhone());
-                row.createCell(5).setCellValue(process.getDescription());
-                row.createCell(6).setCellValue(process.getKnowledge());
-                row.createCell(7).setCellValue(process.getKnowledgePoint());
-                row.createCell(8).setCellValue(process.getSoftSkill());
-                row.createCell(9).setCellValue(process.getSoftSkillPoint());
-                row.createCell(10).setCellValue(process.getAttitude());
-                row.createCell(11).setCellValue(process.getAttitudePoint());
-                row.createCell(12).setCellValue(process.getApplication().getStatus());
+                row.createCell(5).setCellValue(process.getStartDate());
+                row.createCell(6).setCellValue(process.getEndDate());
+                row.createCell(7).setCellValue(process.getDescription());
+                row.createCell(8).setCellValue(process.getKnowledge());
+                row.createCell(9).setCellValue(process.getKnowledgePoint());
+                row.createCell(10).setCellValue(process.getSoftSkill());
+                row.createCell(11).setCellValue(process.getSoftSkillPoint());
+                row.createCell(12).setCellValue(process.getAttitude());
+                row.createCell(13).setCellValue(process.getAttitudePoint());
+                row.createCell(14).setCellValue(process.getGrade());
+                row.createCell(15).setCellValue(process.getApplication().getStatus());
                 count += 1;
             }
             FileOutputStream fileOut = new FileOutputStream(filename);

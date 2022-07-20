@@ -69,7 +69,11 @@ public class StudentController {
         }
         System.out.println();
         System.out.println();*/
-        modelMap.addAttribute("requestList", requestList);
+        ArrayList<Pair> lst = new ArrayList<>();
+        for (ExternalRequest x: requestList) {
+            lst.add(new Pair(x, ojtProcessService.findByApplication(x.getApplication())));
+        }
+        modelMap.addAttribute("requestList", lst);
         return "studentExternalApplications";
     }
     @RequestMapping(value = "applyForm/{id}", method = RequestMethod.GET)
@@ -134,7 +138,8 @@ public class StudentController {
                     x.setStatus(status);
                 } else if (status.equalsIgnoreCase("Interning")
                         && x.getStatus().equalsIgnoreCase("Denied") == false
-                        && x.getStatus().equalsIgnoreCase("Rejected") == false) {
+                        && x.getStatus().equalsIgnoreCase("Rejected") == false
+                        && x.getStatus().equalsIgnoreCase("Waiting") == false) {
                     x.setStatus("Refused");
                 }
                 studentApplyJobsService.save(x);
@@ -146,6 +151,7 @@ public class StudentController {
                     newProcess.setStatus("Interning");
                     newProcess.setStudent(x.getStudent());
                     newProcess.setCompany(x.getJob().getCompany());
+                    newProcess.setGrade((double) 0);
                     System.out.println(x.getId() + " " + x.getJob().getCompany().getAccount().getFullName() + " " + x.getStatus());
                     System.out.println(newProcess.getCompany().getAccount().getFullName() + " " + newProcess.getStudent().getAccount().getFullName());
                     ojtProcessService.save(newProcess);
@@ -207,6 +213,10 @@ public class StudentController {
         CV cv = cvService.findById(cvId);
         cv.setDescription(description);
         path += cv.getId() + " - " + cv.getName();
+        String filename = file.getOriginalFilename();
+        int index = filename.indexOf('.');
+        String extension = filename.substring(index + 1, filename.length()).toUpperCase();
+        System.out.println(path);
         cvService.save(cv);
         if (file != null && file.isEmpty() == false) {
             fileService.saveFile(file, path);
@@ -221,10 +231,16 @@ public class StudentController {
             return "test";
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
+
         CV cv = cvService.findById(cvId);
-        cv.setStatus("Inactive");
-        cvService.save(cv);
-        session.setAttribute("successMessage", "Remove successfully!");
+        if (cv.getStudent().equals(student) == false) {
+            session.setAttribute("dangerMessage", "You have no permission!");
+        }
+        {
+            cv.setStatus("Inactive");
+            cvService.save(cv);
+            session.setAttribute("successMessage", "Remove successfully!");
+        }
         return "redirect:/student/CVs";
     }
 
@@ -250,14 +266,6 @@ public class StudentController {
         return "studentInternshipReport";
     }
 
-    @GetMapping(value = "externalApply")
-    public String externalApply(ModelMap modelMap, HttpServletRequest request) {
-        if(accountService.checkRole("STUDENT", request)==false)
-            return "test";
-        Iterable<Position> positionList = positionService.findAll();
-        modelMap.addAttribute("positionList", positionList);
-        return "studentExternalApply";
-    }
 
     @PostMapping(value = "applyAnExternal")
     public String applyAnExternal(ModelMap modelMap, HttpServletRequest request,
@@ -313,15 +321,6 @@ public class StudentController {
             session.setAttribute("dangerMessage", "Apply failed. You cannot apply any other job.");
         }
         return "redirect:/student/externalApplications";
-    }
-
-    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
-    public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
-        if(accountService.checkRole("STUDENT", request)==false)
-            return "test";
-        OjtProcess process = ojtProcessService.findByApplication(studentApplyJobsService.findById(id));
-        modelMap.addAttribute("process", process);
-        return "viewEvaluate";
     }
 
 }

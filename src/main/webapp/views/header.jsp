@@ -95,7 +95,7 @@ style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV</a>
                     <div class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                          aria-haspopup="true" aria-expanded="false" style="display: ${email!=null?'':'none'};">
                         <!-- <i class="bi bi-person-circle rounded-circle"></i> -->
-                        <img src="${account.avatar==null?'/img/avatar.png':account.avatar}"
+                        <img src="${user.avatar==null?'/img/default.png':user.avatar}"
                          width="30" class="img-fluid rounded-circle" height="30px">
                     </div>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

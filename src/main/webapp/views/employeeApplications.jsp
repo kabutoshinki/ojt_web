@@ -138,7 +138,7 @@
                     </form>
                 </div>
             </div>
-            <a href="/file.xls" download>
+            <a href="/employee/writeApplicationFile">
                 <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
                         class="bi bi-box-arrow-in-down"></i> Export
                 </button>
@@ -176,7 +176,8 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-outline-info btn-sm"><i
+                                    <a href="${o.cv.path}"
+                                       class="btn btn-outline-info btn-sm"><i
                                             class="bi bi-eye"></i> View CV</a>
                                 </td>
                                 <td>${o.status}</td>
@@ -184,18 +185,23 @@
                                     title="${o.employee.account.fullName}">
                                         ${o.employee.account.fullName}</td>
                                 <td>
-                                    <a style="${o.status=='Waiting' || o.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
-                                       href="verifyApplication/${o.id}/Processing"
-                                       class="btn btn-sm btn-outline-success mt-auto mb-auto"
-                                       name="op" value="accept">
+                                    <button
+                                            style="${o.status=='Waiting' || o.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
+                                            class="btn btn-sm btn-outline-success mt-auto mb-auto"
+                                            name="op" value="accept" data-toggle="modal"
+                                            data-target="#acceptModal${o.id}">
                                         <i class="bi bi-check-circle"></i> Accept
-                                    </a>
-                                    <a style="${o.status=='Processing' || o.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}"
-                                       href="verifyApplication/${o.id}/Denied"
-                                       class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                       name="op" value="remove">
+                                    </button>
+
+                                    <button
+                                            style="${o.status=='Processing' || o.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}"
+                                            data-toggle="modal"
+                                            data-target="#denyModal${o.id}"
+                                            class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                            name="op" value="remove">
                                         <i class="bi bi-x-circle"></i> Deny
-                                    </a>
+                                    </button>
+
                                 </td>
                             </tr>
 
@@ -209,23 +215,24 @@
                                         <div class="modal-header"
                                              style="background: orange; text-align: center; display: unset;">
                                             <h5 class="modal-title"
-                                                id="exampleModalLabel">${o.job.company.account.fullName}
+                                                id="exampleModalLabel">
+                                                    ${o.job.company.account.fullName}
                                             </h5>
                                         </div>
                                         <div class="modal-body text-center">
 
                                             <div class="mb-3">
-                                                <img src="/img/default.png"
+                                                <img src="${o.job.company.account.avatar==null?'/img/default.png':o.job.company.account.avatar}"
                                                      alt="avatar image" class="img-fluid"
                                                      style="height: 150px;" disabled>
                                             </div>
 
                                             <div class="input-group mb-3">
                                                                                 <span class="input-group-text"
-                                                                                      id="basic-addon1">Semester</span>
+                                                                                      id="basic-addon1">Position</span>
                                                 <input class="form-control"
-                                                       id="semester"
-                                                       name="semester" value="${o.semester.semester}"
+                                                       id="position" name="position"
+                                                       value="${o.job.position.position}"
                                                        disabled></input>
                                             </div>
 
@@ -236,8 +243,9 @@
                                                 <textarea class="form-control"
                                                           id="description"
                                                           placeholder="Enter Description"
-                                                          name="description" value=""
-                                                          disabled></textarea>
+                                                          name="description"
+                                                          value="${o.job.description}"
+                                                          disabled>${o.job.description}</textarea>
 
                                             </div>
                                             <div class="input-group mb-3">
@@ -246,8 +254,40 @@
                                                 <textarea class="form-control"
                                                           id="requirement"
                                                           placeholder="Enter Requirement"
-                                                          name="requirement" value=""
-                                                          disabled></textarea>
+                                                          name="requirement"
+                                                          value="${o.job.requirement}"
+                                                          disabled>${o.job.requirement}</textarea>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-6 input-group mb-3">
+                                                                                    <span class="input-group-text"
+                                                                                          id="basic-addon1">Start
+                                                                                        Date</i></span>
+                                                    <input type="date"
+                                                           class="form-control p-2"
+                                                           name="startDate"
+                                                           value="${o.job.startDate}"
+                                                           disabled>
+                                                </div>
+                                                <div class="col-6 input-group mb-3">
+                                                                                    <span class="input-group-text"
+                                                                                          id="basic-addon1">End
+                                                                                        Date</span>
+                                                    <input type="date"
+                                                           class="form-control"
+                                                           name="endDate"
+                                                           value="${o.job.endDate}"
+                                                           disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text"
+                                                                                      id="basic-addon1">Slot</span>
+                                                <input type="number"
+                                                       class="form-control" id="slot"
+                                                       name="slot" value="${o.job.slot}"
+                                                       disabled>
                                             </div>
 
                                         </div>
@@ -265,6 +305,71 @@
                             </div>
 
                             <!-- +++++++++++++++++++++++++++++++++++++++++++ -->
+                            <!-- Accept Modal -->
+                            <div class="modal fade" id="acceptModal${o.id}"
+                                 tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="verifyApplication/${o.id}/Processing">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header"
+                                                 style="background: orange; text-align: center; display: unset;">
+                                                <h5 class="modal-title"
+                                                    id="exampleModalLabel4">
+                                                    Accept Form</h5>
+                                            </div>
+                                            <h4>Are you sure you want to accept this application</h4>
+                                            <div class="modal-footer">
+                                                <button type="submit"
+                                                        class="btn btn-outline-success btn-sm">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    Accept
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary"
+                                                        data-dismiss="modal">
+                                                    <i class="bi bi-x-circle"></i>
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- ++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                            <!-- Deny Modal -->
+                            <div class="modal fade" id="denyModal${o.id}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="verifyApplication/${o.id}/Denied">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header"
+                                                 style="background: orange; text-align: center; display: unset;">
+                                                <h5 class="modal-title"
+                                                    id="exampleModalLabel4">
+                                                    Deny Form</h5>
+                                            </div>
+                                            <h4>Are you sure you want to deny this
+                                                student</h4>
+                                            <div class="modal-footer">
+                                                <button type="submit"
+                                                        class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-x-circle"></i>
+                                                    Deny
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary"
+                                                        data-dismiss="modal">
+                                                    <i class="bi bi-x-circle"></i>
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- +++++++++++++++++++++++++++++++++++++ -->
                         </c:forEach>
 
                         </tbody>

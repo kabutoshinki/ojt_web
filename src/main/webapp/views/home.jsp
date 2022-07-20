@@ -188,7 +188,7 @@ ${mess}
                                for="inputGroupSelect01">Position</label>
                     </div>
                     <select class="custom-select" id="inputGroupSelect01" name="position">
-                        <option value="-1">Select...</option>
+                        <option value="-1">None</option>
                         <c:forEach var="o" items="${positionList}">
                             <option value="${o.id}" ${positionID==o.id?"selected":""}>${o.position}
                             </option>
@@ -202,7 +202,7 @@ ${mess}
                                for="inputGroupSelect01">Sort</label>
                     </div>
                     <select class="custom-select" id="inputGroupSelect01" name="sort">
-                        <option value="-1">Select...</option>
+                        <option value="-1">None</option>
                         <option value="1" ${sortID==1?"selected":""}>Sort increasing by date
                         </option>
                         <option value="2" ${sortID==2?"selected":""}>Sort decreasing by date
@@ -213,6 +213,20 @@ ${mess}
                         </option>
                     </select>
                 </div>
+                <c:if test="${account.role.equals('STUDENT') == true}">
+                    <div class="col-3 input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text d-none d-lg-block"
+                                   for="inputGroupSelect01">Recommend</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01" name="recommend">
+                            <option value="-1">None</option>
+                            <option value="1" ${recommendID==1?"selected":""}>Recommend
+                            </option>
+                            </option>
+                        </select>
+                    </div>
+                </c:if>
                 <div class="col-3">
                     <button type="submit" class="btn btn-info btn-sm btn-block"
                             style="padding: 8px;"><i class="bi bi-funnel-fill"></i> Filter

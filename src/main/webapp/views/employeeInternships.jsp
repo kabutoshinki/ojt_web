@@ -80,7 +80,7 @@
                     <h1 style="color: orange">List Of Student Internship Reports</h1>
                 </div>
             </div>
-            <button type="button" class="btn btn-outline-primary mb-3" data-toggle="modal"
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                     data-target="#mo">
                 <i class="bi bi-box-arrow-in-down"> Import</i>
             </button>
@@ -148,7 +148,7 @@
                     </form>
                 </div>
             </div>
-            <a href="/file.xls" download>
+            <a href="/employee/writeProcessFile">
                 <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
                         class="bi bi-box-arrow-in-down"></i> Export
                 </button>
@@ -165,7 +165,6 @@
                             <th>Student Name</th>
                             <th>Detail Information</th>
                             <th>Evaluation Detail</th>
-                            <!-- <th>Grade</th> -->
                             <th>Status</th>
                             <th>Verifier</th>
                             <th>Action</th>
@@ -186,7 +185,7 @@
                                         <i class="bi bi-eye"></i> View
                                     </button>
                                 </td>
-                                <!-- href="/view/evaluate/${o.id}" -->
+
                                 <td>
                                     <button class="btn btn-outline-info btn-sm"
                                             data-toggle="modal"
@@ -195,24 +194,41 @@
                                         Detail
                                     </button>
                                 </td>
-                                <!-- <td>${o.grade}</td> -->
+
                                 <td>${o.status}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
                                     title="${o.employee.account.fullName}">
                                         ${o.employee.account.fullName}</td>
                                 <td>
-                                    <a style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}"
-                                       href="verifyProcess/${o.id}/Accepted"
-                                       class="btn btn-sm btn-outline-success mt-auto mb-auto"
-                                       name="op" value="accept">
+                                    <!-- <a style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                                                    href="verifyProcess/${o.id}/Accepted"
+                                                                                    class="btn btn-sm btn-outline-success mt-auto mb-auto"
+                                                                                    name="op" value="accept">
+                                                                                        <i class="bi bi-check-circle"></i> Accept
+                                                                                    </a>
+                                                                                    <a style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                                                    href="verifyProcess/${o.id}/Denied"
+                                                                                    class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                                                                    name="op" value="remove">
+                                                                                        <i class="bi bi-x-circle"></i> Deny
+                                                                                    </a> -->
+                                    <button
+                                            style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}"
+                                            class="btn btn-sm btn-outline-success mt-auto mb-auto"
+                                            name="op" value="accept" data-toggle="modal"
+                                            data-target="#acceptModal${o.id}">
                                         <i class="bi bi-check-circle"></i> Accept
-                                    </a>
-                                    <a style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}"
-                                       href="verifyProcess/${o.id}/Denied"
-                                       class="btn btn-sm btn-outline-danger mt-auto mb-auto"
-                                       name="op" value="remove">
+                                    </button>
+                                    <!-- denyModal${o.id} -->
+                                    <button
+                                            style="${o.status=='Completed'?'':'pointer-events: none; background-color: lightgrey'}"
+                                            data-toggle="modal"
+                                            data-target="#denyModal${o.id}"
+                                            class="btn btn-sm btn-outline-danger mt-auto mb-auto"
+                                            name="op" value="remove">
                                         <i class="bi bi-x-circle"></i> Deny
-                                    </a>
+                                    </button>
+
                                 </td>
                             </tr>
 
@@ -297,8 +313,6 @@
                             <!-- ++++++++++++++++++++++++++++++++++++ -->
 
                             <!-- -->
-                            <!-- Modal Evaluate -->
-
                             <div class="modal fade" id="evaluateModal_${o.id}"
                                  tabindex="-1" aria-labelledby="exampleModalLabel"
                                  aria-hidden="true">
@@ -308,13 +322,14 @@
                                         <div class="modal-header"
                                              style="background: orange; text-align: center; display: unset;">
                                             <h5 class="modal-title"
-                                                id="exampleModalLabel">Evaluate Detail
+                                                id="exampleModalLabel">Evaluate
+                                                Detail
                                             </h5>
                                         </div>
                                         <div class="modal-body text-center">
 
                                             <div class="mb-3">
-                                                <img src="${o.company.account.avatar==null?'/img/default.png':o.company.account.avatar}"
+                                                <img src="${o.student.account.avatar==null?'/img/default.png':o.student.account.avatar}"
                                                      alt="avatar image" class="img-fluid"
                                                      style="height: 150px;" disabled>
                                             </div>
@@ -327,8 +342,8 @@
                                                 <textarea class="form-control"
                                                           id="description"
                                                           placeholder="Enter Description"
-                                                          name="description" value=""
-                                                          disabled></textarea>
+                                                          name="jobDescription" disabled
+                                                          value="${o.description}">${o.description}</textarea>
 
                                             </div>
 
@@ -338,18 +353,20 @@
                                                                                           id="basic-addon1">Knowledge</span>
                                                     <textarea class="form-control"
                                                               id="requirement"
-                                                              placeholder="Enter Requirement"
-                                                              name="requirement" value=""
-                                                              disabled></textarea>
+                                                              placeholder="Enter Knowledge Evaluate"
+                                                              name="knowledge"
+                                                              value="${o.knowledge}"
+                                                              disabled>${o.knowledge}</textarea>
                                                 </div>
 
                                                 <div class="col-3 input-group mb-3">
+                                                    <input name="point1"
+                                                           class="form-control" id="grade1"
+                                                           aria-label=".form-select-lg example"
+                                                           value="${o.knowledgePoint}"
+                                                           disabled>
 
-                                                    <input type="number"
-                                                           class="form-control"
-                                                           name="grade1" id="grade1"
-                                                           value="10" disabled>
-
+                                                    </input>
                                                 </div>
                                             </div>
 
@@ -360,18 +377,19 @@
                                                                                         skill</span>
                                                     <textarea class="form-control"
                                                               id="requirement"
-                                                              placeholder="Enter Requirement"
-                                                              name="requirement" value=""
-                                                              disabled></textarea>
+                                                              placeholder="Enter Soft Skill Evaluate"
+                                                              name="softSkill"
+                                                              value="${o.softSkill}"
+                                                              disabled>${o.softSkill}</textarea>
                                                 </div>
 
                                                 <div class="col-3 input-group mb-3">
-
-                                                    <input type="number"
-                                                           class="form-control"
-                                                           name="grade2" id="grade2"
-                                                           value="10" disabled>
-
+                                                    <input name="point2"
+                                                           class="form-control" id="grade2"
+                                                           aria-label=".form-select-lg example"
+                                                           value="${o.softSkillPoint}"
+                                                           disabled>
+                                                    </input>
                                                 </div>
                                             </div>
 
@@ -381,27 +399,29 @@
                                                                                           id="basic-addon1">Attitude</span>
                                                     <textarea class="form-control"
                                                               id="requirement"
-                                                              placeholder="Enter Requirement"
-                                                              name="requirement" value=""
-                                                              disabled></textarea>
+                                                              placeholder="Enter Attitude Evaluate"
+                                                              name="attitude"
+                                                              value="${o.attitude}"
+                                                              disabled>${o.attitude}</textarea>
                                                 </div>
 
                                                 <div class="col-3 input-group mb-3">
-
-                                                    <input type="number"
-                                                           class="form-control"
-                                                           name="grade3" id="grade3"
-                                                           value="10" disabled>
-
+                                                    <input name="point3"
+                                                           class="form-control" id="grade3"
+                                                           aria-label=".form-select-lg example"
+                                                           value="${o.attitudePoint}"
+                                                           disabled>
+                                                    </input>
                                                 </div>
                                             </div>
 
                                             <div class="input-group mb-3">
                                                                                 <span class="input-group-text"
-                                                                                      id="basic-addon1">Total</span>
+                                                                                      id="basic-addon1">Grade</span>
                                                 <input type="number"
                                                        class="form-control" id="total"
-                                                       value="0" name="total" disabled>
+                                                       value="${o.grade}" name="total"
+                                                       disabled>
                                             </div>
 
                                         </div>
@@ -420,7 +440,73 @@
                                 </div>
                             </div>
 
-                            <!-- ++++++++++++++++++++++++++++++++++++++++ -->
+                            <!-- +++++++++++++++++++++++++++++++++++++++++ -->
+
+                            <!-- Accept Modal -->
+                            <div class="modal fade" id="acceptModal${o.id}"
+                                 tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="verifyProcess/${o.id}/Accepted">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header"
+                                                 style="background: orange; text-align: center; display: unset;">
+                                                <h5 class="modal-title"
+                                                    id="exampleModalLabel4">
+                                                    Accept Form</h5>
+                                            </div>
+                                            <h4>Are you sure you want to accept this result</h4>
+                                            <div class="modal-footer">
+                                                <button type="submit"
+                                                        class="btn btn-outline-success btn-sm">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    Accept
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary"
+                                                        data-dismiss="modal">
+                                                    <i class="bi bi-x-circle"></i>
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- ++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                            <!-- Deny Modal -->
+                            <div class="modal fade" id="denyModal${o.id}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="verifyProcess/${o.id}/Denied">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header"
+                                                 style="background: orange; text-align: center; display: unset;">
+                                                <h5 class="modal-title"
+                                                    id="exampleModalLabel4">
+                                                    Deny Form</h5>
+                                            </div>
+                                            <h4>Are you sure you want to deny this result</h4>
+                                            <div class="modal-footer">
+                                                <button type="submit"
+                                                        class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-x-circle"></i>
+                                                    Deny
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary"
+                                                        data-dismiss="modal">
+                                                    <i class="bi bi-x-circle"></i>
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- +++++++++++++++++++++++++++++++++++++ -->
+
                         </c:forEach>
 
                         </tbody>
@@ -462,7 +548,7 @@
 
 
         let sum = parseInt(grade1) + parseInt(grade2) + parseInt(grade3);
-        return sum;
+        return sum / 3;
     }
 
 

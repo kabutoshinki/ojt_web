@@ -53,20 +53,25 @@ public class CompanyController {
             return "test";
         HttpSession session = request.getSession();
         StudentApplyJob x = studentApplyJobsService.findById(id);
-        if (x.getStatus().equalsIgnoreCase("Processing") || x.getStatus().equalsIgnoreCase("Interviewing")) {
-            if (status.equalsIgnoreCase("nextStep")) {
-                if (x.getStatus().equalsIgnoreCase("Processing")) {
-                    x.setStatus("Interviewing");
-                } else if (x.getStatus().equalsIgnoreCase("Interviewing")) {
-                    x.setStatus("Passed Interview");
-                }
-            } else {
-                x.setStatus(status);
-            }
-            studentApplyJobsService.save(x);
-            session.setAttribute("successMessage", "Successfully!");
+        Company company = companyService.findByAccount(accountService.currentAccount(request));
+        if (x.getJob().getCompany().equals(company) == false) {
+            session.setAttribute("dangerMessage", "You have no permission!");
         } else {
-            session.setAttribute("dangerMessage", "Failed!");
+            if (x.getStatus().equalsIgnoreCase("Processing") || x.getStatus().equalsIgnoreCase("Interviewing")) {
+                if (status.equalsIgnoreCase("nextStep")) {
+                    if (x.getStatus().equalsIgnoreCase("Processing")) {
+                        x.setStatus("Interviewing");
+                    } else if (x.getStatus().equalsIgnoreCase("Interviewing")) {
+                        x.setStatus("Passed Interview");
+                    }
+                } else {
+                    x.setStatus(status);
+                }
+                studentApplyJobsService.save(x);
+                session.setAttribute("successMessage", "Successfully!");
+            } else {
+                session.setAttribute("dangerMessage", "Failed!");
+            }
         }
         return "redirect:/company/candidates";
     }
@@ -98,26 +103,30 @@ public class CompanyController {
             return "test";
         HttpSession session = request.getSession();
         OjtProcess process = ojtProcessService.findById(id);
-
-        if (process.getStatus().equalsIgnoreCase("Passed") == false
-                && process.getStatus().equalsIgnoreCase("Not Passed") == false) {
-            process.setAttitude(attitude);
-            process.setKnowledge(knowledge);
-            process.setSoftSkill(softSkill);
-            process.setDescription(jobDescription);
-            process.setGrade(1.0 * (point1 + point2 + point3) / 3.0);
-            process.setAttitudePoint(point3);
-            process.setSoftSkillPoint(point2);
-            process.setKnowledgePoint(point1);
-            java.util.Date date = new java.util.Date();
-            java.sql.Date currentDate = new Date(date.getTime());
-            if (process.getEndDate() != null && process.getEndDate().compareTo(currentDate) <= 0) {
-                process.setStatus("Completed");
-            }
-            ojtProcessService.save(process);
-            session.setAttribute("successMessage", "Successfully!");
+        Company company = companyService.findByAccount(accountService.currentAccount(request));
+        if (process.getApplication().getJob().getCompany().equals(company) == false) {
+            session.setAttribute("dangerMessage", "You have no permission!");
         } else {
-            session.setAttribute("dangerMessage", "Failed!");
+            if (process.getStatus().equalsIgnoreCase("Passed") == false
+                    && process.getStatus().equalsIgnoreCase("Not Passed") == false) {
+                process.setAttitude(attitude);
+                process.setKnowledge(knowledge);
+                process.setSoftSkill(softSkill);
+                process.setDescription(jobDescription);
+                process.setGrade(1.0 * (point1 + point2 + point3) / 3.0);
+                process.setAttitudePoint(point3);
+                process.setSoftSkillPoint(point2);
+                process.setKnowledgePoint(point1);
+                java.util.Date date = new java.util.Date();
+                java.sql.Date currentDate = new Date(date.getTime());
+                if (process.getEndDate() != null && process.getEndDate().compareTo(currentDate) <= 0) {
+                    process.setStatus("Completed");
+                }
+                ojtProcessService.save(process);
+                session.setAttribute("successMessage", "Successfully!");
+            } else {
+                session.setAttribute("dangerMessage", "Failed!");
+            }
         }
         modelMap.addAttribute("process", process);
         return "redirect:/company/internships";
@@ -194,9 +203,14 @@ public class CompanyController {
             return "test";
         HttpSession session = request.getSession();
         Job job = jobService.findById(id);
-        job.setStatus("Inactive");
-        jobService.save(job);
-        session.setAttribute("successMessage", "Successfully!");
+        Company company = companyService.findByAccount(accountService.currentAccount(request));
+        if (job.getCompany().equals(company) == false) {
+            session.setAttribute("dangerMessage", "You have no permission!");
+        } else {
+            job.setStatus("Inactive");
+            jobService.save(job);
+            session.setAttribute("successMessage", "Successfully!");
+        }
         return "redirect:/company/requirements";
     }
 
@@ -208,7 +222,13 @@ public class CompanyController {
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        if (endDate.compareTo(startDate) > 0) {
+
+        if (endDate.compareTo(startDate) < 0) {
+            session.setAttribute("dangerMessage", "Start date can not be after End date");
+        } else if (((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24) ) % 365 < 84) {
+            session.setAttribute("dangerMessage", "The process time was not enough 12 weeks.");
+        }
+        else {
             OjtProcess process = ojtProcessService.findById(id);
             if (process.getStatus().equalsIgnoreCase("Passed") == false &&
                     process.getStatus().equalsIgnoreCase("Not Passed") == false) {
@@ -222,8 +242,6 @@ public class CompanyController {
                 ojtProcessService.save(process);
             }
             session.setAttribute("successMessage", "Successfully!");
-        } else {
-            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/company/internships";
     }

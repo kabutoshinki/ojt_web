@@ -65,7 +65,11 @@ public class AccountService {
     }
     public boolean save(Account newAccount) {
         try {
-            newAccount.setStatus("Enable");
+            /*if (newAccount.getStatus() == null || newAccount.getStatus().equalsIgnoreCase("Hidden") == false)
+                newAccount.setStatus("Enable");
+            */
+            if (newAccount.getStatus() == null)
+                newAccount.setStatus("Enable");
             logger.info("insert Data: " + accountRepositories.save(newAccount));
             return true;
         } catch (Exception e) {

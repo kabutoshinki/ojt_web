@@ -110,7 +110,7 @@
 
                     <td>
                         <input type="text" name="redirect" value="applications" hidden>
-                        <a style="${o.status=='Passed Interview' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
+                        <!-- <a style="${o.status=='Passed Interview' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
                            href="verifyIntern/${o.id}/Interning/applications"
                            class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                            value="accept">
@@ -122,7 +122,24 @@
                            class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
                            value="remove">
                             <i class="bi bi-x-circle"></i> Refuse
-                        </a>
+                        </a> -->
+
+                        <button
+                                style="${o.status=='Passed Interview' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
+                                class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                value="accept" data-toggle="modal"
+                                data-target="#acceptModal${o.id}">
+                            <i class="bi bi-check-circle"></i> Intern
+                        </button>
+                        <!-- denyModal${o.id} -->
+                        <button
+                                style="${o.status=='Passed Interview' && o.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
+                                data-toggle="modal" data-target="#denyModal${o.id}"
+                                class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
+                                value="remove">
+                            <i class="bi bi-x-circle"></i> Refuse
+                        </button>
+
                     </td>
                 </tr>
                 <!-- View Modal -->
@@ -141,15 +158,9 @@
                             <div class="modal-body text-center">
 
                                 <div class="mb-3">
-                                    <img src="/img/default.png" alt="avatar image"
-                                         class="img-fluid" style="height: 150px;" disabled>
-                                </div>
-
-                                <div class="input-group mb-3">
-                                                            <span class="input-group-text"
-                                                                  id="basic-addon1">Semester</span>
-                                    <input class="form-control" id="semester" name="semester"
-                                           value="${o.semester.semester}" disabled></input>
+                                    <img src="${o.job.company.account.avatar==null?'/img/default.png':o.job.company.account.avatar}"
+                                         alt="avatar image" class="img-fluid"
+                                         style="height: 150px;" disabled>
                                 </div>
 
                                 <div class="input-group mb-3">
@@ -165,7 +176,8 @@
 
                                     <textarea class="form-control" id="description"
                                               placeholder="Enter Description" name="description"
-                                              value="" disabled></textarea>
+                                              value="${o.job.description}"
+                                              disabled>${o.job.description}</textarea>
 
                                 </div>
                                 <div class="input-group mb-3">
@@ -173,7 +185,29 @@
                                                                   id="basic-addon1">Requirement</span>
                                     <textarea class="form-control" id="requirement"
                                               placeholder="Enter Requirement" name="requirement"
-                                              value="" disabled></textarea>
+                                              value="${o.job.requirement}"
+                                              disabled>${o.job.requirement}</textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-6 input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">Start
+                                                                    Date</i></span>
+                                        <input type="date" class="form-control p-2"
+                                               name="startDate" value="${o.job.startDate}"
+                                               disabled>
+                                    </div>
+                                    <div class="col-6 input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">End
+                                                                    Date</span>
+                                        <input type="date" class="form-control" name="endDate"
+                                               value="${o.job.endDate}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Slot</span>
+                                    <input type="number" class="form-control" id="slot"
+                                           name="slot" value="${o.job.slot}" disabled>
                                 </div>
 
                             </div>
@@ -188,7 +222,68 @@
                     </div>
                 </div>
 
+                <!-- +++++++++++++++++++++++++++++++++++++++++++ -->
+
+                <!-- Accept Modal -->
+                <div class="modal fade" id="acceptModal${o.id}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="verifyIntern/${o.id}/Interning/applications">
+                            <div class="modal-content text-center">
+                                <div class="modal-header"
+                                     style="background: orange; text-align: center; display: unset;">
+                                    <h5 class="modal-title" id="exampleModalLabel4">
+                                        Accept Form</h5>
+                                </div>
+                                <h4>Are you sure to intern in ${o.job.company.account.fullName}</h4>
+                                <div class="modal-footer">
+                                    <button type="submit"
+                                            class="btn btn-outline-success btn-sm">
+                                        <i class="bi bi-check-circle"></i>
+                                        Intern
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-secondary"
+                                            data-dismiss="modal">
+                                        <i class="bi bi-x-circle"></i>
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <!-- ++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                <!-- Deny Modal -->
+                <div class="modal fade" id="denyModal${o.id}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="verifyIntern/${o.id}/Refused/applications">
+                            <div class="modal-content text-center">
+                                <div class="modal-header"
+                                     style="background: orange; text-align: center; display: unset;">
+                                    <h5 class="modal-title" id="exampleModalLabel4">
+                                        Deny Form</h5>
+                                </div>
+                                <h4>Are you sure you want to refuse this student</h4>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-x-circle"></i>
+                                        Refuse
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-secondary"
+                                            data-dismiss="modal">
+                                        <i class="bi bi-x-circle"></i>
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- +++++++++++++++++++++++++++++++++++++ -->
             </c:forEach>
             </tbody>
         </table>

@@ -102,8 +102,8 @@
                                                     title="${o.student.account.fullName}">${o.student.account.fullName}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#profile_${o.id}"><i
-                                                            class="bi bi-eye"></i>
+                                                    <button class="btn btn-outline-info btn-sm" data-toggle="modal"
+                                                        data-target="#profile_${o.id}"><i class="bi bi-eye"></i>
                                                         View</button>
                                                 </td>
                                                 <td class="text-truncate" style="max-width: 150px;"
@@ -114,24 +114,39 @@
                                                         View Detail</a>
                                                 </td> -->
                                                 <td>
-                                                    <a href="" class="btn btn-outline-info btn-sm"><i
+                                                    <a href="${o.cv.path}" class="btn btn-outline-info btn-sm"><i
                                                             class="bi bi-eye"></i>
                                                         ${o.cv.name}</a>
                                                 </td>
                                                 <td>${o.status}</td>
                                                 <td>
-                                                    <a style="${o.status!='Passed' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                    <!-- <a style="${o.status!='Passed Interview' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
                                                         href="verifyApplication/${o.id}/nextStep"
                                                         class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                                                         value="accept">
                                                         <i class="bi bi-check-circle"></i> Next Step
                                                     </a>
-                                                    <a style="${o.status!='Rejected' && o.status!='Passed'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                    <a style="${o.status!='Rejected' && o.status!='Passed Interview'?'':'pointer-events: none; background-color: lightgrey'}"
                                                         href="verifyApplication/${o.id}/Rejected"
                                                         class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
                                                         value="remove">
                                                         <i class="bi bi-x-circle"></i> Reject
-                                                    </a>
+                                                    </a> -->
+                                                    <button
+                                                        style="${o.status!='Passed Interview' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                        class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
+                                                        value="accept" data-toggle="modal"
+                                                        data-target="#acceptModal${o.id}">
+                                                        <i class="bi bi-check-circle"></i> Next Step
+                                                    </button>
+                                               
+                                                    <button
+                                                        style="${o.status!='Rejected' && o.status!='Passed Interview'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                        data-toggle="modal" data-target="#denyModal${o.id}"
+                                                        class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
+                                                        value="remove">
+                                                        <i class="bi bi-x-circle"></i> Reject
+                                                    </button>
                                                 </td>
                                             </tr>
 
@@ -156,8 +171,8 @@
                                                                 <span class="input-group-text" id="basic-addon1"><i
                                                                         class='fas fa-user-graduate'></i></span>
                                                                 <input type="text" class="form-control" id="studentName"
-                                                                    placeholder="Student Name" name="studentName" value="${o.student.account.fullName}"
-                                                                    disabled>
+                                                                    placeholder="Student Name" name="studentName"
+                                                                    value="${o.student.account.fullName}" disabled>
                                                             </div>
 
                                                             <div class="input-group mb-3">
@@ -187,15 +202,16 @@
                                                                         class="bi bi-envelope-fill"></i></span>
                                                                 <input type="email" class="form-control"
                                                                     id="studentEmail" placeholder="Student Email"
-                                                                    name="studentEmail" value="${o.student.account.email}" disabled>
+                                                                    name="studentEmail"
+                                                                    value="${o.student.account.email}" disabled>
                                                             </div>
 
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1"><i
                                                                         class="bi bi-telephone-fill"></i></span>
                                                                 <input type="tel" class="form-control" id="studentPhone"
-                                                                    placeholder="Student Phone" name="studentPhone" value="${o.student.account.phone}"
-                                                                    disabled>
+                                                                    placeholder="Student Phone" name="studentPhone"
+                                                                    value="${o.student.account.phone}" disabled>
                                                             </div>
 
                                                             <div class="input-group mb-3">
@@ -218,6 +234,67 @@
                                                 </div>
                                             </div>
                                             <!-- ++++ -->
+                                            <!-- Accept Modal -->
+                                            <div class="modal fade" id="acceptModal${o.id}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form action="verifyApplication/${o.id}/nextStep">
+                                                        <div class="modal-content text-center">
+                                                            <div class="modal-header"
+                                                                style="background: orange; text-align: center; display: unset;">
+                                                                <h5 class="modal-title" id="exampleModalLabel4">
+                                                                    Accept Form</h5>
+                                                            </div>
+                                                            <h4>Update status of ${o.student.account.fullName} ?</h4>
+                                                            <div class="modal-footer">
+                                                                <button type="submit"
+                                                                    class="btn btn-outline-success btn-sm">
+                                                                    <i class="bi bi-check-circle"></i>
+                                                                    Update
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-outline-secondary"
+                                                                    data-dismiss="modal">
+                                                                    <i class="bi bi-x-circle"></i>
+                                                                    Cancel
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- ++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                                            <!-- Deny Modal -->
+                                            <div class="modal fade" id="denyModal${o.id}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form action="verifyApplication/${o.id}/Rejected">
+                                                        <div class="modal-content text-center">
+                                                            <div class="modal-header"
+                                                                style="background: orange; text-align: center; display: unset;">
+                                                                <h5 class="modal-title" id="exampleModalLabel4">
+                                                                    Deny Form</h5>
+                                                            </div>
+                                                            <h4>Are you sure you want to reject this student</h4>
+                                                            <div class="modal-footer">
+                                                                <button type="submit"
+                                                                    class="btn btn-outline-danger btn-sm">
+                                                                    <i class="bi bi-x-circle"></i>
+                                                                    Reject
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-outline-secondary"
+                                                                    data-dismiss="modal">
+                                                                    <i class="bi bi-x-circle"></i>
+                                                                    Cancel
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- +++++++++++++++++++++++++++++++++++++  -->
                                             <!--  -->
                                         </c:forEach>
                                     </tbody>
