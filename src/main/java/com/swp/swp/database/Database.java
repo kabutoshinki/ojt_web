@@ -51,6 +51,7 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
+/*
                 File file = new File(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
                 file.mkdirs();
                 Account accountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
@@ -129,15 +130,15 @@ public class Database {
                 StudentApplyJob std = new StudentApplyJob(job2, studentD, "Waiting", semester, cv);
                 StudentApplyJob std1 = new StudentApplyJob(job1, studentD, "Waiting", semester, cv);
                 StudentApplyJob std3 = new StudentApplyJob(job1, studentD, "Waiting", semester, cv);
-                /*std.setEmployee(employeeA);
+                *//*std.setEmployee(employeeA);
                 std1.setEmployee(employeeA);
-                std3.setEmployee(employeeA)*/;
+                std3.setEmployee(employeeA)*//*;
 
-                /*OjtProcess process = new OjtProcess();
+                *//*OjtProcess process = new OjtProcess();
                 process.setStudent(studentD);
                 process.setCompany(company1);
                 process.setApplication(std1);
-                process.setStatus("Interning");*/
+                process.setStatus("Interning");*//*
 
 
                 semesterService.save(semester);
@@ -176,7 +177,7 @@ public class Database {
                 logger.info("insert Data: " + studentApplyJobsService.save(std));
                 logger.info("insert Data: " + studentApplyJobsService.save(std1));
                 logger.info("insert Data: " + studentApplyJobsService.save(std3));
-
+*/
 
 
 /*

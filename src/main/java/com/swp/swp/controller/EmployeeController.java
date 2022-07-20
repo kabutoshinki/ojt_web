@@ -157,6 +157,11 @@ public class EmployeeController {
             x.setStatus(status);
             x.setEmployee(employee);
             studentApplyJobsService.save(x);
+            if (status.equalsIgnoreCase("Denied")) {
+                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application have been denied by " + employee.getAccount().getFullName(), "Application Updated");
+            } else {
+                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application was sent to " + x.getJob().getCompany().getAccount().getFullName(), "Application Updated");
+            }
             session.setAttribute("successMessage", "Successfully!");
         }
         return "redirect:/employee/applications";
@@ -180,6 +185,11 @@ public class EmployeeController {
             System.out.println(employee.getAccount().getFullName());
             System.out.println(employee.getAccount().getFullName());
             System.out.println(x.getEmployee().getAccount().getFullName());
+            if (status.equalsIgnoreCase("Denied")) {
+                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application was denied by " + employee.getAccount().getFullName(), "Application Updated");
+            } else {
+                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application was accepted.", "Application Updated");
+            }
             studentApplyJobsService.save(application);
             externalRequestService.save(x);
             session.setAttribute("successMessage", "Successfully!");
@@ -205,12 +215,16 @@ public class EmployeeController {
                 if (x.getGrade() >= 5.0) {
                     x.setStatus("Passed");
                     application.setStatus("Passed");
+                    application.getStudent().getAccount().setStatus("Passed");
                 } else {
                     x.setStatus("Not Passed");
                     application.setStatus("Not Passed");
+                    application.getStudent().getAccount().setStatus("Not Passed");
                 }
+                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your internship report was updated.", "Internship Report");
             }
             x.setEmployee(employee);
+            accountService.save(application.getStudent().getAccount());
             ojtProcessService.save(x);
             studentApplyJobsService.save(application);
             session.setAttribute("successMessage", "Successfully!");
@@ -244,6 +258,11 @@ public class EmployeeController {
         job.setStatus(status);
         job.setEmployee(employee);
         jobService.save(job);
+        if (status.equalsIgnoreCase("Denied")) {
+            emailService.sendEmail(job.getCompany().getAccount().getEmail(), "Your recruitment was denied by " + employee.getAccount().getFullName(), "Recruitment Updated");
+        } else {
+            emailService.sendEmail(job.getCompany().getAccount().getEmail(), "Your recruitment was accepted.", "Recruitment Updated");
+        }
         session.setAttribute("successMessage", "Successfully!");
         return "redirect:/employee/requirements";
     }
@@ -290,10 +309,12 @@ public class EmployeeController {
             newStudent.setSemester(semesterService.currentSemester());
             newStudent.setStudentId((String)x.get(1));
             newStudent.setGender((String)x.get(4));
-            accountService.save(account);
-            studentService.save(newStudent);
-            emailService.sendEmail(account.getEmail(), body, subject);
-            System.out.println(account);
+            if (account.getStatus().equalsIgnoreCase("Passed") == false) {
+                accountService.save(account);
+                studentService.save(newStudent);
+                emailService.sendEmail(account.getEmail(), body, subject);
+                System.out.println(account);
+            }
         }
         if (countSuccess > 0)
             session.setAttribute("successMessage", "Successfully added " + countSuccess + " accounts");
@@ -415,15 +436,6 @@ public class EmployeeController {
         return "redirect:/employee/semester";
     }
 
-    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
-    public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
-        if(accountService.checkRole("EMPLOYEE", request)==false)
-            return "test";
-        OjtProcess process = ojtProcessService.findByApplication(studentApplyJobsService.findById(id));
-        modelMap.addAttribute("process", process);
-        return "employeeEvaluate";
-    }
-
     @RequestMapping(value = "/updateExternalEvaluate/{id}", method = RequestMethod.GET)
     public String updateEvaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id,
                                  @RequestParam("startDate") Date startDate,
@@ -472,13 +484,16 @@ public class EmployeeController {
                 if (process.getGrade() >= 5.0) {
                     process.setStatus("Passed");
                     application.setStatus("Passed");
+                    application.getStudent().getAccount().setStatus("Passed");
                 } else {
                     process.setStatus("Not Passed");
                     application.setStatus("Not Passed");
+                    application.getStudent().getAccount().setStatus("Not Passed");
                 }
-
+                emailService.sendEmail(process.getStudent().getAccount().getEmail(), "Your internship report was updated.", "Internship Report");
                 process.setEmployee(employeeService.findByAccount(accountService.currentAccount(request)));
             }
+            accountService.save(application.getStudent().getAccount());
             ojtProcessService.save(process);
             studentApplyJobsService.save(application);
             session.setAttribute("successMessage", "Successfully!");
