@@ -105,6 +105,7 @@ public class AccountController {
             modelMap.addAttribute("company", company);
         }
         accountService.save(account);
+        
         if (file.isEmpty() == false) {
             // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
             Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/avatar");
