@@ -51,7 +51,7 @@ public class Database {
                         @Override
                         public void run(String... args) throws Exception {
 
-                                Account employeeAccountA = new Account("test3", "danghuudat163@gmail.com", "EMPLOYEE");
+                                Account employeeAccountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                                 Account employeeAccountB = new Account("test3", "trungskse150457@fpt.edu.vn", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "hoannsse150010@fpt.edu.vn",
                                                 "COMPANY");
@@ -61,7 +61,7 @@ public class Database {
                                 accountExternal.setStatus("Hidden");
                                 Company companyExternal = new Company();
                                 companyExternal.setAccount(accountExternal);
-                                Account studentAccount1 = new Account("FPT", "datdhse150011@fpt.edu.vn", "STUDENT");
+                                Account studentAccount1 = new Account("FPT", "hoan123hahaha@gmail.com", "STUDENT");
                                 Account accountAdmin = new Account("FPT", "ojt.sender@gmail.com", "ADMIN");
                                 Employee employeeAdmin = new Employee();
                                 employeeAdmin.setAccount(accountAdmin);

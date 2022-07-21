@@ -258,6 +258,16 @@
                                                           value="${o.job.requirement}"
                                                           disabled>${o.job.requirement}</textarea>
                                             </div>
+                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text"
+                                                                                      id="basic-addon1">Benefit</span>
+                                                <textarea class="form-control"
+                                                          id="benefit"
+                                                          placeholder="Enter Requirement"
+                                                          name="benefit"
+                                                          value="${o.job.benefit}"
+                                                          disabled>${o.job.benefit}</textarea>
+                                            </div>
                                             <div class="form-row">
                                                 <div class="col-6 input-group mb-3">
                                                                                     <span class="input-group-text"

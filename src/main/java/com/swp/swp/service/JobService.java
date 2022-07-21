@@ -51,6 +51,15 @@ public class JobService {
         }
     }
 
+    public String[] getJobBenefit(int id) {
+        Job job = jobRepositories.findById(id);
+        try {
+            return job.getBenefit().split("\n");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public String[] getCompanyDescription(int id) {
         Job job = jobRepositories.findById(id);
         Company company = job.getCompany();
@@ -169,39 +178,39 @@ public class JobService {
         double percent = 0;
         HashSet<String> set = new HashSet();
         String temp = "";
-        System.out.println(); System.out.println();
+        /*System.out.println(); System.out.println();
         System.out.println(job.getDescription());
         System.out.println(job.getRequirement());
-        System.out.println(cv.getDescription());
+        System.out.println(cv.getDescription());*/
         for (int i = 0; i < job.getDescription().length(); i++) {
             if (!Character.isLetter(job.getDescription().charAt(i))) {
                 temp = temp.toLowerCase();
                 set.add(temp);
-                System.out.println(temp);
+                //System.out.println(temp);
                 temp = "";
             } else {
                 temp += job.getDescription().charAt(i);
             }
         }
-        if (!temp.isEmpty()) { set.add(temp); System.out.println(temp); }
+        if (!temp.isEmpty()) { set.add(temp); /*System.out.println(temp);*/ }
         temp = "";
         for (int i = 0; i < job.getRequirement().length(); i++) {
             if (!Character.isLetter(job.getRequirement().charAt(i))) {
                 temp = temp.toLowerCase();
                 set.add(temp);
-                System.out.println(temp);
+                //System.out.println(temp);
                 temp = "";
             } else {
                 temp += job.getRequirement().charAt(i);
             }
         }
-        if (!temp.isEmpty()) { set.add(temp); System.out.println(temp); }
+        if (!temp.isEmpty()) { set.add(temp); /*System.out.println(temp);*/ }
         int matched = 0, total = 0;
         temp = "";
         for (int i = 0; i < cv.getDescription().length(); i++) {
             if (!Character.isLetter(cv.getDescription().charAt(i))) {
                 temp = temp.toLowerCase();
-                System.out.println(temp);
+                //System.out.println(temp);
                 if (set.contains(temp)) {
                     matched++;
                 }
@@ -212,7 +221,7 @@ public class JobService {
             }
         }
         if (!temp.isEmpty()) {
-            System.out.println(temp);
+            //System.out.println(temp);
             if (set.contains(temp)) {
                 matched++;
             }
@@ -220,4 +229,6 @@ public class JobService {
         }
         return 1.0 * matched / total * 100;
     }
+
+
 }

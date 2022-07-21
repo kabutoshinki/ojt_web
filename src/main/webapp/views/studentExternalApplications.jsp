@@ -82,7 +82,7 @@
                 <th class="text-center">Information</th>
                 <th class="text-center">Evaluation</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Verifier</th>
+                <%--<th class="text-center">Verifier</th>--%>
                 <th class="text-center">Operation</th>
             </tr>
             </thead>
@@ -110,9 +110,9 @@
                         </c:if>
                     </td>
                     <td>${o.key.application.status}</td>
-                    <td class="text-truncate" style="max-width: 150px;"
-                        title="${o.key.employee.account.fullName}">
-                            ${o.key.employee.account.fullName}</td>
+                    <%--<td class="text-truncate" style="max-width: 150px;" title="${o.key.employee.account.fullName}">
+                            ${o.key.employee.account.fullName}
+                    </td>--%>
                     <td>
                         <a style="${o.key.application.status=='Accepted' && o.key.student.applicationStatus == false?'':'pointer-events: none; background-color: lightgrey'}"
                            href="verifyIntern/${o.key.application.id}/Interning/externalApplications"

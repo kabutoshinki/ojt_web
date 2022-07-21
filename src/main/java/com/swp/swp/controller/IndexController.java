@@ -94,7 +94,7 @@ class IndexController {
             Student student = studentService.findByAccount(accountService.currentAccount(request));
             for (Job x : jobList) {
                 for (CV y: student.getCvList()) {
-                    System.out.println(jobService.match(x, y));
+                    //System.out.println(jobService.match(x, y));
                     if (jobService.match(x, y) > 50) {
                         x.setRecommend("Recommend");
                         break;
@@ -102,9 +102,10 @@ class IndexController {
                 }
             }
             if (recommend == 1) {
-                ArrayList <Job> temp = jobList;
+                ArrayList <Job> temp = (ArrayList<Job>) jobList.clone();
                 jobList.clear();
                 for (Job x: temp) {
+                    //System.out.println(x.getRequirement());
                     if (x.getRecommend().equalsIgnoreCase("Recommend"))
                         jobList.add(x);
                 }

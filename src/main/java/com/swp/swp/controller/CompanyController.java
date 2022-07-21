@@ -146,34 +146,39 @@ public class CompanyController {
     @RequestMapping(value = "/uploadRequirement", method = RequestMethod.POST)
     public String uploadRequirement(ModelMap modelMap, HttpServletRequest request, @RequestParam("position") int positionId,
                                     @RequestParam("description") String description, @RequestParam("requirement") String requirement,
-                                    @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate,
+                                    @RequestParam("benefit") String benefit, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate,
                                     @RequestParam("slot") int slot){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        if (endDate.compareTo(startDate) > 0 && startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis())) >= 0) {
+        if (endDate.compareTo(startDate) < 0) {
+            session.setAttribute("dangerMessage", "Start date must before end date");
+        } else if (startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis())) < 0) {
+            session.setAttribute("dangerMessage", "Start date can not before current date");
+        } else {
             Position position = positionService.findById(positionId);
             Job newJob = new Job();
             newJob.setPosition(position);
             newJob.setCompany(companyService.findByAccount(accountService.currentAccount(request)));
             newJob.setStatus("Waiting");
             newJob.setRequirement(requirement);
+            newJob.setBenefit(benefit);
             newJob.setDescription(description);
             newJob.setStartDate(startDate);
             newJob.setEndDate(endDate);
             newJob.setSlot(slot);
             jobService.save(newJob);
             session.setAttribute("successMessage", "Successfully!");
-        } else {
+        } /*else {
             session.setAttribute("dangerMessage", "Failed!");
-        }
+        }*/
         return "redirect:/company/requirements";
     }
 
     @RequestMapping(value = "/updateRequirement/{id}", method = RequestMethod.POST)
     public String updateRequirement(ModelMap modelMap, HttpServletRequest request, @RequestParam("position") int positionId,
                                     @RequestParam("description") String description, @RequestParam("requirement") String requirement,
-                                    @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate,
+                                    @RequestParam("benefit") String benefit, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate,
                                     @RequestParam("slot") int slot, @PathVariable("id") int id){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
@@ -185,6 +190,7 @@ public class CompanyController {
             //newJob.setCompany(companyService.findByAccount(accountService.currentAccount(request)));
             //newJob.setStatus("Waiting");
             newJob.setRequirement(requirement);
+            newJob.setBenefit(benefit);
             newJob.setDescription(description);
             newJob.setStartDate(startDate);
             newJob.setEndDate(endDate);

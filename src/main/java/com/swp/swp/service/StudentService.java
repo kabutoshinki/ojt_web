@@ -24,20 +24,29 @@ public class StudentService {
     private StudentRepositories studentRepositories;
 
     public boolean save(Student newStudent) {
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/students");
+        Path currentWorkingDir1 = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
         //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
         try {
             logger.info("insert Data: " + studentRepositories.save(newStudent));
-            File file = new File(currentWorkingDir + "\\" + newStudent.getId());
+            File file = new File(currentWorkingDir + "/" + newStudent.getId());
+            File file1 = new File(currentWorkingDir1 + "/" + newStudent.getId());
             /*file.createNewFile();*/
             //if (!file.exists()){
-            File cvFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\CV");
-            File imgFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\image");
-            File requestFolder = new File(currentWorkingDir + "\\" + newStudent.getId() + "\\Request");
+            File cvFolder = new File(currentWorkingDir + "/" + newStudent.getId() + "/CV");
+            File cvFolder1 = new File(currentWorkingDir1 + "/" + newStudent.getId() + "/CV");
+            File imgFolder = new File(currentWorkingDir + "/" + newStudent.getId() + "/image");
+            File imgFolder1 = new File(currentWorkingDir1 + "/" + newStudent.getId() + "/image");
+            File requestFolder = new File(currentWorkingDir + "/" + newStudent.getId() + "/Request");
+            File requestFolder1 = new File(currentWorkingDir1 + "/" + newStudent.getId() + "/Request");
             file.mkdirs();
+            file1.mkdirs();
             cvFolder.mkdirs();
+            cvFolder1.mkdirs();
             imgFolder.mkdirs();
+            imgFolder1.mkdirs();
             requestFolder.mkdirs();
+            requestFolder1.mkdirs();
             //}
             System.out.println(file.exists());
             return true;
