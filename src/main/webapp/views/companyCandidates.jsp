@@ -163,7 +163,7 @@
                                                         </div>
                                                         <div class="modal-body text-center">
                                                             <div class="mb-3">
-                                                                <img src="/img/default.png" alt="avatar image"
+                                                                <img src="${o.student.account.avatar==null?'/img/default.png':o.student.account.avatar}" alt="avatar image"
                                                                     class="img-fluid" style="height: 150px;" disabled>
                                                             </div>
 

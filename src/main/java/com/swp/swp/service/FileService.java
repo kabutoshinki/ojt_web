@@ -98,8 +98,7 @@ public class FileService {
 
     public void exportStudentList(Iterable<Student> studentList) {
         try {
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static");
-            String filename = currentWorkingDir.normalize().toString() + "\\file.xls";
+
 
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = workbook.createSheet("Students");
@@ -126,9 +125,14 @@ public class FileService {
                 row.createCell(7).setCellValue(student.getAccount().getStatus());
                 count += 1;
             }
+            /*Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static");
+            String filename = currentWorkingDir.normalize().toString() + "\\file.xls";
             FileOutputStream fileOut = new FileOutputStream(filename);
-            workbook.write(fileOut);
-            fileOut.close();
+            workbook.write(fileOut);*/
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static").toString() + "/file.xls"));
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static").toString() + "/file.xls"));
+
+            //fileOut.close();
             workbook.close();
             System.out.println("Excel file has been generated successfully.");
         } catch (Exception e) {
@@ -165,7 +169,10 @@ public class FileService {
             FileOutputStream fileOut = new FileOutputStream(filename);
             workbook.write(fileOut);
             fileOut.close();
-            workbook.close();
+            /*workbook.close();*/
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static").toString() + "/file.xls"));
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static").toString() + "/file.xls"));
+
             System.out.println("Excel file has been generated successfully.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -248,7 +255,10 @@ public class FileService {
             FileOutputStream fileOut = new FileOutputStream(filename);
             workbook.write(fileOut);
             fileOut.close();
-            workbook.close();
+            //workbook.close();
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static").toString() + "/file.xls"));
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static").toString() + "/file.xls"));
+
             System.out.println("Excel file has been generated successfully.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -306,6 +316,47 @@ public class FileService {
             FileOutputStream fileOut = new FileOutputStream(filename);
             workbook.write(fileOut);
             fileOut.close();
+            //workbook.close();
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static").toString() + "/file.xls"));
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static").toString() + "/file.xls"));
+
+            System.out.println("Excel file has been generated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exportEmployeeList(ArrayList<Employee> employeeList) {
+        try {
+
+
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("Employees");
+            HSSFRow rowhead = sheet.createRow((short) 0);
+            rowhead.createCell(0).setCellValue("No.");
+            rowhead.createCell(1).setCellValue("Full Name");
+            rowhead.createCell(2).setCellValue("Email");
+            rowhead.createCell(3).setCellValue("Phone");
+            rowhead.createCell(4).setCellValue("Address");
+            int count = 1;
+            for (Employee employee: employeeList) {
+                HSSFRow row = sheet.createRow((short) count);
+
+                row.createCell(0).setCellValue(count);
+                row.createCell(1).setCellValue(employee.getAccount().getFullName());
+                row.createCell(2).setCellValue(employee.getAccount().getEmail());
+                row.createCell(3).setCellValue(employee.getAccount().getPhone());
+                row.createCell(4).setCellValue(employee.getAccount().getAddress());
+                count += 1;
+            }
+            /*Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static");
+            String filename = currentWorkingDir.normalize().toString() + "\\file.xls";
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            workbook.write(fileOut);*/
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static").toString() + "/file.xls"));
+            workbook.write(new FileOutputStream(Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static").toString() + "/file.xls"));
+
+            //fileOut.close();
             workbook.close();
             System.out.println("Excel file has been generated successfully.");
         } catch (Exception e) {

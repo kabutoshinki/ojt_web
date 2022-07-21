@@ -152,6 +152,16 @@
                 </c:forEach>
             </ul>
         </div>
+
+        <div class="col-12 mt-5 mb-5 mr-2">
+            <h3>Benefit:</h3>
+            <ul style="font-size: 25px">
+                <c:forEach items="${jobBenefit}" var="o">
+                    <li>${o}</li>
+                </c:forEach>
+            </ul>
+        </div>
+
     </div>
 </div>
 <jsp:include page="footer.jsp"/>

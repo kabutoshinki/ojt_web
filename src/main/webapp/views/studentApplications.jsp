@@ -82,7 +82,7 @@
                 <th class="text-center">Position</th>
                 <th class="text-center">Details</th>
                 <th class="text-center">CV</th>
-                <th class="text-center">Verifier</th>
+                <%--<th class="text-center">Verifier</th>--%>
                 <th class="text-center">Status</th>
                 <th class="text-center">Action</th>
             </tr>
@@ -103,9 +103,9 @@
                     </td>
                     <td title="${o.cv.name}"><a href="${o.cv.path}"
                                                 class="btn btn-outline-info btn-sm">View CV</a></td>
-                    <td class="text-truncate" style="max-width: 150px;"
+                    <%--<td class="text-truncate" style="max-width: 150px;"
                         title="${o.employee.account.fullName}">
-                            ${o.employee.account.fullName}</td>
+                            ${o.employee.account.fullName}</td>--%>
                     <td>${o.status}</td>
 
                     <td>
@@ -187,6 +187,14 @@
                                               placeholder="Enter Requirement" name="requirement"
                                               value="${o.job.requirement}"
                                               disabled>${o.job.requirement}</textarea>
+                                </div>
+                                <div class="input-group mb-3">
+                                                            <span class="input-group-text"
+                                                                  id="basic-addon1">Benefit</span>
+                                    <textarea class="form-control" id="benefit"
+                                              placeholder="Enter Benefit" name="benefit"
+                                              value="${o.job.benefit}"
+                                              disabled>${o.job.benefit}</textarea>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-6 input-group mb-3">

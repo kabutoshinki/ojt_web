@@ -42,6 +42,7 @@ public class ViewController {
         String[] jobDes = jobService.getJobDescription(id);
         String[] companyDes = jobService.getCompanyDescription(id);
         String[] jobRe = jobService.getJobRequirement(id);
+        String[] jobBenefit = jobService.getJobBenefit(id);
         if (accountService.checkRole("STUDENT", request) == true) {
             Student student = studentService.findByAccount(accountService.currentAccount(request));
             Iterable<CV> cvList = cvService.findAllAvailable(student);
@@ -61,6 +62,8 @@ public class ViewController {
 
     @RequestMapping(value = "/user")
     public String viewUserInformation(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response){
+        if(accountService.currentAccount(request) == null)
+            return "test";
         Account account = accountService.currentAccount(request);
         modelMap.addAttribute("user", account);
         //System.out.println(account.getFullName());

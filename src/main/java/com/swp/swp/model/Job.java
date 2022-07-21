@@ -45,6 +45,9 @@ public class Job {
     @Column( unique = false, length = 1000)
     @Lob
     private String requirement;
+    @Column( unique = false, length = 1000)
+    @Lob
+    private String benefit;
     @Column(unique = false, length = 300)
     private String status;
     @Column(unique = false)
@@ -247,6 +250,14 @@ public class Job {
 
     public void setRecommend(String recommend) {
         this.recommend = recommend;
+    }
+
+    public String getBenefit() {
+        return benefit;
+    }
+
+    public void setBenefit(String benefit) {
+        this.benefit = benefit;
     }
 
     @Override

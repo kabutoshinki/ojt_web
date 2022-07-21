@@ -110,14 +110,17 @@
                                               placeholder="Enter Description" name="description" required></textarea>
                                 </div>
                                 <div class="input-group mb-3">
-                                                        <span class="input-group-text"
-                                                              id="basic-addon1">Requirement</span>
+                                    <span class="input-group-text" id="basic-addon1">Requirement</span>
                                     <textarea class="form-control" id="requirement"
                                               placeholder="Enter Requirement" name="requirement" required></textarea>
                                 </div>
                                 <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">Start
-                                                            date</span>
+                                    <span class="input-group-text" id="basic-addon1">Benefit</span>
+                                    <textarea class="form-control" id="benefit"
+                                              placeholder="Enter Benefit" name="benefit" required></textarea>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Start date</span>
                                     <input type="date" class="form-control" id="startDate"
                                            placeholder="Enter Start Date" name="startDate" required>
                                 </div>
@@ -215,8 +218,7 @@
                                                 </div>
 
                                                 <div class="input-group mb-3">
-                                                                            <span class="input-group-text"
-                                                                                  id="basic-addon1">Description</span>
+                                                    <span class="input-group-text" id="basic-addon1">Description</span>
                                                     <input type="text" class="form-control"
                                                            id="description"
                                                            value="${o.description}"
@@ -224,13 +226,21 @@
                                                            name="description" required>
                                                 </div>
                                                 <div class="input-group mb-3">
-                                                                            <span class="input-group-text"
-                                                                                  id="basic-addon1">Requirement</span>
+                                                    <span class="input-group-text" id="basic-addon1">Requirement</span>
                                                     <input type="text" class="form-control"
                                                            id="requirement"
                                                            value="${o.requirement}"
                                                            placeholder="Enter Requirement"
                                                            name="requirement" required>
+                                                </div>
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">Benefit</span>
+                                                    <input type="text" class="form-control"
+                                                           id="benefit"
+                                                           value="${o.benefit}"
+                                                           placeholder="Enter Benefit"
+                                                           name="benefit" required>
                                                 </div>
                                                 <div class="input-group mb-3">
                                                                             <span class="input-group-text"
@@ -327,7 +337,8 @@
                                 <div class="modal-body text-center">
 
                                     <div class="mb-3">
-                                        <img src="/img/default.png" alt="avatar image"
+                                        <img src="${o.company.account.avatar==null?'/img/default.png':o.company.account.avatar}"
+                                             alt="avatar image"
                                              class="img-fluid" style="height: 150px;" disabled>
                                     </div>
 
@@ -341,8 +352,7 @@
                                     </div>
 
                                     <div class="input-group mb-3">
-                                                                <span class="input-group-text"
-                                                                      id="basic-addon1">Description</span>
+                                        <span class="input-group-text" id="basic-addon1">Description</span>
 
                                         <textarea class="form-control" id="description"
                                                   placeholder="Enter Description" name="description"
@@ -350,11 +360,16 @@
 
                                     </div>
                                     <div class="input-group mb-3">
-                                                                <span class="input-group-text"
-                                                                      id="basic-addon1">Requirement</span>
+                                        <span class="input-group-text" id="basic-addon1">Requirement</span>
                                         <textarea class="form-control" id="requirement"
                                                   placeholder="Enter Requirement" name="requirement"
                                                   value="${o.requirement}" disabled>${o.requirement}</textarea>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Benefit</span>
+                                        <textarea class="form-control" id="benefit"
+                                                  placeholder="Enter Benefit" name="benefit"
+                                                  value="${o.benefit}" disabled>${o.benefit}</textarea>
                                     </div>
 
                                     <div class="form-row">

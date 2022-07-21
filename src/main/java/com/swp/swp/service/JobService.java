@@ -24,10 +24,12 @@ import java.util.HashSet;
 public class JobService {
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
-    @Autowired JobRepositories jobRepositories;
+    @Autowired
+    JobRepositories jobRepositories;
     @Autowired
     CompanyRepositories companyRepositories;
-    @Autowired PositionRepositories positionRepositories;
+    @Autowired
+    PositionRepositories positionRepositories;
 
     public String[] getJobDescription(int id) {
         Job job = jobRepositories.findById(id);
@@ -38,11 +40,21 @@ public class JobService {
             return null;
         }
     }
+
     public String[] getJobRequirement(int id) {
         Job job = jobRepositories.findById(id);
         try {
             return job.getRequirement().split("\n");
 
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String[] getJobBenefit(int id) {
+        Job job = jobRepositories.findById(id);
+        try {
+            return job.getBenefit().split("\n");
         } catch (Exception e) {
             return null;
         }
@@ -59,6 +71,7 @@ public class JobService {
         }
 
     }
+
     public boolean insertJob(Job job, int companyId, int positionId) {
         Company company = companyRepositories.findById(companyId);
         Position position = positionRepositories.findById(positionId);
@@ -69,15 +82,22 @@ public class JobService {
             positionRepositories.save(position);
             return true;
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());;
+            System.out.println(e.getStackTrace());
+            ;
             return false;
         }
     }
+
     public boolean updateStatus(int id, String status) {
-        Job job = jobRepositories.findById(id);
-        job.setStatus(status);
-        jobRepositories.save(job);
-        return false;
+        try {
+            Job job = jobRepositories.findById(id);
+            job.setStatus(status);
+            jobRepositories.save(job);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
     }
     public Iterable<Job> findAll() {
         Iterable<Job> jobs = jobRepositories.findAll();
@@ -148,6 +168,7 @@ public class JobService {
         // TODO Auto-generated method stub
         return false;
     }
+
     public Job getByString(String value) {
         // TODO Auto-generated method stub
         return null;
@@ -157,39 +178,39 @@ public class JobService {
         double percent = 0;
         HashSet<String> set = new HashSet();
         String temp = "";
-        System.out.println(); System.out.println();
+        /*System.out.println(); System.out.println();
         System.out.println(job.getDescription());
         System.out.println(job.getRequirement());
-        System.out.println(cv.getDescription());
+        System.out.println(cv.getDescription());*/
         for (int i = 0; i < job.getDescription().length(); i++) {
             if (!Character.isLetter(job.getDescription().charAt(i))) {
                 temp = temp.toLowerCase();
                 set.add(temp);
-                System.out.println(temp);
+                //System.out.println(temp);
                 temp = "";
             } else {
                 temp += job.getDescription().charAt(i);
             }
         }
-        if (!temp.isEmpty()) { set.add(temp); System.out.println(temp); }
+        if (!temp.isEmpty()) { set.add(temp); /*System.out.println(temp);*/ }
         temp = "";
         for (int i = 0; i < job.getRequirement().length(); i++) {
             if (!Character.isLetter(job.getRequirement().charAt(i))) {
                 temp = temp.toLowerCase();
                 set.add(temp);
-                System.out.println(temp);
+                //System.out.println(temp);
                 temp = "";
             } else {
                 temp += job.getRequirement().charAt(i);
             }
         }
-        if (!temp.isEmpty()) { set.add(temp); System.out.println(temp); }
+        if (!temp.isEmpty()) { set.add(temp); /*System.out.println(temp);*/ }
         int matched = 0, total = 0;
         temp = "";
         for (int i = 0; i < cv.getDescription().length(); i++) {
             if (!Character.isLetter(cv.getDescription().charAt(i))) {
                 temp = temp.toLowerCase();
-                System.out.println(temp);
+                //System.out.println(temp);
                 if (set.contains(temp)) {
                     matched++;
                 }
@@ -200,7 +221,7 @@ public class JobService {
             }
         }
         if (!temp.isEmpty()) {
-            System.out.println(temp);
+            //System.out.println(temp);
             if (set.contains(temp)) {
                 matched++;
             }
@@ -208,4 +229,6 @@ public class JobService {
         }
         return 1.0 * matched / total * 100;
     }
+
+
 }

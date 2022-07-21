@@ -27,12 +27,6 @@ public class StudentApplyJobsService {
 
 
 
-    public StudentApplyJobsService(StudentApplyJobsRepositories studentApplyJobsRepositories,
-                                   CompanyRepositories companyRepositories, JobRepositories jobRepositories) {
-        this.studentApplyJobsRepositories = studentApplyJobsRepositories;
-        this.companyRepositories = companyRepositories;
-        this.jobRepositories = jobRepositories;
-    }
 
     public boolean updateStatus(int id, String status) {
         StudentApplyJob candidate = studentApplyJobsRepositories.findById(id);

@@ -1,5 +1,3 @@
-<%-- Document : index Created on : May 19, 2022, 6:42:41 PM Author : admin --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -282,7 +280,6 @@ ${mess}
             });
         });
     });
-
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

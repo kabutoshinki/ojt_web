@@ -171,8 +171,8 @@ public class StudentController {
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
         if (cvService.countAllAvailable(student) < 10) {
-            //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
+            // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
             String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
             CV newCV = new CV();
 
@@ -188,11 +188,13 @@ public class StudentController {
             newCV.setName(name + "." + extension);
             name = newCV.getId() + " - " + name + "." + extension;
             /*newCV.setPath("\\src\\main\\resources\\static\\students\\" + String.valueOf(student.getId()) + "\\CV\\" + name + ".pdf");*/
-            newCV.setPath("\\students\\" + String.valueOf(student.getId()) + "\\CV\\" + name);
+            newCV.setPath("/students/" + String.valueOf(student.getId()) + "/CV/" + name);
             path += name;
 
             cvService.save(newCV);
-            fileService.saveFile(file, path);
+            fileService.saveFile(file, Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students").toString() + "/" + student.getId() + "/CV/" + name);
+            fileService.saveFile(file, Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/students").toString() + "/" + student.getId() + "/CV/" + name);
+            /*fileService.saveFile(file, path);*/
             session.setAttribute("successMessage", "Upload successfully!");
         } else {
             session.setAttribute("dangerMessage", "You are have more than 10 CV. Can not upload any else");
@@ -207,8 +209,8 @@ public class StudentController {
 
         HttpSession session = request.getSession();
         Student student = studentService.findByAccount(accountService.currentAccount(request));
-        //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\students");
-        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+        Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
+        // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
         String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\CV\\";
         CV cv = cvService.findById(cvId);
         cv.setDescription(description);
@@ -216,10 +218,12 @@ public class StudentController {
         String filename = file.getOriginalFilename();
         int index = filename.indexOf('.');
         String extension = filename.substring(index + 1, filename.length()).toUpperCase();
-        System.out.println(path);
+        System.out.println("Path: "+currentWorkingDir.toAbsolutePath());
         cvService.save(cv);
         if (file != null && file.isEmpty() == false) {
-            fileService.saveFile(file, path);
+            //fileService.saveFile(file, path);
+            fileService.saveFile(file, Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students").toString() + "/" + student.getId() + "/CV/" + cv.getId() + " - " + cv.getName());
+            fileService.saveFile(file, Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/students").toString() + "/" + student.getId() + "/CV/" + cv.getId() + " - " + cv.getName());
         }
         session.setAttribute("successMessage", "Update successfully!");
         return "redirect:/student/CVs";
@@ -298,20 +302,24 @@ public class StudentController {
             apply.setStudent(student);
             apply.setSemester(student.getSemester());
             apply.setJob(jobService.firstOfCompany(companyService.findByAccount(accountService.findByEmail(""))));
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\students");
+            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
             String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
-            File requestFolder = new File(currentWorkingDir + "\\" + student.getId() + "\\Request\\" + newRequest.getId());
+            File requestFolder = new File(currentWorkingDir + "/" + student.getId() + "/Request/" + newRequest.getId());
             requestFolder.mkdirs();
             String filename = contract.getOriginalFilename();
             int index = filename.indexOf('.');
             String extension = filename.substring(index + 1, filename.length()).toUpperCase();
-            fileService.saveFile(contract, path + "contract" + "." + extension);
-            newRequest.setContractPath("\\students\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\" + "contract" + "." + extension);
+            //fileService.saveFile(contract, path + "contract" + "." + extension);
+            fileService.saveFile(contract, Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students").toString() + "/" + student.getId() + "/Request/" + newRequest.getId() + "/" + "contract" + "." + extension);
+            fileService.saveFile(contract, Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/students").toString() + "/" + student.getId() + "/Request/" + newRequest.getId() + "/" + "contract" + "." + extension);
+            newRequest.setContractPath("/students/" + student.getId() + "/Request/" + newRequest.getId() + "/" + "contract" + "." + extension);
             filename = letter.getOriginalFilename();
             index = filename.indexOf('.');
             extension = filename.substring(index + 1, filename.length()).toUpperCase();
-            fileService.saveFile(letter, path + "letter" + "." + extension);
-            newRequest.setLetterPath("\\students\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\" + "letter" + "." + extension);
+            //fileService.saveFile(letter, path + "letter" + "." + extension);
+            fileService.saveFile(contract, Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students").toString() + "/" + student.getId() + "/Request/" + newRequest.getId() + "/" + "letter" + "." + extension);
+            fileService.saveFile(contract, Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/students").toString() + "/" + student.getId() + "/Request/" + newRequest.getId() + "/" + "letter" + "." + extension);
+            newRequest.setLetterPath("/students/" + student.getId() + "/Request/" + newRequest.getId() + "/" + "letter" + "." + extension);
             newRequest.setApplication(apply);
 
             studentApplyJobsService.save(apply);

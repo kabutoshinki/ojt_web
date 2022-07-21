@@ -443,7 +443,7 @@ public class EmployeeController {
                                  @RequestParam("jobDescription") String jobDescription, @RequestParam("knowledge") String knowledge,
                                  @RequestParam("softSkill") String softSkill, @RequestParam("attitude") String attitude,
                                  @RequestParam("point1") int point1, @RequestParam("point2") int point2, @RequestParam("point3") int point3) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
         ExternalRequest request1 = externalRequestService.findById(id);
@@ -506,7 +506,7 @@ public class EmployeeController {
 
     @RequestMapping("/writeStudentFile")
     public String writeStudentFile(ModelMap modelMap, HttpServletRequest request) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
         ArrayList<Student> studentList = (ArrayList<Student>) session.getAttribute("studentList");
@@ -515,9 +515,20 @@ public class EmployeeController {
         return "redirect:/file.xls";
     }
 
+    @RequestMapping("/writeEmployeeFile")
+    public String writeEmployeeFile(ModelMap modelMap, HttpServletRequest request) {
+        if(accountService.checkRole("ADMIN", request)==false)
+            return "test";
+        HttpSession session = request.getSession();
+        ArrayList<Employee> employeeList = (ArrayList<Employee>) session.getAttribute("employeeList");
+        System.out.println(employeeList);
+        fileService.exportEmployeeList(employeeList);
+        return "redirect:/file.xls";
+    }
+
     @RequestMapping("/writeCompanyFile")
     public String writeCompanyFile(ModelMap modelMap, HttpServletRequest request) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
         ArrayList<Company> companyList = (ArrayList<Company>) session.getAttribute("companyList");
@@ -528,7 +539,7 @@ public class EmployeeController {
 
     @RequestMapping("/writeApplicationFile")
     public String writeApplyFile(ModelMap modelMap, HttpServletRequest request) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
         ArrayList<StudentApplyJob> applyList = (ArrayList<StudentApplyJob>) session.getAttribute("applyList");
@@ -539,7 +550,7 @@ public class EmployeeController {
 
     @RequestMapping("/writeExternalApplicationFile")
     public String writeExternalApplicationFile(ModelMap modelMap, HttpServletRequest request) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
         ArrayList<Pair> applyList = (ArrayList<Pair>) session.getAttribute("applyList");
@@ -554,7 +565,7 @@ public class EmployeeController {
 
     @RequestMapping("/writeProcessFile")
     public String writeProcessFile(ModelMap modelMap, HttpServletRequest request) {
-        if(accountService.checkRole("EMPLOYEE", request)==false)
+        if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
         HttpSession session = request.getSession();
         ArrayList<OjtProcess> processList = (ArrayList<OjtProcess>) session.getAttribute("processList");

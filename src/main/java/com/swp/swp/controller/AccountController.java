@@ -105,17 +105,22 @@ public class AccountController {
             modelMap.addAttribute("company", company);
         }
         accountService.save(account);
+
         if (file.isEmpty() == false) {
-            Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
-            String path = currentWorkingDir.normalize().toString();
+            // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
+            //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/Avatar");
+            //String path = currentWorkingDir.normalize().toString();
             String filename = file.getOriginalFilename();
             int index = filename.indexOf('.');
             String extension = filename.substring(index+1, filename.length()).toUpperCase();
-            path += File.separator + String.valueOf(account.getId()) + "." + extension;
-            account.setAvatar("\\avatar\\" + String.valueOf(account.getId()) + "." + extension);
-            fileService.saveFile(file, path);
+            //path += File.separator + String.valueOf(account.getId()) + "." + extension;
+            account.setAvatar("/avatar/" + String.valueOf(account.getId()) + "." + extension);
+            //fileService.saveFile(file, path);
+            fileService.saveFile(file, Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/avatar").toString() + File.separator + String.valueOf(account.getId()) + "." + extension);
+            fileService.saveFile(file, Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/avatar").toString() + File.separator + String.valueOf(account.getId()) + "." + extension);
             accountService.save(account);
         }
+        session.setAttribute("account", account);
         session.setAttribute("successMessage", "Update successfully!");
         return "redirect:/view/user";
     }
