@@ -57,6 +57,7 @@ public class ViewController {
         modelMap.addAttribute("companyDes", companyDes);
         modelMap.addAttribute("jobRe", jobRe);
         modelMap.addAttribute("jobDetail", jobDetail);
+        modelMap.addAttribute("jobBenefit", jobBenefit);
         return "viewRecruitment";
     }
 

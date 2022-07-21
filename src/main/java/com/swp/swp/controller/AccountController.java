@@ -109,7 +109,7 @@ public class AccountController {
         if (file.isEmpty() == false) {
             // Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\target\\classes\\static\\avatar");
             //Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/Avatar");
-            //String path = currentWorkingDir.normalize().toString();
+            //String path = currentWorkingDir.normalize().toStr  ing();
             String filename = file.getOriginalFilename();
             int index = filename.indexOf('.');
             String extension = filename.substring(index+1, filename.length()).toUpperCase();
