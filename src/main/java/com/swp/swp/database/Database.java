@@ -36,16 +36,16 @@ public class Database {
 
         @Bean
         CommandLineRunner initDatabase(AccountService accountService,
-                        CompanyService companyService,
-                        StudentService studentService,
-                        EmployeeService employeeService,
-                        JobService jobService,
-                        SemesterService semesterService,
-                        CVService cvService,
-                        MajorService majorService,
-                        StudentApplyJobsService studentApplyJobsService,
-                        OjtProcessService ojtProcessService,
-                        PositionRepositories positionService) {
+                                       CompanyService companyService,
+                                       StudentService studentService,
+                                       EmployeeService employeeService,
+                                       JobService jobService,
+                                       SemesterService semesterService,
+                                       CVService cvService,
+                                       MajorService majorService,
+                                       StudentApplyJobsService studentApplyJobsService,
+                                       OjtProcessService ojtProcessService,
+                                       PositionRepositories positionService) {
 
                 return new CommandLineRunner() {
                         @Override
@@ -54,9 +54,9 @@ public class Database {
                                 Account employeeAccountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                                 Account employeeAccountB = new Account("test3", "trungskse150457@fpt.edu.vn", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "hoannsse150010@fpt.edu.vn",
-                                                "COMPANY");
+                                        "COMPANY");
                                 Account companyAccount2 = new Account("FPT SOFTWARE2", "kabutoshinki@gmail.com",
-                                                "COMPANY");
+                                        "COMPANY");
                                 Account accountExternal = new Account("External", "", "COMPANY");
                                 accountExternal.setStatus("Hidden");
                                 Company companyExternal = new Company();
@@ -78,15 +78,15 @@ public class Database {
                                 Date startDate = Date.valueOf("2022-03-06");
                                 Date endDate = Date.valueOf("2022-06-20");
                                 Company company1 = new Company(
-                                                "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"
-                                                                +
-                                                                "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.",
-                                                companyAccount1);
+                                        "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"
+                                                +
+                                                "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.",
+                                        companyAccount1);
                                 Company company2 = new Company(
-                                                "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"
-                                                                +
-                                                                "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.",
-                                                companyAccount2);
+                                        "Information Technology & Services  10,001+ employees  377 on LinkedIn\n"
+                                                +
+                                                "Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.",
+                                        companyAccount2);
                                 Position position = new Position("Backend");
                                 Position position2 = new Position("Frontend");
                                 Major major = new Major("SE");
@@ -94,43 +94,43 @@ public class Database {
                                 position2.setMajor(major);
 
                                 Job job2 = new Job(10,
-                                                "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
-                                                                + "Participate in building and developing system architecture\n"
-                                                                +
-                                                                "Create technical documents such as: system architecture, high level design\n"
-                                                                +
-                                                                "Developing new features/product improvements\n" +
-                                                                "Research and solve difficult technical issues\n",
-                                                "Strong understanding of WebRTC\n"
-                                                                + "Good knowledge with C++, Java or Javascript\n" +
-                                                                "2 years Experienced in developing web apps with ReactJS, NodeJS\n"
-                                                                +
-                                                                "Experience in building and deploying applications on the cloud (AWS)\n"
-                                                                +
-                                                                "Have in-depth knowledge of Object Oriented Design and Data Structures\n"
-                                                                +
-                                                                "Knowledge of infra, networking",
-                                                "Accepted", startDate, Date.valueOf("2022-08-20"), company2, position2,
-                                                employeeA);
+                                        "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
+                                                + "Participate in building and developing system architecture\n"
+                                                +
+                                                "Create technical documents such as: system architecture, high level design\n"
+                                                +
+                                                "Developing new features/product improvements\n" +
+                                                "Research and solve difficult technical issues\n",
+                                        "Strong understanding of WebRTC\n"
+                                                + "Good knowledge with C++, Java or Javascript\n" +
+                                                "2 years Experienced in developing web apps with ReactJS, NodeJS\n"
+                                                +
+                                                "Experience in building and deploying applications on the cloud (AWS)\n"
+                                                +
+                                                "Have in-depth knowledge of Object Oriented Design and Data Structures\n"
+                                                +
+                                                "Knowledge of infra, networking",
+                                        "Accepted", startDate, Date.valueOf("2022-08-20"), company2, position2,
+                                        employeeA);
                                 Job job1 = new Job(10,
-                                                "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
-                                                                + "Participate in building and developing system architecture\n"
-                                                                +
-                                                                "Create technical documents such as: system architecture, high level design\n"
-                                                                +
-                                                                "Developing new features/product improvements\n" +
-                                                                "Research and solve difficult technical issues\n",
-                                                "Strong understanding of WebRTC\n"
-                                                                + "Good knowledge with C++, Java or Javascript\n" +
-                                                                "2 years Experienced in developing web apps with ReactJS, NodeJS\n"
-                                                                +
-                                                                "Experience in building and deploying applications on the cloud (AWS)\n"
-                                                                +
-                                                                "Have in-depth knowledge of Object Oriented Design and Data Structures\n"
-                                                                +
-                                                                "Knowledge of infra, networking",
-                                                "Accepted", startDate, Date.valueOf("2022-09-20"), company1, position2,
-                                                employeeA);
+                                        "Clarify requirements, initiative solutions and develop deliverable software in the iterations of Scrum\n"
+                                                + "Participate in building and developing system architecture\n"
+                                                +
+                                                "Create technical documents such as: system architecture, high level design\n"
+                                                +
+                                                "Developing new features/product improvements\n" +
+                                                "Research and solve difficult technical issues\n",
+                                        "Strong understanding of WebRTC\n"
+                                                + "Good knowledge with C++, Java or Javascript\n" +
+                                                "2 years Experienced in developing web apps with ReactJS, NodeJS\n"
+                                                +
+                                                "Experience in building and deploying applications on the cloud (AWS)\n"
+                                                +
+                                                "Have in-depth knowledge of Object Oriented Design and Data Structures\n"
+                                                +
+                                                "Knowledge of infra, networking",
+                                        "Accepted", startDate, Date.valueOf("2022-09-20"), company1, position2,
+                                        employeeA);
                                 // OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, studentD);
 
                                 Job jobExternal = new Job();

@@ -162,7 +162,7 @@
                                     title="${o.description}">${o.description}</td>
                                     <%--<td>${currentPath}${o.path}</td>--%>
 
-                                <td><a href="${o.path}"
+                                <td><a href="${o.path}" target="_blank"
                                        class="btn btn-outline-info btn-sm"><i
                                         class="bi bi-eye"></i> View Detail</a></td>
                                     <%--<td><a href="file:///${currentPath}${o.path}"

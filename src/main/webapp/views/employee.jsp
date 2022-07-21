@@ -65,14 +65,6 @@
     session.setAttribute("warningMessage", null);
 %>
 
-<div class="container mt-4">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb align-items-center">
-            <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Employee</li>
-        </ol>
-    </nav>
-</div>
 <!-- Content -->
 
 <div class="container mt-3">

@@ -169,7 +169,7 @@ ${mess}
             <p>Type some text to search the List:</p>
             <input class="form-control" id="myInput" type="text" placeholder="Search.."/>
             <form class="form-row m-0" action="/home">
-                <%--<div class="col-3 input-group mb-3">
+                <%--<div class="col-3 input-group mb-3 mt-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text d-none d-lg-block"
                             for="inputGroupSelect01">Major</label>
@@ -182,12 +182,12 @@ ${mess}
                     </select>
                 </div>--%>
 
-                <div class="col-3 input-group mb-3">
+                <div class="col-3 input-group mb-3 mt-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text d-none d-lg-block"
                                for="inputGroupSelect01">Position</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01" name="position">
+                    <select class="custom-select" id="inputGroupSelect01" name="position" style="height: 40px">
                         <option value="-1">None</option>
                         <c:forEach var="o" items="${positionList}">
                             <option value="${o.id}" ${positionID==o.id?"selected":""}>${o.position}
@@ -196,12 +196,12 @@ ${mess}
                     </select>
                 </div>
 
-                <div class="col-3 input-group mb-3">
+                <div class="col-3 input-group mb-3 mt-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text d-none d-lg-block"
                                for="inputGroupSelect01">Sort</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01" name="sort">
+                    <select class="custom-select" id="inputGroupSelect01" name="sort" style="height: 40px">
                         <option value="-1">None</option>
                         <option value="1" ${sortID==1?"selected":""}>Sort increasing by date
                         </option>
@@ -214,12 +214,12 @@ ${mess}
                     </select>
                 </div>
                 <c:if test="${account.role.equals('STUDENT') == true}">
-                    <div class="col-3 input-group mb-3">
+                    <div class="col-3 input-group mb-3 mt-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text d-none d-lg-block"
                                    for="inputGroupSelect01">Recommend</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01" name="recommend">
+                        <select class="custom-select" id="inputGroupSelect01" name="recommend" style="height: 40px">
                             <option value="-1">None</option>
                             <option value="1" ${recommendID==1?"selected":""}>Recommend
                             </option>
@@ -227,7 +227,7 @@ ${mess}
                         </select>
                     </div>
                 </c:if>
-                <div class="col-3">
+                <div class="col-3 mt-3 mb-3">
                     <button type="submit" class="btn btn-info btn-sm btn-block"
                             style="padding: 8px;"><i class="bi bi-funnel-fill"></i> Filter
                     </button>
@@ -243,9 +243,9 @@ ${mess}
         <c:forEach items="${jobList}" var="o">
             <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3">
                 <form
-                        style="text-align: center; display: block; padding-top: 0em; margin-top: 0px;">
+                        style="text-align: center; display: block;">
                     <img src="${o.company.account.avatar==null?'/img/avatar.png':o.company.account.avatar}"
-                         width="300" class="mt-3" height="150px">
+                         width="300" class="mt-3" height="150px" class="img-fluid rounded mx-auto d-block">
                     <hr id="hr"/>
                     <strong>Position: </strong>${o.position.position}<br/>
                     <strong>End date: </strong>${o.endDate}<br/>
@@ -265,10 +265,22 @@ ${mess}
         </c:forEach>
     </div>
     <br/>
-    <div class="" style="text-align: center">
-        <a href="" style="font-size: 18px"><i class="bi bi-arrow-down-short"></i>Xem
-            thêm</a>
+    <!-- Phân Trang -->
+    <div class="row">
+        <div class="col" style="text-align: right;">
+            <br/>
+            <form action="<c:url value="/home/index.do" />">
+                <button type="submit" class="btn btn-sm btn-info" name="op" value="FirstPage" title="First Page" <c:if test="${page==1}">disabled</c:if>><i class="bi bi-chevron-bar-left"></i></button>
+                <button type="submit" class="btn btn-sm btn-info" name="op" value="PreviousPage" title="Previous Page" <c:if test="${page==1}">disabled</c:if>><i class="bi bi-chevron-left"></i></button>
+                <button type="submit" class="btn btn-sm btn-info" name="op" value="NextPage" title="Next Page" <c:if test="${page==totalPage}">disabled</c:if>><i class="bi bi-chevron-right"></i></button>
+                <button type="submit" class="btn btn-sm btn-info" name="op" value="LastPage" title="Last Page" <c:if test="${page==totalPage}">disabled</c:if>><i class="bi bi-chevron-bar-right"></i></button>
+                <input type="text" name="gotoPage" value="${page}" class="btn btn-sm btn-outline-default" style="text-align: right;width: 32px;" title="Enter page number"/>
+                <button type="submit" class="btn btn-sm btn-info" name="op" value="GotoPage" title="Goto Page"><i class="bi bi-arrow-up-right-circle"></i></button>
+            </form>
+            Page ${page}/${totalPage}
+        </div>
     </div>
+
 </div>
 <%@include file="footer.jsp" %>
 <script>

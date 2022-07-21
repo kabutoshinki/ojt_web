@@ -96,7 +96,7 @@ style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV</a>
                          aria-haspopup="true" aria-expanded="false" style="display: ${email!=null?'':'none'};">
                         <!-- <i class="bi bi-person-circle rounded-circle"></i> -->
                         <img src="${account.avatar==null?'/img/default.png':account.avatar}"
-                         width="30" class="img-fluid rounded-circle" height="30px">
+                         class="img-fluid rounded-circle" style="height: 40px; width: 40px;">
                     </div>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/view/user">My Profile</a>

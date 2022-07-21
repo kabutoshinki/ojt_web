@@ -71,6 +71,61 @@
                         </label>
                     </div>
 
+                    <!-- Modal Filter -->
+
+                    <div class="modal fade" id="filter" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="verifyApplication/${o.id}/Processing">
+                                <div class="modal-content text-center">
+                                    <div class="modal-header"
+                                        style="background: orange; text-align: center; display: unset;">
+                                        <h5 class="modal-title" id="exampleModalLabel4">
+                                            Filter Form</h5>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <div class="input-group mt-3 mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Filter</label>
+                                            </div>
+                                            <select class="custom-select" id="inputGroupSelect01" name="position"
+                                                required>
+                                                <option value="" selected>Select...
+                                                </option>
+                                                <!-- <c:forEach var="po"
+                                                                        items="${positionList}">
+                                                                        <option value="${po.id}"
+                                                                            ${po.id==o.position.id?"":"selected"}>
+                                                                            ${o.position.position}</option>
+                                                                    </c:forEach> -->
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-outline-success btn-sm">
+                                            <i class="bi bi-funnel"></i>
+                                            Filter
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                            data-dismiss="modal">
+                                            <i class="bi bi-x-circle"></i>
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- ++++++++++++++++++++++++++++++++++++++++ -->
+                    <button type="button" class="btn btn-outline-info ml-2" data-toggle="modal" data-target="#filter">
+                        <i class="bi bi-funnel-fill"></i> Filter
+                    </button>
+
                     <hr>
                     <div class="container">
                         <div class="table-responsive-lg">
@@ -181,8 +236,7 @@
                                                                 id="basic-addon1">Benefit</span>
                                                             <textarea class="form-control" id="benefit"
                                                                 placeholder="Enter Requirement" name="benefit"
-                                                                value="${o.benefit}"
-                                                                disabled>${o.benefit}</textarea>
+                                                                value="${o.benefit}" disabled>${o.benefit}</textarea>
                                                         </div>
 
                                                         <div class="form-row">
