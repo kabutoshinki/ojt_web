@@ -194,14 +194,14 @@
                                                     <table id="myTable" class="table table-bordered">
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-center">No.</th>
-                                                                <th class="text-center">Student ID</th>
-                                                                <th class="text-center">Student Name</th>
-                                                                <th class="text-center">Email</th>
-                                                                <th class="text-center">Details</th>
-                                                                <th class="text-center">Semester</th>
-                                                                <th class="text-center">Status</th>
-                                                                <th class="text-center">Action</th>
+                                                                <th>No.</th>
+                                                                <th>Student ID</th>
+                                                                <th>Student Name</th>
+                                                                <th>Email</th>
+                                                                <th>Details</th>
+                                                                <th>Semester</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

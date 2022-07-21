@@ -142,14 +142,14 @@
             <div class="container">
 
                 <div class="table-responsive">
-                    <table id="myTable" class="table table-bordered text-center">
+                    <table id="myTable" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center">No.</th>
-                            <th class="text-center">CV</th>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">View CV</th>
-                            <th class="text-center">Operation</th>
+                            <th>No.</th>
+                            <th>CV</th>
+                            <th>Description</th>
+                            <th>View CV</th>
+                            <th>Operation</th>
                         </tr>
                         </thead>
                         <tbody>

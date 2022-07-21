@@ -133,13 +133,13 @@
                             <table id="myTable" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">Company</th>
-                                        <th class="text-center">Position</th>
-                                        <th class="text-center">Detail</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Verifier</th>
-                                        <th class="text-center">Operations</th>
+                                        <th>No</th>
+                                        <th>Company</th>
+                                        <th>Position</th>
+                                        <th>Detail</th>
+                                        <th>Status</th>
+                                        <th>Verifier</th>
+                                        <th>Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>

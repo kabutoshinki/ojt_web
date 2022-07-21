@@ -192,14 +192,14 @@ multiple>
                                 <div class="container">
 
                                     <div class="table-responsive-lg">
-                                        <table id="myTable" class="table table-bordered text-center">
+                                        <table id="myTable" class="table table-bordered">
                                             <thead>
                                                 <tr style="text-align: center;">
-                                                    <th class="text-center">No.</th>
-                                                    <th class="text-center">Company Name</th>
-                                                    <th class="text-center">Email</th>
-                                                    <th class="text-center">Details</th>
-                                                    <th class="text-center">Action</th>
+                                                    <th>No.</th>
+                                                    <th>Company Name</th>
+                                                    <th>Email</th>
+                                                    <th>Details</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

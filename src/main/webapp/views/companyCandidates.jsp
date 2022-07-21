@@ -81,17 +81,17 @@
                         <div class="container">
                             <div class="table-responsive-lg">
 
-                                <table id="myTable" class="table table-striped text-center">
+                                <table id="myTable" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">No</th>
-                                            <th class="text-center">Student Name</th>
-                                            <th class="text-center">User Information</th>
-                                            <th class="text-center">Position</th>
+                                            <th>No</th>
+                                            <th>Student Name</th>
+                                            <th>User Information</th>
+                                            <th>Position</th>
                                             <!-- <th class="text-center">Detail Information</th> -->
-                                            <th class="text-center">CV</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Operations</th>
+                                            <th>CV</th>
+                                            <th>Status</th>
+                                            <th>Operations</th>
                                         </tr>
                                     </thead>
                                     <tbody>

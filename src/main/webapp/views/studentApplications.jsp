@@ -75,16 +75,16 @@
     </div>
 
     <div class="table-responsive-lg">
-        <table id="myTable" class="table table-bordered text-center">
+        <table id="myTable" class="table table-bordered">
             <thead>
             <tr style="text-align: center">
-                <th class="text-center">No.</th>
-                <th class="text-center">Position</th>
-                <th class="text-center">Details</th>
-                <th class="text-center">CV</th>
+                <th>No.</th>
+                <th>Position</th>
+                <th>Details</th>
+                <th>CV</th>
                 <%--<th class="text-center">Verifier</th>--%>
-                <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>

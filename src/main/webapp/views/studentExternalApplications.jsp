@@ -74,16 +74,16 @@
     </div>
 
     <div class="table-responsive-lg">
-        <table id="myTable" class="table table-bordered text-center">
+        <table id="myTable" class="table table-bordered">
             <thead>
-            <tr style="text-align: center">
-                <th class="text-center">No.</th>
-                <th class="text-center">Company Name</th>
-                <th class="text-center">Information</th>
-                <th class="text-center">Evaluation</th>
-                <th class="text-center">Status</th>
-                <%--<th class="text-center">Verifier</th>--%>
-                <th class="text-center">Operation</th>
+            <tr>
+                <th>No.</th>
+                <th>Company Name</th>
+                <th>Information</th>
+                <th>Evaluation</th>
+                <th>Status</th>
+                <%--<th>Verifier</th>--%>
+                <th>Operation</th>
             </tr>
             </thead>
             <tbody>
