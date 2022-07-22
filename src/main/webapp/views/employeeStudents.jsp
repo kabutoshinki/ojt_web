@@ -157,7 +157,7 @@
                                                for="customFile">Choose
                                             file</label>
                                         <input type="file" class="custom-file-input"
-                                               name="file" id="fileImage" accept=".xlsx,.XLS">
+                                               name="file" id="fileImage" accept=".xlsx,.XLS" required>
                                         <input type="text" name="role" value="STUDENT"
                                                hidden>
                                         <input type="text" name="redirect" value="students"

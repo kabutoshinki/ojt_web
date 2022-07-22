@@ -73,8 +73,8 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-12 col-lg-4 mb-2">
-                                <img style="width:300px; max-height: 250px;" class="img-fluid rounded mx-auto d-block mb-3"
-                                    alt="Responsive image"
+                                <img style="width:300px; max-height: 250px;"
+                                    class="img-fluid rounded mx-auto d-block mb-3" alt="Responsive image"
                                     src="${jobDetail.company.account.avatar==null?'/img/avatar.png':jobDetail.company.account.avatar}" />
                                 <a href=""
                                     style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}; ${student.applicationStatus==true || student.semester.equals(currentSemester)?'pointer-events: none; background-color: lightgrey; border: none; ':''}"
@@ -137,16 +137,16 @@
                     <div class="container">
 
                         <div class="row">
-                            <!-- <div class="col-12 mt-5 mr-2">
-            <h3>Job description:</h3>
-            <ul style="font-size: 25px">
-                <c:forEach items="${jobDes}" var="o">
-                    <li>${o}</li>
-                </c:forEach>
-            </ul>
-        </div> -->
+                            <div class="col-12 mt-5 mr-2">
+                                <h3>Job description:</h3>
+                                <ul style="font-size: 25px">
+                                    <c:forEach items="${jobDes}" var="o">
+                                        <li>${o}</li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
 
-                            <div class="col-12 mt-2 mb-2 mr-2">
+                            <!-- <div class="col-12 mt-2 mb-2 mr-2">
                                 <h4>Job description:</h4>
                                 <textarea rows="5" class="w-100 p-3 overflow-auto" style="font-size: 25px;"
                                     disabled><c:forEach items="${jobDes}" var="o">• ${o}</c:forEach></textarea>
@@ -160,26 +160,27 @@
                                 <h3>Benefit:</h3>
                                 <textarea rows="5" class="w-100 p-3 overflow-auto" style="font-size: 25px;"
                                     disabled><c:forEach items="${jobBenefit}" var="o">• ${o}</c:forEach></textarea>
+                            </div> -->
+
+                            <div class="col-12 mt-5 mb-5 mr-2">
+                                <h4>Qualification:</h4>
+                                <ul style="font-size: 25px">
+                                    <c:forEach items="${jobRe}" var="o">
+                                        <li>${o}</li>
+                                    </c:forEach>
+                                </ul>
                             </div>
-                            <!-- <div class="col-12 mt-5 mb-5 mr-2">
-            <h4>Qualification:</h4>
-            <ul style="font-size: 25px">
-                <c:forEach items="${jobRe}" var="o">
-                    <li>${o}</li>
-                </c:forEach>
-            </ul>
-        </div> -->
 
 
 
-                            <!-- <div class="col-12 mt-5 mb-5 mr-2">
+                            <div class="col-12 mt-5 mb-5 mr-2">
                                 <h4>Benefit:</h4>
                                 <ul style="font-size: 25px">
                                     <c:forEach items="${jobBenefit}" var="o">
                                         <li>${o}</li>
                                     </c:forEach>
                                 </ul>
-                            </div> -->
+                            </div>
 
                         </div>
                     </div>

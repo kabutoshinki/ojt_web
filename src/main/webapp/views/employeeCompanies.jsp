@@ -151,7 +151,7 @@ multiple>
                                                             <label class="custom-file-label" for="customFile">Choose
                                                                 file</label>
                                                             <input type="file" class="custom-file-input" name="file"
-                                                                id="fileImage" accept=".xlsx,.XLS">
+                                                                id="fileImage" accept=".xlsx,.XLS" required>
                                                             <input type="text" name="role" value="COMPANY" hidden>
                                                             <input type="text" name="redirect" value="companies" hidden>
                                                         </div>

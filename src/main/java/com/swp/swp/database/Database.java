@@ -52,17 +52,17 @@ public class Database {
                         public void run(String... args) throws Exception {
 
                                 Account employeeAccountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
-                                Account employeeAccountB = new Account("test3", "trungskse150457@fpt.edu.vn", "EMPLOYEE");
-                                Account companyAccount1 = new Account("FPT SOFTWARE", "hoannsse150010@fpt.edu.vn",
+                                Account employeeAccountB = new Account("test3", "huynhse151464@fpt.edu.vn", "EMPLOYEE");
+                                Account companyAccount1 = new Account("FPT SOFTWARE", "huynhse151464@gmail.com",
                                         "COMPANY");
-                                Account companyAccount2 = new Account("FPT SOFTWARE2", "kabutoshinki@gmail.com",
+                                Account companyAccount2 = new Account("FPT SOFTWARE2", "hoanghuy1vip@gmail.com",
                                         "COMPANY");
                                 Account accountExternal = new Account("External", "", "COMPANY");
                                 accountExternal.setStatus("Hidden");
                                 Company companyExternal = new Company();
                                 companyExternal.setAccount(accountExternal);
-                                Account studentAccount1 = new Account("FPT", "hoan123hahaha@gmail.com", "STUDENT");
-                                Account accountAdmin = new Account("FPT", "ojt.sender@gmail.com", "ADMIN");
+                                Account studentAccount1 = new Account("FPT", "kabutoshinki@gmail.com", "STUDENT");
+                                Account accountAdmin = new Account("FPT", "goldscorpio1311.com", "ADMIN");
                                 Employee employeeAdmin = new Employee();
                                 employeeAdmin.setAccount(accountAdmin);
                                 Employee employeeA = new Employee();
