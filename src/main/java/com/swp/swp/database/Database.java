@@ -65,7 +65,7 @@ public class Database {
                                 Company companyExternal = new Company();
                                 companyExternal.setAccount(accountExternal);
                                 Account studentAccount1 = new Account("FPT", "kabutoshinki@gmail.com", "STUDENT");
-                                Account accountAdmin = new Account("FPT", "goldscorpio1311.com", "ADMIN");
+                                Account accountAdmin = new Account("FPT", "goldscorpio1311@gmail.com", "ADMIN");
                                 Employee employeeAdmin = new Employee();
                                 employeeAdmin.setAccount(accountAdmin);
                                 Employee employeeA = new Employee();

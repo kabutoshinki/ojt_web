@@ -140,11 +140,11 @@
                                                 </div>
                                                 <div class="modal-body text-center">
                                                     <!-- <div class="form-group">
-<input type="file" name="file" class="form-control-file" required
-multiple>
-<input type="text" name="role" value="COMPANY" hidden>
-<input type="text" name="redirect" value="companies" hidden>
-</div> -->
+                                                        <input type="file" name="file" class="form-control-file" required
+                                                        multiple>
+                                                        <input type="text" name="role" value="COMPANY" hidden>
+                                                        <input type="text" name="redirect" value="companies" hidden>
+                                                        </div> -->
 
                                                     <div class="form-group">
                                                         <div class="custom-file mt-3">

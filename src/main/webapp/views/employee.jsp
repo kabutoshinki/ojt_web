@@ -120,7 +120,7 @@
         <div class="col-12 col-lg-4">
             <a href="/employee/externalApplications">
                 <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
-                    <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
+                    <img class="card-img-top img-fluid" src="/img/external.png"
                          style="  height: 150px;" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-text"><strong>Student External Application</strong></p>

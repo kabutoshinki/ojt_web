@@ -529,11 +529,13 @@
                                                                                 </div>
                                                                                 <div class="col-4 input-group mb-3">
                                                                                     <a href="${o.key.contractPath}"
-                                                                                        class="btn btn-outline-info btn-lg btn-block" target="_blank">Contract</a>
+                                                                                        class="btn btn-outline-info btn-lg btn-block"
+                                                                                        target="_blank">Contract</a>
                                                                                 </div>
                                                                                 <div class="col-4 input-group mb-3">
                                                                                     <a href="${o.key.letterPath}"
-                                                                                        class="btn btn-outline-info btn-lg btn-block" target="_blank">Letter</a>
+                                                                                        class="btn btn-outline-info btn-lg btn-block"
+                                                                                        target="_blank">Letter</a>
                                                                                 </div>
                                                                             </div>
 
@@ -647,6 +649,15 @@
                             $(document).ready(function () {
                                 $("#import").click(function () {
                                     $("#success").modal();
+                                });
+                            });
+
+                            $(function () {
+                                $('#grade1, #grade2, #grade3').change(function () {
+                                    var grade1 = parseInt($('#grade1').val(), 10) || 0;
+                                    var grade2 = parseInt($('#grade2').val(), 10) || 0;
+                                    var grade3 = parseInt($('#grade3').val(), 10) || 0;
+                                    $('#total').val((grade1 + grade2 + grade3) / 3.0);
                                 });
                             });
                         </script>

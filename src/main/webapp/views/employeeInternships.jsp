@@ -161,7 +161,7 @@
                                     <label class="custom-file-label" for="customFile">Choose
                                         file</label>
                                     <input type="file" class="custom-file-input" name="file"
-                                           id="fileImage">
+                                           id="fileImage" accept=".xlsx,.XLS" required>
                                     <input type="text" name="role" value="STUDENT" hidden>
                                     <input type="text" name="redirect" value="students"
                                            hidden>
@@ -204,7 +204,7 @@
                             <th>Student Name</th>
                             <th>Detail Information</th>
                             <th>Evaluation Detail</th>
-                            <th>Semester</th>
+                            <!-- <th>Semester</th> -->
                             <th>Status</th>
                             <th>Verifier</th>
                             <th>Action</th>
@@ -235,7 +235,7 @@
                                     </button>
                                 </td>
 
-                                <td>${o.application.semester.semester}</td>
+                                <!-- <td>${o.application.semester.semester}</td> -->
                                 <td>${o.status}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
                                     title="${o.employee.account.fullName}">
