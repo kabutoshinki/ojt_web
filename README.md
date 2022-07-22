@@ -8,8 +8,12 @@ OJT Website create with purposes help student in FPT University find the job in 
 **JDK 11**
 - Follow instructions to install the latest version of JDK [oracle docs](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 ## Create database for project
-- By default we use H2Database for project if you want to use MySql database use need to create database name 'swp' in your machine by using fowlling script `create database swp`
+- By default we use H2Database for project if you want to use MySql or MSSql you need to create database name 'swp' in your machine by using fowlling script `create database swp`
 - You need to change some code in file `application.properties` 
+![application.properties Image](https://github.com/noname163/swp_project/blob/main/Screenshot%20(43).png)
+  - If you use MySql you need uncommend code from line 16 to line 21
+  - if you use MSSql you need uncommend code from line 1 to line 7
+  
  ### You will find in this repo the following stuff:
 * Java source code for OJT website
 #### © TEAM7 
