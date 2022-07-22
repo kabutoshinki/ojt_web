@@ -18,7 +18,9 @@ OJT Website create with purposes help student in FPT University find the job in 
   - If you use MySql you will uncomment code from line 40 to 44
   - If you use MSSql you will uncomment code from line 35 to 39
   - If you use H2Database you will uncoment code from line 29 to 33
-
+## Run Project
+- Download, open project name "swp_project" in VS Code and run it 
+## Error handling
  ### You will find in this repo the following stuff:
 * Java source code for OJT website
 #### © TEAM7 
