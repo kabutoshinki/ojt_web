@@ -90,7 +90,7 @@
             <div class="modal fade" id="filter" tabindex="-1"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="verifyApplication/${o.id}/Processing">
+                    <form action="/employee/internships">
                         <div class="modal-content text-center">
                             <div class="modal-header"
                                  style="background: orange; text-align: center; display: unset;">

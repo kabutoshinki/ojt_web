@@ -50,7 +50,10 @@ public class Database {
                 return new CommandLineRunner() {
                         @Override
                         public void run(String... args) throws Exception {
-
+                                File file = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/static/avatar");
+                                file.mkdirs();
+                                file = new File(Paths.get("").toAbsolutePath() + "/target/classes/static/avatar");
+                                file.mkdirs();
                                 Account employeeAccountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
                                 Account employeeAccountB = new Account("test3", "huynhse151464@fpt.edu.vn", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "huynhse151464@gmail.com",
