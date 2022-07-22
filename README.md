@@ -8,7 +8,7 @@ OJT Website create with purposes help student in FPT University find the job in 
 **JDK 11**
 - Follow instructions to install the latest version of JDK [oracle docs](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 ## Create database for project
-- By default we use H2Database for project if you want to use MySql database use can find the scrip in file `MySqlScript.txt` at in project folder 
+- By default we use H2Database for project if you want to use MySql database use can find the scrip in file `MySqlScript.txt` in project folder 
  ### You will find in this repo the following stuff:
 * Java source code for OJT website
 #### © TEAM7 
