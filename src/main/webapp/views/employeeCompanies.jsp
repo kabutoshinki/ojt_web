@@ -177,10 +177,10 @@ multiple>
                                     </button>
                                 </a>
 
-                                <button type="button" class="btn btn-outline-info" data-toggle="modal"
-                                    data-target="#filter">
+                                <%--<button type="button" class="btn btn-outline-info" data-toggle="modal"
+                                    data-target="#filter" style="float: right;">
                                     <i class="bi bi-funnel-fill"></i> Filter
-                                </button>
+                                </button>--%>
 
                                 <a href="/template/Company.xlsx" download>
                                     <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i

@@ -99,7 +99,7 @@
                     <img class="card-img-top img-fluid" src="/img/verify.jpg" style="  height: 150px;"
                          alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text"><strong>Verify Internship Requirement</strong></p>
+                        <p class="card-text"><strong>Internship Requirement</strong></p>
                     </div>
                 </div>
             </a>
@@ -111,7 +111,7 @@
                     <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
                          style="  height: 150px;" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text"><strong>Verify Student Application</strong></p>
+                        <p class="card-text"><strong>Student Application</strong></p>
                     </div>
                 </div>
             </a>
@@ -123,7 +123,7 @@
                     <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
                          style="  height: 150px;" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text"><strong>Verify Student External Application</strong></p>
+                        <p class="card-text"><strong>Student External Application</strong></p>
                     </div>
                 </div>
             </a>

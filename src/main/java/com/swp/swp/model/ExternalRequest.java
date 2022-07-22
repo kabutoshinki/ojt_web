@@ -118,5 +118,4 @@ public class ExternalRequest {
     public void setLetterPath(String letterPath) {
         this.letterPath = letterPath;
     }
-
 }

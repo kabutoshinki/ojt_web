@@ -303,8 +303,12 @@ public class StudentController {
             apply.setSemester(student.getSemester());
             apply.setJob(jobService.firstOfCompany(companyService.findByAccount(accountService.findByEmail(""))));
             Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
-            String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
+            //String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
             File requestFolder = new File(currentWorkingDir + "/" + student.getId() + "/Request/" + newRequest.getId());
+            requestFolder.mkdirs();
+            currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/students");
+            //String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
+            requestFolder = new File(currentWorkingDir + "/" + student.getId() + "/Request/" + newRequest.getId());
             requestFolder.mkdirs();
             String filename = contract.getOriginalFilename();
             int index = filename.indexOf('.');

@@ -73,7 +73,7 @@ style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV</a>
             </div>
 
             <ul class="navbar-nav menu mr-auto ml-auto p-0 align-items-center">
-                <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/home" style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">Home</a></li>
                 <li class="nav-item active"><a href="/student/CVs"
                                                     style="text-decoration: none; display: ${account.role.equals('STUDENT')=='true'?'':'none'}">My CVs</a></li>
                 <li class="nav-item active"><a href="/student/applications"

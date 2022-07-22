@@ -72,10 +72,37 @@ public class EmployeeController {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
 
-        Iterable<Student> studentList = studentService.findAllActive();
+        ArrayList<Student> lst = (ArrayList<Student>) studentService.findAllActive();
         HttpSession session = request.getSession();
         //modelMap.addAttribute("studentList", studentList);
+        ArrayList <Student> studentList = new ArrayList<>();
+        int semesterId = -1;
+        //System.out.println(request.getParameter("semesterId"));
+        if (request.getParameter("semesterId") != null) {
+            semesterId = Integer.parseInt(request.getParameter("semesterId"));
+        }
+        String statusValue = "all";
+        //System.out.println(request.getParameter("statusValue"));
+        if (request.getParameter("statusValue") != null) {
+            statusValue = (String) request.getParameter("statusValue");
+        }
+        for (Student x: lst) {
+            boolean flag = true;
+            if (semesterId != -1 && x.getSemester().getId() != semesterId) {
+                flag = false;
+            }
+            if (statusValue.equals("all") == false && x.getAccount().getStatus().equalsIgnoreCase(statusValue) == false) {
+                flag = false;
+            }
+            if (flag)
+                studentList.add(x);
+         }
+        System.out.println(semesterId);
+        System.out.println(statusValue);
+        session.setAttribute("semesterId", semesterId);
+        session.setAttribute("statusValue", statusValue);
         session.setAttribute("studentList", studentList);
+        session.setAttribute("semesterList", semesterService.findAll());
         return "employeeStudents";
     }
 
@@ -117,11 +144,39 @@ public class EmployeeController {
     public String applications(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
-        Iterable<StudentApplyJob> applyList = studentApplyJobsService.findAllApplications();
+        Iterable<StudentApplyJob> lst = studentApplyJobsService.findAllApplications();
+        ArrayList <StudentApplyJob> applyList = new ArrayList<>();
         HttpSession session = request.getSession();
+        int semesterId = -1;
+        //System.out.println(request.getParameter("semesterId"));
+        if (request.getParameter("semesterId") != null) {
+            semesterId = Integer.parseInt(request.getParameter("semesterId"));
+        }
+        String statusValue = "all";
+        //System.out.println(request.getParameter("statusValue"));
+        if (request.getParameter("statusValue") != null) {
+            statusValue = (String) request.getParameter("statusValue");
+        }
+        for (StudentApplyJob x: lst) {
+            boolean flag = true;
+            if (semesterId != -1 && x.getSemester().getId() != semesterId) {
+                flag = false;
+            }
+            if (statusValue.equals("all") == false && x.getStatus().equalsIgnoreCase(statusValue) == false) {
+                flag = false;
+            }
+            if (flag)
+                applyList.add(x);
+        }
+        System.out.println(semesterId);
+        System.out.println(statusValue);
+        session.setAttribute("semesterId", semesterId);
+        session.setAttribute("statusValue", statusValue);
+        session.setAttribute("semesterList", semesterService.findAll());
         session.setAttribute("applyList", applyList);
         /*modelMap.addAttribute("applyList", applyList);
         fileService.exportApplyList(applyList);*/
+
         return "employeeApplications";
     }
 
@@ -129,16 +184,41 @@ public class EmployeeController {
     public String externalApplications(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
-        Iterable<ExternalRequest> applyList = externalRequestService.findAll();
-        ArrayList<Pair> lst = new ArrayList<>();
-        for (ExternalRequest x: applyList) {
-            lst.add(new Pair(x, ojtProcessService.findByApplication(x.getApplication())));
-        }
-        //modelMap.addAttribute("applyList", applyList);
-        /*modelMap.addAttribute("applyList", lst);
-        fileService.exportExternalApplyList(applyList);*/
+        Iterable<ExternalRequest> lst = externalRequestService.findAll();
+        ArrayList<Pair> applyList = new ArrayList<>();
+
         HttpSession session = request.getSession();
-        session.setAttribute("applyList", lst);
+        int semesterId = -1;
+        //System.out.println(request.getParameter("semesterId"));
+        if (request.getParameter("semesterId") != null) {
+            semesterId = Integer.parseInt(request.getParameter("semesterId"));
+        }
+        String statusValue = "all";
+        //System.out.println(request.getParameter("statusValue"));
+        if (request.getParameter("statusValue") != null) {
+            statusValue = (String) request.getParameter("statusValue");
+        }
+        for (ExternalRequest x: lst) {
+            boolean flag = true;
+            System.out.println(x.getApplication().getSemester().getSemester());
+            System.out.println(x.getApplication().getSemester().getId());
+            if (semesterId != -1 && x.getApplication().getSemester().getId() != semesterId) {
+                System.out.println(x.getApplication().getSemester().getSemester());
+                System.out.println(x.getApplication().getSemester().getId());
+                flag = false;
+            }
+            if (statusValue.equals("all") == false && x.getApplication().getStatus().equalsIgnoreCase(statusValue) == false) {
+                flag = false;
+            }
+            if (flag)
+                applyList.add(new Pair(x, ojtProcessService.findByApplication(x.getApplication())));
+        }
+        System.out.println(semesterId);
+        System.out.println(statusValue);
+        session.setAttribute("semesterId", semesterId);
+        session.setAttribute("statusValue", statusValue);
+        session.setAttribute("semesterList", semesterService.findAll());
+        session.setAttribute("applyList", applyList);
         return "employeeExternalApplications";
     }
 
@@ -237,10 +317,39 @@ public class EmployeeController {
     public String studentInternshipResult(ModelMap modelMap, HttpServletRequest request){
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
-        Iterable <OjtProcess> processList = ojtProcessService.findAll();
-        /*modelMap.addAttribute("processList", processList);
-        fileService.exportProcessList(processList);*/
+        Iterable <OjtProcess> lst = ojtProcessService.findAll();
+        ArrayList <OjtProcess> processList = new ArrayList<>();
         HttpSession session = request.getSession();
+        int semesterId = -1;
+        //System.out.println(request.getParameter("semesterId"));
+        if (request.getParameter("semesterId") != null) {
+            semesterId = Integer.parseInt(request.getParameter("semesterId"));
+        }
+        String statusValue = "all";
+        //System.out.println(request.getParameter("statusValue"));
+        if (request.getParameter("statusValue") != null) {
+            statusValue = (String) request.getParameter("statusValue");
+        }
+        for (OjtProcess x: lst) {
+            boolean flag = true;
+            System.out.println(x.getApplication().getSemester().getSemester());
+            System.out.println(x.getApplication().getSemester().getId());
+            if (semesterId != -1 && x.getApplication().getSemester().getId() != semesterId) {
+                System.out.println(x.getApplication().getSemester().getSemester());
+                System.out.println(x.getApplication().getSemester().getId());
+                flag = false;
+            }
+            if (statusValue.equals("all") == false && x.getApplication().getStatus().equalsIgnoreCase(statusValue) == false) {
+                flag = false;
+            }
+            if (flag)
+                processList.add(x);
+        }
+        System.out.println(semesterId);
+        System.out.println(statusValue);
+        session.setAttribute("semesterId", semesterId);
+        session.setAttribute("statusValue", statusValue);
+        session.setAttribute("semesterList", semesterService.findAll());
         session.setAttribute("processList", processList);
         return "employeeInternships";
     }
@@ -403,7 +512,27 @@ public class EmployeeController {
     public String requirements(ModelMap modelMap, HttpServletRequest request) {
         if(accountService.checkRole("EMPLOYEE", request)==false && accountService.checkRole("ADMIN", request)==false)
             return "test";
-        Iterable<Job> jobList = jobService.findAll();
+        HttpSession session = request.getSession();
+        ArrayList<Job> lst = (ArrayList<Job>) jobService.findAll();
+        String statusValue = "all";
+        //System.out.println(request.getParameter("statusValue"));
+        if (request.getParameter("statusValue") != null) {
+            statusValue = (String) request.getParameter("statusValue");
+        }
+        ArrayList <Job> jobList = new ArrayList<>();
+        for (Job job: lst) {
+            boolean flag = true;
+            //System.out.println(job.getStatus());
+            System.out.println(statusValue);
+            if (statusValue.equals("all") == false && job.getStatus().equalsIgnoreCase(statusValue) == false) {
+                System.out.println(job.getStatus());
+                flag = false;
+            }
+            if (flag == true) {
+                jobList.add(job);
+            }
+        }
+        session.setAttribute("statusValue", statusValue);
         modelMap.addAttribute("jobList",jobList);
         return "employeeRequirements";
     }
