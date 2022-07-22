@@ -21,7 +21,7 @@ OJT Website create with purposes help student in FPT University find the job in 
   - If you use MSSql you will uncomment code from line 35 to 39
   - If you use H2Database you will uncoment code from line 29 to 33
 ## Run Project
-- Download, open project name "swp_project" in VS Code and run by command `mvn sprinng-boot:run` 
+- Download, open project name "swp_project" in VS Code and run by command `mvn spring-boot:run` 
 ## Error handling
 - All error will redirect to `Error Page`
 ![Error Page](https://github.com/noname163/swp_project/blob/main/Screenshot%20(46).png)
