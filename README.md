@@ -21,6 +21,63 @@ OJT Website create with purposes help student in FPT University find the job in 
 ## Run Project
 - Download, open project name "swp_project" in VS Code and run it 
 ## Error handling
+- All error will redirect to `Error Page`
+![Error Page](https://github.com/noname163/swp_project/blob/main/Screenshot%20(46).png)
+## End point
+### GET /account
+- General
+  - Get all account available
+  - Return an account object similar to the one below
+```
+Account [ id=1, address=null, avatar=null, company=null, 
+email=datdhse150011@fpt.edu.vn, employee=null, fullName=FPT, 
+phone=null, role=STUDENT, status=Enable, student=null]
+```
+
+### GET /employee
+- General
+  - Get all employee available
+  - Return an employee object similar to the one below
+```
+Employee [id=1, account=Account [ id=4, address=null, avatar=null, company=null, 
+email=trungskse150457@fpt.edu.vn, employee=null, fullName=test3, 
+phone=null, role=EMPLOYEE, status=Enable, student=null], jobList=[], 
+processList=[], requestList=[], studentApplyList=[]]
+```
+### GET /company
+- General
+  - Get all company available
+  - Return an company object similar to the one below
+```
+Company [id=1, account=Account [id=1, address=null, avatar=null, company=null, email=hoannsse150010@fpt.edu.vn, employee=null, 
+fullName=FPT SOFTWARE, phone=null, role=COMPANY, status=Enable, student=null],
+description=Information Technology & Services  10,001+ employees  377 on LinkedIn
+Established since 1999, a leading IT Service provider in Southeast Asia with 52 offices in 18 countries and 700+ customers worldwide.,
+jobList=[], processList=[]]
+```
+
+### GET /student
+- General
+  - Get all student available
+  - Return an student object similar to the one below
+```
+Student [id=6, account=Account [address=null, avatar=null, company=null, email=datdhse150011@fpt.edu.vn, employee=null, fullName=FPT, phone=null, role=STUDENT, status=Enable, student=null], applyList=[], cvList=[], dateOfBirth=null, gender=null, id=1, processList=[], 
+requestList=[], semester=Semester [applyList=[], endDate=2022-06-20, id=1, 
+semester=Spring, startDate=2022-03-06, studentList=[], year=2022], studentId=SE1500000]
+```
+
+### GET /major
+- General
+  - Get all major available
+  - Return an major object similar to the one below
+```
+Major: Major [id=1, name=SE, positionList=[]]
+```
+
+
+
+
+
  ### You will find in this repo the following stuff:
 * Java source code for OJT website
 #### © TEAM7 
