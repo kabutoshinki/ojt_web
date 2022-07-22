@@ -7,6 +7,8 @@ OJT Website create with purposes help student in FPT University find the job in 
 ## Install dependence 
 **JDK 11**
 - Follow instructions to install the latest version of JDK [oracle docs](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+**Maven**
+- Follow instruction to setup and install [Maven](https://maven.apache.org/install.html))
 ## Create database for project
 - By default we use H2Database for project if you want to use MySql or MSSql you need to create database name 'swp' in your machine by using fowlling script `create database swp`
 - You need to change some code in file `application.properties` 
@@ -19,17 +21,19 @@ OJT Website create with purposes help student in FPT University find the job in 
   - If you use MSSql you will uncomment code from line 35 to 39
   - If you use H2Database you will uncoment code from line 29 to 33
 ## Run Project
-- Download, open project name "swp_project" in VS Code and run it 
+- Download, open project name "swp_project" in VS Code and run by command `mvn sprinng-boot:run` 
 ## Error handling
 - All error will redirect to `Error Page`
 ![Error Page](https://github.com/noname163/swp_project/blob/main/Screenshot%20(46).png)
 ## End point
+
 ### GET /account
 - General
   - Get all account available
   - Return an account object similar to the one below
-```
-Account [ id=1, address=null, avatar=null, company=null, 
+```diff
+Account [ 
+id= 1, address=null, avatar=null, company=null, 
 email=datdhse150011@fpt.edu.vn, employee=null, fullName=FPT, 
 phone=null, role=STUDENT, status=Enable, student=null]
 ```
@@ -98,8 +102,8 @@ studentList=[], year=2022], studentId=SE1500000]]
 - General
   - Get all job available
   - Return job object similar to the one below
-```
- Job [id =1, applyList=[], benefit=null, 
+```diff
+ Job [ + id =1, applyList=[], benefit=null, 
  company=Company [id =1, account=Account [address=null, avatar=null, company=null, 
  email=hoannsse150010@fpt.edu.vn, employee=null, fullName=FPT SOFTWARE, id=1, 
  phone=null, role=COMPANY, status=Enable, student=null], 
