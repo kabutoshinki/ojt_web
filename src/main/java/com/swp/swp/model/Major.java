@@ -30,7 +30,7 @@ public class Major {
         )
     private int id;
 
-    @Column(nullable = true ,unique = false, length = 300)
+    @Column(nullable = true ,unique = true, length = 300)
     private String name;
 
     @OneToMany(cascade = CascadeType.PERSIST)

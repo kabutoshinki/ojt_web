@@ -181,7 +181,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${employeeList}" var="o" varStatus="loop">
+                        <%--<c:forEach items="${employeeList}" var="o" varStatus="loop">
                             <tr>
                                 <td>${loop.count}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
@@ -244,7 +244,7 @@
                                 </div>
                                 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                             </tr>
-                        </c:forEach>
+                        </c:forEach>--%>
                         </tbody>
                     </table>
 

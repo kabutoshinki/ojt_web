@@ -117,10 +117,13 @@
                                     </div>
                                     <select class="custom-select" id="inputGroupSelect01"
                                             name="statusValue" required>
-                                        <option value=""}>Select...</option>
-                                        <option value="Interning" ${statusValue=="Interning"?"selected":""}}>Interning</option>
+                                        <option value="" }>Select...</option>
+                                        <option value="Interning" ${statusValue=="Interning"?"selected":""}}>Interning
+                                        </option>
                                         <option value="Passed" ${statusValue=="Passed"?"selected":""}}>Passed</option>
-                                        <option value="Not Passed" ${statusValue=="Not Passed"?"selected":""}}>Not Passed</option>
+                                        <option value="Not Passed" ${statusValue=="Not Passed"?"selected":""}}>Not
+                                            Passed
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -236,7 +239,7 @@
                                 </td>
 
                                 <td>${o.application.semester.semester}</td>
-                                <td>${o.status}</td>
+                                <td title="${o.message}">${o.status}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
                                     title="${o.employee.account.fullName}">
                                         ${o.employee.account.fullName}</td>
@@ -529,8 +532,16 @@
                                                     id="exampleModalLabel4">
                                                     Deny Form</h5>
                                             </div>
-                                            <h4>Are you sure you want to deny this
-                                                result</h4>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Reasons</span>
+
+                                                <textarea class="form-control" id="message"
+                                                          placeholder="Enter the reason" name="message"
+                                                          value="${o.message}">${o.message}</textarea>
+
+                                            </div>
+                                            <%--<h4>Are you sure you want to deny this
+                                                result</h4>--%>
                                             <div class="modal-footer">
                                                 <button type="submit"
                                                         class="btn btn-outline-danger btn-sm">

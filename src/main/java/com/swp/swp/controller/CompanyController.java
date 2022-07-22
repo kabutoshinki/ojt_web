@@ -85,14 +85,14 @@ public class CompanyController {
         return "companyInternships";
     }
 
-    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
     public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         OjtProcess process = ojtProcessService.findById(id);
         modelMap.addAttribute("process", process);
         return "companyEvaluate";
-    }
+    }*/
 
     @RequestMapping(value = "/updateEvaluate/{id}", method = RequestMethod.GET)
     public String updateEvaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id,

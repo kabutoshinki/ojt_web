@@ -231,17 +231,16 @@ public class EmployeeController {
         HttpSession session = request.getSession();
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         StudentApplyJob x = studentApplyJobsService.findById(id);
-        if (x.getStatus().equalsIgnoreCase("Waiting") ||
-                x.getStatus().equalsIgnoreCase("Processing") ||
-                x.getStatus().equalsIgnoreCase("Denied")) {
+        if (x.getStatus().equalsIgnoreCase("Waiting")) {
             x.setStatus(status);
             x.setEmployee(employee);
-            studentApplyJobsService.save(x);
             if (status.equalsIgnoreCase("Denied")) {
-                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application have been denied by " + employee.getAccount().getFullName(), "Application Updated");
+                x.setMessage(request.getParameter("message"));
+                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application have been denied by " + employee.getAccount().getFullName() + " with reason " + x.getMessage(), "Application Updated");
             } else {
                 emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application was sent to " + x.getJob().getCompany().getAccount().getFullName(), "Application Updated");
             }
+            studentApplyJobsService.save(x);
             session.setAttribute("successMessage", "Successfully!");
         }
         return "redirect:/employee/applications";
@@ -256,9 +255,7 @@ public class EmployeeController {
         Employee employee = employeeService.findByAccount(accountService.currentAccount(request));
         ExternalRequest x = externalRequestService.findById(id);
         StudentApplyJob application = x.getApplication();
-        if (application.getStatus().equalsIgnoreCase("Waiting") ||
-                application.getStatus().equalsIgnoreCase("Accepted") ||
-                application.getStatus().equalsIgnoreCase("Denied")) {
+        if (application.getStatus().equalsIgnoreCase("Waiting")) {
             application.setStatus(status);
             application.setEmployee(employee);
             x.setEmployee(employee);
@@ -266,8 +263,17 @@ public class EmployeeController {
             System.out.println(employee.getAccount().getFullName());
             System.out.println(x.getEmployee().getAccount().getFullName());
             if (status.equalsIgnoreCase("Denied")) {
-                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application was denied by " + employee.getAccount().getFullName(), "Application Updated");
+                application.setMessage(request.getParameter("message"));
+                emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application was denied by " + employee.getAccount().getFullName() + " with reason " + application.getMessage(), "Application Updated");
             } else {
+                for (StudentApplyJob app : application.getStudent().getApplyList()) {
+                    if (app.getStatus().equalsIgnoreCase("Interning") == false
+                            && app.getStatus().equalsIgnoreCase("Denied") == false
+                            && app.getStatus().equalsIgnoreCase("Rejected") == false) {
+                        app.setStatus("Refused");
+                        studentApplyJobsService.save(app);
+                    }
+                }
                 emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your application was accepted.", "Application Updated");
             }
             studentApplyJobsService.save(application);
@@ -302,6 +308,8 @@ public class EmployeeController {
                     application.getStudent().getAccount().setStatus("Not Passed");
                 }
                 emailService.sendEmail(x.getStudent().getAccount().getEmail(), "Your internship report was updated.", "Internship Report");
+            } else {
+                x.setMessage(request.getParameter("message"));
             }
             x.setEmployee(employee);
             accountService.save(application.getStudent().getAccount());
@@ -368,7 +376,8 @@ public class EmployeeController {
         job.setEmployee(employee);
         jobService.save(job);
         if (status.equalsIgnoreCase("Denied")) {
-            emailService.sendEmail(job.getCompany().getAccount().getEmail(), "Your recruitment was denied by " + employee.getAccount().getFullName(), "Recruitment Updated");
+            job.setMessage(request.getParameter("message"));
+            emailService.sendEmail(job.getCompany().getAccount().getEmail(), "Your recruitment was denied by " + employee.getAccount().getFullName() + " with reason " + job.getMessage(), "Recruitment Updated");
         } else {
             emailService.sendEmail(job.getCompany().getAccount().getEmail(), "Your recruitment was accepted.", "Recruitment Updated");
         }

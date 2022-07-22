@@ -118,7 +118,7 @@
                                                             class="bi bi-eye"></i>
                                                         ${o.cv.name}</a>
                                                 </td>
-                                                <td>${o.status}</td>
+                                                <td title="o.message">${o.status}</td>
                                                 <td>
                                                     <!-- <a style="${o.status!='Passed Interview' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
                                                         href="verifyApplication/${o.id}/nextStep"
@@ -133,7 +133,7 @@
                                                         <i class="bi bi-x-circle"></i> Reject
                                                     </a> -->
                                                     <button
-                                                        style="${o.status!='Passed Interview' && o.status!='Rejected'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                        style="${o.status=='Processing' || o.status=='Interviewing'?'':'pointer-events: none; background-color: lightgrey'}"
                                                         class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                                                         value="accept" data-toggle="modal"
                                                         data-target="#acceptModal${o.id}">
@@ -141,7 +141,7 @@
                                                     </button>
                                                
                                                     <button
-                                                        style="${o.status!='Rejected' && o.status!='Passed Interview'?'':'pointer-events: none; background-color: lightgrey'}"
+                                                        style="${o.status=='Processing' || o.status=='Interviewing'?'':'pointer-events: none; background-color: lightgrey'}"
                                                         data-toggle="modal" data-target="#denyModal${o.id}"
                                                         class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
                                                         value="remove">

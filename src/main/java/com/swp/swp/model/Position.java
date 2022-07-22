@@ -23,7 +23,7 @@ public class Position {
     )
     private int id;
 
-    @Column( unique = false, length = 300)
+    @Column( unique = true, length = 300)
     private String position;
     @OneToMany(mappedBy = "position", cascade = CascadeType.REFRESH)
     private Set<Job> jobList = new HashSet<>();

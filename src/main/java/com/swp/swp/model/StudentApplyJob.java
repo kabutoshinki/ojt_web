@@ -21,7 +21,7 @@ public class StudentApplyJob {
     @JoinColumn(name = "Job_id")
     private Job job;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
     private Student student;
 
@@ -36,7 +36,7 @@ public class StudentApplyJob {
     @JoinColumn(name = "cv_id")
     private CV cv;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "semester_id")
     private Semester semester;
 
@@ -45,6 +45,10 @@ public class StudentApplyJob {
 
     @OneToOne(mappedBy = "application")
     private ExternalRequest request;
+
+    @Column( unique = false)
+    @Lob
+    private String message;
     public StudentApplyJob() {
     }
 
@@ -96,6 +100,14 @@ public class StudentApplyJob {
         this.status = status;
     }
 
+    public CV getCv() {
+        return cv;
+    }
+
+    public void setCv(CV cv) {
+        this.cv = cv;
+    }
+
     public Semester getSemester() {
         return semester;
     }
@@ -104,11 +116,27 @@ public class StudentApplyJob {
         this.semester = semester;
     }
 
-    public CV getCv() {
-        return cv;
+    public OjtProcess getProcess() {
+        return process;
     }
 
-    public void setCv(CV cv) {
-        this.cv = cv;
+    public void setProcess(OjtProcess process) {
+        this.process = process;
+    }
+
+    public ExternalRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(ExternalRequest request) {
+        this.request = request;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

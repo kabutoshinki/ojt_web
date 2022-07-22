@@ -49,7 +49,14 @@ public class OjtProcessService {
     }
 
     public Iterable<OjtProcess> findByCompany(Company company) {
-        return ojtProcessRepositories.findByCompany(company);
+        Iterable <OjtProcess> temp = ojtProcessRepositories.findAll();
+        ArrayList <OjtProcess> processList = new ArrayList<>();
+        for (OjtProcess process: temp) {
+            if (process.getApplication().getJob().getCompany().equals(company)) {
+                processList.add(process);
+            }
+        }
+        return processList;
     }
     public OjtProcess findByApplication(StudentApplyJob application) {
         return ojtProcessRepositories.findByApplication(application);

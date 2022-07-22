@@ -179,7 +179,7 @@
                                                         View Detail
                                                     </button>
                                                 </td>
-                                                <td>${o.status}</td>
+                                                <td title="o.message">${o.status}</td>
                                                 <td>${o.employee.account.fullName}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-outline-primary btn-sm"

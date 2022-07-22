@@ -31,8 +31,6 @@ public class Company implements Serializable{
     @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
     private Set<Job> jobList = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
-    private Set<OjtProcess> processList = new HashSet<>();
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;

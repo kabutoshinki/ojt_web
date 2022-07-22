@@ -11,6 +11,6 @@ public interface OjtProcessRepositories extends JpaRepository<OjtProcess, Intege
     OjtProcess findById(int id);
 
     Iterable <OjtProcess> findByStudent(Student student);
-    Iterable <OjtProcess> findByCompany(Company company);
+    //Iterable <OjtProcess> findByCompany(Company company);
     OjtProcess findByApplication(StudentApplyJob application);
 }

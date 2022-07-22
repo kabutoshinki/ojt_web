@@ -22,7 +22,7 @@ public class CV {
     @Column(nullable = true, unique = false, length = 300)
     private String name;
 
-    @Column(nullable = true, unique = false, length = 300)
+    @Column(nullable = true, unique = false)
     private String description;
 
     @Column(nullable = true, unique = false, length = 300)
@@ -40,8 +40,6 @@ public class CV {
     private Set<StudentApplyJob> applyList = new HashSet<>();
     public CV() {
     }
-
-
 
     public CV(String name) {
         this.name = name;

@@ -159,7 +159,7 @@
                                 View
                             </button>
                         </td>
-                        <td>${o.status}</td>
+                        <td title="${o.message}">${o.status}</td>
                         <td class="text-truncate" style="max-width: 150px;"
                             title="${o.employee.account.fullName}">${o.employee.account.fullName}
                         </td>
@@ -171,7 +171,8 @@
                                                     <i class="bi bi-check-circle"></i> Accept
                                                 </a> -->
                             <button
-                                    style="${o.status!='Accepted'?'':'pointer-events: none; background-color: lightgrey'}"
+                                    <%--style="${o.status!='Accepted'?'':'pointer-events: none; background-color: lightgrey'}"--%>
+                                    style="${o.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}"
                                     class="btn btn-sm btn-outline-success mt-auto mb-auto" name="op"
                                     value="accept" data-toggle="modal"
                                     data-target="#acceptModal${o.id}">
@@ -179,7 +180,8 @@
                             </button>
                             <!-- denyModal${o.id} -->
                             <button
-                                    style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}"
+                                    <%--style="${o.status!='Denied'?'':'pointer-events: none; background-color: lightgrey'}"--%>
+                                    style="${o.status=='Waiting'?'':'pointer-events: none; background-color: lightgrey'}"
                                     data-toggle="modal" data-target="#denyModal${o.id}"
                                     class="btn btn-sm btn-outline-danger mt-auto mb-auto" name="op"
                                     value="remove">
@@ -315,7 +317,15 @@
                                         <h5 class="modal-title" id="exampleModalLabel4">
                                             Deny Form</h5>
                                     </div>
-                                    <h4>Are you sure you want to deny this requirement</h4>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Reasons</span>
+
+                                        <textarea class="form-control" id="message"
+                                                  placeholder="Enter the reason" name="message"
+                                                  value="${o.message}">${o.message}</textarea>
+
+                                    </div>
+                                    <%--<h4>Are you sure you want to deny this requirement</h4>--%>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-outline-danger btn-sm">
                                             <i class="bi bi-x-circle"></i>
