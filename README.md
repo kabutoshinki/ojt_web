@@ -103,7 +103,7 @@ studentList=[], year=2022], studentId=SE1500000]]
   - Get all job available
   - Return job object similar to the one below
 ```diff
- Job [ + id =1, applyList=[], benefit=null, 
+ Job [id =1, applyList=[], benefit=null, 
  company=Company [id =1, account=Account [address=null, avatar=null, company=null, 
  email=hoannsse150010@fpt.edu.vn, employee=null, fullName=FPT SOFTWARE, id=1, 
  phone=null, role=COMPANY, status=Enable, student=null], 
