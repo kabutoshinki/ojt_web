@@ -82,14 +82,13 @@
                                     data-target="#CV">APPLY</a>
                             </div>
 
-                            <div class="col-12 col-lg-8 mt-5 mb-2">
-                                <p style="font-size: 30px; font-weight:bold;">
+                            <div class="col-12 col-lg-8 mb-2">
+                                <p class="overflow-auto" style="font-size: 20px; font-weight:bold; height: 250px;">
                                     <c:forEach items="${companyDes}" var="o">
-                                        ${o}<br>
+                                        • ${o}<br>
                                     </c:forEach>
-                                    ${jobDetail.company.account.address}
+                                    ${jobDetail.company.account.address}<br>
                                     Slot: ${jobDetail.slot} - End date: ${jobDetail.endDate}
-                                    <br>
                                 </p>
                             </div>
                         </div>
