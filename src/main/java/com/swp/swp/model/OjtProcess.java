@@ -23,7 +23,7 @@ public class OjtProcess {
     @Column(unique = false, nullable = true)
     private Date endDate;
     @Lob
-    @Column(unique = false, nullable = true, length = 300)
+    @Column(unique = false, nullable = true)
     private String detail;
     @Column(unique = false, nullable = true)
     private Double grade;
@@ -47,6 +47,11 @@ public class OjtProcess {
     @Column(unique = false, nullable = true)
     private int attitudePoint;
 
+    @Column(unique = false, nullable = true)
+    private String message;
+
+
+
     @OneToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "application_id")
     private StudentApplyJob application;
@@ -55,9 +60,6 @@ public class OjtProcess {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "company_id")
-    private Company company;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id")
     private Student student;
@@ -112,6 +114,70 @@ public class OjtProcess {
         this.status = status;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(String knowledge) {
+        this.knowledge = knowledge;
+    }
+
+    public int getKnowledgePoint() {
+        return knowledgePoint;
+    }
+
+    public void setKnowledgePoint(int knowledgePoint) {
+        this.knowledgePoint = knowledgePoint;
+    }
+
+    public String getSoftSkill() {
+        return softSkill;
+    }
+
+    public void setSoftSkill(String softSkill) {
+        this.softSkill = softSkill;
+    }
+
+    public int getSoftSkillPoint() {
+        return softSkillPoint;
+    }
+
+    public void setSoftSkillPoint(int softSkillPoint) {
+        this.softSkillPoint = softSkillPoint;
+    }
+
+    public String getAttitude() {
+        return attitude;
+    }
+
+    public void setAttitude(String attitude) {
+        this.attitude = attitude;
+    }
+
+    public int getAttitudePoint() {
+        return attitudePoint;
+    }
+
+    public void setAttitudePoint(int attitudePoint) {
+        this.attitudePoint = attitudePoint;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public StudentApplyJob getApplication() {
         return application;
     }
@@ -136,78 +202,26 @@ public class OjtProcess {
         this.student = student;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getKnowledge() {
-        return knowledge;
-    }
-
-    public void setKnowledge(String knowledge) {
-        this.knowledge = knowledge;
-    }
-
-    public String getSoftSkill() {
-        return softSkill;
-    }
-
-    public void setSoftSkill(String softSkill) {
-        this.softSkill = softSkill;
-    }
-
-    public String getAttitude() {
-        return attitude;
-    }
-
-    public void setAttitude(String attitude) {
-        this.attitude = attitude;
-    }
-
-    public int getKnowledgePoint() {
-        return knowledgePoint;
-    }
-
-    public void setKnowledgePoint(int knowledgePoint) {
-        this.knowledgePoint = knowledgePoint;
-    }
-
-    public int getSoftSkillPoint() {
-        return softSkillPoint;
-    }
-
-    public void setSoftSkillPoint(int softSkillPoint) {
-        this.softSkillPoint = softSkillPoint;
-    }
-
-    public int getAttitudePoint() {
-        return attitudePoint;
-    }
-
-    public void setAttitudePoint(int attitudePoint) {
-        this.attitudePoint = attitudePoint;
-    }
-
-    @Override
+    /*@Override
     public String toString() {
-        return "OjtProcess [application=" + application + ", attitude=" + attitude + ", attitudePoint=" + attitudePoint
-                + ", company=" + company + ", description=" + description + ", detail=" + detail + ", employee="
-                + employee + ", endDate=" + endDate + ", grade=" + grade + ", id=" + id + ", knowledge=" + knowledge
-                + ", knowledgePoint=" + knowledgePoint + ", softSkill=" + softSkill + ", softSkillPoint="
-                + softSkillPoint + ", startDate=" + startDate + ", status=" + status + ", student=" + student + "]";
-    }
-
-    
+        return "OjtProcess{" +
+                "id=" + id +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", detail='" + detail + '\'' +
+                ", grade=" + grade +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", knowledge='" + knowledge + '\'' +
+                ", knowledgePoint=" + knowledgePoint +
+                ", softSkill='" + softSkill + '\'' +
+                ", softSkillPoint=" + softSkillPoint +
+                ", attitude='" + attitude + '\'' +
+                ", attitudePoint=" + attitudePoint +
+                ", message='" + message + '\'' +
+                ", application=" + application +
+                ", employee=" + employee +
+                ", student=" + student +
+                '}';
+    }*/
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,6 +111,44 @@ class IndexController {
                         jobList.add(x);
                 }
             }
+        }
+
+        int page = 1;
+        if (session.getAttribute("page") != null) {
+            page = (int) session.getAttribute("page");
+        }
+        int totalPage = jobList.size() / 6;
+        if (jobList.size() % 6 != 0) {
+            totalPage += 1;
+        }
+
+        String cmd = "";
+        if (request.getParameter("op") != null) {
+            cmd = request.getParameter("op");
+        }
+        if (cmd.equalsIgnoreCase("FirstPage")) {
+            page = 1;
+        } else if (cmd.equalsIgnoreCase("PreviousPage")) {
+            page -= 1;
+        } else if (cmd.equalsIgnoreCase("NextPage")) {
+            page += 1;
+        } else if (cmd.equalsIgnoreCase("LastPage")) {
+            page = totalPage;
+        } else if (cmd.equalsIgnoreCase("GotoPage")) {
+            if (request.getParameter("gotoPage") != null) {
+                page = Integer.parseInt(request.getParameter("gotoPage"));
+            }
+        }
+        page = Math.min(page, totalPage);
+        page = Math.max(page, 1);
+        session.setAttribute("totalPage", totalPage);
+        session.setAttribute("page", page);
+        int start = (page - 1) * 6;
+        int end = (page * 6);
+        ArrayList <Job> temp = (ArrayList<Job>) jobList.clone();
+        jobList.clear();
+        for (int i = start; i < Math.min(end, temp.size()); i++) {
+            jobList.add(temp.get(i));
         }
         modelMap.addAttribute("jobList",jobList);
 

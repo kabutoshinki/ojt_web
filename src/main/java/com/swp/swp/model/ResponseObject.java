@@ -46,8 +46,5 @@ public class ResponseObject {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "ResponseObject{" + "status=" + status + ", message=" + message + ", data=" + data + '}';
-    }
+    
 }

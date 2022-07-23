@@ -20,20 +20,24 @@ public class ExternalRequest {
 
     private int id;
 
-    @Column(nullable = true ,unique = false, length = 300)
+    @Column(nullable = false ,unique = false, length = 300)
     private String companyName;
 
-    @Column(nullable = true ,unique = false, length = 300)
+    @Column(nullable = false ,unique = false, length = 300)
     private String companyEmail;
 
-    @Column(nullable = true ,unique = false, length = 300)
+    @Column(nullable = false ,unique = false, length = 300)
     private String companyPhone;
 
     @Column(nullable = true ,unique = false, length = 300)
     private String contractPath;
 
+
     @Column(nullable = true ,unique = false, length = 300)
     private String letterPath;
+
+    @Column(nullable = true ,unique = false)
+    private String message;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "student_id")
@@ -53,30 +57,6 @@ public class ExternalRequest {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public StudentApplyJob getApplication() {
-        return application;
-    }
-
-    public void setApplication(StudentApplyJob application) {
-        this.application = application;
     }
 
     public String getCompanyName() {
@@ -119,12 +99,35 @@ public class ExternalRequest {
         this.letterPath = letterPath;
     }
 
-    @Override
-    public String toString() {
-        return "ExternalRequest [application=" + application + ", companyEmail=" + companyEmail + ", companyName="
-                + companyName + ", companyPhone=" + companyPhone + ", contractPath=" + contractPath + ", employee="
-                + employee + ", id=" + id + ", letterPath=" + letterPath + ", student=" + student + "]";
+    public String getMessage() {
+        return message;
     }
-    
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public StudentApplyJob getApplication() {
+        return application;
+    }
+
+    public void setApplication(StudentApplyJob application) {
+        this.application = application;
+    }
 }

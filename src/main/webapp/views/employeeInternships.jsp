@@ -41,7 +41,6 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb align-items-center">
-            <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
             <li class="breadcrumb-item"><a href="/employee"
                                            style="padding:0;display: inline;">Employee</a></li>
             <li class="breadcrumb-item active" aria-current="page">Internship Reports
@@ -80,38 +79,72 @@
                     <h1 style="color: orange">List Of Student Internship Reports</h1>
                 </div>
             </div>
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+            <button type="button" class="btn btn-outline-primary mb-3" data-toggle="modal"
                     data-target="#mo">
                 <i class="bi bi-box-arrow-in-down"> Import</i>
             </button>
 
-            <!-- Notification-->
-            <c:if test="${not empty file}">
-                <div class="modal fade" id="success" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-success">
-                                <h5 class="modal-title ml-auto mr-auto"
-                                    id="exampleModalLabel">
-                                    <i class="bi bi-check-circle"
-                                       style="font-size:100px"></i>
-                                </h5>
+
+            <!-- Modal Filter  -->
+
+            <div class="modal fade" id="filter" tabindex="-1"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form action="/employee/internships">
+                        <div class="modal-content text-center">
+                            <div class="modal-header"
+                                 style="background: orange; text-align: center; display: unset;">
+                                <h5 class="modal-title" id="exampleModalLabel4">
+                                    Filter Form</h5>
                             </div>
                             <div class="modal-body text-center">
-                                Success Import
+                                <div class="input-group mt-3 mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text"
+                                               for="inputGroupSelect01">Semester</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01"
+                                            name="semesterId" required>
+                                        <option value="-1" selected>Select...</option>
+                                        <c:forEach var="o" items="${semesterList}">
+                                            <option value="${o.id}" ${o.id==semesterId?"selected":""}>${o.semester}</option>
+                                        </c:forEach>
+                                    </select>
+
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text"
+                                               for="inputGroupSelect01">Status</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01"
+                                            name="statusValue" required>
+                                        <option value=""}>Select...</option>
+                                        <option value="Interning" ${statusValue=="Interning"?"selected":""}}>Interning</option>
+                                        <option value="Passed" ${statusValue=="Passed"?"selected":""}}>Passed</option>
+                                        <option value="Not Passed" ${statusValue=="Not Passed"?"selected":""}}>Not Passed</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="modal-footer mr-auto ml-auto">
-                                <button type="button" class="btn btn-danger" id="close"
-                                        data-dismiss="modal">Close
+
+                            <div class="modal-footer">
+                                <button type="submit"
+                                        class="btn btn-outline-success btn-sm">
+                                    <i class="bi bi-funnel"></i>
+                                    Filter
+                                </button>
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary"
+                                        data-dismiss="modal">
+                                    <i class="bi bi-x-circle"></i>
+                                    Cancel
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </c:if>
+            </div>
 
-            <!-- +++++++++++++++++++++++++++++++++ -->
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++ -->
+
             <div class="modal fade" id="mo" tabindex="-1"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -149,10 +182,16 @@
                 </div>
             </div>
             <a href="/employee/writeProcessFile">
-                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                        class="bi bi-box-arrow-in-down"></i> Export
+                <button class="btn btn-outline-info mb-3" formaction="<c:url value="
+                                                /" />"><i class="bi bi-box-arrow-in-down"></i> Export
                 </button>
             </a>
+
+            <button type="button" class="btn btn-outline-info mb-3" data-toggle="modal"
+                    data-target="#filter" style="float: right;">
+                <i class="bi bi-funnel-fill"></i> Filter
+            </button>
+
             <br/>
 
             <div class="container">
@@ -165,6 +204,7 @@
                             <th>Student Name</th>
                             <th>Detail Information</th>
                             <th>Evaluation Detail</th>
+                            <th>Semester</th>
                             <th>Status</th>
                             <th>Verifier</th>
                             <th>Action</th>
@@ -195,6 +235,7 @@
                                     </button>
                                 </td>
 
+                                <td>${o.application.semester.semester}</td>
                                 <td>${o.status}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
                                     title="${o.employee.account.fullName}">
@@ -455,7 +496,8 @@
                                                     id="exampleModalLabel4">
                                                     Accept Form</h5>
                                             </div>
-                                            <h4>Are you sure you want to accept this result</h4>
+                                            <h4>Are you sure you want to accept this
+                                                result</h4>
                                             <div class="modal-footer">
                                                 <button type="submit"
                                                         class="btn btn-outline-success btn-sm">
@@ -487,7 +529,8 @@
                                                     id="exampleModalLabel4">
                                                     Deny Form</h5>
                                             </div>
-                                            <h4>Are you sure you want to deny this result</h4>
+                                            <h4>Are you sure you want to deny this
+                                                result</h4>
                                             <div class="modal-footer">
                                                 <button type="submit"
                                                         class="btn btn-outline-danger btn-sm">

@@ -35,31 +35,42 @@ public class Job {
         strategy = GenerationType.AUTO,
         generator = "job_sequence"
     )
-    @Column(name = "id")
+    /*@Column(name = "id")*/
     public int id;
-    @Column(unique = false, length = 100)
+
+    @Column(unique = false)
     private int slot;
-    @Column( unique = false, length = 10000)
+
+    @Column( unique = false)
     @Lob
     private String description;
-    @Column( unique = false, length = 1000)
+
+    @Column( unique = false)
     @Lob
     private String requirement;
-    @Column( unique = false, length = 1000)
+
+    @Column( unique = false)
     @Lob
     private String benefit;
+
+    @Column( unique = false)
+    @Lob
+    private String message;
+
     @Column(unique = false, length = 300)
     private String status;
+
     @Column(unique = false)
     private Date startDate;
+
     @Column(unique = false)
     private Date endDate;
+
 
     private String recommend;
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "company_Id")
     private Company company;
-
 
     @OneToMany(mappedBy = "job", cascade = CascadeType.PERSIST)
     private Set<StudentApplyJob> applyList = new HashSet<>();
@@ -71,60 +82,11 @@ public class Job {
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "employee_id")
     private Employee employee;
-    @Transient
-    private int positionId;
-
-    public Job(int slot, String description, String requirement, String status, Date startDate, Date endDate,
-               Company company, Position position2, Employee employee) {
-        this.slot = slot;
-        this.description = description;
-        this.requirement = requirement;
-        this.status = status;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.company = company;
-        this.position = position2;
-        this.employee = employee;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-
-
-
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-
-
-
-
-    public int getPositionId() {
-        return positionId;
-    }
-
-
-    public void setPositionId(int positionId) {
-        this.positionId = positionId;
-    }
-
 
     public Job() {
     }
 
-
-    public Job(Company company) {
-        this.company = company;
-    }
-
-    
-    
-    public Job(int slot, String description, String requirement, String status, Date startDate, Date endDate,
-            Company company) {
+    public Job(int slot, String description, String requirement, String status, Date startDate, Date endDate, Company company, Position position, Employee employee) {
         this.slot = slot;
         this.description = description;
         this.requirement = requirement;
@@ -132,124 +94,40 @@ public class Job {
         this.startDate = startDate;
         this.endDate = endDate;
         this.company = company;
+        this.position = position;
+        this.employee = employee;
     }
-
-
-    public Job(int slot, String description, String requirement, String status, Company company) {
-        this.slot = slot;
-        this.description = description;
-        this.requirement = requirement;
-        this.status = status;
-        this.company = company;
-    }
-
 
     public int getId() {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Set<StudentApplyJob> getApplyList() {
-        return applyList;
-    }
-
-    public void setApplyList(Set<StudentApplyJob> applyList) {
-        this.applyList = applyList;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public int getSlot() {
         return slot;
     }
 
-
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-
-
-
     public void setSlot(int slot) {
         this.slot = slot;
     }
-    public int getCompanyId(){
-        return company.getId();
-    }
-
 
     public String getDescription() {
         return description;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public String getRequirement() {
         return requirement;
     }
 
-
     public void setRequirement(String requirement) {
         this.requirement = requirement;
-    }
-
-
-    public String getStatus() {
-        return status;
-    }
-
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-
-    public Company getCompany() {
-        return company;
-    }
-
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public String getRecommend() {
-        return recommend;
-    }
-
-    public void setRecommend(String recommend) {
-        this.recommend = recommend;
     }
 
     public String getBenefit() {
@@ -260,13 +138,77 @@ public class Job {
         this.benefit = benefit;
     }
 
-    @Override
-    public String toString() {
-        return "Job [applyList=" + applyList + ", benefit=" + benefit + ", company=" + company + ", description="
-                + description + ", employee=" + employee + ", endDate=" + endDate + ", id=" + id + ", position="
-                + position + ", positionId=" + positionId + ", recommend=" + recommend + ", requirement=" + requirement
-                + ", slot=" + slot + ", startDate=" + startDate + ", status=" + status + "]";
+    public String getMessage() {
+        return message;
     }
 
-    
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Set<StudentApplyJob> getApplyList() {
+        return applyList;
+    }
+
+    public void setApplyList(Set<StudentApplyJob> applyList) {
+        this.applyList = applyList;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+   
 }

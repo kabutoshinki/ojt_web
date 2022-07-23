@@ -172,16 +172,16 @@
                     <table id="myTable" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center">No.</th>
-                            <th class="text-center">Employee Name</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Phone</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
+                            <th>No.</th>
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${employeeList}" var="o" varStatus="loop">
+                        <%--<c:forEach items="${employeeList}" var="o" varStatus="loop">
                             <tr>
                                 <td>${loop.count}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
@@ -244,7 +244,7 @@
                                 </div>
                                 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                             </tr>
-                        </c:forEach>
+                        </c:forEach>--%>
                         </tbody>
                     </table>
 

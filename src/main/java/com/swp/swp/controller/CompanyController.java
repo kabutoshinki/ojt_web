@@ -85,14 +85,14 @@ public class CompanyController {
         return "companyInternships";
     }
 
-    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
     public String evaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id){
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         OjtProcess process = ojtProcessService.findById(id);
         modelMap.addAttribute("process", process);
         return "companyEvaluate";
-    }
+    }*/
 
     @RequestMapping(value = "/updateEvaluate/{id}", method = RequestMethod.GET)
     public String updateEvaluate(ModelMap modelMap, HttpServletRequest request, @PathVariable("id") int id,
@@ -183,7 +183,11 @@ public class CompanyController {
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         HttpSession session = request.getSession();
-        if (endDate.compareTo(startDate) > 0) {
+        if (endDate.compareTo(startDate) < 0) {
+            session.setAttribute("dangerMessage", "Start date must before end date");
+        } else if (startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis())) < 0) {
+            session.setAttribute("dangerMessage", "Start date can not before current date");
+        } else {
             Position position = positionService.findById(positionId);
             Job newJob = jobService.findById(id);
             newJob.setPosition(position);
@@ -197,8 +201,6 @@ public class CompanyController {
             newJob.setSlot(slot);
             jobService.save(newJob);
             session.setAttribute("successMessage", "Successfully!");
-        } else {
-            session.setAttribute("dangerMessage", "Failed!");
         }
         return "redirect:/company/requirements";
     }

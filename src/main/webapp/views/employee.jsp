@@ -65,14 +65,6 @@
     session.setAttribute("warningMessage", null);
 %>
 
-<div class="container mt-4">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb align-items-center">
-            <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Employee</li>
-        </ol>
-    </nav>
-</div>
 <!-- Content -->
 
 <div class="container mt-3">
@@ -107,7 +99,7 @@
                     <img class="card-img-top img-fluid" src="/img/verify.jpg" style="  height: 150px;"
                          alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text"><strong>Verify Internship Requirement</strong></p>
+                        <p class="card-text"><strong>Internship Requirement</strong></p>
                     </div>
                 </div>
             </a>
@@ -119,7 +111,7 @@
                     <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
                          style="  height: 150px;" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text"><strong>Verify Student Application</strong></p>
+                        <p class="card-text"><strong>Student Application</strong></p>
                     </div>
                 </div>
             </a>
@@ -128,10 +120,10 @@
         <div class="col-12 col-lg-4">
             <a href="/employee/externalApplications">
                 <div class="card mr-auto ml-auto mt-2 mb-2" style="width: 18rem;">
-                    <img class="card-img-top img-fluid" src="/img/verifyStudent.png"
+                    <img class="card-img-top img-fluid" src="/img/external.png"
                          style="  height: 150px;" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text"><strong>Verify Student External Application</strong></p>
+                        <p class="card-text"><strong>Student External Application</strong></p>
                     </div>
                 </div>
             </a>

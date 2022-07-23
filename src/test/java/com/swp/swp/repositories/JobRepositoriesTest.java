@@ -31,7 +31,7 @@ public class JobRepositoriesTest {
     void testFindById() {
         Iterable<Job> jobList = jobRepositories.findAll();
         for (Job job : jobList) {
-            assertNotNull(jobRepositories.findById(job.getCompanyId()));
+            assertNotNull(jobRepositories.findById(job.getId()));
             
         }
     }

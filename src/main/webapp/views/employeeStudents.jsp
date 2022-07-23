@@ -42,7 +42,6 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb align-items-center">
-            <li class="breadcrumb-item"><a href="/home" style="padding:0">Home</a></li>
             <li class="breadcrumb-item"><a href="/employee"
                                            style="padding:0;display: inline;">Employee</a></li>
             <li class="breadcrumb-item active" aria-current="page">Students</li>
@@ -66,11 +65,10 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
     </c:if>
-    <%
-        session.setAttribute("successMessage", null);
-        session.setAttribute("dangerMessage", null);
-        session.setAttribute("warningMessage", null);
-    %>
+    <% session.setAttribute("successMessage", null);
+        session.setAttribute("dangerMessage",
+                null);
+        session.setAttribute("warningMessage", null); %>
 
     <br/>
     <div class="container" style="justify-content: center;">
@@ -85,48 +83,83 @@
                 <i class="bi bi-box-arrow-in-down"> Import</i>
             </button>
 
-            <!-- Notification-->
-            <c:if test="${not empty file}">
-                <div class="modal fade" id="success" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-success">
-                                <h5 class="modal-title ml-auto mr-auto" id="exampleModalLabel">
-                                    <i class="bi bi-check-circle" style="font-size:100px"></i>
-                                </h5>
-                            </div>
-                            <div class="modal-body text-center">
-                                Success Import
-                            </div>
-                            <div class="modal-footer mr-auto ml-auto">
-                                <button type="button" class="btn btn-danger" id="close"
-                                        data-dismiss="modal">Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-
-            <!-- +++++++++++++++++++++++++++++++++ -->
-            <div class="modal fade" id="mo" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+            <div class="modal fade" id="filter" tabindex="-1"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="/employee/uploadStudent" method="post" enctype="multipart/form-data">
+                    <form action="/employee/students">
                         <div class="modal-content text-center">
                             <div class="modal-header"
                                  style="background: orange; text-align: center; display: unset;">
-                                <h5 class="modal-title" id="exampleModalLabel">Import Form</h5>
+                                <h5 class="modal-title" id="exampleModalLabel4">
+                                    Filter Form</h5>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="input-group mt-3 mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text"
+                                               for="inputGroupSelect01">Semester</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01"
+                                            name="semesterId">
+                                        <option value="-1">Select...</option>
+                                        <c:forEach var="o" items="${semesterList}">
+                                            <option value="${o.id}" ${o.id==semesterId?"selected":""}>${o.semester}</option>
+                                        </c:forEach>
+                                    </select>
+
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text"
+                                               for="inputGroupSelect01">Status</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01"
+                                            name="statusValue">
+                                        <option value="all"}>Select...</option>
+                                        <option value="Interning" ${statusValue.equals("Interning")=="true"?"selected":""}}>Interning</option>
+                                        <option value="Passed" ${statusValue.equals("Passed")=="true"?"selected":""}}>Passed</option>
+                                        <option value="Not Passed" ${statusValue.equals("Not Passed")=="true"?"selected":""}}>Not Passed</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit"
+                                        class="btn btn-outline-success btn-sm">
+                                    <i class="bi bi-funnel"></i>
+                                    Filter
+                                </button>
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary"
+                                        data-dismiss="modal">
+                                    <i class="bi bi-x-circle"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal fade" id="mo" tabindex="-1"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form action="/employee/uploadStudent" method="post"
+                          enctype="multipart/form-data">
+                        <div class="modal-content text-center">
+                            <div class="modal-header"
+                                 style="background: orange; text-align: center; display: unset;">
+                                <h5 class="modal-title" id="exampleModalLabel">Import Form
+                                </h5>
                             </div>
                             <div class="modal-body text-center">
                                 <div class="form-group">
                                     <div class="custom-file mt-3">
-                                        <label class="custom-file-label" for="customFile">Choose
+                                        <label class="custom-file-label"
+                                               for="customFile">Choose
                                             file</label>
-                                        <input type="file" class="custom-file-input" name="file"
-                                               id="fileImage" accept=".xlsx,.XLS">
-                                        <input type="text" name="role" value="STUDENT" hidden>
+                                        <input type="file" class="custom-file-input"
+                                               name="file" id="fileImage" accept=".xlsx,.XLS" required>
+                                        <input type="text" name="role" value="STUDENT"
+                                               hidden>
                                         <input type="text" name="redirect" value="students"
                                                hidden>
                                     </div>
@@ -148,13 +181,19 @@
             </div>
             <%--<a href="/employee/writeStudentFile" download>--%>
             <a href="/employee/writeStudentFile">
-                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                        class="bi bi-box-arrow-in-down"></i> Export
+                <button class="btn btn-outline-info" formaction="<c:url value="
+                                                    /" />"><i class="bi bi-box-arrow-in-down"></i> Export
                 </button>
             </a>
+
+            <button type="button" class="btn btn-outline-info" data-toggle="modal"
+                    data-target="#filter" style="float: right;">
+                <i class="bi bi-funnel-fill"></i> Filter
+            </button>
+
             <a href="/template/Student.xlsx" download>
-                <button class="btn btn-outline-info" formaction="<c:url value=" /" />"><i
-                        class="bi bi-box-arrow-in-down"></i> Download template
+                <button class="btn btn-outline-info" formaction="<c:url value="
+                                                    /" />"><i class="bi bi-box-arrow-in-down"></i> Download template
                 </button>
             </a>
 
@@ -165,14 +204,14 @@
                     <table id="myTable" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center">No.</th>
-                            <th class="text-center">Student ID</th>
-                            <th class="text-center">Student Name</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Details</th>
-                            <th class="text-center">Semester</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
+                            <th>No.</th>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>Details</th>
+                            <th>Semester</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -181,20 +220,23 @@
                                 <td>${loop.count}</td>
                                 <td>${o.studentId}</td>
                                 <td class="text-truncate" style="max-width: 150px;"
-                                    title="${o.account.fullName}">${o.account.fullName}</td>
-                                <td><a
-                                        href="mailto: ${o.account.email}" class="text-truncate"
-                                        style="max-width: 150px;"
-                                        title="${o.account.email}">${o.account.email}</a>
+                                    title="${o.account.fullName}">
+                                        ${o.account.fullName}</td>
+                                <td><a href="mailto: ${o.account.email}"
+                                       class="text-truncate"
+                                       style="max-width: 150px;"
+                                       title="${o.account.email}">${o.account.email}</a>
                                 </td>
                                 <td>
-                                    <button class="btn btn-outline-info btn-sm" data-toggle="modal"
+                                    <button class="btn btn-outline-info btn-sm"
+                                            data-toggle="modal"
                                             data-target="#inforModal_${o.id}"><i
                                             class="bi bi-eye"></i> View Detail
                                     </button>
                                 </td>
                                 <td class="text-truncate" style="max-width: 150px;"
-                                    title="${o.semester.semester}">${o.semester.semester}
+                                    title="${o.semester.semester}">
+                                        ${o.semester.semester}
                                 </td>
                                 <td>${o.account.status}</td>
                                 <td>
@@ -245,13 +287,15 @@
                             <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
                             <!-- User information -->
-                            <div class="modal fade" id="inforModal_${o.id}" tabindex="-1"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="inforModal_${o.id}"
+                                 tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content text-center">
                                         <div class="modal-header"
                                              style="background: orange; text-align: center; display: unset;">
-                                            <h5 class="modal-title" id="exampleModalLabel">User
+                                            <h5 class="modal-title"
+                                                id="exampleModalLabel">User
                                                 Profile
                                             </h5>
                                         </div>
@@ -259,44 +303,54 @@
                                             <div class="mb-3">
                                                 <img src="${o.account.avatar==null?'/img/default.png':o.account.avatar}"
                                                      alt="avatar image"
-                                                     class="img-fluid" style="height: 150px;"
-                                                     disabled>
+                                                     class="img-fluid"
+                                                     style="height: 150px;" disabled>
                                             </div>
 
                                             <div class="input-group mb-3">
-                                                                        <span class="input-group-text"
-                                                                              id="basic-addon1"><i
-                                                                                class='fas fa-user-graduate'></i></span>
-                                                <input type="text" class="form-control"
+                                                                                    <span class="input-group-text"
+                                                                                          id="basic-addon1"><i
+                                                                                            class='fas fa-user-graduate'></i></span>
+                                                <input type="text"
+                                                       class="form-control"
                                                        id="studentName"
-                                                       name="studentName" value="${o.account.fullName}" disabled>
-                                            </div>
-
-                                            <div class="input-group mb-3">
-                                                                        <span class="input-group-text"
-                                                                              id="basic-addon1"><i
-                                                                                class="bi bi-envelope-fill"></i></span>
-                                                <input type="email" class="form-control"
-                                                       id="studentEmail" name="studentEmail" value="${o.account.email}"
+                                                       name="studentName"
+                                                       value="${o.account.fullName}"
                                                        disabled>
                                             </div>
 
                                             <div class="input-group mb-3">
-                                                                        <span class="input-group-text"
-                                                                              id="basic-addon1"><i
-                                                                                class="bi bi-telephone-fill"></i></span>
-                                                <input type="tel" class="form-control"
-                                                       id="studentPhone" name="studentPhone" value="${o.account.phone}"
+                                                                                    <span class="input-group-text"
+                                                                                          id="basic-addon1"><i
+                                                                                            class="bi bi-envelope-fill"></i></span>
+                                                <input type="email"
+                                                       class="form-control"
+                                                       id="studentEmail"
+                                                       name="studentEmail"
+                                                       value="${o.account.email}"
+                                                       disabled>
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                                                    <span class="input-group-text"
+                                                                                          id="basic-addon1"><i
+                                                                                            class="bi bi-telephone-fill"></i></span>
+                                                <input type="tel"
+                                                       class="form-control"
+                                                       id="studentPhone"
+                                                       name="studentPhone"
+                                                       value="${o.account.phone}"
                                                        disabled>
                                             </div>
 
 
                                             <div class="input-group mb-3">
-                                                                        <span class="input-group-text"
-                                                                              id="basic-addon1"><i
-                                                                                class="bi bi-geo-alt-fill"></i></span>
+                                                                                    <span class="input-group-text"
+                                                                                          id="basic-addon1"><i
+                                                                                            class="bi bi-geo-alt-fill"></i></span>
                                                 <textarea class="form-control"
-                                                          id="studentAddress" name="studentAddress"
+                                                          id="studentAddress"
+                                                          name="studentAddress"
                                                           value="${o.account.address}"
                                                           disabled>${o.account.address}</textarea>
                                             </div>
@@ -304,7 +358,8 @@
                                         </div>
 
                                         <div class="modal-footer mr-auto ml-auto">
-                                            <button type="button" class="btn btn-outline-danger"
+                                            <button type="button"
+                                                    class="btn btn-outline-danger"
                                                     data-dismiss="modal"><i
                                                     class="bi bi-x-circle"></i>
                                                 Close

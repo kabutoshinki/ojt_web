@@ -21,16 +21,16 @@ public class Semester {
     )
     private int id;
 
-    @Column( unique = false, length = 300)
+    @Column( unique = false, length = 300, nullable = false)
     private String semester;
 
-    @Column( unique = false)
+    @Column( unique = false, nullable = false)
     private int year;
 
-    @Column(unique = false, nullable = true)
+    @Column(unique = false, nullable = false)
     private Date startDate;
 
-    @Column(unique = false, nullable = true)
+    @Column(unique = false, nullable = false)
     private Date endDate;
     @OneToMany(mappedBy = "semester", cascade = CascadeType.REFRESH)
     private Set<Student> studentList = new HashSet<>();
@@ -119,11 +119,7 @@ public class Semester {
     }
 
 
-    @Override
-    public String toString() {
-        return "Semester [applyList=" + applyList + ", endDate=" + endDate + ", id=" + id + ", semester=" + semester
-                + ", startDate=" + startDate + ", studentList=" + studentList + ", year=" + year + "]";
-    }
+    
 
     
 

@@ -75,12 +75,10 @@
 
     </div>
 
-    <button class="btn btn-outline-info" formaction="<c:url value=" /" />">
+    <button class="btn btn-outline-info mb-3" formaction="<c:url value=" /" />">
         <i class="bi bi-box-arrow-in-down"></i> Export
     </button>
 
-
-    <hr>
     <div class="container">
         <div class="table-responsive">
 
@@ -99,326 +97,334 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${processList}" var="o" varStatus="loop">
-                    <tr>
-                        <td>${loop.count}</td>
-                        <td class="text-truncate" style="max-width: 150px;"
-                            title="${o.student.account.fullName}">${o.student.account.fullName}
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-info btn-sm" data-toggle="modal"
-                                    data-target="#viewModal_${o.id}">
-                                <i class="bi bi-eye"></i> View
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-info btn-sm" data-toggle="modal"
-                                    data-target="#evaluateModal_${o.id}">
-                                <i class="bi bi-eye"></i> Evaluate
-                            </button>
-                        </td>
-                        <td>${o.status}</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm"
-                                    data-toggle="modal" data-target="#updateModel_${o.id}">
-                                <i class="fa fa-refresh"></i> Update
-                            </button>
-                                <%--<button type="button" class="btn btn-outline-danger btn-sm"
-                                    style="color: red" data-toggle="modal"
-                                    data-target="#removeModel_${o.id}">
-                                    <i class="fa fa-trash"></i> Remove
-                                    </button>--%>
+                <tr>
+                    <td>${loop.count}</td>
+                    <td class="text-truncate" style="max-width: 150px;"
+                        title="${o.student.account.fullName}">${o.student.account.fullName}
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-info btn-sm" data-toggle="modal"
+                                data-target="#viewModal_${o.id}">
+                            <i class="bi bi-eye"></i> View
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-info btn-sm" data-toggle="modal"
+                                data-target="#evaluateModal_${o.id}">
+                            <i class="bi bi-eye"></i> Evaluate
+                        </button>
+                    </td>
+                    <td title="o.message">${o.status}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-sm"
+                                data-toggle="modal" data-target="#updateModel_${o.id}">
+                            <i class="fa fa-refresh"></i> Update
+                        </button>
+                            <%--<button type="button" class="btn btn-outline-danger btn-sm"
+                                style="color: red" data-toggle="modal"
+                                data-target="#removeModel_${o.id}">
+                                <i class="fa fa-trash"></i> Remove
+                                </button>--%>
 
-                            <!-- ++++++++++++++++ Update Requirement +++++++++++++++++ -->
-                            <div class="modal fade" id="updateModel_${o.id}" tabindex="-1"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <form action="/company/updateProcess/${o.id}"
-                                          method="post">
-                                        <div class="modal-content text-center">
-                                            <div class="modal-header"
-                                                 style="background: orange; text-align: center; display: unset;">
-                                                <h5 class="modal-title"
-                                                    id="exampleModalLabel2">Update Form</h5>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <div class="input-group mb-3">
+                        <!-- ++++++++++++++++ Update Requirement +++++++++++++++++ -->
+                        <div class="modal fade" id="updateModel_${o.id}" tabindex="-1"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="/company/updateProcess/${o.id}"
+                                      method="post">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header"
+                                             style="background: orange; text-align: center; display: unset;">
+                                            <h5 class="modal-title"
+                                                id="exampleModalLabel2">Update Form</h5>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div class="input-group mb-3">
                                                                                 <span class="input-group-text"
                                                                                       id="basic-addon1">Start date</span>
-                                                    <input type="date" class="form-control"
-                                                           id="startDate"
-                                                           value="${o.startDate}"
-                                                           placeholder="Enter Start Date"
-                                                           name="startDate" required>
-                                                </div>
-                                                <div class="input-group mb-3">
+                                                <input type="date" class="form-control"
+                                                       id="startDate"
+                                                       value="${o.startDate}"
+                                                       placeholder="Enter Start Date"
+                                                       name="startDate" required>
+                                            </div>
+                                            <div class="input-group mb-3">
                                                                                 <span class="input-group-text"
                                                                                       id="basic-addon1">End date</span>
-                                                    <input type="date" class="form-control"
-                                                           id="endDate" value="${o.endDate}"
-                                                           placeholder="Enter End Date"
-                                                           name="endDate" required>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit"
-                                                        class="btn btn-sm btn-outline-success"
-                                                        id="import"><i
-                                                        class="bi bi-check-circle"></i>Upload
-                                                </button>
-                                                <button type="button"
-                                                        class="btn btn-sm btn-outline-danger"
-                                                        data-dismiss="modal"><i
-                                                        class="bi bi-x-circle"></i>Cancel
-                                                </button>
+                                                <input type="date" class="form-control"
+                                                       id="endDate" value="${o.endDate}"
+                                                       placeholder="Enter End Date"
+                                                       name="endDate" required>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- ++++++++++++++++ End Update Requirement +++++++++++++++++ -->
-
-                        </td>
-                    </tr>
-
-                    <!-- Evaluate Modal -->
-
-                    <div class="modal fade" id="evaluateModal_${o.id}" tabindex="-1"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-
-                            <div class="modal-content text-center">
-                                <form action="/company/updateEvaluate/${o.id}">
-                                    <div class="modal-header"
-                                         style="background: orange; text-align: center; display: unset;">
-                                        <h5 class="modal-title" id="exampleModalLabel">Evaluate
-                                            Detail
-                                        </h5>
-                                    </div>
-                                    <div class="modal-body text-center">
-
-                                        <div class="mb-3">
-                                            <img src="${o.student.account.avatar==null?'/img/default.png':o.student.account.avatar}"
-                                                 alt="avatar image"
-                                                 class="img-fluid" style="height: 150px;"
-                                                 disabled>
+                                        <div class="modal-footer">
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-outline-success"
+                                                    id="import"><i
+                                                    class="bi bi-check-circle"></i>Upload
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    data-dismiss="modal"><i
+                                                    class="bi bi-x-circle"></i>Cancel
+                                            </button>
                                         </div>
-
-                                        <div class="input-group mb-3">
-                                                                    <span class="input-group-text" id="basic-addon1">Job
-                                                                        Description</span>
-
-                                            <textarea class="form-control" id="description"
-                                                      placeholder="Enter Description"
-                                                      name="jobDescription"
-                                                      required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
-                                                      value="${o.description}">${o.description}</textarea>
-
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col-9 input-group mb-3">
-                                                                        <span class="input-group-text"
-                                                                              id="basic-addon1">Knowledge</span>
-                                                <textarea class="form-control" id="requirement"
-                                                          placeholder="Enter Knowledge Evaluate"
-                                                          name="knowledge" value="${o.knowledge}"
-                                                          required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
-                                                >${o.knowledge}</textarea>
-                                            </div>
-
-                                            <div class="col-3 input-group mb-3">
-                                                <select name="point1" class="custom-select"
-                                                        id="grade1"
-                                                        aria-label=".form-select-lg example" value="${o.knowledgePoint}"
-                                                        required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}>
-                                                    <c:forEach begin="0" end="10" step="1" var="it">
-                                                        <option value="${it}"
-                                                            ${o.knowledgePoint==it?"selected":""}>
-                                                                ${it}
-                                                        </option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col-9 input-group mb-3">
-                                                                        <span class="input-group-text"
-                                                                              id="basic-addon1">Soft skill</span>
-                                                <textarea class="form-control" id="requirement"
-                                                          placeholder="Enter Soft Skill Evaluate"
-                                                          name="softSkill" value="${o.softSkill}"
-                                                          required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}
-                                                >${o.softSkill}</textarea>
-                                            </div>
-
-                                            <div class="col-3 input-group mb-3">
-                                                <select name="point2" class="custom-select"
-                                                        id="grade2"
-                                                        aria-label=".form-select-lg example" value="${o.softSkillPoint}"
-                                                        required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}>
-                                                    <c:forEach begin="0" end="10" step="1" var="it">
-                                                        <option value="${it}"
-                                                            ${o.softSkillPoint==it?"selected":""}>
-                                                                ${it}
-                                                        </option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col-9 input-group mb-3">
-                                                                        <span class="input-group-text"
-                                                                              id="basic-addon1">Attitude</span>
-                                                <textarea class="form-control" id="requirement"
-                                                          placeholder="Enter Attitude Evaluate"
-                                                          name="attitude" value="${o.attitude}"
-                                                          required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}>${o.attitude}</textarea>
-                                            </div>
-
-                                            <div class="col-3 input-group mb-3">
-                                                <select name="point3" class="custom-select"
-                                                        id="grade3"
-                                                        aria-label=".form-select-lg example" value="${o.attitudePoint}"
-                                                        required ${o.status=="Passed" || o.status == "Not Passed"?"disabled":""}>
-                                                    <c:forEach begin="0" end="10" step="1" var="it">
-                                                        <option value="${it}"
-                                                            ${o.attitudePoint.equals(it)?"selected":""}>
-                                                                ${it}
-                                                        </option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                                                    <span class="input-group-text"
-                                                                          id="basic-addon1">Grade</span>
-                                            <input type="number" class="form-control" id="total"
-                                                   value="${o.grade}" name="total" disabled>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="modal-footer">
-                                        <button type="submit"
-                                                class="btn btn-outline-success" ${o.status=="Passed" || o.status == "Not Passed"?"hidden":""}
-                                                id="import"><i class="bi bi-check-circle"></i>
-                                            Save
-                                        </button>
-                                        <button type="button" class="btn btn-outline-danger"
-                                                data-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                            Close
-                                        </button>
                                     </div>
                                 </form>
                             </div>
-
                         </div>
-                    </div>
+                        <!-- ++++++++++++++++ End Update Requirement +++++++++++++++++ -->
 
-                    <!-- +++++++++++++++++++++++++++++++++++++++++ -->
+                    </td>
+                </tr>
 
-                    <!-- View Modal -->
+                <!-- Evaluate Modal -->
 
-                    <div class="modal fade" id="viewModal_${o.id}" tabindex="-1"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                <div class="modal fade" id="evaluateModal_${o.id}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="/company/updateEvaluate/${o.id}">
                             <div class="modal-content text-center">
+
                                 <div class="modal-header"
                                      style="background: orange; text-align: center; display: unset;">
-                                    <h5 class="modal-title" id="exampleModalLabel">Detail
-                                        Information
+                                    <h5 class="modal-title" id="exampleModalLabel">Evaluate
+                                        Detail
                                     </h5>
                                 </div>
                                 <div class="modal-body text-center">
+
                                     <div class="mb-3">
                                         <img src="${o.student.account.avatar==null?'/img/default.png':o.student.account.avatar}"
-                                             alt="avatar image"
-                                             class="img-fluid" style="height: 150px;" disabled>
+                                             alt="avatar image" class="img-fluid"
+                                             style="height: 150px;" disabled>
                                     </div>
 
                                     <div class="input-group mb-3">
-                                                                <span class="input-group-text" id="basic-addon1"><i
-                                                                        class='fas fa-user-graduate'></i></span>
-                                        <input type="text" class="form-control" id="studentName"
-                                               name="studentName"
-                                               value="${o.student.account.fullName}" disabled>
-                                    </div>
+                                                                    <span class="input-group-text" id="basic-addon1">Job
+                                                                        Description</span>
 
-                                    <div class="input-group mb-3">
-                                                                <span class="input-group-text" id="basic-addon1"><i
-                                                                        class='fas fa-id-card'></i></span>
-                                        <input type="text" class="form-control" id="studentId"
-                                               name="studentId" value="${o.student.studentId}"
-                                               disabled>
-                                    </div>
+                                        <textarea class="form-control" id="description"
+                                                  placeholder="Enter Description"
+                                                  name="jobDescription" required
+                                            ${o.status=="Passed" || o.status=="Not Passed"
+                                                    ?"disabled":""}
+                                                  value="${o.description}">${o.description}</textarea>
 
-                                    <div class="input-group mb-3">
-                                                                <span class="input-group-text" id="basic-addon1"><i
-                                                                        class='fas fa-calendar-alt'></i></span>
-                                        <input type="text" class="form-control" id="semester"
-                                               name="semester"
-                                               value="${o.application.semester.semester}" disabled>
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                                                <span class="input-group-text" id="basic-addon1">
-                                                                    <i class="bi bi-geo-fill"></i>
-                                                                </span>
-                                        <input type="text" class="form-control" name="position"
-                                               id="position"
-                                               value="${o.application.job.position.position}"
-                                               disabled>
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                                                <span class="input-group-text" id="basic-addon1"><i
-                                                                        class="bi bi-envelope-fill"></i></span>
-                                        <input type="email" class="form-control"
-                                               id="studentEmail" placeholder="Student Email"
-                                               name="studentEmail" value="${o.student.account.email}" disabled>
                                     </div>
 
                                     <div class="form-row">
-                                        <div class="col-6 input-group mb-3">
-                                                                    <span class="input-group-text"
-                                                                          id="basic-addon1">Start Date</i></span>
-                                            <input type="text" class="form-control"
-                                                   name="startDate" value="${o.startDate}"
-                                                   disabled>
+                                        <div class="col-9 input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1">Knowledge</span>
+                                            <textarea class="form-control" id="requirement"
+                                                      placeholder="Enter Knowledge Evaluate"
+                                                      name="knowledge" value="${o.knowledge}"
+                                                      required ${o.status=="Passed" ||
+                                                    o.status=="Not Passed"
+                                                    ?"disabled":""}>${o.knowledge}</textarea>
                                         </div>
-                                        <div class="col-6 input-group mb-3">
-                                                                    <span class="input-group-text" id="basic-addon1">End
-                                                                        Date</span>
-                                            <input type="text" class="form-control"
-                                                   name="endDate" value="${o.endDate}" disabled>
+
+                                        <div class="col-3 input-group mb-3">
+                                            <select name="point1" class="custom-select"
+                                                    id="grade1"
+                                                    aria-label=".form-select-lg example"
+                                                    value="${o.knowledgePoint}" required
+                                                ${o.status=="Passed" ||
+                                                        o.status=="Not Passed" ?"disabled":""}>
+                                                <c:forEach begin="0" end="10" step="1"
+                                                           var="it">
+                                                    <option value="${it}"
+                                                        ${o.knowledgePoint==it?"selected":""}>
+                                                            ${it}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
 
+                                    <div class="form-row">
+                                        <div class="col-9 input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1">Soft skill</span>
+                                            <textarea class="form-control" id="requirement"
+                                                      placeholder="Enter Soft Skill Evaluate"
+                                                      name="softSkill" value="${o.softSkill}"
+                                                      required ${o.status=="Passed" ||
+                                                    o.status=="Not Passed"
+                                                    ?"disabled":""}>${o.softSkill}</textarea>
+                                        </div>
+
+                                        <div class="col-3 input-group mb-3">
+                                            <select name="point2" class="custom-select"
+                                                    id="grade2"
+                                                    aria-label=".form-select-lg example"
+                                                    value="${o.softSkillPoint}" required
+                                                ${o.status=="Passed" ||
+                                                        o.status=="Not Passed" ?"disabled":""}>
+                                                <c:forEach begin="0" end="10" step="1"
+                                                           var="it">
+                                                    <option value="${it}"
+                                                        ${o.softSkillPoint==it?"selected":""}>
+                                                            ${it}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-9 input-group mb-3">
+                                                                        <span class="input-group-text"
+                                                                              id="basic-addon1">Attitude</span>
+                                            <textarea class="form-control" id="requirement"
+                                                      placeholder="Enter Attitude Evaluate"
+                                                      name="attitude" value="${o.attitude}"
+                                                      required ${o.status=="Passed" ||
+                                                    o.status=="Not Passed"
+                                                    ?"disabled":""}>${o.attitude}</textarea>
+                                        </div>
+
+                                        <div class="col-3 input-group mb-3">
+                                            <select name="point3" class="custom-select"
+                                                    id="grade3"
+                                                    aria-label=".form-select-lg example"
+                                                    value="${o.attitudePoint}" required
+                                                ${o.status=="Passed" ||
+                                                        o.status=="Not Passed" ?"disabled":""}>
+                                                <c:forEach begin="0" end="10" step="1"
+                                                           var="it">
+                                                    <option value="${it}"
+                                                        ${o.attitudePoint.equals(it)?"selected":""}>
+                                                            ${it}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                                                    <span class="input-group-text"
+                                                                          id="basic-addon1">Grade</span>
+                                        <input type="number" class="form-control" id="total"
+                                               value="${o.grade}" name="total" disabled>
+                                    </div>
 
                                 </div>
 
-                                <div class="modal-footer mr-auto ml-auto">
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-outline-success"
+                                        ${o.status=="Passed" || o.status=="Not Passed"
+                                                ?"hidden":""} id="import"><i
+                                            class="bi bi-check-circle"></i>
+                                        Save
+                                    </button>
                                     <button type="button" class="btn btn-outline-danger"
                                             data-dismiss="modal"><i class="bi bi-x-circle"></i>
                                         Close
                                     </button>
                                 </div>
-                            </div>
-
-                        </div>
+                        </form>
                     </div>
 
-                    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-                </c:forEach>
-                </tbody>
-            </table>
-
+                </div>
         </div>
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++ -->
+
+        <!-- View Modal -->
+
+        <div class="modal fade" id="viewModal_${o.id}" tabindex="-1"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content text-center">
+                    <div class="modal-header"
+                         style="background: orange; text-align: center; display: unset;">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail
+                            Information
+                        </h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="mb-3">
+                            <img src="${o.student.account.avatar==null?'/img/default.png':o.student.account.avatar}"
+                                 alt="avatar image" class="img-fluid" style="height: 150px;"
+                                 disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class='fas fa-user-graduate'></i></span>
+                            <input type="text" class="form-control" id="studentName"
+                                   name="studentName" value="${o.student.account.fullName}" disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class='fas fa-id-card'></i></span>
+                            <input type="text" class="form-control" id="studentId" name="studentId"
+                                   value="${o.student.studentId}" disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class='fas fa-calendar-alt'></i></span>
+                            <input type="text" class="form-control" id="semester" name="semester"
+                                   value="${o.application.semester.semester}" disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="bi bi-geo-fill"></i>
+                                                </span>
+                            <input type="text" class="form-control" name="position" id="position"
+                                   value="${o.application.job.position.position}" disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i
+                                                        class="bi bi-envelope-fill"></i></span>
+                            <input type="email" class="form-control" id="studentEmail"
+                                   placeholder="Student Email" name="studentEmail"
+                                   value="${o.student.account.email}" disabled>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-6 input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">Start
+                                                        Date</i></span>
+                                <input type="text" class="form-control" name="startDate"
+                                       value="${o.startDate}" disabled>
+                            </div>
+                            <div class="col-6 input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">End
+                                                        Date</span>
+                                <input type="text" class="form-control" name="endDate"
+                                       value="${o.endDate}" disabled>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer mr-auto ml-auto">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i
+                                class="bi bi-x-circle"></i>
+                            Close
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        </c:forEach>
+        </tbody>
+        </table>
+
     </div>
+</div>
 </div>
 </div>
 <hr>

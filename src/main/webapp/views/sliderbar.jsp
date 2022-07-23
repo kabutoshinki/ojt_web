@@ -65,7 +65,7 @@
             <li>
                 <a href="/employee/semester" class="text-truncate"
                    style="display: ${account.role.equals('ADMIN')=='true'?'':'none'}">
-                    <i class="bi bi-award-fill"></i>
+                    <i class="fas fa-calendar-alt"></i>
                     Semester
                 </a>
             </li>
@@ -73,7 +73,7 @@
             <li>
                 <a href="/employee/employees" class="text-truncate"
                    style="display: ${account.role.equals('ADMIN')=='true'?'':'none'}">
-                    <i class="bi bi-award-fill"></i>
+                    <i class="fas fa-user-tie"></i>
                     Employees
                 </a>
             </li>

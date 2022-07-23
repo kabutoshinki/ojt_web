@@ -138,8 +138,7 @@ public class StudentController {
                     x.setStatus(status);
                 } else if (status.equalsIgnoreCase("Interning")
                         && x.getStatus().equalsIgnoreCase("Denied") == false
-                        && x.getStatus().equalsIgnoreCase("Rejected") == false
-                        && x.getStatus().equalsIgnoreCase("Waiting") == false) {
+                        && x.getStatus().equalsIgnoreCase("Rejected") == false) {
                     x.setStatus("Refused");
                 }
                 studentApplyJobsService.save(x);
@@ -150,10 +149,9 @@ public class StudentController {
                     newProcess.setApplication(x);
                     newProcess.setStatus("Interning");
                     newProcess.setStudent(x.getStudent());
-                    newProcess.setCompany(x.getJob().getCompany());
                     newProcess.setGrade((double) 0);
                     System.out.println(x.getId() + " " + x.getJob().getCompany().getAccount().getFullName() + " " + x.getStatus());
-                    System.out.println(newProcess.getCompany().getAccount().getFullName() + " " + newProcess.getStudent().getAccount().getFullName());
+                    System.out.println(newProcess.getApplication().getJob().getCompany().getAccount().getFullName() + " " + newProcess.getStudent().getAccount().getFullName());
                     ojtProcessService.save(newProcess);
                 }
             }
@@ -303,8 +301,12 @@ public class StudentController {
             apply.setSemester(student.getSemester());
             apply.setJob(jobService.firstOfCompany(companyService.findByAccount(accountService.findByEmail(""))));
             Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/src/main/resources/static/students");
-            String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
+            //String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
             File requestFolder = new File(currentWorkingDir + "/" + student.getId() + "/Request/" + newRequest.getId());
+            requestFolder.mkdirs();
+            currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "/target/classes/static/students");
+            //String path = currentWorkingDir.normalize().toString() + "\\" + student.getId() + "\\Request\\" + newRequest.getId() + "\\";
+            requestFolder = new File(currentWorkingDir + "/" + student.getId() + "/Request/" + newRequest.getId());
             requestFolder.mkdirs();
             String filename = contract.getOriginalFilename();
             int index = filename.indexOf('.');

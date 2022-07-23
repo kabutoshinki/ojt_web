@@ -77,10 +77,6 @@ public class Employee {
         this.jobList = jobList;
     }
 
-    @Override
-    public String toString() {
-        return "Employee [account=" + account + ", id=" + id + ", jobList=" + jobList + ", processList=" + processList
-                + ", requestList=" + requestList + ", studentApplyList=" + studentApplyList + "]";
-    }
+   
     
 }

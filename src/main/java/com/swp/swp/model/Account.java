@@ -17,7 +17,6 @@ import lombok.Builder;
 
 
 /**
- *
  * @author ADMIN
  */
 @Entity
@@ -35,7 +34,7 @@ public class Account implements UserDetails {
             strategy = GenerationType.AUTO,
             generator = "account_sequence"
     )
-    
+
     private int id;
     @Column(nullable = true, unique = false, length = 300)
     private String fullName;
@@ -63,6 +62,7 @@ public class Account implements UserDetails {
 
     @OneToOne(mappedBy = "account")
     private Employee employee;
+
     public Account() {
     }
 
@@ -174,13 +174,13 @@ public class Account implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
- 
+
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
- 
- 
+
+
         authorities.add(new SimpleGrantedAuthority(role));
- 
- 
+
+
         return authorities;
     }
 
@@ -220,12 +220,6 @@ public class Account implements UserDetails {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Account [address=" + address + ", avatar=" + avatar + ", company=" + company + ", email=" + email
-                + ", employee=" + employee + ", fullName=" + fullName + ", id=" + id + ", phone=" + phone + ", role="
-                + role + ", status=" + status + ", student=" + student + "]";
-    }
     
     
 }

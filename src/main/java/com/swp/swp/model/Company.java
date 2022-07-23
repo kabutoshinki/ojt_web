@@ -31,8 +31,6 @@ public class Company implements Serializable{
     @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
     private Set<Job> jobList = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
-    private Set<OjtProcess> processList = new HashSet<>();
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;
@@ -69,10 +67,5 @@ public class Company implements Serializable{
         this.account = account;
     }
 
-    @Override
-    public String toString() {
-        return "Company [account=" + account + ", description=" + description + ", id=" + id + ", jobList=" + jobList
-                + ", processList=" + processList + "]";
-    }
     
 }

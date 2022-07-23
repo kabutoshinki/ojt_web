@@ -25,7 +25,7 @@ public class Student {
     )
 
     private int id;
-    @Column(nullable = true, unique = true, length = 300)
+    @Column(nullable = false, unique = true, length = 300)
     private String studentId;
     @Column(nullable = true, unique = false)
     private Date dateOfBirth;
@@ -65,7 +65,10 @@ public class Student {
 
     public boolean getApplicationStatus() {
         for (StudentApplyJob x: this.getApplyList()) {
-            if (x.getStatus().equalsIgnoreCase("Interning"))
+            if (x.getSemester().equals(this.semester) && (x.getStatus().equalsIgnoreCase("Interning")
+                    || x.getStatus().equalsIgnoreCase("Passed")
+                    || x.getStatus().equalsIgnoreCase("Not Passed")
+                    || x.getStatus().equalsIgnoreCase("Completed")))
                 return true;
         }
         return false;
@@ -93,6 +96,14 @@ public class Student {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Set<StudentApplyJob> getApplyList() {
@@ -127,22 +138,6 @@ public class Student {
         this.requestList = requestList;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public Semester getSemester() {
         return semester;
     }
@@ -151,12 +146,13 @@ public class Student {
         this.semester = semester;
     }
 
-    @Override
-    public String toString() {
-        return "Student [account=" + account + ", applyList=" + applyList + ", cvList=" + cvList + ", dateOfBirth="
-                + dateOfBirth + ", gender=" + gender + ", id=" + id + ", processList=" + processList + ", requestList="
-                + requestList + ", semester=" + semester + ", studentId=" + studentId + "]";
+    public Account getAccount() {
+        return account;
     }
 
-    
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+   
 }
