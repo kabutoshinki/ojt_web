@@ -240,7 +240,7 @@
                         <div class="container main-content">
                             <div class="row" style="justify-content: center;">
                                 <c:forEach items="${jobList}" var="o">
-                                    <div class="col-12 col-lg-3 list-comp mr-auto ml-auto mt-3">
+                                    <div class="col-12 col-lg-4 list-comp mr-auto ml-auto mt-3">
                                         <form style="text-align: center; display: block;">
                                             <img src="${o.company.account.avatar==null?'/img/avatar.png':o.company.account.avatar}"
                                                 width="300" class="mt-3" height="150px"
