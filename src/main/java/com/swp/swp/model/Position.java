@@ -88,4 +88,12 @@ public class Position {
     public void setMajor(Major major) {
         this.major = major;
     }
+
+
+    @Override
+    public String toString() {
+        return "Position [id=" + id + ", jobList=" + jobList + ", major=" + major + ", position=" + position + "]";
+    }
+
+    
 }

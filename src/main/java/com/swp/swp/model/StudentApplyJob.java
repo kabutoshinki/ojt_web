@@ -111,4 +111,13 @@ public class StudentApplyJob {
     public void setCv(CV cv) {
         this.cv = cv;
     }
+
+    @Override
+    public String toString() {
+        return "StudentApplyJob [cv=" + cv + ", employee=" + employee + ", id=" + id + ", job=" + job + ", process="
+                + process + ", request=" + request + ", semester=" + semester + ", status=" + status + ", student="
+                + student + "]";
+    }
+
+    
 }

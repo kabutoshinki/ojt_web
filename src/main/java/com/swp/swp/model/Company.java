@@ -68,4 +68,11 @@ public class Company implements Serializable{
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    @Override
+    public String toString() {
+        return "Company [account=" + account + ", description=" + description + ", id=" + id + ", jobList=" + jobList
+                + ", processList=" + processList + "]";
+    }
+    
 }

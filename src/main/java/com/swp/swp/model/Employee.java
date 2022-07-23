@@ -76,4 +76,11 @@ public class Employee {
     public void setJobList(Set<Job> jobList) {
         this.jobList = jobList;
     }
+
+    @Override
+    public String toString() {
+        return "Employee [account=" + account + ", id=" + id + ", jobList=" + jobList + ", processList=" + processList
+                + ", requestList=" + requestList + ", studentApplyList=" + studentApplyList + "]";
+    }
+    
 }

@@ -44,6 +44,7 @@ public class AccountServiceTest {
     @Test
     void testGetById() {
         Iterable<Account> list = accountRepositories.findAll();
+        System.out.println("Account: " + list.iterator().toString());
         for (Account account : list) {
             Account expected = accountRepositories.findById(account.getId());
             Account actual = accountService.findById(account.getId());
@@ -79,6 +80,7 @@ public class AccountServiceTest {
     void testIsExist() {
         Iterable <Account> accountList = accountRepositories.findAll();
         for (Account account : accountList) {
+            
             assertTrue(accountService.isExist(account.getEmail()));
         }
     }

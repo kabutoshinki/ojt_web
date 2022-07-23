@@ -199,4 +199,15 @@ public class OjtProcess {
     public void setAttitudePoint(int attitudePoint) {
         this.attitudePoint = attitudePoint;
     }
+
+    @Override
+    public String toString() {
+        return "OjtProcess [application=" + application + ", attitude=" + attitude + ", attitudePoint=" + attitudePoint
+                + ", company=" + company + ", description=" + description + ", detail=" + detail + ", employee="
+                + employee + ", endDate=" + endDate + ", grade=" + grade + ", id=" + id + ", knowledge=" + knowledge
+                + ", knowledgePoint=" + knowledgePoint + ", softSkill=" + softSkill + ", softSkillPoint="
+                + softSkillPoint + ", startDate=" + startDate + ", status=" + status + ", student=" + student + "]";
+    }
+
+    
 }

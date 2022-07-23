@@ -64,4 +64,11 @@ public class Major {
     public void setPositionList(Set<Position> positionList) {
         this.positionList = positionList;
     }
+
+
+    @Override
+    public String toString() {
+        return "Major [id=" + id + ", name=" + name + ", positionList=" + positionList + "]";
+    }
+    
 }

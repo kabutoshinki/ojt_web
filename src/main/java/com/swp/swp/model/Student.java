@@ -150,4 +150,13 @@ public class Student {
     public void setSemester(Semester semester) {
         this.semester = semester;
     }
+
+    @Override
+    public String toString() {
+        return "Student [account=" + account + ", applyList=" + applyList + ", cvList=" + cvList + ", dateOfBirth="
+                + dateOfBirth + ", gender=" + gender + ", id=" + id + ", processList=" + processList + ", requestList="
+                + requestList + ", semester=" + semester + ", studentId=" + studentId + "]";
+    }
+
+    
 }

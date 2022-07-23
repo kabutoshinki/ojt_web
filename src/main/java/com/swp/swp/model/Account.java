@@ -171,6 +171,7 @@ public class Account implements UserDetails {
         this.student = student;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
  
@@ -217,6 +218,13 @@ public class Account implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Account [address=" + address + ", avatar=" + avatar + ", company=" + company + ", email=" + email
+                + ", employee=" + employee + ", fullName=" + fullName + ", id=" + id + ", phone=" + phone + ", role="
+                + role + ", status=" + status + ", student=" + student + "]";
     }
     
     

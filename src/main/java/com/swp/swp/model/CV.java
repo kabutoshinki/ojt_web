@@ -109,4 +109,14 @@ public class CV {
     public void setPath(String path) {
         this.path = path;
     }
+
+
+
+    @Override
+    public String toString() {
+        return "CV [applyList=" + applyList + ", description=" + description + ", id=" + id + ", name=" + name
+                + ", path=" + path + ", status=" + status + ", student=" + student + "]";
+    }
+
+    
 }

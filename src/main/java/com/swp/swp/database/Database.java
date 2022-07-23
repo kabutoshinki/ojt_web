@@ -52,7 +52,8 @@ public class Database {
                         public void run(String... args) throws Exception {
 
                                 Account employeeAccountA = new Account("test3", "danghuudat163@gmail.com", "EMPLOYEE");
-                                Account employeeAccountB = new Account("test3", "trungskse150457@fpt.edu.vn", "EMPLOYEE");
+                                Account employeeAccountB = new Account("test3", "trungskse150457@fpt.edu.vn",
+                                                "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "hoannsse150010@fpt.edu.vn",
                                                 "COMPANY");
                                 Account companyAccount2 = new Account("FPT SOFTWARE2", "kabutoshinki@gmail.com",
@@ -67,7 +68,7 @@ public class Database {
                                 employeeAdmin.setAccount(accountAdmin);
                                 Employee employeeA = new Employee();
                                 employeeA.setAccount(employeeAccountA);
-                                Employee employeeB= new Employee();
+                                Employee employeeB = new Employee();
                                 employeeA.setAccount(employeeAccountB);
                                 Student studentD = new Student();
                                 studentD.setStudentId("SE1500000");
@@ -196,6 +197,20 @@ public class Database {
                                 logger.info("insert Data: " + studentApplyJobsService.save(std));
                                 logger.info("insert Data: " + studentApplyJobsService.save(std1));
                                 logger.info("insert Data: " + studentApplyJobsService.save(std3));
+
+
+                                System.out.println("Account: " + studentAccount1.toString());
+                                System.out.println("Employee: "+ employeeA.toString());
+                                System.out.println("Company Account: "+ company1.toString());
+                                System.out.println("Student: "+ studentD.toString());
+                                System.out.println("Company: " + company1.toString());
+                                System.out.println("Semester: " + semester.toString());
+                                System.out.println("Major: "+ major.toString());
+                                System.out.println("CV:" + cv.toString());
+                                System.out.println("Job: " + job1.toString());
+                                System.out.println("Position: " + position.toString());
+                                System.out.println("Student apply job: " + std3.toString());
+
 
                         }
 

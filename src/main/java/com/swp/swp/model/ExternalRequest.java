@@ -119,4 +119,12 @@ public class ExternalRequest {
         this.letterPath = letterPath;
     }
 
+    @Override
+    public String toString() {
+        return "ExternalRequest [application=" + application + ", companyEmail=" + companyEmail + ", companyName="
+                + companyName + ", companyPhone=" + companyPhone + ", contractPath=" + contractPath + ", employee="
+                + employee + ", id=" + id + ", letterPath=" + letterPath + ", student=" + student + "]";
+    }
+    
+
 }

@@ -118,4 +118,13 @@ public class Semester {
         return nextSemester;
     }
 
+
+    @Override
+    public String toString() {
+        return "Semester [applyList=" + applyList + ", endDate=" + endDate + ", id=" + id + ", semester=" + semester
+                + ", startDate=" + startDate + ", studentList=" + studentList + ", year=" + year + "]";
+    }
+
+    
+
 }

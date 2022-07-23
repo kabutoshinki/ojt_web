@@ -262,7 +262,11 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job [company=" + company + ", description=" + description + ", idJob=" + id
-                + ", requirement=" + requirement + ", slot=" + slot + ", status=" + status + "]";
+        return "Job [applyList=" + applyList + ", benefit=" + benefit + ", company=" + company + ", description="
+                + description + ", employee=" + employee + ", endDate=" + endDate + ", id=" + id + ", position="
+                + position + ", positionId=" + positionId + ", recommend=" + recommend + ", requirement=" + requirement
+                + ", slot=" + slot + ", startDate=" + startDate + ", status=" + status + "]";
     }
+
+    
 }
