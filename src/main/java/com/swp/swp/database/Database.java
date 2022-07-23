@@ -58,18 +58,25 @@ public class Database {
                                 Account employeeAccountB = new Account("test3", "huynhse151464@fpt.edu.vn", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "kaitokid792001@gmail.com",
                                                 "COMPANY");
+                                                companyAccount1.setAvatar("/avatar/1.png");
                                 Account companyAccount2 = new Account("DXC Technology", "hoannsse150010@fpt.edu.vn",
                                                 "COMPANY");
+                                                companyAccount2.setAvatar("/avatar/2.png");
                                 Account companyAccount3 = new Account("ProGrad", "mori792001@gmail.com",
                                                 "COMPANY");
+                                                companyAccount3.setAvatar("/avatar/3.jpg");
                                 Account companyAccount4 = new Account("Viettel Digital", "akai792001@gmail.com",
                                                 "COMPANY");
+                                                companyAccount4.setAvatar("/avatar/4.png");
                                 Account companyAccount5 = new Account("Ascend Technology", "ran792001@gmail.com",
                                                 "COMPANY");
-                                Account companyAccount6 = new Account("Data Annotator", "shinichi792001@gmail.com",
+                                                companyAccount5.setAvatar("/avatar/5.png");
+                                Account companyAccount6 = new Account("Appen", "shinichi792001@gmail.com",
                                                 "COMPANY");
+                                                companyAccount6.setAvatar("/avatar/6.png");
                                 Account companyAccount7 = new Account("Hitachi Vantara", "haibara792001@gmail.com",
                                                 "COMPANY");
+                                                companyAccount7.setAvatar("/avatar/7.jpg");
                                 Account accountExternal = new Account("External", "", "COMPANY");
                                 accountExternal.setStatus("Hidden");
                                 Company companyExternal = new Company();
@@ -84,6 +91,7 @@ public class Database {
                                 employeeB.setAccount(employeeAccountB);
                                 Student studentD = new Student();
                                 studentD.setAccount(studentAccount1);
+                                studentD.setStudentId("SE150011");
                                 // String startDate = "6/3/2022";
                                 // String endDate = "20/6/2022";
                                 Date startDate = Date.valueOf("2022-03-06");
@@ -144,7 +152,7 @@ public class Database {
                                         "Knowledge of infra, networking",
                                                 "Accepted", startDate, Date.valueOf("2022-09-20"), company1, position2,
                                                 employeeA);
-
+                                job1.setBenefit("Not Available");
                                 Job job2 = new Job(10,
                                 "Training hour: Monday through Friday, 9:00AM – 6:00PM\n"
                                                 + "Address: Etown 5, 364 Cong Hoa, Ward 13, Tan Binh District, HCMC\n"
@@ -160,6 +168,7 @@ public class Database {
                                                 "Basic English communication from Pre-Intermediate\n",
                                 "Accepted", startDate, Date.valueOf("2022-08-20"), company2, position2,
                                 employeeA);
+                                job2.setBenefit("Not Available");
                                 Job job3 = new Job(10,
                                         "Full-time CTC: 13+ LPA (on successfully completing the training and internship)\n"
                                         + "Students from any degree/stream - with 60% marks throughout 10th, 12th, UG/PG, knowledge in one of the programming languages: C++/Java/Python\n"+
@@ -175,6 +184,7 @@ public class Database {
                                         "You pay strong attention to detail and deliver work that is of a high standard",
                                                 "Accepted", startDate, Date.valueOf("2022-09-20"), company3, position2,
                                                 employeeA);
+                                                job3.setBenefit("Not Available");
                                 Job job4 = new Job(10,
                                         "Tham gia phát triển các dự án trong Hệ sinh thái Tài chính số (Viettel Pay, Mobile Money, ví cá nhân, ví doanh nghiệp, ...). Cung cấp sản phẩm ứng dụng thanh toán và chuyển tiền với số lượng giao dịch rất lớn, đòi hỏi hiệu năng xử lý cao\n"
                                         + "Xây dựng các hệ thống Tài chính điện tử cho các thị trường nước ngoài mà Viettel đầu tư\n"+
@@ -190,6 +200,7 @@ public class Database {
                                         "Thành thạo SQL, PLSQL, có kiến thức về các hệ quản trị cơ sở dữ liệu Oracle/MySQL, noSQL,",
                                                 "Accepted", startDate, Date.valueOf("2022-09-20"), company4, position,
                                                 employeeA);
+                                                job4.setBenefit("Not Available\n");
                                 Job job5 = new Job(10,
                                         "Work in development team to help team complete task of developing product.\n"
                                         + "Design system based on the industry best practice\n"+
@@ -204,6 +215,7 @@ public class Database {
                                         "Able to use English at work",
                                                 "Accepted", startDate, Date.valueOf("2022-09-20"), company5, position2,
                                                 employeeA);
+                                        job5.setBenefit("Not Available");
                                 Job job6 = new Job(10,
                                         "In this project, you will be provided with a passage, a one-sentence summary of the passage, and 3 questions per summary to help us assess whether the summary is comprehensive and faithful.\n"
                                         + "You will need to read the passage and the summary, and then answer all the questions provided\n"+
@@ -213,6 +225,7 @@ public class Database {
                                         "You must have a good command of English in order to understand the project-related materials, such as guidelines.\n",
                                                 "Accepted", startDate, Date.valueOf("2022-09-20"), company6, position2,
                                                 employeeA);
+                                        job6.setBenefit("Not Available");
                                 Job job7 = new Job(10,
                                         "We are looking for motivated and experienced Java developer/Fullstack Developer software professional.\n"+
                                         "Our Java developer must have knowledge in all stages of software development.\n"+
@@ -227,6 +240,7 @@ public class Database {
                                         "Able to write well-structured and maintainable code.",
                                                 "Accepted", startDate, Date.valueOf("2022-09-20"), company7, position2,
                                                 employeeA);
+                                        job7.setBenefit("Not Available");
                                 // OjtProcess ojtProcess = new OjtProcess(1, "detail", 1, studentD);
 
                                 Job jobExternal = new Job();
@@ -273,7 +287,7 @@ public class Database {
                                 logger.info("insert Data: " + employeeService.save(employeeB));
                                 logger.info("insert Data: " + employeeService.save(employeeAdmin));
 
-                                logger.info("insert Data: " + studentService.save(studentD));
+                                
 
                                 logger.info("insert Data: " + accountService.save(accountAdmin));
                                 logger.info("insert Data: " + accountService.save(employeeAccountA));
@@ -285,7 +299,11 @@ public class Database {
                                 logger.info("insert Data: " + accountService.save(companyAccount5));
                                 logger.info("insert Data: " + accountService.save(companyAccount6));
                                 logger.info("insert Data: " + accountService.save(companyAccount7));
+
+                                logger.info("insert Data: " + studentService.save(studentD));
                                 logger.info("insert Data: " + accountService.save(studentAccount1));
+                                
+
                                 logger.info("insert Data: " + accountService.save(accountExternal));
 
                                 logger.info("insert Data: " + positionService.save(position));

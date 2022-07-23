@@ -51,7 +51,7 @@ public class StudentService {
             System.out.println(file.exists());
             return true;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Insert Student Error: "+e.getMessage());
             return false;
         }
     }
