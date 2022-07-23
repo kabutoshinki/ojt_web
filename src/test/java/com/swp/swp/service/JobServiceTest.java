@@ -86,7 +86,7 @@ public class JobServiceTest {
 
     @Test
     void testInsertJob() {
-        Job job = new Job(10, "description", "requirement", "status", null);
+        Job job = new Job();
         Iterable<Company> companyList = companyRepositories.findAll();
         Iterable<Position> positonList = positionRepositories.findAll();
         assertTrue(jobService.insertJob(job, companyList.iterator().next().getId(), positonList.iterator().next().getId()));
