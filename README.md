@@ -2,6 +2,7 @@
 OJT Website create with purposes help student in FPT University find the job in OJT (On Job Training) semester more simple by friendly interface and the notification throw email. With employee in FPT University this system will help reduce the complex work . This project also help company that have connected with FPT University choose the candidate faster by view their information right on the website.
 ## Use can visit ours website at the link below
 - https://ojt-website.herokuapp.com/
+# Installation guide
 ## Software requirement
 - VS Code: You can download VS Code [in here](https://docs.microsoft.com/vi-vn/visualstudio/ide/?view=vs-2019) 
 - Database(Not required): 
