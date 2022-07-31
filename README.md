@@ -11,8 +11,9 @@ OJT Website create with purposes help student in FPT University find the job in 
 - Follow instructions to install the latest version of JDK [oracle docs](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 **Maven**
 - Follow instruction to setup and install [Maven](https://maven.apache.org/install.html))
-## Create database for project(If you not use database please skip this step)
+## Create database for project(You can skip this step if you not want to use any specific database)
 - By default we use H2Database for project if you want to use MySql or MSSql you need to create database name 'swp' in your machine by using fowlling script `create database swp`
+- All data of project are implemented in project code.
 - You need to change some code in file `application.properties` 
   - If you use MySql you need uncommend code from line 16 to line 21
   - if you use MSSql you need uncommend code from line 1 to line 7
