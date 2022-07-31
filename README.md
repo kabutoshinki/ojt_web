@@ -1,5 +1,8 @@
-﻿# Welcome to SWP_Project Reposiyory
-OJT Website create with purposes help student in FPT University find the job in OJT (On Job Training) semester more simple by friendly interface and the notification throw email. With employee in FPT University this system will help reduce the complex work . This project also help company that have connected with FPT University choose the candidate faster by view their information right on the website.
+# Welcome to SWP_Project Repository
+OJT Website was created with the purpose help students in FPT University find a job in OJT (On Job Training) semester more simple by friendly interface and the notification throw email. For employees at FPT University, this system will help reduce the complex work. This project also helps companies that have connected with FPT University choose the candidate faster by viewing their information right on the website.
+## You can visit our website at the link below
+- https://ojt-website.herokuapp.com/
+# Installation guide
 ## Software requirement
 - VS Code: You can download VS Code [in here](https://docs.microsoft.com/vi-vn/visualstudio/ide/?view=vs-2019) 
 - Database(Not required): 
@@ -9,17 +12,20 @@ OJT Website create with purposes help student in FPT University find the job in 
 - Follow instructions to install the latest version of JDK [oracle docs](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 **Maven**
 - Follow instruction to setup and install [Maven](https://maven.apache.org/install.html))
-## Create database for project
-- By default we use H2Database for project if you want to use MySql or MSSql you need to create database name 'swp' in your machine by using fowlling script `create database swp`
-- You need to change some code in file `application.properties` 
+## Create a database for the project(You can skip this step if you do not want to use any specific database)
+- By default we use H2Database for a project if you want to use MySql or MSSql you need to create database name 'swp' in your machine by using fowling script `create database swp`
+- All data of the project are implemented in project code.
+- You need to change some code in the file `application.properties` 
+  - If you use MySql you need to uncomment code from line 16 to line 21
+  - if you use MSSql you need to uncomment code from line 1 to line 7
 ![application.properties Image](https://github.com/noname163/swp_project/blob/main/Screenshot%20(43).png)
-  - If you use MySql you need uncommend code from line 16 to line 21
-  - if you use MSSql you need uncommend code from line 1 to line 7
-- In file `pom.xml` you will change code depend on database you use
+
+- In file `pom.xml` you will change code depending the on the database you use
+  - If you use MySql you will uncomment code from lines 40 to 44
+  - If you use MSSql you will uncomment code from lines 35 to 39
+  - If you use H2Database you will uncomment code from lines 29 to 33
 ![pom.xml](https://github.com/noname163/swp_project/blob/main/Screenshot%20(44).png)
-  - If you use MySql you will uncomment code from line 40 to 44
-  - If you use MSSql you will uncomment code from line 35 to 39
-  - If you use H2Database you will uncoment code from line 29 to 33
+
 ## Run Project
 - Download, open project name "swp_project" in VS Code and run by command `mvn spring-boot:run` 
 ## Error handling
