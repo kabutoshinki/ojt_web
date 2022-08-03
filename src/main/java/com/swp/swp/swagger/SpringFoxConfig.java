@@ -1,3 +1,4 @@
+/*
 package com.swp.swp.swagger;
 
 import org.springframework.context.annotation.Bean;
@@ -25,3 +26,4 @@ public class SpringFoxConfig {
           .build();                                           
     }
 }
+*/

@@ -317,27 +317,33 @@
                                         <h5 class="modal-title" id="exampleModalLabel4">
                                             Deny Form</h5>
                                     </div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Reasons</span>
+                                    <div class="modal-body text-center">
+                                        <div class="input-group mb-3">
+                                                                <span class="input-group-text"
+                                                                      id="basic-addon1">Reasons</span>
 
-                                        <textarea class="form-control" id="message"
-                                                  placeholder="Enter the reason" name="message"
-                                                  value="${o.message}">${o.message}</textarea>
+                                            <textarea class="form-control" id="message"
+                                                      placeholder="Enter the reason" name="message"
+                                                      value="${o.message}">${o.message}</textarea>
 
+                                        </div>
+                                            <%--<h4>Are you sure you want to deny this requirement</h4>
+                                                --%>
+                                        <div class="modal-footer">
+                                            <button type="submit"
+                                                    class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-x-circle"></i>
+                                                Deny
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-secondary"
+                                                    data-dismiss="modal">
+                                                <i class="bi bi-x-circle"></i>
+                                                Cancel
+                                            </button>
+                                        </div>
                                     </div>
-                                    <%--<h4>Are you sure you want to deny this requirement</h4>--%>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-outline-danger btn-sm">
-                                            <i class="bi bi-x-circle"></i>
-                                            Deny
-                                        </button>
-                                        <button type="button"
-                                                class="btn btn-sm btn-outline-secondary"
-                                                data-dismiss="modal">
-                                            <i class="bi bi-x-circle"></i>
-                                            Cancel
-                                        </button>
-                                    </div>
+
                                 </div>
                             </form>
                         </div>

@@ -91,7 +91,8 @@ public class EmployeeController {
             if (semesterId != -1 && x.getSemester().getId() != semesterId) {
                 flag = false;
             }
-            if (statusValue.equals("all") == false && x.getAccount().getStatus().equalsIgnoreCase(statusValue) == false) {
+            if (statusValue != null && statusValue.equals("all") == false
+                    && x.getAccount().getStatus() != null &&x.getAccount().getStatus().equalsIgnoreCase(statusValue) == false) {
                 flag = false;
             }
             if (flag)
@@ -162,7 +163,8 @@ public class EmployeeController {
             if (semesterId != -1 && x.getSemester().getId() != semesterId) {
                 flag = false;
             }
-            if (statusValue.equals("all") == false && x.getStatus().equalsIgnoreCase(statusValue) == false) {
+            if (statusValue != null && statusValue.equals("all") == false
+                    && x.getStatus() != null &&x.getStatus().equalsIgnoreCase(statusValue) == false) {
                 flag = false;
             }
             if (flag)
@@ -406,10 +408,14 @@ public class EmployeeController {
             account.setPhone((String)x.get(5));
             account.setAddress((String)x.get(6));
             account.setEmail(account.getEmail().toLowerCase());
+            account.setStatus("Enable");
             Student newStudent = new Student();
             newStudent.setAccount(account);
             if (accountService.isExist(account.getEmail())) {
                 account = accountService.findByEmail(account.getEmail());
+                if (account.getStatus().equalsIgnoreCase("Passed") == false) {
+                    account.setStatus("Enable");
+                }
                 Student oldStudent = studentService.findByAccount(account);
                 if (oldStudent.getStudentId() != (String)x.get(1)) {
                     conflict.add(account.getEmail());
@@ -427,7 +433,7 @@ public class EmployeeController {
             newStudent.setSemester(semesterService.currentSemester());
             newStudent.setStudentId((String)x.get(1));
             newStudent.setGender((String)x.get(4));
-            if (account.getStatus().equalsIgnoreCase("Passed") == false) {
+            if (account.getStatus() != null && account.getStatus().equalsIgnoreCase("Passed") == false) {
                 accountService.save(account);
                 studentService.save(newStudent);
                 emailService.sendEmail(account.getEmail(), body, subject);

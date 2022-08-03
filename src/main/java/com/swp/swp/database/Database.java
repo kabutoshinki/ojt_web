@@ -55,6 +55,7 @@ public class Database {
                                 file = new File(Paths.get("").toAbsolutePath() + "/target/classes/static/avatar");
                                 file.mkdirs();
                                 Account employeeAccountA = new Account("Employee1", "danghuudat163@gmail.com", "EMPLOYEE");
+
                                 Account employeeAccountB = new Account("test3", "huynhse151464@fpt.edu.vn", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "kaitokid792001@gmail.com",
                                                 "COMPANY");
@@ -81,7 +82,7 @@ public class Database {
                                 accountExternal.setStatus("Hidden");
                                 Company companyExternal = new Company();
                                 companyExternal.setAccount(accountExternal);
-                                Account studentAccount1 = new Account("FPT", "datdhse150011@fpt.edu.vn", "STUDENT");
+                                Account studentAccount1 = new Account("FPT", "hoan123hahaha@gmail.com", "STUDENT");
                                 Account accountAdmin = new Account("FPT", "ojt.sender@gmail.com", "ADMIN");
                                 Employee employeeAdmin = new Employee();
                                 employeeAdmin.setAccount(accountAdmin);
