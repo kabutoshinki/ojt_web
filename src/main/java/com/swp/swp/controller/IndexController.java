@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -39,6 +42,21 @@ class IndexController {
     @RequestMapping("/")
     public String index() {
         return "forward:/home";
+    }
+
+    @RequestMapping("/manualLogout")
+    public String manualLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        /*HttpSession session = request.getSession();
+        System.out.println(session.getAttribute("warningMessage"));
+        Cookie[] cookies = request.getCookies();
+        if(cookies!=null)
+            for (int i = 0; i < cookies.length; i++) {
+                cookies[i].setMaxAge(0);
+            }
+
+        System.out.println(session.getAttribute("warningMessage"));*/
+        response.sendRedirect("/logout");
+        return "forward:/logout";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -107,7 +125,7 @@ class IndexController {
                 jobList.clear();
                 for (Job x: temp) {
                     //System.out.println(x.getRequirement());
-                    if (x.getRecommend().equalsIgnoreCase("Recommend"))
+                    if (x.getRecommend() != null && x.getRecommend().equalsIgnoreCase("Recommend"))
                         jobList.add(x);
                 }
             }

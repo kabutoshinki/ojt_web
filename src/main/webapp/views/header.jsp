@@ -104,7 +104,7 @@ style="display: ${account.role.equals('STUDENT')=='true'?'':'none'}">View CV</a>
                            style="display: ${account.role.equals('EMPLOYEE')=='true'?'':'none'}"> Manage Page</a>
                         <a class="dropdown-item" href="/company"
                            style="display: ${account.role.equals('COMPANY')=='true'?'':'none'}"> Manage Page</a>
-                        <a class="dropdown-item" href="/logout">Logout</a>
+                        <a class="dropdown-item" href="/manualLogout">Logout</a>
                     </div>
                 </div>
             </div>

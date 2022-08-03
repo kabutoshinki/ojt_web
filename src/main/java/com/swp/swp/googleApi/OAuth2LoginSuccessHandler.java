@@ -3,6 +3,7 @@ package com.swp.swp.googleApi;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,8 +29,21 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         HttpSession session = request.getSession();
         if(accountService.isExist(email)==false || (accountService.isExist(email) == true && accountService.findByEmail(email).getStatus().equals("Inactive"))){
             System.out.println("This account not have permission");
+            Cookie[] cookies = request.getCookies();
+            if(cookies!=null)
+                for (int i = 0; i < cookies.length; i++) {
+                    cookies[i].setMaxAge(0);
+                }
+            //HttpSession newSession = request.getSession();
+            //System.out.println(session);
+            //.out.println(newSession);
+            System.out.println(request);
+            //newSession.setAttribute("warningMessage", "This account not have permission");
             session.setAttribute("warningMessage", "This account not have permission");
-            response.sendRedirect("/logout");
+            request.setAttribute("warningMessage", "This account not have permission");
+            System.out.println(request.getAttribute("warningMessage"));
+            System.out.println(session.getAttribute("warningMessage"));
+            response.sendRedirect("/manualLogout");
         }else{
             System.out.println("login success");
 

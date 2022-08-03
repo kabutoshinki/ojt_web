@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/oauth2/authorization/google").permitAll()
                 .and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/home").and()
+                //.and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).logoutSuccessUrl("/home").and()
                 .oauth2Login()
                     .loginPage("/oauth2/authorization/google")
                     .userInfoEndpoint()
