@@ -58,6 +58,10 @@ class IndexController {
         ArrayList<Job> jobList = (ArrayList<Job>) jobService.findAllAvailable();
         Iterable<Major> majorsList = majorService.findAll();
         modelMap.addAttribute("majorsList", majorsList);
+        System.out.println("Number of job: "+ jobList.size());
+        for(Job job : jobList){
+            System.out.println("Job: " + job.getId());
+        }
         Iterable<Position> positionList = positionService.findAll();
         modelMap.addAttribute("positionList", positionList);
 

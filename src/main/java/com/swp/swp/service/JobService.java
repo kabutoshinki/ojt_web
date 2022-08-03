@@ -139,7 +139,10 @@ public class JobService {
         ArrayList<Job> jobs = new ArrayList<>();
         java.util.Date date = new java.util.Date();
         java.sql.Date currentDate = new Date(date.getTime());
-
+        System.out.println("Current date: " + currentDate.toString());
+        for (Job job : temp) {
+            System.out.println("Job ID: " + job.getId());
+        }
         for (Job x: temp) {
             if (x.getStatus().equals("Accepted") == true &&
                     x.getEndDate().compareTo(currentDate) >= 0 &&
