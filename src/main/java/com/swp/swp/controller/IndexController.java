@@ -97,7 +97,7 @@ class IndexController {
         if (sort != -1) {
             switch (sort) {
                 case 1:
-                    jobList.sort((o1, o2) -> o1.getEndDate().compareTo(o2.getEndDate()));
+                    jobList.sort((o1, o2)-> o1.getEndDate().compareTo(o2.getEndDate()));
                     break;
 
                 case 2:

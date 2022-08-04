@@ -82,7 +82,7 @@ public class Database {
                                 accountExternal.setStatus("Hidden");
                                 Company companyExternal = new Company();
                                 companyExternal.setAccount(accountExternal);
-                                Account studentAccount1 = new Account("FPT", "hoan123hahaha@gmail.com", "STUDENT");
+                                Account studentAccount1 = new Account("Dang Huu Dat", "datdhse150011@fpt.edu.vn", "STUDENT");
                                 Account accountAdmin = new Account("FPT", "ojt.sender@gmail.com", "ADMIN");
                                 Employee employeeAdmin = new Employee();
                                 employeeAdmin.setAccount(accountAdmin);
