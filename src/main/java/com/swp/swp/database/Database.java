@@ -86,6 +86,8 @@ public class Database {
                                 Account studentAccount2 = new Account("Nguyen Hoang Huy", "goldscorpio1311@gmail.com", "STUDENT");
                                 Account studentAccount3 = new Account("Dang Huu Dat", "datdhse150011@fpt.edu.vn", "STUDENT");
                                 Account studentAccount4 = new Account("Su Khac Trung", "trungthresh2410@gmail.com", "STUDENT");
+                                Account studentAccount5 = new Account("Nguyen Hong Hai", "Haidilao@gmail.com", "STUDENT");
+                                Account studentAccount6 = new Account("Tran Khac Chan", "tranmenhthientu@gmail.com", "STUDENT");
                                 Account accountAdmin = new Account("Admin", "ojt.sender@gmail.com", "ADMIN");
 
                                 Employee employeeAdmin = new Employee();
@@ -115,6 +117,14 @@ public class Database {
                                 Student student4 = new Student();
                                 student4.setAccount(studentAccount4);
                                 student4.setStudentId("SE150012");
+
+                                Student student5 = new Student();
+                                student5.setAccount(studentAccount5);
+                                student5.setStudentId("SE150044");
+
+                                Student student6 = new Student();
+                                student6.setAccount(studentAccount6);
+                                student6.setStudentId("SE152012");
 
                                 // String startDate = "6/3/2022";
                                 // String endDate = "20/6/2022";
@@ -288,17 +298,25 @@ public class Database {
                                 cv3.setDescription("front end javascript java C++");
                                 cv3.setStatus("Active");
 
-                                Semester semester = new Semester("Spring", 2022);
-                                semester.setStartDate(startDate);
-                                semester.setEndDate(endDate);
-                                student1.setSemester(semester);
-                                student2.setSemester(semester);
-                                student3.setSemester(semester);
-                                student4.setSemester(semester);
+                                Semester semester1 = new Semester("Summer", 2021);
+                                semester1.setStartDate(Date.valueOf("2021-05-20"));
+                                semester1.setEndDate(Date.valueOf("2021-08-20"));
+                                Semester semester2 = new Semester("Fall", 2021);
+                                semester2.setStartDate(Date.valueOf("2021-09-20"));
+                                semester2.setEndDate(Date.valueOf("2021-12-20"));
+                                Semester semester3 = new Semester("Spring", 2022);
+                                semester3.setStartDate(startDate);
+                                semester3.setEndDate(endDate);
+                                student1.setSemester(semester3);
+                                student2.setSemester(semester3);
+                                student3.setSemester(semester3);
+                                student4.setSemester(semester3);
+                                student5.setSemester(semester1);
+                                student6.setSemester(semester2);
 
-                                StudentApplyJob std = new StudentApplyJob(job2, student1, "Waiting", semester, cv1);
-                                StudentApplyJob std1 = new StudentApplyJob(job1, student2, "Waiting", semester, cv2);
-                                StudentApplyJob std3 = new StudentApplyJob(job1, student3, "Waiting", semester, cv3);
+                                StudentApplyJob std = new StudentApplyJob(job2, student1, "Waiting", semester3, cv1);
+                                StudentApplyJob std1 = new StudentApplyJob(job1, student2, "Waiting", semester3, cv2);
+                                StudentApplyJob std3 = new StudentApplyJob(job1, student3, "Waiting", semester3, cv3);
                                 // std.setEmployee(employeeA);
                                 std1.setEmployee(employeeA);
                                 std3.setEmployee(employeeA);
@@ -309,7 +327,9 @@ public class Database {
                                 process.setApplication(std1);
                                 process.setStatus("Interning");
 
-                                semesterService.save(semester);
+                                semesterService.save(semester1);
+                                semesterService.save(semester2);
+                                semesterService.save(semester3);
 
                                 majorService.save(major);
 
@@ -345,10 +365,14 @@ public class Database {
                                 logger.info("insert Data: " + studentService.save(student2));
                                 logger.info("insert Data: " + studentService.save(student3));
                                 logger.info("insert Data: " + studentService.save(student4));
+                                logger.info("insert Data: " + studentService.save(student5));
+                                logger.info("insert Data: " + studentService.save(student6));
                                 logger.info("insert Data: " + accountService.save(studentAccount1));
                                 logger.info("insert Data: " + accountService.save(studentAccount2));
                                 logger.info("insert Data: " + accountService.save(studentAccount3));
                                 logger.info("insert Data: " + accountService.save(studentAccount4));
+                                logger.info("insert Data: " + accountService.save(studentAccount5));
+                                logger.info("insert Data: " + accountService.save(studentAccount6));
 
 
                                 logger.info("insert Data: " + accountService.save(accountExternal));
