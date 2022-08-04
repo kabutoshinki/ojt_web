@@ -153,7 +153,7 @@ public class CompanyController {
         HttpSession session = request.getSession();
         if (endDate.compareTo(startDate) < 0) {
             session.setAttribute("dangerMessage", "Start date must before end date");
-        } else if (startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis())) < 0) {
+        } else if (startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis() - 1000 * 60 * 60 * 24)) < 0) {
             session.setAttribute("dangerMessage", "Start date can not before current date");
         } else {
             Position position = positionService.findById(positionId);
@@ -183,13 +183,13 @@ public class CompanyController {
         if(accountService.checkRole("COMPANY", request)==false)
             return "test";
         HttpSession session = request.getSession();
+        Job newJob = jobService.findById(id);
         if (endDate.compareTo(startDate) < 0) {
             session.setAttribute("dangerMessage", "Start date must before end date");
-        } else if (startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis())) < 0) {
+        } else if (startDate.compareTo(newJob.getStartDate()) != 0 && startDate.compareTo(new java.sql.Date(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24)) < 0) {
             session.setAttribute("dangerMessage", "Start date can not before current date");
         } else {
             Position position = positionService.findById(positionId);
-            Job newJob = jobService.findById(id);
             newJob.setPosition(position);
             //newJob.setCompany(companyService.findByAccount(accountService.currentAccount(request)));
             //newJob.setStatus("Waiting");

@@ -99,10 +99,11 @@ public class JobService {
         }
 
     }
+
     public Iterable<Job> findAll() {
         Iterable<Job> jobs = jobRepositories.findAll();
         ArrayList<Job> jobList = new ArrayList<>();
-        for (Job job: jobs) {
+        for (Job job : jobs) {
             if (job.getStatus().equalsIgnoreCase("Hidden") == false) {
                 jobList.add(job);
             }
@@ -117,7 +118,7 @@ public class JobService {
 
     public Job firstOfCompany(Company company) {
         Iterable<Job> jobList = jobRepositories.findByCompany(company);
-        for (Job job: jobList) {
+        for (Job job : jobList) {
             return job;
         }
         return null;
@@ -126,28 +127,31 @@ public class JobService {
     public Iterable<Job> findAllActiveByCompany(Company company) {
         Iterable<Job> lst = jobRepositories.findByCompany(company);
         ArrayList<Job> jobList = new ArrayList<>();
-        for (Job job: lst) {
-            if (job.getStatus().equalsIgnoreCase("Inactive") == false && job.getStatus().equalsIgnoreCase("Hidden") == false) {
+        for (Job job : lst) {
+            if (job.getStatus().equalsIgnoreCase("Inactive") == false
+                    && job.getStatus().equalsIgnoreCase("Hidden") == false) {
                 jobList.add(job);
             }
         }
         return jobList;
     }
 
-    public Iterable <Job> findAllAvailable() {
+    public Iterable<Job> findAllAvailable() {
         Iterable<Job> temp = jobRepositories.findAll();
         ArrayList<Job> jobs = new ArrayList<>();
         java.util.Date date = new java.util.Date();
-        java.sql.Date currentDate = new Date(date.getTime());
-        System.out.println("Current date: " + currentDate.toString());
-        for (Job job : temp) {
-            System.out.println("Job ID: " + job.getId());
-        }
-        for (Job x: temp) {
+        java.sql.Date currentDate = new Date(date.getTime() + 1000 * 60 * 60 * 24);
+
+        for (Job x : temp) {
+            System.out.println(x.getCompany().getAccount().getFullName() + " " + x.getStartDate() + " " + x.getEndDate()
+                    + " " + currentDate);
+            if (x.getCompany().getAccount().getFullName().equalsIgnoreCase("External") == false)
+                System.out.println(x.getStatus() + " " + x.getEndDate().compareTo(currentDate) + " "
+                        + x.getStartDate().compareTo(currentDate) + " " + x.getSlot());
             if (x.getStatus().equals("Accepted") == true &&
                     x.getEndDate().compareTo(currentDate) >= 0 &&
                     x.getStartDate().compareTo(currentDate) <= 0 && x.getSlot() > 0) {
-                jobs.add(x);
+                    jobs.add(x);
             }
         }
         return jobs;
@@ -156,7 +160,7 @@ public class JobService {
     public boolean save(Job newJob) {
         Path currentWorkingDir = Path.of(Paths.get("").toAbsolutePath() + "\\src\\main\\resources\\static\\companies");
         try {
-            logger.info("insert Data: " +  jobRepositories.save(newJob));
+            logger.info("insert Data: " + jobRepositories.save(newJob));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -167,6 +171,7 @@ public class JobService {
     public Job findById(int id) {
         return jobRepositories.findById(id);
     }
+
     public boolean isExist(String value) {
         // TODO Auto-generated method stub
         return false;
@@ -181,39 +186,45 @@ public class JobService {
         double percent = 0;
         HashSet<String> set = new HashSet();
         String temp = "";
-        /*System.out.println(); System.out.println();
-        System.out.println(job.getDescription());
-        System.out.println(job.getRequirement());
-        System.out.println(cv.getDescription());*/
+        /*
+         * System.out.println(); System.out.println();
+         * System.out.println(job.getDescription());
+         * System.out.println(job.getRequirement());
+         * System.out.println(cv.getDescription());
+         */
         for (int i = 0; i < job.getDescription().length(); i++) {
             if (!Character.isLetter(job.getDescription().charAt(i))) {
                 temp = temp.toLowerCase();
                 set.add(temp);
-                //System.out.println(temp);
+                // System.out.println(temp);
                 temp = "";
             } else {
                 temp += job.getDescription().charAt(i);
             }
         }
-        if (!temp.isEmpty()) { set.add(temp); /*System.out.println(temp);*/ }
+        if (!temp.isEmpty()) {
+            set.add(temp);
+            /* System.out.println(temp); */ }
         temp = "";
         for (int i = 0; i < job.getRequirement().length(); i++) {
             if (!Character.isLetter(job.getRequirement().charAt(i))) {
                 temp = temp.toLowerCase();
                 set.add(temp);
-                //System.out.println(temp);
+                // System.out.println(temp);
                 temp = "";
             } else {
                 temp += job.getRequirement().charAt(i);
             }
         }
-        if (!temp.isEmpty()) { set.add(temp); /*System.out.println(temp);*/ }
+        if (!temp.isEmpty()) {
+            set.add(temp);
+            /* System.out.println(temp); */ }
         int matched = 0, total = 0;
         temp = "";
         for (int i = 0; i < cv.getDescription().length(); i++) {
             if (!Character.isLetter(cv.getDescription().charAt(i))) {
                 temp = temp.toLowerCase();
-                //System.out.println(temp);
+                // System.out.println(temp);
                 if (set.contains(temp)) {
                     matched++;
                 }
@@ -224,7 +235,7 @@ public class JobService {
             }
         }
         if (!temp.isEmpty()) {
-            //System.out.println(temp);
+            // System.out.println(temp);
             if (set.contains(temp)) {
                 matched++;
             }
@@ -232,6 +243,5 @@ public class JobService {
         }
         return 1.0 * matched / total * 100;
     }
-
 
 }
