@@ -54,18 +54,19 @@ public class Database {
                                 file.mkdirs();
                                 file = new File(Paths.get("").toAbsolutePath() + "/target/classes/static/avatar");
                                 file.mkdirs();
-                                Account employeeAccountA = new Account("test3", "hoanmalai2001@gmail.com", "EMPLOYEE");
-                                Account employeeAccountB = new Account("test3", "huynhse151464@fpt.edu.vn", "EMPLOYEE");
+                                Account employeeAccountA = new Account("Nguyen Sy Hoan", "hoanmalai2001@gmail.com", "EMPLOYEE");
+                                Account employeeAccountB = new Account("Nguyen Hoang Huy", "huynhse151464@fpt.edu.vn", "EMPLOYEE");
+                                Account employeeAccountC = new Account("Dang Huu Dat", "danghuudat163@gmail.com", "EMPLOYEE");
                                 Account companyAccount1 = new Account("FPT SOFTWARE", "kaitokid792001@gmail.com",
                                                 "COMPANY");
                                                 companyAccount1.setAvatar("/avatar/1.png");
-                                Account companyAccount2 = new Account("DXC Technology", "hoannsse150010@fpt.edu.vn",
+                                Account companyAccount2 = new Account("DXC Technology", "hoan123hahaha@gmail.com",
                                                 "COMPANY");
                                                 companyAccount2.setAvatar("/avatar/2.png");
                                 Account companyAccount3 = new Account("ProGrad", "mori792001@gmail.com",
                                                 "COMPANY");
                                                 companyAccount3.setAvatar("/avatar/3.jpg");
-                                Account companyAccount4 = new Account("Viettel Digital", "akai792001@gmail.com",
+                                Account companyAccount4 = new Account("Viettel Digital", "hoanghuy1vip@gmail.com",
                                                 "COMPANY");
                                                 companyAccount4.setAvatar("/avatar/4.png");
                                 Account companyAccount5 = new Account("Ascend Technology", "ran792001@gmail.com",
@@ -74,24 +75,47 @@ public class Database {
                                 Account companyAccount6 = new Account("Appen", "shinichi792001@gmail.com",
                                                 "COMPANY");
                                                 companyAccount6.setAvatar("/avatar/6.png");
-                                Account companyAccount7 = new Account("Hitachi Vantara", "haibara792001@gmail.com",
+                                Account companyAccount7 = new Account("Hitachi Vantara", "trungsu476@gmail.com",
                                                 "COMPANY");
                                                 companyAccount7.setAvatar("/avatar/7.jpg");
                                 Account accountExternal = new Account("External", "", "COMPANY");
                                 accountExternal.setStatus("Hidden");
                                 Company companyExternal = new Company();
                                 companyExternal.setAccount(accountExternal);
-                                Account studentAccount1 = new Account("FPT", "hoan123hahaha@gmail.com", "STUDENT");
-                                Account accountAdmin = new Account("FPT", "ojt.sender@gmail.com", "ADMIN");
+                                Account studentAccount1 = new Account("Nguyen Sy Hoan", "hoannsse150010@fpt.edu.vn", "STUDENT");
+                                Account studentAccount2 = new Account("Nguyen Hoang Huy", "goldscorpio1311@gmail.com", "STUDENT");
+                                Account studentAccount3 = new Account("Dang Huu Dat", "datdhse150011@fpt.edu.vn", "STUDENT");
+                                Account studentAccount4 = new Account("Su Khac Trung", "trungthresh2410@gmail.com", "STUDENT");
+                                Account accountAdmin = new Account("Admin", "ojt.sender@gmail.com", "ADMIN");
+
                                 Employee employeeAdmin = new Employee();
                                 employeeAdmin.setAccount(accountAdmin);
+
                                 Employee employeeA = new Employee();
                                 employeeA.setAccount(employeeAccountA);
+
                                 Employee employeeB = new Employee();
                                 employeeB.setAccount(employeeAccountB);
-                                Student studentD = new Student();
-                                studentD.setAccount(studentAccount1);
-                                studentD.setStudentId("SE150011");
+
+                                Employee employeeC = new Employee();
+                                employeeC.setAccount(employeeAccountC);
+
+                                Student student1 = new Student();
+                                student1.setAccount(studentAccount1);
+                                student1.setStudentId("SE150010");
+
+                                Student student2 = new Student();
+                                student2.setAccount(studentAccount2);
+                                student2.setStudentId("SE151464");
+
+                                Student student3 = new Student();
+                                student3.setAccount(studentAccount3);
+                                student3.setStudentId("SE150011");
+
+                                Student student4 = new Student();
+                                student4.setAccount(studentAccount4);
+                                student4.setStudentId("SE150012");
+
                                 // String startDate = "6/3/2022";
                                 // String endDate = "20/6/2022";
                                 Date startDate = Date.valueOf("2022-03-06");
@@ -131,10 +155,16 @@ public class Database {
                                                 "We help enterprises store, enrich, activate and monetize data for better customer experiences, new revenue streams and lower business costs.\n",
                                                 companyAccount7);
                                 Position position = new Position("Backend");
-                                Position position2 = new Position("Frontend");
+                                Position position1 = new Position("Frontend");
+                                Position position2 = new Position("Fullstack");
+                                Position position3 = new Position("Data Scientist");
+                                Position position4 = new Position("Computer scientist");
                                 Major major = new Major("SE");
                                 position.setMajor(major);
+                                position1.setMajor(major);
                                 position2.setMajor(major);
+                                position3.setMajor(major);
+                                position4.setMajor(major);
 
                                 
                                 Job job1 = new Job(10,
@@ -248,24 +278,27 @@ public class Database {
                                 jobExternal.setStatus("Hidden");
                                 jobExternal.setSlot(1000000000);
 
-                                CV cv = new CV("test", studentD);
+                                CV cv = new CV("test", student1);
                                 cv.setDescription("front end javascript java C++");
                                 cv.setStatus("Active");
 
                                 Semester semester = new Semester("Spring", 2022);
                                 semester.setStartDate(startDate);
                                 semester.setEndDate(endDate);
-                                studentD.setSemester(semester);
+                                student1.setSemester(semester);
+                                student2.setSemester(semester);
+                                student3.setSemester(semester);
+                                student4.setSemester(semester);
 
-                                StudentApplyJob std = new StudentApplyJob(job2, studentD, "Waiting", semester, cv);
-                                StudentApplyJob std1 = new StudentApplyJob(job1, studentD, "Waiting", semester, cv);
-                                StudentApplyJob std3 = new StudentApplyJob(job1, studentD, "Waiting", semester, cv);
+                                StudentApplyJob std = new StudentApplyJob(job2, student1, "Waiting", semester, cv);
+                                StudentApplyJob std1 = new StudentApplyJob(job1, student1, "Waiting", semester, cv);
+                                StudentApplyJob std3 = new StudentApplyJob(job1, student1, "Waiting", semester, cv);
                                 // std.setEmployee(employeeA);
                                 std1.setEmployee(employeeA);
                                 std3.setEmployee(employeeA);
 
                                 OjtProcess process = new OjtProcess();
-                                process.setStudent(studentD);
+                                process.setStudent(student1);
                                 // process.setCompany(company1);
                                 process.setApplication(std1);
                                 process.setStatus("Interning");
@@ -285,6 +318,7 @@ public class Database {
 
                                 logger.info("insert Data: " + employeeService.save(employeeA));
                                 logger.info("insert Data: " + employeeService.save(employeeB));
+                                logger.info("insert Data: " + employeeService.save(employeeC));
                                 logger.info("insert Data: " + employeeService.save(employeeAdmin));
 
                                 
@@ -292,6 +326,7 @@ public class Database {
                                 logger.info("insert Data: " + accountService.save(accountAdmin));
                                 logger.info("insert Data: " + accountService.save(employeeAccountA));
                                 logger.info("insert Data: " + accountService.save(employeeAccountB));
+                                logger.info("insert Data: " + accountService.save(employeeAccountC));
                                 logger.info("insert Data: " + accountService.save(companyAccount1));
                                 logger.info("insert Data: " + accountService.save(companyAccount2));
                                 logger.info("insert Data: " + accountService.save(companyAccount3));
@@ -300,14 +335,24 @@ public class Database {
                                 logger.info("insert Data: " + accountService.save(companyAccount6));
                                 logger.info("insert Data: " + accountService.save(companyAccount7));
 
-                                logger.info("insert Data: " + studentService.save(studentD));
+                                logger.info("insert Data: " + studentService.save(student1));
+                                logger.info("insert Data: " + studentService.save(student2));
+                                logger.info("insert Data: " + studentService.save(student3));
+                                logger.info("insert Data: " + studentService.save(student4));
                                 logger.info("insert Data: " + accountService.save(studentAccount1));
-                                
+                                logger.info("insert Data: " + accountService.save(studentAccount2));
+                                logger.info("insert Data: " + accountService.save(studentAccount3));
+                                logger.info("insert Data: " + accountService.save(studentAccount4));
+
 
                                 logger.info("insert Data: " + accountService.save(accountExternal));
 
                                 logger.info("insert Data: " + positionService.save(position));
+                                logger.info("insert Data: " + positionService.save(position1));
                                 logger.info("insert Data: " + positionService.save(position2));
+                                logger.info("insert Data: " + positionService.save(position3));
+                                logger.info("insert Data: " + positionService.save(position4));
+
 
                                 logger.info("insert Data: " + jobService.save(job1));
                                 logger.info("insert Data: " + jobService.save(job2));
@@ -318,14 +363,13 @@ public class Database {
                                 logger.info("insert Data: " + jobService.save(job7));
                                 logger.info("insert Data: " + jobService.save(jobExternal));
 
-                                logger.info("insert Data: " + cvService.save(cv));
+                                //logger.info("insert Data: " + cvService.save(cv));
 
                                 // logger.info("insert Data: " + ojtProcessService.save(ojtProcess));
                                 // ojtProcessService.save(process);
-                                logger.info("insert Data: " + studentApplyJobsService.save(std));
-                                logger.info("insert Data: " + studentApplyJobsService.save(std1));
-                                logger.info("insert Data: " + studentApplyJobsService.save(std3));
-
+                                //logger.info("insert Data: " + studentApplyJobsService.save(std));
+                                //logger.info("insert Data: " + studentApplyJobsService.save(std1));
+                                //logger.info("insert Data: " + studentApplyJobsService.save(std3));
                         }
 
                 };

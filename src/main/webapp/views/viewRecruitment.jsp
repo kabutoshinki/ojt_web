@@ -113,8 +113,7 @@
                                             <select name="cvId"
                                                 class="form-select form-select-lg mb-3 btn btn-primary btn-lg btn-block mt-3"
                                                 id="selection" aria-label=".form-select-lg example" required>
-                                                <%--<option name="CvId" value="" class="text-center" selected>Select CV
-                                                </option>--%>
+                                                <option name="CvId" value="" class="text-center" selected>Select CV</option>
                                                 <c:forEach var="o" items="${cvList}">
                                                     <option value="${o.id}">${o.name}</option>
                                                 </c:forEach>

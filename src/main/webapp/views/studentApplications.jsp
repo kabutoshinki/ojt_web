@@ -6,7 +6,7 @@
             <html>
 
             <head>
-                <title>Apply list</title>
+                <title>Applications</title>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="/CSS/styles.css">
@@ -78,6 +78,7 @@
                                 <thead>
                                     <tr style="text-align: center">
                                         <th>No.</th>
+                                        <th>Company</th>
                                         <th>Position</th>
                                         <th>Details</th>
                                         <th>CV</th>
@@ -88,8 +89,10 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach var="o" items="${applyList}" varStatus="loop">
-                                        <tr style="text-align: center">
+                                        <tr <%--style="text-align: center"--%>>
                                             <td>${loop.count}</td>
+                                            <td class="text-truncate" style="max-width: 150px;"
+                                                title="${o.job.company.account.fullName}">${o.job.company.account.fullName}</td>
                                             <td class="text-truncate" style="max-width: 150px;"
                                                 title="${o.job.position.position}">${o.job.position.position}</td>
                                             <!-- <td><a href="/view/recruitment/${o.job.id}" class="btn btn-outline-info btn-sm"><i
