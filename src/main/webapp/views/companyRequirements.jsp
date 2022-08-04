@@ -160,7 +160,7 @@
                                             <th class="text-center">Position</th>
                                             <th class="text-center">Detail</th>
                                             <th class="text-center">Status</th>
-                                            <th class="text-center">Verifier</th>
+                                            <%--<th class="text-center">Verifier</th>--%>
                                             <th class="text-center">Operations</th>
                                         </tr>
                                     </thead>
@@ -180,7 +180,7 @@
                                                     </button>
                                                 </td>
                                                 <td title="o.message">${o.status}</td>
-                                                <td>${o.employee.account.fullName}</td>
+                                                <%--<td>${o.employee.account.fullName}</td>--%>
                                                 <td>
                                                     <button type="button" class="btn btn-outline-primary btn-sm"
                                                         data-toggle="modal" data-target="#updateModel_${o.id}">

@@ -182,7 +182,7 @@
                             <!-- <th>Semester</th> -->
                             <th>Evaluation</th>
                             <th>Status</th>
-                            <th>Verifier</th>
+                            <%--<th>Verifier</th>--%>
                             <th>Operation</th>
                         </tr>
                         </thead>
@@ -226,10 +226,10 @@
                                                                     ${o.key.application.semester.semester}</td> -->
 
                                 <td>${o.key.application.status}</td>
-                                <td class="text-truncate" style="max-width: 150px;"
+                                <%--<td class="text-truncate" style="max-width: 150px;"
                                     title="${o.key.employee.account.fullName}">
                                         ${o.key.employee.account.fullName}</td>
-                                <td>
+                                <td>--%>
 
                                     <button
                                             style="${o.key.application.status=='Waiting' || o.key.application.status=='Denied'?'':'pointer-events: none; background-color: lightgrey'}"

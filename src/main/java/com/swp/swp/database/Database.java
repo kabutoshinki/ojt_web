@@ -278,9 +278,15 @@ public class Database {
                                 jobExternal.setStatus("Hidden");
                                 jobExternal.setSlot(1000000000);
 
-                                CV cv = new CV("test", student1);
-                                cv.setDescription("front end javascript java C++");
-                                cv.setStatus("Active");
+                                CV cv1 = new CV("Cv1", student1);
+                                CV cv2 = new CV("Cv2", student2);
+                                CV cv3 = new CV("Cv3", student3);
+                                cv1.setDescription("front end javascript java C++");
+                                cv1.setStatus("Active");
+                                cv2.setDescription("front end javascript java C++");
+                                cv2.setStatus("Active");
+                                cv3.setDescription("front end javascript java C++");
+                                cv3.setStatus("Active");
 
                                 Semester semester = new Semester("Spring", 2022);
                                 semester.setStartDate(startDate);
@@ -290,9 +296,9 @@ public class Database {
                                 student3.setSemester(semester);
                                 student4.setSemester(semester);
 
-                                StudentApplyJob std = new StudentApplyJob(job2, student1, "Waiting", semester, cv);
-                                StudentApplyJob std1 = new StudentApplyJob(job1, student1, "Waiting", semester, cv);
-                                StudentApplyJob std3 = new StudentApplyJob(job1, student1, "Waiting", semester, cv);
+                                StudentApplyJob std = new StudentApplyJob(job2, student1, "Waiting", semester, cv1);
+                                StudentApplyJob std1 = new StudentApplyJob(job1, student2, "Waiting", semester, cv2);
+                                StudentApplyJob std3 = new StudentApplyJob(job1, student3, "Waiting", semester, cv3);
                                 // std.setEmployee(employeeA);
                                 std1.setEmployee(employeeA);
                                 std3.setEmployee(employeeA);
@@ -363,13 +369,15 @@ public class Database {
                                 logger.info("insert Data: " + jobService.save(job7));
                                 logger.info("insert Data: " + jobService.save(jobExternal));
 
-                                //logger.info("insert Data: " + cvService.save(cv));
+                                logger.info("insert Data: " + cvService.save(cv1));
+                                logger.info("insert Data: " + cvService.save(cv2));
+                                logger.info("insert Data: " + cvService.save(cv3));
 
                                 // logger.info("insert Data: " + ojtProcessService.save(ojtProcess));
                                 // ojtProcessService.save(process);
-                                //logger.info("insert Data: " + studentApplyJobsService.save(std));
-                                //logger.info("insert Data: " + studentApplyJobsService.save(std1));
-                                //logger.info("insert Data: " + studentApplyJobsService.save(std3));
+                                logger.info("insert Data: " + studentApplyJobsService.save(std));
+                                logger.info("insert Data: " + studentApplyJobsService.save(std1));
+                                logger.info("insert Data: " + studentApplyJobsService.save(std3));
                         }
 
                 };
