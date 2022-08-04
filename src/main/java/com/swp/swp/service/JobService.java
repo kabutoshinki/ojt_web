@@ -138,12 +138,16 @@ public class JobService {
         Iterable<Job> temp = jobRepositories.findAll();
         ArrayList<Job> jobs = new ArrayList<>();
         java.util.Date date = new java.util.Date();
-        java.sql.Date currentDate = new Date(date.getTime());
+        java.sql.Date currentDate = new Date(date.getTime() + 1000 * 60 * 60 * 24);
 
         for (Job x: temp) {
+            System.out.println(x.getCompany().getAccount().getFullName() + " " + x.getStartDate() + " " + x.getEndDate() + " " + currentDate);
+            if (x.getCompany().getAccount().getFullName().equalsIgnoreCase("External") == false)
+            System.out.println(x.getStatus() + " " + x.getEndDate().compareTo(currentDate) + " " + x.getStartDate().compareTo(currentDate) + " " + x.getSlot());
             if (x.getStatus().equals("Accepted") == true &&
                     x.getEndDate().compareTo(currentDate) >= 0 &&
                     x.getStartDate().compareTo(currentDate) <= 0 && x.getSlot() > 0) {
+                System.out.println(x.getCompany().getAccount().getFullName() + " " + x.getStartDate() + " " + x.getEndDate());
                 jobs.add(x);
             }
         }
