@@ -83,7 +83,7 @@ public class Database {
                                 Company companyExternal = new Company();
                                 companyExternal.setAccount(accountExternal);
                                 Account studentAccount1 = new Account("Dang Huu Dat", "datdhse150011@fpt.edu.vn", "STUDENT");
-                                Account accountAdmin = new Account("FPT", "ojt.sender@gmail.com", "ADMIN");
+                                Account accountAdmin = new Account("FPT", "hoanghuy1vip@gmail.com", "ADMIN");
                                 Employee employeeAdmin = new Employee();
                                 employeeAdmin.setAccount(accountAdmin);
                                 Employee employeeA = new Employee();
